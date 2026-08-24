@@ -6,7 +6,7 @@ export function Marquee() {
   return (
     <div className="relative border-y border-line/70 bg-ink-900/40 py-5">
       <div className="mask-fade-x overflow-hidden">
-        <div className="flex w-max animate-marquee gap-3">
+        <div className="marquee-track flex w-max animate-marquee gap-3">
           {items.map((tech, i) => (
             <span
               key={i}

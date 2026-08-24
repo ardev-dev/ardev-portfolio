@@ -2,18 +2,20 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Package } from "lucide-react";
-import { packages, socials } from "@/lib/data";
+import { packages, sections, socials } from "@/lib/data";
 import { SectionHeading } from "@/components/Section";
+import { useLang } from "@/components/LanguageProvider";
 
 export function OpenSource() {
+  const { t } = useLang();
   return (
     <section id="open-source" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-24 sm:px-6">
-      <SectionHeading index="02" eyebrow="Open Source" title="Published packages">
-        Maintained Dart packages on pub.dev under the{" "}
+      <SectionHeading index="02" eyebrow={t(sections.openSource.eyebrow)} title={t(sections.openSource.title)}>
+        {t(sections.openSource.subA)}{" "}
         <a href={socials.pubdev} target="_blank" rel="noreferrer" className="text-violet-400 hover:underline">
           ardev.dev
         </a>{" "}
-        publisher — solving real gaps the community was stuck on.
+        {t(sections.openSource.subB)}
       </SectionHeading>
 
       <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -39,8 +41,8 @@ export function OpenSource() {
               />
             </div>
             <h3 className="mt-5 break-all font-mono text-[15px] font-semibold text-fg">{pkg.name}</h3>
-            <p className="mt-3 flex-1 text-sm leading-relaxed text-fg-muted">{pkg.blurb}</p>
-            <p className="mt-5 font-mono text-xs text-cyan">{pkg.meta}</p>
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-fg-muted">{t(pkg.blurb)}</p>
+            <p className="mt-5 font-mono text-xs text-cyan">{t(pkg.meta)}</p>
           </motion.a>
         ))}
       </div>

@@ -111,6 +111,18 @@ body {
   }
 }
 
+/* ─── العربية: خط Cairo + اتجاه RTL ──────────────────────────────── */
+html[lang="ar"] body,
+html[lang="ar"] .font-sans,
+html[lang="ar"] .font-display,
+html[lang="ar"] .font-mono {
+  font-family: var(--font-cairo), "Cairo", "Tajawal", sans-serif;
+}
+/* في RTL نُبقي الشريط المتحرّك يسير أفقياً كما هو (زخرفي) */
+html[dir="rtl"] .marquee-track {
+  direction: ltr;
+}
+
 /* احترام تفضيل تقليل الحركة */
 @media (prefers-reduced-motion: reduce) {
   *,

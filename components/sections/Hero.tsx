@@ -2,9 +2,10 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail, Sparkles } from "lucide-react";
-import { profile, socials, stats } from "@/lib/data";
+import { profile, socials, stats, ui } from "@/lib/data";
 import { Counter } from "@/components/Counter";
 import { GithubIcon } from "@/components/BrandIcons";
+import { useLang } from "@/components/LanguageProvider";
 
 const container = {
   hidden: {},
@@ -16,6 +17,7 @@ const item = {
 };
 
 export function Hero() {
+  const { t } = useLang();
   return (
     <section id="top" className="relative mx-auto max-w-6xl px-4 pt-36 pb-16 sm:px-6 sm:pt-44">
       <motion.div variants={container} initial="hidden" animate="show" className="max-w-3xl">
@@ -26,7 +28,7 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan" />
             </span>
-            {profile.status}
+            {t(profile.status)}
           </span>
         </motion.div>
 
@@ -35,18 +37,18 @@ export function Hero() {
           variants={item}
           className="mt-6 font-display text-mega text-fg"
         >
-          {profile.firstName}
+          {t(profile.firstName)}
           <span className="text-gradient">.</span>
         </motion.h1>
 
         {/* الدور */}
         <motion.p variants={item} className="mt-3 font-display text-display text-fg-muted">
-          {profile.role}
+          {t(profile.role)}
         </motion.p>
 
         {/* الوصف */}
         <motion.p variants={item} className="mt-6 max-w-2xl text-lg leading-relaxed text-fg-muted text-balance">
-          {profile.tagline}
+          {t(profile.tagline)}
         </motion.p>
 
         {/* أزرار */}
@@ -55,7 +57,7 @@ export function Hero() {
             href="#work"
             className="group inline-flex items-center gap-2 rounded-2xl bg-accent-gradient px-5 py-3 text-sm font-semibold text-ink shadow-glow transition-transform hover:scale-[1.03] active:scale-95"
           >
-            View my work
+            {t(ui.viewWork)}
             <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
           <a
@@ -77,7 +79,7 @@ export function Hero() {
         {/* بطاقة الهوية الصغيرة */}
         <motion.p variants={item} className="mt-6 flex items-center gap-2 font-mono text-sm text-fg-faint">
           <Sparkles size={14} className="text-violet" />
-          {profile.brand} · based in {profile.location}
+          {profile.brand} · {t(ui.basedIn)} {t(profile.location)}
         </motion.p>
       </motion.div>
 
@@ -89,11 +91,11 @@ export function Hero() {
         className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-4"
       >
         {stats.map((s) => (
-          <motion.div key={s.label} variants={item} className="bg-ink-900/80 px-5 py-6">
+          <motion.div key={s.label.en} variants={item} className="bg-ink-900/80 px-5 py-6">
             <div className="font-display text-3xl font-bold text-gradient sm:text-4xl">
               <Counter value={s.value} suffix={s.suffix} />
             </div>
-            <div className="mt-1 text-xs text-fg-muted sm:text-sm">{s.label}</div>
+            <div className="mt-1 text-xs text-fg-muted sm:text-sm">{t(s.label)}</div>
           </motion.div>
         ))}
       </motion.div>

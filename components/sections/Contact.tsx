@@ -2,17 +2,20 @@
 
 import { motion } from "framer-motion";
 import { Mail, Package } from "lucide-react";
-import { profile, socials } from "@/lib/data";
+import { profile, socials, ui } from "@/lib/data";
 import { GithubIcon, LinkedinIcon } from "@/components/BrandIcons";
-
-const links = [
-  { label: "Email", value: profile.email, href: socials.email, Icon: Mail },
-  { label: "GitHub", value: socials.githubHandle, href: socials.github, Icon: GithubIcon },
-  { label: "pub.dev", value: socials.pubdevHandle, href: socials.pubdev, Icon: Package },
-  { label: "LinkedIn", value: socials.linkedinHandle, href: socials.linkedin, Icon: LinkedinIcon },
-];
+import { useLang } from "@/components/LanguageProvider";
 
 export function Contact() {
+  const { t } = useLang();
+
+  const links = [
+    { label: t(ui.emailLabel), value: profile.email, href: socials.email, Icon: Mail },
+    { label: "GitHub", value: socials.githubHandle, href: socials.github, Icon: GithubIcon },
+    { label: "pub.dev", value: socials.pubdevHandle, href: socials.pubdev, Icon: Package },
+    { label: "LinkedIn", value: socials.linkedinHandle, href: socials.linkedin, Icon: LinkedinIcon },
+  ];
+
   return (
     <footer id="contact" className="relative scroll-mt-24 px-4 pb-14 pt-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
@@ -25,9 +28,9 @@ export function Contact() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center"
         >
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-violet">Let&apos;s build</p>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-violet">{t(ui.letsBuild)}</p>
           <h2 className="mx-auto mt-4 max-w-2xl font-display text-h2 text-fg text-balance">
-            Have a system worth building right? <span className="text-gradient">Let&apos;s talk.</span>
+            {t(ui.ctaTitleA)} <span className="text-gradient">{t(ui.ctaTitleB)}</span>
           </h2>
           <a
             href={socials.email}
@@ -46,7 +49,7 @@ export function Contact() {
               rel="noreferrer"
               className="group flex items-center gap-3 rounded-2xl border border-line bg-ink-800/40 px-4 py-3.5 transition-colors hover:border-violet/40 hover:bg-white/5"
             >
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 text-fg-muted transition-colors group-hover:text-violet-400">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/5 text-fg-muted transition-colors group-hover:text-violet-400">
                 <Icon size={16} />
               </span>
               <span className="min-w-0">
@@ -59,9 +62,9 @@ export function Contact() {
 
         <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-line pt-8 text-sm text-fg-faint sm:flex-row">
           <p>
-            © {new Date().getFullYear()} {profile.name}. Built with Next.js &amp; Framer Motion.
+            © {new Date().getFullYear()} {t(profile.name)}. {t(ui.builtWith)}
           </p>
-          <p className="font-mono">{profile.location}</p>
+          <p className="font-mono">{t(profile.location)}</p>
         </div>
       </div>
     </footer>

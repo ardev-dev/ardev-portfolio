@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { nav, profile, socials } from "@/lib/data";
+import { nav, profile, socials, ui } from "@/lib/data";
+import { useLang } from "@/components/LanguageProvider";
 import { cn } from "@/lib/utils";
 
 export function Nav() {
+  const { t, toggle } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("");
@@ -49,7 +51,6 @@ export function Nav() {
             scrolled ? "glass shadow-card" : "border border-transparent"
           )}
         >
-          {/* الشعار */}
           <a href="#top" className="group flex items-center gap-2.5" aria-label={profile.brand}>
             <span className="grid h-9 w-9 place-items-center rounded-xl bg-accent-gradient font-display text-sm font-bold text-ink shadow-glow">
               AR
@@ -59,7 +60,6 @@ export function Nav() {
             </span>
           </a>
 
-          {/* روابط سطح المكتب */}
           <nav className="hidden items-center gap-1 md:flex">
             {nav.map((n) => (
               <a
@@ -67,22 +67,27 @@ export function Nav() {
                 href={n.href}
                 className={cn(
                   "rounded-lg px-3.5 py-1.5 text-sm transition-colors",
-                  active === n.href.slice(1)
-                    ? "text-fg"
-                    : "text-fg-muted hover:text-fg"
+                  active === n.href.slice(1) ? "text-fg" : "text-fg-muted hover:text-fg"
                 )}
               >
-                {n.label}
+                {t(n.label)}
               </a>
             ))}
           </nav>
 
           <div className="flex items-center gap-2">
+            <button
+              onClick={toggle}
+              className="rounded-xl border border-line bg-white/5 px-3 py-2 text-sm font-medium text-fg transition-colors hover:border-violet/50 hover:bg-white/10"
+              aria-label="Switch language"
+            >
+              {t(ui.langLabel)}
+            </button>
             <a
               href={socials.email}
               className="hidden rounded-xl bg-accent-gradient px-4 py-2 text-sm font-semibold text-ink shadow-glow transition-transform hover:scale-[1.03] active:scale-95 sm:inline-block"
             >
-              Get in touch
+              {t(ui.getInTouch)}
             </a>
             <button
               onClick={() => setOpen((v) => !v)}
@@ -94,7 +99,6 @@ export function Nav() {
           </div>
         </div>
 
-        {/* قائمة الجوّال */}
         <AnimatePresence>
           {open && (
             <motion.nav
@@ -111,7 +115,7 @@ export function Nav() {
                   onClick={() => setOpen(false)}
                   className="rounded-lg px-3 py-2.5 text-sm text-fg-muted hover:bg-white/5 hover:text-fg"
                 >
-                  {n.label}
+                  {t(n.label)}
                 </a>
               ))}
               <a
@@ -119,7 +123,7 @@ export function Nav() {
                 onClick={() => setOpen(false)}
                 className="mt-1 rounded-lg bg-accent-gradient px-3 py-2.5 text-center text-sm font-semibold text-ink"
               >
-                Get in touch
+                {t(ui.getInTouch)}
               </a>
             </motion.nav>
           )}

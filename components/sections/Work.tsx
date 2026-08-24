@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { projects, type Project } from "@/lib/data";
+import { projects, sections, ui, type Project } from "@/lib/data";
 import { SectionHeading } from "@/components/Section";
+import { useLang } from "@/components/LanguageProvider";
 import { cn } from "@/lib/utils";
 
 const accentRing: Record<string, string> = {
@@ -13,6 +14,7 @@ const accentRing: Record<string, string> = {
 };
 
 function Card({ project, featured }: { project: Project; featured?: boolean }) {
+  const { t } = useLang();
   return (
     <motion.article
       initial={{ opacity: 0, y: 26 }}
@@ -30,23 +32,23 @@ function Card({ project, featured }: { project: Project; featured?: boolean }) {
           <h3 className={cn("font-display font-bold text-fg", featured ? "text-2xl" : "text-xl")}>
             {project.name}
           </h3>
-          <p className="mt-0.5 font-mono text-xs uppercase tracking-wider text-violet">{project.kind}</p>
+          <p className="mt-0.5 font-mono text-xs uppercase tracking-wider text-violet">{t(project.kind)}</p>
         </div>
         {project.featured && (
-          <span className="rounded-full border border-violet/30 bg-violet-soft px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-violet-400">
-            Flagship
+          <span className="shrink-0 rounded-full border border-violet/30 bg-violet-soft px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-violet-400">
+            {t(ui.flagship)}
           </span>
         )}
       </div>
 
       <p className={cn("mt-4 text-fg-muted", featured ? "text-[15px] leading-relaxed" : "text-sm leading-relaxed")}>
-        {project.blurb}
+        {t(project.blurb)}
       </p>
 
       <div className="mt-5 flex flex-wrap gap-2">
-        {project.tags.map((t) => (
-          <span key={t} className="rounded-lg bg-white/[0.04] px-2.5 py-1 text-xs text-fg-muted">
-            {t}
+        {project.tags.map((tag) => (
+          <span key={tag} className="rounded-lg bg-white/[0.04] px-2.5 py-1 text-xs text-fg-muted">
+            {tag}
           </span>
         ))}
       </div>
@@ -61,7 +63,7 @@ function Card({ project, featured }: { project: Project; featured?: boolean }) {
               rel="noreferrer"
               className="group/link inline-flex items-center gap-1 text-sm font-medium text-fg transition-colors hover:text-violet-400"
             >
-              {l.label}
+              {t(l.label)}
               <ArrowUpRight size={14} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
             </a>
           ))}
@@ -72,14 +74,14 @@ function Card({ project, featured }: { project: Project; featured?: boolean }) {
 }
 
 export function Work() {
+  const { t } = useLang();
   const featured = projects.filter((p) => p.featured);
   const rest = projects.filter((p) => !p.featured);
 
   return (
     <section id="work" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-24 sm:px-6">
-      <SectionHeading index="01" eyebrow="Selected Work" title="Products I build & operate">
-        Production systems shipped end-to-end — mobile, web, and backend — across consultation,
-        real-estate, delivery, and financial domains.
+      <SectionHeading index="01" eyebrow={t(sections.work.eyebrow)} title={t(sections.work.title)}>
+        {t(sections.work.subtitle)}
       </SectionHeading>
 
       <div className="mt-12 grid gap-5 sm:grid-cols-2">

@@ -45,6 +45,7 @@ const config: Config = {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
         display: ["var(--font-grotesk)", "var(--font-inter)", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        arabic: ["var(--font-cairo)", "Cairo", "Tajawal", "sans-serif"],
       },
       fontSize: {
         mega: ["clamp(2.75rem, 8vw, 6.5rem)", { lineHeight: "0.98", letterSpacing: "-0.03em", fontWeight: "700" }],
