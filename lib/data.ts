@@ -265,7 +265,6 @@ export const moreProjects: MiniProject[] = [
   { name: "MikroTik Manager", kind: { en: "Router Management", ar: "إدارة راوترات" }, tags: ["Flutter", "Networking"] },
   { name: "Aleuhda", kind: { en: "Wallet App", ar: "تطبيق محفظة" }, tags: ["Flutter", "BLoC"] },
   { name: "Alminshar", kind: { en: "Accounting System", ar: "نظام محاسبة" }, tags: ["Flutter", "Accounting"] },
-  { name: "shared_utils", kind: { en: "Shared Framework", ar: "إطار مشترك" }, tags: ["Dart", "pub.dev"] },
   { name: "CopyPaste", kind: { en: "macOS Utility", ar: "أداة macOS" }, tags: ["Swift", "macOS"] },
   { name: "Somow", kind: { en: "Company Website", ar: "موقع الشركة" }, tags: ["React", "JSX"] },
 ];
@@ -278,7 +277,7 @@ export const scale: { value: L; label: L }[] = [
   { value: same("30+"), label: { en: "Apps, panels & services", ar: "تطبيقاً ولوحةً وخدمة" } },
 ];
 
-export type Package = { name: string; blurb: L; meta: L; href: string };
+export type Package = { name: string; blurb: L; meta: L; href?: string };
 
 export const packages: Package[] = [
   {
@@ -307,6 +306,15 @@ export const packages: Package[] = [
     },
     meta: { en: "155 / 160 pub points · cross-platform", ar: "‏155/160 نقطة · متعدّد المنصّات" },
     href: "https://pub.dev/packages/flutter_websocket_manager",
+  },
+  {
+    name: "shared_utils",
+    blurb: {
+      en: "Internal Flutter framework reused across all production apps — typed networking, WebSocket/SSE managers (auto-reconnect, token refresh), persistent device identity, formatters, and media pickers.",
+      ar: "إطار Flutter داخلي مُعاد استخدامه عبر كل التطبيقات الإنتاجية — شبكات مُنمّطة، ومديرو WebSocket/SSE (إعادة اتصال وتجديد رمز)، وهويّة جهاز دائمة، ومنسّقات، ومنتقيات وسائط.",
+    },
+    meta: { en: "~13K LOC · reused across all apps", ar: "‏~13 ألف سطر · مُعاد عبر كل التطبيقات" },
+    // إطار داخلي خاصّ — بلا صفحة pub.dev عامّة
   },
 ];
 

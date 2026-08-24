@@ -6,6 +6,7 @@ import { packages, scale, sections, socials } from "@/lib/data";
 import { SectionHeading } from "@/components/Section";
 import { GithubIcon } from "@/components/BrandIcons";
 import { useLang } from "@/components/LanguageProvider";
+import { cn } from "@/lib/utils";
 
 export function OpenSource() {
   const { t } = useLang();
@@ -19,33 +20,40 @@ export function OpenSource() {
         {t(sections.openSource.subB)}
       </SectionHeading>
 
-      <div className="mt-12 grid gap-5 md:grid-cols-3">
-        {packages.map((pkg, i) => (
-          <motion.a
-            key={pkg.name}
-            href={pkg.href}
-            target="_blank"
-            rel="noreferrer"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="card-glow group flex flex-col rounded-3xl border border-line bg-ink-800/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow"
-          >
-            <div className="flex items-center justify-between">
-              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-violet-soft text-violet-400">
-                <Package size={20} />
-              </span>
-              <ArrowUpRight
-                size={18}
-                className="text-fg-faint transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-violet-400"
-              />
-            </div>
-            <h3 className="mt-5 break-all font-mono text-[15px] font-semibold text-fg">{pkg.name}</h3>
-            <p className="mt-3 flex-1 text-sm leading-relaxed text-fg-muted">{t(pkg.blurb)}</p>
-            <p className="mt-5 font-mono text-xs text-cyan">{t(pkg.meta)}</p>
-          </motion.a>
-        ))}
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {packages.map((pkg, i) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const Tag: any = pkg.href ? motion.a : motion.div;
+          return (
+            <Tag
+              key={pkg.name}
+              {...(pkg.href ? { href: pkg.href, target: "_blank", rel: "noreferrer" } : {})}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: (i % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className={cn(
+                "card-glow group flex h-full flex-col rounded-3xl border border-line bg-ink-800/60 p-6 transition-all duration-300",
+                pkg.href && "hover:-translate-y-1 hover:shadow-glow"
+              )}
+            >
+              <div className="flex items-center justify-between">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-violet-soft text-violet-400">
+                  <Package size={20} />
+                </span>
+                {pkg.href && (
+                  <ArrowUpRight
+                    size={18}
+                    className="text-fg-faint transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-violet-400"
+                  />
+                )}
+              </div>
+              <h3 className="mt-5 break-all font-mono text-[15px] font-semibold text-fg">{pkg.name}</h3>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-fg-muted">{t(pkg.blurb)}</p>
+              <p className="mt-5 font-mono text-xs text-cyan">{t(pkg.meta)}</p>
+            </Tag>
+          );
+        })}
       </div>
 
       {/* شريط المقياس — أرقام حقيقية من جرد المشاريع + GitHub */}

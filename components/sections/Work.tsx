@@ -8,30 +8,27 @@ import { useLang } from "@/components/LanguageProvider";
 import { cn } from "@/lib/utils";
 
 const accentRing: Record<string, string> = {
-  violet: "group-hover:shadow-glow",
-  cyan: "group-hover:shadow-glow-cyan",
-  pink: "group-hover:shadow-lift",
+  violet: "hover:shadow-glow",
+  cyan: "hover:shadow-glow-cyan",
+  pink: "hover:shadow-lift",
 };
 
-function Card({ project, featured }: { project: Project; featured?: boolean }) {
+function Card({ project }: { project: Project }) {
   const { t } = useLang();
   return (
     <motion.article
-      initial={{ opacity: 0, y: 26 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "card-glow group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-ink-800/60 p-6 transition-all duration-300 hover:-translate-y-1",
-        accentRing[project.accent ?? "violet"],
-        featured && "sm:p-8"
+        "card-glow group relative flex h-full flex-col rounded-3xl border border-line bg-ink-800/60 p-6 transition-all duration-300 hover:-translate-y-1",
+        accentRing[project.accent ?? "violet"]
       )}
     >
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h3 className={cn("font-display font-bold text-fg", featured ? "text-2xl" : "text-xl")}>
-            {project.name}
-          </h3>
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="font-display text-xl font-bold text-fg">{project.name}</h3>
           <p className="mt-0.5 font-mono text-xs uppercase tracking-wider text-violet">{t(project.kind)}</p>
         </div>
         {project.featured && (
@@ -41,9 +38,7 @@ function Card({ project, featured }: { project: Project; featured?: boolean }) {
         )}
       </div>
 
-      <p className={cn("mt-4 text-fg-muted", featured ? "text-[15px] leading-relaxed" : "text-sm leading-relaxed")}>
-        {t(project.blurb)}
-      </p>
+      <p className="mt-4 text-sm leading-relaxed text-fg-muted">{t(project.blurb)}</p>
 
       <div className="mt-5 flex flex-wrap gap-2">
         {project.tags.map((tag) => (
@@ -75,8 +70,6 @@ function Card({ project, featured }: { project: Project; featured?: boolean }) {
 
 export function Work() {
   const { t } = useLang();
-  const featured = projects.filter((p) => p.featured);
-  const rest = projects.filter((p) => !p.featured);
 
   return (
     <section id="work" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-24 sm:px-6">
@@ -84,13 +77,9 @@ export function Work() {
         {t(sections.work.subtitle)}
       </SectionHeading>
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-2">
-        {featured.map((p) => (
-          <Card key={p.name} project={p} featured />
-        ))}
-      </div>
-      <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {rest.map((p) => (
+      {/* شبكة موحّدة 3×3 — متوازنة بصرياً */}
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((p) => (
           <Card key={p.name} project={p} />
         ))}
       </div>
@@ -109,7 +98,7 @@ export function Work() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: (i % 3) * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="group rounded-2xl border border-line bg-ink-800/40 p-4 transition-colors hover:border-violet/40 hover:bg-white/5"
+              className="group flex h-full flex-col rounded-2xl border border-line bg-ink-800/40 p-4 transition-colors hover:border-violet/40 hover:bg-white/5"
             >
               <div className="flex items-baseline justify-between gap-2">
                 <h4 className="font-display text-base font-bold text-fg">{p.name}</h4>
