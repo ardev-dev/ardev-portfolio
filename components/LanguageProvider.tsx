@@ -20,7 +20,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
 
   useEffect(() => {
+    // أولوية لِمعامل الرابط ?lang= (قابل للمشاركة)، ثم التفضيل المحفوظ.
     try {
+      const q = new URLSearchParams(window.location.search).get("lang");
+      if (q === "ar" || q === "en") {
+        setLang(q);
+        return;
+      }
       const saved = localStorage.getItem("lang");
       if (saved === "ar" || saved === "en") setLang(saved);
     } catch {}

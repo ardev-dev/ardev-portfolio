@@ -1,119 +1,76 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { moreProjects, projects, sections, ui, type Project } from "@/lib/data";
-import { SectionHeading } from "@/components/Section";
+import { heads, moreProjects, projects, socials } from "@/lib/data";
 import { useLang } from "@/components/LanguageProvider";
-import { cn } from "@/lib/utils";
-
-const accentRing: Record<string, string> = {
-  violet: "hover:shadow-glow",
-  cyan: "hover:shadow-glow-cyan",
-  pink: "hover:shadow-lift",
-};
-
-function Card({ project }: { project: Project }) {
-  const { t } = useLang();
-  return (
-    <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className={cn(
-        "card-glow group relative flex h-full flex-col rounded-3xl border border-line bg-ink-800/60 p-6 transition-all duration-300 hover:-translate-y-1",
-        accentRing[project.accent ?? "violet"]
-      )}
-    >
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h3 className="font-display text-xl font-bold text-fg">{project.name}</h3>
-          <p className="mt-0.5 font-mono text-xs uppercase tracking-wider text-violet">{t(project.kind)}</p>
-        </div>
-        {project.featured && (
-          <span className="shrink-0 rounded-full border border-violet/30 bg-violet-soft px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-violet-400">
-            {t(ui.flagship)}
-          </span>
-        )}
-      </div>
-
-      <p className="mt-4 text-sm leading-relaxed text-fg-muted">{t(project.blurb)}</p>
-
-      <div className="mt-5 flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
-          <span key={tag} className="rounded-lg bg-white/[0.04] px-2.5 py-1 text-xs text-fg-muted">
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      {project.links.length > 0 && (
-        <div className="mt-auto flex flex-wrap gap-4 pt-6">
-          {project.links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              target="_blank"
-              rel="noreferrer"
-              className="group/link inline-flex items-center gap-1 text-sm font-medium text-fg transition-colors hover:text-violet-400"
-            >
-              {t(l.label)}
-              <ArrowUpRight size={14} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-            </a>
-          ))}
-        </div>
-      )}
-    </motion.article>
-  );
-}
+import { Head } from "@/components/Head";
+import { Reveal } from "@/components/Reveal";
 
 export function Work() {
   const { t } = useLang();
-
   return (
-    <section id="work" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-24 sm:px-6">
-      <SectionHeading index="01" eyebrow={t(sections.work.eyebrow)} title={t(sections.work.title)}>
-        {t(sections.work.subtitle)}
-      </SectionHeading>
+    <section id="work" className="scroll-mt-24 py-14 lg:py-20">
+      <Head num="03." title={t(heads.work)} />
 
-      {/* شبكة موحّدة 3×3 — متوازنة بصرياً */}
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col">
         {projects.map((p) => (
-          <Card key={p.name} project={p} />
+          <Reveal key={p.name}>
+            <div className="group -mx-4 rounded-xl p-4 transition-colors duration-200 hover:bg-white/[0.025]">
+              <div className="flex items-baseline justify-between gap-3">
+                <h3 className="flex items-center gap-2 font-display text-base font-semibold text-heading transition-colors group-hover:text-accent">
+                  {p.name}
+                  {p.featured && <span className="h-1.5 w-1.5 rounded-full bg-accent" title="Flagship" />}
+                </h3>
+                <span className="shrink-0 font-mono text-xs text-faint">{t(p.kind)}</span>
+              </div>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-body">{t(p.blurb)}</p>
+              <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <div className="flex flex-wrap gap-1.5">
+                  {p.tags.map((tag) => (
+                    <span key={tag} className="font-mono text-xs text-faint">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                {p.links.map((l) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="link-underline inline-flex items-center gap-1 text-xs font-medium text-accent"
+                  >
+                    {t(l.label)} <ArrowUpRight size={12} />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         ))}
       </div>
 
-      {/* المزيد — بطاقات مُدمجة لبقية المشاريع */}
-      <div className="mt-14">
-        <h3 className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-fg-faint">
-          {t(ui.moreWork)}
-          <span className="h-px flex-1 bg-line" />
-        </h3>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {moreProjects.map((p, i) => (
-            <motion.div
+      {/* المزيد — قائمة مُدمجة */}
+      <div className="mt-12">
+        <p className="font-mono text-xs uppercase tracking-[0.18em] text-faint">{t(heads.more)}</p>
+        <div className="mt-4 grid gap-x-8 sm:grid-cols-2">
+          {moreProjects.map((p) => (
+            <div
               key={p.name}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.4, delay: (i % 3) * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="group flex h-full flex-col rounded-2xl border border-line bg-ink-800/40 p-4 transition-colors hover:border-violet/40 hover:bg-white/5"
+              className="flex items-baseline justify-between gap-3 border-b border-line/60 py-2.5 transition-colors hover:border-accent/40"
             >
-              <div className="flex items-baseline justify-between gap-2">
-                <h4 className="font-display text-base font-bold text-fg">{p.name}</h4>
-                <span className="shrink-0 font-mono text-[11px] text-violet-400">{t(p.kind)}</span>
-              </div>
-              <div className="mt-2.5 flex flex-wrap gap-1.5">
-                {p.tags.map((tag) => (
-                  <span key={tag} className="rounded bg-white/[0.04] px-2 py-0.5 text-[11px] text-fg-muted">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
+              <span className="text-sm text-heading">{p.name}</span>
+              <span className="shrink-0 font-mono text-xs text-faint">{t(p.kind)}</span>
+            </div>
           ))}
         </div>
+        <a
+          href={socials.github}
+          target="_blank"
+          rel="noreferrer"
+          className="link-underline mt-7 inline-flex items-center gap-1.5 font-mono text-sm text-accent"
+        >
+          {t(heads.viewGithub)} <ArrowUpRight size={14} />
+        </a>
       </div>
     </section>
   );

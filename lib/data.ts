@@ -13,8 +13,12 @@ export const profile = {
   firstName: { en: "Abdulrahman", ar: "عبدالرحمن" } as L,
   role: { en: "Senior Software Engineer", ar: "مهندس برمجيات أول" } as L,
   tagline: {
-    en: "I design, build, and operate production software end-to-end — from requirements and architecture to deployment and production support.",
-    ar: "أُصمّم وأبني وأُشغّل أنظمة برمجية إنتاجية من الفكرة إلى التشغيل — من المتطلبات والمعمارية إلى النشر والدعم الإنتاجي.",
+    en: "I build systems end-to-end — from requirements to production.",
+    ar: "أبني الأنظمة من الفكرة إلى التشغيل — من المتطلبات إلى الإنتاج.",
+  } as L,
+  about: {
+    en: "I'm a software engineer who owns systems end-to-end — turning business requirements into production software across mobile, web, and backend. Today I lead engineering at Somow, where I build and operate products used by tens of thousands and coordinate the third-party services behind them. I care about clean architecture, reliability, and shipping things that hold up in production.",
+    ar: "مهندس برمجيات أتولّى الأنظمة من الفكرة إلى التشغيل — أُحوّل متطلبات العمل إلى برمجيات إنتاجية عبر الموبايل والويب والخلفية. أقود اليوم الهندسة في Somow، حيث أبني وأُشغّل منتجات يستخدمها عشرات الآلاف، وأُنسّق خدمات الطرف الثالث خلفها. يهمّني نظافة المعمارية، والموثوقية، وأن يصمد ما أشحنه في الإنتاج.",
   } as L,
   location: { en: "Buraydah, Saudi Arabia", ar: "بريدة، السعودية" } as L,
   status: {
@@ -340,7 +344,7 @@ export const experience: Job[] = [
       },
       {
         en: "Primary technical liaison with external providers — payment gateways, Tamara, Meta, Huawei — owning SDK integration and account management.",
-        ar: "نقطة الاتصال التقنية الأساسية مع المزوّدين الخارجيين — بوابات الدفع وTamara وMeta وHuawei — أتولّى تكامل الـ SDK وإدارة الحسابات.",
+        ar: "نقطة الاتصال التقنية الأساسية مع المزوّدين الخارجيين — بوابات الدفع، Tamara، Meta، Huawei — أتولّى تكامل الـ SDK وإدارة الحسابات.",
       },
       {
         en: "Led weekly architecture reviews and authored the internal Clean Architecture handbook.",
@@ -385,9 +389,20 @@ export const experience: Job[] = [
 ];
 
 export const nav: { label: L; href: string }[] = [
+  { label: { en: "About", ar: "نبذة" }, href: "#about" },
+  { label: { en: "Experience", ar: "الخبرة" }, href: "#experience" },
   { label: { en: "Work", ar: "الأعمال" }, href: "#work" },
   { label: { en: "Open Source", ar: "مفتوح المصدر" }, href: "#open-source" },
-  { label: { en: "Skills", ar: "المهارات" }, href: "#skills" },
-  { label: { en: "Experience", ar: "الخبرة" }, href: "#experience" },
-  { label: { en: "Contact", ar: "تواصل" }, href: "#contact" },
 ];
+
+/** عناوين الأقسام القصيرة (النمط التحريري). */
+export const heads = {
+  about: { en: "About", ar: "نبذة" } as L,
+  experience: { en: "Experience", ar: "الخبرة" } as L,
+  work: { en: "Selected Work", ar: "أعمال مختارة" } as L,
+  more: { en: "More", ar: "المزيد" } as L,
+  openSource: { en: "Open Source", ar: "مفتوح المصدر" } as L,
+  contact: { en: "Get in touch", ar: "لنتواصل" } as L,
+  currently: { en: "Currently working with", ar: "أعمل حالياً بـ" } as L,
+  viewGithub: { en: "All projects on GitHub", ar: "كل المشاريع على GitHub" } as L,
+};
