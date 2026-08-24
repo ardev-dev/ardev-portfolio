@@ -218,6 +218,47 @@ export const projects: Project[] = [
     links: [],
     accent: "violet",
   },
+  {
+    name: "Moqawlat",
+    kind: { en: "Contracting ERP", ar: "نظام مقاولات" },
+    blurb: {
+      en: "A 14-module construction-contracting ERP designed for white-label deployment — projects, contracts, accounting, and field operations.",
+      ar: "نظام تخطيط موارد للمقاولات من 14 وحدة مُصمّم للنشر بعلامة بيضاء — مشاريع وعقود ومحاسبة وعمليات ميدانية.",
+    },
+    tags: ["Flutter", "Multi-Module", "Accounting"],
+    links: [],
+    accent: "cyan",
+  },
+  {
+    name: "Truck-go",
+    kind: { en: "Logistics Platform", ar: "منصّة لوجستية" },
+    blurb: {
+      en: "A logistics platform — customer and driver apps, a web dashboard, and a Python service layer for routing and operations.",
+      ar: "منصّة لوجستية — تطبيقا العميل والسائق، ولوحة ويب، وطبقة خدمات Python للتوجيه والعمليات.",
+    },
+    tags: ["Flutter", "Django", "Python"],
+    links: [],
+    accent: "violet",
+  },
+  {
+    name: "Sweetra",
+    kind: { en: "Mobile Game", ar: "لعبة موبايل" },
+    blurb: {
+      en: "A published Flutter + Flame game shipped end-to-end through full CI/CD with automated tests.",
+      ar: "لعبة Flutter + Flame منشورة، أُنجزت من الألف إلى الياء عبر CI/CD كامل مع اختبارات آلية.",
+    },
+    tags: ["Flutter", "Flame", "CI/CD"],
+    links: [{ label: googlePlay, href: "https://play.google.com/store/apps/details?id=io.ar.sweetra" }],
+    accent: "pink",
+  },
+];
+
+/** أرقام المقياس الحقيقية (جرد المشاريع + GitHub، 2026-08). */
+export const scale: { value: L; label: L }[] = [
+  { value: { en: "1M+", ar: "+مليون" }, label: { en: "Lines authored", ar: "سطر مؤلَّف" } },
+  { value: same("72"), label: { en: "Repositories", ar: "مستودعاً" } },
+  { value: same("12"), label: { en: "Product ventures", ar: "مشروعاً منتَجاً" } },
+  { value: same("30+"), label: { en: "Apps, panels & services", ar: "تطبيقاً ولوحةً وخدمة" } },
 ];
 
 export type Package = { name: string; blurb: L; meta: L; href: string };

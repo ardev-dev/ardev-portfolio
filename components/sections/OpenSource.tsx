@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Package } from "lucide-react";
-import { packages, sections, socials } from "@/lib/data";
+import { packages, scale, sections, socials } from "@/lib/data";
 import { SectionHeading } from "@/components/Section";
+import { GithubIcon } from "@/components/BrandIcons";
 import { useLang } from "@/components/LanguageProvider";
 
 export function OpenSource() {
@@ -46,6 +47,33 @@ export function OpenSource() {
           </motion.a>
         ))}
       </div>
+
+      {/* شريط المقياس — أرقام حقيقية من جرد المشاريع + GitHub */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="mt-6 overflow-hidden rounded-3xl border border-line bg-ink-800/40"
+      >
+        <div className="grid grid-cols-2 gap-px bg-line sm:grid-cols-4">
+          {scale.map((s) => (
+            <div key={s.label.en} className="bg-ink-900/60 px-5 py-6 text-center">
+              <div className="font-display text-3xl font-bold text-gradient">{t(s.value)}</div>
+              <div className="mt-1 text-xs text-fg-muted">{t(s.label)}</div>
+            </div>
+          ))}
+        </div>
+        <a
+          href={socials.github}
+          target="_blank"
+          rel="noreferrer"
+          className="group flex items-center justify-center gap-2 border-t border-line py-4 text-sm font-medium text-fg-muted transition-colors hover:text-fg"
+        >
+          <GithubIcon size={16} /> {socials.githubHandle}
+          <ArrowUpRight size={14} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </a>
+      </motion.div>
     </section>
   );
 }
