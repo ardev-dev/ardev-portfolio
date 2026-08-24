@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { projects, sections, ui, type Project } from "@/lib/data";
+import { moreProjects, projects, sections, ui, type Project } from "@/lib/data";
 import { SectionHeading } from "@/components/Section";
 import { useLang } from "@/components/LanguageProvider";
 import { cn } from "@/lib/utils";
@@ -93,6 +93,38 @@ export function Work() {
         {rest.map((p) => (
           <Card key={p.name} project={p} />
         ))}
+      </div>
+
+      {/* المزيد — بطاقات مُدمجة لبقية المشاريع */}
+      <div className="mt-14">
+        <h3 className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-fg-faint">
+          {t(ui.moreWork)}
+          <span className="h-px flex-1 bg-line" />
+        </h3>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {moreProjects.map((p, i) => (
+            <motion.div
+              key={p.name}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.4, delay: (i % 3) * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              className="group rounded-2xl border border-line bg-ink-800/40 p-4 transition-colors hover:border-violet/40 hover:bg-white/5"
+            >
+              <div className="flex items-baseline justify-between gap-2">
+                <h4 className="font-display text-base font-bold text-fg">{p.name}</h4>
+                <span className="shrink-0 font-mono text-[11px] text-violet-400">{t(p.kind)}</span>
+              </div>
+              <div className="mt-2.5 flex flex-wrap gap-1.5">
+                {p.tags.map((tag) => (
+                  <span key={tag} className="rounded bg-white/[0.04] px-2 py-0.5 text-[11px] text-fg-muted">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

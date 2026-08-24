@@ -46,6 +46,7 @@ export const ui = {
   builtWith: { en: "Built with Next.js & Framer Motion.", ar: "بُني بـ Next.js وFramer Motion." } as L,
   emailLabel: { en: "Email", ar: "البريد" } as L,
   langLabel: { en: "العربية", ar: "EN" } as L, // نصّ زرّ التبديل: يعرض اللغة الأخرى
+  moreWork: { en: "More products & systems", ar: "منتجات وأنظمة أخرى" } as L,
 };
 
 /** عناوين الأقسام. */
@@ -251,6 +252,22 @@ export const projects: Project[] = [
     links: [{ label: googlePlay, href: "https://play.google.com/store/apps/details?id=io.ar.sweetra" }],
     accent: "pink",
   },
+];
+
+/** مشاريع إضافية (بطاقات مُدمجة) — من جرد المشاريع المحلية + GitHub، أوصاف مُتحقَّقة. */
+export type MiniProject = { name: string; kind: L; tags: string[] };
+
+export const moreProjects: MiniProject[] = [
+  { name: "AppProof", kind: { en: "Beta Testing Platform", ar: "منصّة اختبار تجريبي" }, tags: ["Flutter", "Django", "Web"] },
+  { name: "Wasla", kind: { en: "Community App", ar: "تطبيق مجتمعي" }, tags: ["Flutter", "Firebase", "Web"] },
+  { name: "Lumi", kind: { en: "AI Learning for Kids", ar: "تعلّم ذكي للأطفال" }, tags: ["Flutter", "AI"] },
+  { name: "FactForge", kind: { en: "AI Media Automation", ar: "أتمتة محتوى بالذكاء" }, tags: ["Python", "Multi-Agent AI"] },
+  { name: "MikroTik Manager", kind: { en: "Router Management", ar: "إدارة راوترات" }, tags: ["Flutter", "Networking"] },
+  { name: "Aleuhda", kind: { en: "Wallet App", ar: "تطبيق محفظة" }, tags: ["Flutter", "BLoC"] },
+  { name: "Alminshar", kind: { en: "Accounting System", ar: "نظام محاسبة" }, tags: ["Flutter", "Accounting"] },
+  { name: "shared_utils", kind: { en: "Shared Framework", ar: "إطار مشترك" }, tags: ["Dart", "pub.dev"] },
+  { name: "CopyPaste", kind: { en: "macOS Utility", ar: "أداة macOS" }, tags: ["Swift", "macOS"] },
+  { name: "Somow", kind: { en: "Company Website", ar: "موقع الشركة" }, tags: ["React", "JSX"] },
 ];
 
 /** أرقام المقياس الحقيقية (جرد المشاريع + GitHub، 2026-08). */
