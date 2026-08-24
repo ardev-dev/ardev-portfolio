@@ -115,14 +115,14 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: { en: "Real-Time & Platforms", ar: "الزمن الحقيقي والمنصّات" },
+    items: [same("WebRTC (Agora)"), same("WebSocket"), same("Firebase"), same("CI/CD"), same("Sentry")],
+  },
+  {
+    title: { en: "Payments & Fintech", ar: "المدفوعات والدفع الرقمي" },
     items: [
-      same("WebRTC (Agora)"),
-      same("WebSocket"),
-      same("Firebase"),
-      same("CI/CD"),
-      same("Sentry"),
-      { en: "Payments (HyperPay · Tamara · STC Pay)", ar: "المدفوعات (HyperPay · Tamara · STC Pay)" },
-    ],
+      "HyperPay", "Tap", "Tamara", "Mada", "STC Pay", "Apple Pay",
+      "Google Pay", "PayPal", "Visa", "Mastercard", "Stripe", "3D Secure",
+    ].map(same),
   },
 ];
 
