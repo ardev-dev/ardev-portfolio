@@ -93,8 +93,8 @@ export function Bento() {
           <h3 className="mt-2 font-display text-2xl font-bold text-ink">{t(ai.title)}</h3>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-fg">
             {t({
-              en: "I use the latest AI tools — Claude Code, Cursor, Copilot — to accelerate delivery and automation, while holding a high bar for clean, tested, production-grade code.",
-              ar: "أستخدم أحدث أدوات الذكاء الاصطناعي — Claude Code وCursor وCopilot — لتسريع التسليم والأتمتة، مع الحفاظ على معيار هندسي عالٍ لكود نظيف ومُختبَر وجاهز للإنتاج.",
+              en: "I use the latest AI tools — Claude Code, Cursor, Copilot, Codex, Gemini — to accelerate delivery and automation, while holding a high bar for clean, tested, production-grade code.",
+              ar: "أستخدم أحدث أدوات الذكاء الاصطناعي — Claude Code وCursor وCopilot وCodex وGemini — لتسريع التسليم والأتمتة، مع الحفاظ على معيار هندسي عالٍ لكود نظيف ومُختبَر وجاهز للإنتاج.",
             })}
           </p>
           <Chips items={ai.items} />
