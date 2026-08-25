@@ -13,12 +13,12 @@ export const profile = {
   firstName: { en: "Abdulrahman", ar: "عبدالرحمن" } as L,
   role: { en: "Senior Software Engineer", ar: "مهندس برمجيات أول" } as L,
   tagline: {
-    en: "I build systems end-to-end — from requirements to production.",
-    ar: "أبني الأنظمة من الفكرة إلى التشغيل — من المتطلبات إلى الإنتاج.",
+    en: "I engineer from first principles — and enter any software domain on demand.",
+    ar: "أُهندس من المبادئ الأولى — وأدخل أي مجال برمجي عند الطلب.",
   } as L,
   about: {
-    en: "I'm a software engineer who owns systems end-to-end — turning business requirements into production software across mobile, web, and backend. Today I lead engineering at Somow, where I build and operate products used by 21,000+ people and coordinate the third-party services behind them. Languages and frameworks are tools, not identity: grounded in engineering principles, I pick up any new language or stack the problem needs — accelerated by modern AI-assisted workflows, and always to a high bar for clean, reliable, production-grade code.",
-    ar: "مهندس برمجيات أتولّى الأنظمة من الفكرة إلى التشغيل — أُحوّل متطلبات العمل إلى برمجيات إنتاجية عبر الموبايل والويب والخلفية. أقود اليوم الهندسة في Somow، حيث أبني وأُشغّل منتجات يستخدمها 21,000+ مستخدم، وأُنسّق خدمات الطرف الثالث خلفها. اللغات والأُطر أدوات لا هوية: انطلاقاً من المبادئ الهندسية، أتقن أي لغة أو تقنية جديدة يتطلّبها الحل بسرعة — مدعوماً بأحدث تدفّقات العمل المعزّزة بالذكاء الاصطناعي، وبمعيار عالٍ دائماً لكود نظيف وموثوق وجاهز للإنتاج.",
+    en: "I'm a software engineer defined by method, not by any language or framework — I work from first principles: analysis, system design, and problem-solving. That lets me enter any software-engineering domain on demand, including ones I've never used before, and ship production-grade systems. Today I lead engineering at Somow, building and operating products used by 21,000+ people. My track record proves it transfers — Java → Flutter → Django → Next.js → multi-agent AI — accelerated by AI-assisted workflows. Technologies are evidence of range; engineering is the discipline.",
+    ar: "مهندس برمجيات يُعرَّف بالمنهج لا بلغة أو إطار — أعمل من المبادئ الأولى: التحليل وتصميم الأنظمة وحلّ المشكلات. هذا يمكّنني من دخول أي مجال في هندسة البرمجيات عند الطلب — حتى ما لم أستخدمه من قبل — وشحن أنظمة جاهزة للإنتاج. أقود اليوم الهندسة في Somow، وأبني وأُشغّل منتجات يستخدمها 21,000+ مستخدم. وسجلّي يُثبت أن المنهج ينتقل — Java ← Flutter ← Django ← Next.js ← أنظمة وكلاء AI — مدعوماً بأدوات الذكاء الاصطناعي. التقنيات دليل اتساع؛ والهندسة هي التخصّص.",
   } as L,
   location: { en: "Buraydah, Saudi Arabia", ar: "بريدة، السعودية" } as L,
   status: {
@@ -71,10 +71,10 @@ export const sections = {
   },
   skills: {
     eyebrow: { en: "Capabilities", ar: "القدرات" } as L,
-    title: { en: "The full lifecycle — and the stack behind it", ar: "دورة الحياة الكاملة — والتقنيات خلفها" } as L,
+    title: { en: "Method first — the stack is just evidence", ar: "المنهج أولاً — والتقنيات مجرّد دليل" } as L,
     subtitle: {
-      en: "Technologies are evidence, not identity — I'm a software engineer first, and I adopt any new language or stack the problem calls for. I own the system from requirements to production support; these are the tools I reach for today.",
-      ar: "التقنيات دليل لا هويّة — أنا مهندس برمجيات أولاً، وأتبنّى أي لغة أو تقنية جديدة يتطلّبها الحل. أتولّى النظام من المتطلبات إلى الدعم الإنتاجي؛ وهذه هي الأدوات التي أستخدمها اليوم.",
+      en: "I engineer from first principles — analysis, design, and problem-solving — then reach for whatever a problem needs. Technologies are evidence of range, not identity; these are the tools I've reached for so far.",
+      ar: "أُهندس من المبادئ الأولى — تحليلٌ وتصميمٌ وحلّ مشكلات — ثم أستخدم ما يتطلّبه الحل. التقنيات دليل اتساعٍ لا هويّة؛ وهذه هي الأدوات التي استخدمتها حتى الآن.",
     } as L,
   },
   experience: {

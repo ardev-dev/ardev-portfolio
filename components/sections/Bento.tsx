@@ -49,10 +49,10 @@ export function Bento() {
       <div className="mt-12 grid gap-4 md:grid-cols-3">
         <Card span>
           <span className="font-mono text-xs uppercase tracking-wider text-accent">
-            {t({ en: "End-to-end ownership", ar: "ملكية من الفكرة للتشغيل" })}
+            {t({ en: "Engineering method", ar: "المنهج الهندسي" })}
           </span>
           <h3 className="mt-2 font-display text-2xl font-bold text-ink">
-            {t({ en: "I own the full lifecycle", ar: "أتولّى دورة الحياة كاملة" })}
+            {t({ en: "From first principles to production", ar: "من المبادئ الأولى إلى الإنتاج" })}
           </h3>
           <div className="mt-5 flex flex-wrap items-center gap-2">
             {lifecycle.items.map((step, i) => (
