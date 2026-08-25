@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --accent: #5eead4;
+  --accent: #818cf8;
 }
 
 * {
@@ -12,73 +12,93 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+  scroll-padding-top: 96px;
 }
 
 body {
-  background-color: #0a0e14;
-  color: #93a3b8;
+  background-color: #08090c;
+  color: #a2a2ad;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* ─── Scrollbar ──────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0e14;
-}
-::-webkit-scrollbar-thumb {
-  background: #1c2531;
-  border-radius: 99px;
-  border: 2px solid #0a0e14;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #2a3644;
+::selection {
+  background: rgba(129, 140, 248, 0.3);
+  color: #fff;
 }
 
-::selection {
-  background: rgba(94, 234, 212, 0.22);
-  color: #e7eef6;
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: #08090c;
+}
+::-webkit-scrollbar-thumb {
+  background: #24252f;
+  border-radius: 99px;
+  border: 3px solid #08090c;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #34353f;
 }
 
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 3px;
+  border-radius: 6px;
 }
 
 @layer components {
-  /* رقم القسم التحريري */
-  .eyebrow {
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.22em;
+  /* بطاقة بعمق (Linear-style): تدرّج داخلي + حدّ دقيق + إضاءة علوية */
+  .card {
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.008));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 10px 34px -14px rgba(0, 0, 0, 0.7);
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-hover:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+    transform: translateY(-3px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 24px 55px -18px rgba(0, 0, 0, 0.8);
   }
 
-  /* رابط بخطّ سفلي متحرّك بلون التمييز */
-  .link-underline {
+  /* حدّ متدرّج (premium) — إطار بلون التدرّج مع داخل داكن */
+  .grad-border {
     position: relative;
+    background-clip: padding-box;
+    border: 1px solid transparent;
   }
-  .link-underline::after {
+  .grad-border::before {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: -2px;
-    height: 1px;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: left;
-    background: var(--accent);
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(120deg, rgba(129, 140, 248, 0.7), rgba(232, 121, 249, 0.35), rgba(255, 255, 255, 0.05));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
-  [dir="rtl"] .link-underline::after {
-    transform-origin: right;
+
+  .text-grad {
+    background: linear-gradient(120deg, #c7d2fe 0%, #a78bfa 45%, #f0abfc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
-  .link-underline:hover::after {
-    transform: scaleX(1);
+
+  /* زرّ أساسي */
+  .btn-primary {
+    background-image: linear-gradient(120deg, #6366f1, #8b5cf6);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2), 0 8px 24px -8px rgba(99, 102, 241, 0.55);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.25), 0 12px 30px -8px rgba(99, 102, 241, 0.7);
   }
 }
 
@@ -86,17 +106,41 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-  .grain {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+  .grid-bg {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
   }
 }
 
-/* ─── العربية: خط Cairo + RTL ─────────────────────────────────────── */
+/* كشف عند التحميل — حركة CSS خالصة تنتهي مرئية */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.reveal {
+  animation: reveal-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* العربية: خط Cairo + RTL */
 html[lang="ar"] body,
 html[lang="ar"] .font-sans,
 html[lang="ar"] .font-display,
 html[lang="ar"] .font-mono {
   font-family: var(--font-cairo), "Cairo", "Tajawal", sans-serif;
+}
+html[dir="rtl"] .marquee-track {
+  direction: ltr;
 }
 
 @media (prefers-reduced-motion: reduce) {

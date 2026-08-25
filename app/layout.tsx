@@ -1,17 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono, Cairo } from "next/font/google";
+import { Inter, JetBrains_Mono, Cairo } from "next/font/google";
 import "./globals.css";
 import { profile, socials } from "@/lib/data";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 /* خطوط ذاتيّة الاستضافة عبر next/font — غير حاجبة للعرض (LCP أفضل). */
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
-const grotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-  variable: "--font-grotesk",
-});
 const mono = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-mono" });
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -57,7 +51,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0e14",
+  themeColor: "#08090c",
   width: "device-width",
   initialScale: 1,
 };
@@ -79,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       dir="ltr"
-      className={`${inter.variable} ${grotesk.variable} ${mono.variable} ${cairo.variable}`}
+      className={`${inter.variable} ${mono.variable} ${cairo.variable}`}
     >
       <body className="font-sans antialiased">
         <script
