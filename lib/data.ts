@@ -150,8 +150,8 @@ export const projects: Project[] = [
     name: "Abber",
     kind: { en: "Consultation Platform", ar: "منصّة استشارات" },
     blurb: {
-      en: "Flagship consultation marketplace that has processed tens of thousands of requests — native VoIP calling (CallKit + WebRTC), offline-first realtime chat, native payments, and a Django backend spanning ~30 business domains.",
-      ar: "سوق استشارات رئيسي عالَج عشرات الآلاف من الطلبات — مكالمات صوتية أصلية (CallKit + WebRTC)، ومحادثة لحظية تعمل دون اتصال، ومدفوعات أصلية، وخلفية Django تغطّي نحو 30 مجالاً تجارياً.",
+      en: "Flagship consultation marketplace serving 21,000+ users with 40,000+ orders and 600K+ real-time messages — native VoIP calling (CallKit + WebRTC), offline-first realtime chat, native payments, and a Django backend spanning ~30 business domains.",
+      ar: "سوق استشارات رئيسي يخدم 21,000+ مستخدم بـ 40,000+ طلب و600K+ رسالة لحظية — مكالمات صوتية أصلية (CallKit + WebRTC)، ومحادثة لحظية تعمل دون اتصال، ومدفوعات أصلية، وخلفية Django تغطّي نحو 30 مجالاً.",
     },
     tags: ["Flutter", "Swift VoIP", "WebRTC", "Django", "Payments"],
     links: [
@@ -339,8 +339,8 @@ export const experience: Job[] = [
         ar: "خفّضتُ الأعطال المُبلَّغة من الجودة بنسبة 50% عبر معايير هندسية ومراجعة أكواد ومراقبة إنتاجية.",
       },
       {
-        en: "Improved the operating model and cut cost by SAR 200,000 by bringing outsourced work in-house.",
-        ar: "حسّنتُ نموذج التشغيل وخفّضتُ التكلفة بمقدار 200,000 ريال بجلب العمل المُسنَد خارجياً إلى الداخل.",
+        en: "Improved the operating model and delivery efficiency by bringing outsourced engineering work in-house.",
+        ar: "حسّنتُ نموذج التشغيل وكفاءة التسليم بجلب العمل الهندسي المُسنَد خارجياً إلى الداخل.",
       },
       {
         en: "Primary technical liaison with external providers — payment gateways, Tamara, Meta, Huawei — owning SDK integration and account management.",
