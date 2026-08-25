@@ -17,8 +17,8 @@ export const profile = {
     ar: "أبني الأنظمة من الفكرة إلى التشغيل — من المتطلبات إلى الإنتاج.",
   } as L,
   about: {
-    en: "I'm a software engineer who owns systems end-to-end — turning business requirements into production software across mobile, web, and backend. Today I lead engineering at Somow, where I build and operate products used by tens of thousands and coordinate the third-party services behind them. I care about clean architecture, reliability, and shipping things that hold up in production.",
-    ar: "مهندس برمجيات أتولّى الأنظمة من الفكرة إلى التشغيل — أُحوّل متطلبات العمل إلى برمجيات إنتاجية عبر الموبايل والويب والخلفية. أقود اليوم الهندسة في Somow، حيث أبني وأُشغّل منتجات يستخدمها عشرات الآلاف، وأُنسّق خدمات الطرف الثالث خلفها. يهمّني نظافة المعمارية، والموثوقية، وأن يصمد ما أشحنه في الإنتاج.",
+    en: "I'm a software engineer who owns systems end-to-end — turning business requirements into production software across mobile, web, and backend. Today I lead engineering at Somow, where I build and operate products used by 21,000+ people and coordinate the third-party services behind them. I care about clean architecture, reliability, and shipping things that hold up in production.",
+    ar: "مهندس برمجيات أتولّى الأنظمة من الفكرة إلى التشغيل — أُحوّل متطلبات العمل إلى برمجيات إنتاجية عبر الموبايل والويب والخلفية. أقود اليوم الهندسة في Somow، حيث أبني وأُشغّل منتجات يستخدمها 21,000+ مستخدم، وأُنسّق خدمات الطرف الثالث خلفها. يهمّني نظافة المعمارية، والموثوقية، وأن يصمد ما أشحنه في الإنتاج.",
   } as L,
   location: { en: "Buraydah, Saudi Arabia", ar: "بريدة، السعودية" } as L,
   status: {
