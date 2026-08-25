@@ -232,13 +232,13 @@ export const projects: Project[] = [
   },
   {
     name: "Wasselak",
-    kind: { en: "Delivery Platform", ar: "منصّة توصيل" },
+    kind: { en: "Express-Delivery Platform", ar: "منصّة توصيل سريع" },
     blurb: {
-      en: "A multi-app express-delivery platform on a Django backend with real-time GPS tracking over WebSocket and optimized REST APIs across customer, captain, business, and admin apps.",
-      ar: "منصّة توصيل سريع متعددة التطبيقات على خلفية Django مع تتبّع GPS لحظي عبر WebSocket وواجهات REST مُحسّنة عبر تطبيقات العميل والكابتن والأعمال والإدارة.",
+      en: "A multi-app express-delivery platform on a Django backend — customer, delivery-captain, business, employee, and admin apps plus a web dashboard — with real-time GPS tracking over WebSocket and optimized REST APIs.",
+      ar: "منصّة توصيل سريع متعددة التطبيقات على خلفية Django — تطبيقات العميل والمندوب والأعمال والموظّف والإدارة إضافةً إلى لوحة ويب — مع تتبّع GPS لحظي عبر WebSocket وواجهات REST مُحسّنة.",
     },
     tags: ["Flutter", "Django", "Realtime GPS"],
-    links: [],
+    links: [{ label: same("GitHub"), href: "https://github.com/wasselak-com" }],
     accent: "violet",
   },
   {
@@ -256,11 +256,11 @@ export const projects: Project[] = [
     name: "Truck-go",
     kind: { en: "Logistics Platform", ar: "منصّة لوجستية" },
     blurb: {
-      en: "A logistics platform — customer and driver apps, a web dashboard, and a Python service layer for routing and operations.",
-      ar: "منصّة لوجستية — تطبيقا العميل والسائق، ولوحة ويب، وطبقة خدمات Python للتوجيه والعمليات.",
+      en: "A logistics platform — customer and driver apps, a web dashboard, and a Python service layer (with an AI component) for routing and operations.",
+      ar: "منصّة لوجستية — تطبيقا العميل والسائق، ولوحة ويب، وطبقة خدمات Python (بمكوّن ذكاء اصطناعي) للتوجيه والعمليات.",
     },
-    tags: ["Flutter", "Django", "Python"],
-    links: [],
+    tags: ["Flutter", "Python", "AI"],
+    links: [{ label: same("GitHub"), href: "https://github.com/Truck-go" }],
     accent: "violet",
   },
   {
