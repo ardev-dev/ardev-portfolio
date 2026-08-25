@@ -124,12 +124,23 @@ export const skillGroups: SkillGroup[] = [
       "Google Pay", "PayPal", "Visa", "Mastercard", "Stripe", "3D Secure",
     ].map(same),
   },
+  {
+    title: { en: "AI & Automation", ar: "الذكاء الاصطناعي والأتمتة" },
+    items: [
+      { en: "AI-Assisted Development", ar: "تطوير مدعوم بالذكاء الاصطناعي" },
+      same("Claude Code"), same("Cursor"), same("GitHub Copilot"),
+      { en: "LLM Tooling", ar: "أدوات النماذج اللغوية" },
+      { en: "Multi-Agent Systems", ar: "أنظمة الوكلاء المتعددة" },
+      { en: "Automation", ar: "الأتمتة" },
+    ],
+  },
 ];
 
 /** شريط التقنيات المتحرّك (أسماء تقنيات — لا تُترجم). */
 export const marquee = [
   "Django", "Flutter", "Next.js", "TypeScript", "Python", "PostgreSQL", "WebRTC",
   "Docker", "Redis", "Celery", "Swift", "Kotlin", "React", "WebSocket", "AWS S3", "Firebase",
+  "Claude Code", "Cursor", "Copilot", "AI-Assisted",
 ];
 
 export type Project = {

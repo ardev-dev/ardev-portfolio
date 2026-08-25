@@ -38,6 +38,7 @@ export function Bento() {
   const backend = byTitle("Backend & Data");
   const web = byTitle("Web & Mobile");
   const realtime = byTitle("Real-Time & Platforms");
+  const ai = byTitle("AI & Automation");
 
   return (
     <section id="capabilities" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-24">
@@ -83,6 +84,32 @@ export function Bento() {
         <Card delay={0.2}>
           <h3 className="font-display text-lg font-bold text-ink">{t(realtime.title)}</h3>
           <Chips items={realtime.items} />
+        </Card>
+
+        <Card span delay={0.25}>
+          <span className="font-mono text-xs uppercase tracking-wider text-accent">
+            {t({ en: "Modern toolchain", ar: "أدوات حديثة" })}
+          </span>
+          <h3 className="mt-2 font-display text-2xl font-bold text-ink">{t(ai.title)}</h3>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-fg">
+            {t({
+              en: "I use the latest AI tools — Claude Code, Cursor, Copilot — to accelerate delivery and automation, while holding a high bar for clean, tested, production-grade code.",
+              ar: "أستخدم أحدث أدوات الذكاء الاصطناعي — Claude Code وCursor وCopilot — لتسريع التسليم والأتمتة، مع الحفاظ على معيار هندسي عالٍ لكود نظيف ومُختبَر وجاهز للإنتاج.",
+            })}
+          </p>
+          <Chips items={ai.items} />
+        </Card>
+
+        <Card delay={0.3}>
+          <h3 className="font-display text-lg font-bold text-ink">
+            {t({ en: "Engineering bar", ar: "المعيار الهندسي" })}
+          </h3>
+          <p className="mt-4 text-sm leading-relaxed text-fg">
+            {t({
+              en: "Clean Architecture · SOLID · code review · production monitoring — a 50% cut in QA-filed defects.",
+              ar: "معمارية نظيفة · SOLID · مراجعة كود · مراقبة إنتاج — خفض 50% في العيوب المُبلَّغة من الجودة.",
+            })}
+          </p>
         </Card>
       </div>
     </section>
