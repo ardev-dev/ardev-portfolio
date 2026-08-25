@@ -106,8 +106,8 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: { en: "Backend & Data", ar: "الخلفية والبيانات" },
-    items: ["Python", "Django", "Django REST", "Channels / Daphne", "Celery", "Redis", "PostgreSQL", "Docker", "AWS S3"].map(same),
+    title: { en: "Backend & Distributed Systems", ar: "الخلفية والأنظمة الموزّعة" },
+    items: ["Python", "Java", "Node.js", "Django", "Django REST", "Celery", "Redis", "PostgreSQL", "Docker", "AWS S3", "Microservices", "Distributed Systems", "Scalability"].map(same),
   },
   {
     title: { en: "Web & Mobile", ar: "الويب والموبايل" },
@@ -138,7 +138,7 @@ export const skillGroups: SkillGroup[] = [
 
 /** شريط التقنيات المتحرّك (أسماء تقنيات — لا تُترجم). */
 export const marquee = [
-  "Django", "Flutter", "Next.js", "TypeScript", "Python", "PostgreSQL", "WebRTC",
+  "Django", "Flutter", "Next.js", "TypeScript", "Python", "Java", "Node.js", "PostgreSQL", "WebRTC",
   "Docker", "Redis", "Celery", "Swift", "Kotlin", "React", "WebSocket", "AWS S3", "Firebase",
   "Claude Code", "Cursor", "Copilot", "AI-Assisted",
 ];

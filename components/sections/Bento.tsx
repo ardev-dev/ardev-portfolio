@@ -35,7 +35,7 @@ export function Bento() {
   const { t } = useLang();
   const lifecycle = byTitle("Lifecycle");
   const payments = byTitle("Payments & Fintech");
-  const backend = byTitle("Backend & Data");
+  const backend = byTitle("Backend & Distributed Systems");
   const web = byTitle("Web & Mobile");
   const realtime = byTitle("Real-Time & Platforms");
   const ai = byTitle("AI & Automation");
