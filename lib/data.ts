@@ -85,7 +85,7 @@ export const sections = {
 
 /** أرقام تظهر كعدّادات متحرّكة. */
 export const stats: { value: number; suffix: string; label: L }[] = [
-  { value: 5, suffix: "+", label: { en: "Years engineering", ar: "سنوات في الهندسة" } },
+  { value: 6, suffix: "+", label: { en: "Years engineering", ar: "سنوات في الهندسة" } },
   { value: 14, suffix: "+", label: { en: "Apps & services shipped", ar: "تطبيقات وخدمات مُنجَزة" } },
   { value: 5, suffix: "+", label: { en: "Live on App Store & Play", ar: "منشورة على المتاجر" } },
   { value: 1, suffix: "M+", label: { en: "Lines of code authored", ar: "أسطر برمجية مؤلَّفة" } },
@@ -368,23 +368,29 @@ export const experience: Job[] = [
     ],
   },
   {
-    role: { en: "Independent Software Engineer & Product Developer", ar: "مهندس برمجيات ومطوّر منتجات مستقل" },
-    org: { en: "Self-Published · Open Source", ar: "أعمال ذاتية · مفتوح المصدر" },
-    period: { en: "2021 — Present", ar: "2021 — حتى الآن" },
+    role: { en: "Flutter Developer", ar: "مطوّر Flutter" },
+    org: { en: "Independent · Freelance", ar: "مستقل · عمل حرّ" },
+    period: { en: "2021 — 2022", ar: "2021 — 2022" },
     summary: {
-      en: "Design, build, publish, and operate my own products and open-source packages end-to-end.",
-      ar: "أُصمّم وأبني وأنشر وأُشغّل منتجاتي وحزمي مفتوحة المصدر من الألف إلى الياء.",
+      en: "Adopted Flutter and delivered cross-platform apps end-to-end, publishing production apps to the App Store and Google Play.",
+      ar: "تبنّيت Flutter وسلّمت تطبيقات متعددة المنصّات من الألف إلى الياء، ونشرت تطبيقات إنتاجية على App Store وGoogle Play.",
     },
     highlights: [
       {
-        en: "Maintain published Dart packages on pub.dev under the ardev.dev publisher.",
-        ar: "أُصين حزم Dart منشورة على pub.dev تحت الناشر ardev.dev.",
-      },
-      {
-        en: "Built a Python multi-agent automation system running autonomously in production.",
-        ar: "بنيتُ نظام أتمتة متعدّد الوكلاء بلغة Python يعمل ذاتياً في الإنتاج.",
+        en: "Built REST-integrated apps with clean architecture and shipped them to the stores.",
+        ar: "بنيت تطبيقات مدمجة مع REST بمعمارية نظيفة ونشرتها على المتاجر.",
       },
     ],
+  },
+  {
+    role: { en: "Android Developer", ar: "مطوّر Android" },
+    org: { en: "Independent · Freelance", ar: "مستقل · عمل حرّ" },
+    period: { en: "2019 — 2020", ar: "2019 — 2020" },
+    summary: {
+      en: "Built and published production Android apps (Java) for clients — from requirements to Play Store release.",
+      ar: "بنيت ونشرت تطبيقات Android إنتاجية (Java) لعملاء — من المتطلبات إلى النشر على Play Store.",
+    },
+    highlights: [],
   },
 ];
 
