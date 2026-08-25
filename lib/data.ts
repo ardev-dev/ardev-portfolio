@@ -353,21 +353,6 @@ export const experience: Job[] = [
     ],
   },
   {
-    role: { en: "Software Engineer", ar: "مهندس برمجيات" },
-    org: { en: "Wasselak — Express Delivery Platform", ar: "وصلك — منصّة توصيل سريع" },
-    period: { en: "Apr 2023 — Mar 2024 · Contract", ar: "أبريل 2023 — مارس 2024 · عقد" },
-    summary: {
-      en: "Delivered a multi-app delivery platform on a Django backend — requirements, design, build, and integration.",
-      ar: "أنجزتُ منصّة توصيل متعددة التطبيقات على خلفية Django — المتطلبات والتصميم والبناء والتكامل.",
-    },
-    highlights: [
-      {
-        en: "Real-time GPS tracking over WebSocket with optimized REST APIs across apps, backend, and dashboards.",
-        ar: "تتبّع GPS لحظي عبر WebSocket مع واجهات REST مُحسّنة عبر التطبيقات والخلفية واللوحات.",
-      },
-    ],
-  },
-  {
     role: { en: "Flutter Developer", ar: "مطوّر Flutter" },
     org: { en: "Independent · Freelance", ar: "مستقل · عمل حرّ" },
     period: { en: "2021 — 2022", ar: "2021 — 2022" },
