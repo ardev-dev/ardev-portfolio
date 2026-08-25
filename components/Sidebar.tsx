@@ -36,8 +36,8 @@ export function Sidebar() {
       <div>
         {/* الاسم والدور */}
         <p className="eyebrow font-mono text-xs uppercase text-accent">{profile.brand}</p>
-        <h1 className="mt-3 font-display text-mega text-heading">{t(profile.firstName)}</h1>
-        <p className="mt-3 font-display text-2xl font-semibold text-body sm:text-3xl">{t(profile.role)}</p>
+        <h1 className="mt-3 font-display text-mega text-heading">{t(profile.name)}</h1>
+        <p className="mt-4 font-display text-xl font-semibold text-body sm:text-2xl">{t(profile.role)}</p>
         <p className="mt-5 max-w-xs text-body leading-relaxed">{t(profile.tagline)}</p>
 
         {/* التنقّل — يُبرز القسم الحالي */}
