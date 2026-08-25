@@ -33,8 +33,8 @@ export const socials = {
   githubHandle: "github.com/ardev-dev",
   pubdev: "https://pub.dev/publishers/ardev.dev/packages",
   pubdevHandle: "pub.dev/ardev.dev",
-  linkedin: "https://www.linkedin.com/in/abdulrahman-m-420715227/",
-  linkedinHandle: "linkedin.com/in/abdulrahman-m",
+  linkedin: "https://www.linkedin.com/in/ardev-dev",
+  linkedinHandle: "linkedin.com/in/ardev-dev",
   email: "mailto:me@ardev.dev",
 };
 
