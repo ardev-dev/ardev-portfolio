@@ -59,7 +59,7 @@ export function OpenSource() {
                 i >= 2 && "border-t border-white/[0.06] sm:border-t-0"
               )}
             >
-              <div className="font-display text-3xl font-bold text-grad">{t(s.value)}</div>
+              <div dir="ltr" className="font-display text-3xl font-bold text-grad">{t(s.value)}</div>
               <div className="mt-1.5 font-mono text-[11px] uppercase tracking-wider text-fg-muted">{t(s.label)}</div>
             </div>
           ))}

@@ -47,7 +47,7 @@ export function Counter({ value, suffix = "" }: { value: number; suffix?: string
   }, [value]);
 
   return (
-    <span ref={ref}>
+    <span ref={ref} dir="ltr" style={{ display: "inline-block", unicodeBidi: "isolate" }}>
       {n}
       {suffix}
     </span>
