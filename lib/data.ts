@@ -155,66 +155,73 @@ export type Project = {
 
 const appStore: L = { en: "App Store", ar: "App Store" };
 const googlePlay: L = { en: "Google Play", ar: "Google Play" };
+const website: L = { en: "Website", ar: "الموقع" };
 
 export const projects: Project[] = [
   {
     name: "Abber",
-    kind: { en: "Consultation Platform", ar: "منصّة استشارات" },
+    kind: { en: "Dream-Interpretation Marketplace", ar: "سوق تفسير الأحلام" },
     blurb: {
-      en: "Flagship consultation marketplace serving 21,000+ users with 40,000+ orders and 600K+ real-time messages — native VoIP calling (CallKit + WebRTC), offline-first realtime chat, native payments, and a Django backend spanning ~30 business domains.",
-      ar: "سوق استشارات رئيسي يخدم 21,000+ مستخدم بـ 40,000+ طلب و600K+ رسالة لحظية — مكالمات صوتية أصلية (CallKit + WebRTC)، ومحادثة لحظية تعمل دون اتصال، ومدفوعات أصلية، وخلفية Django تغطّي نحو 30 مجالاً.",
+      en: "Flagship dream & vision interpretation marketplace — users submit a dream and receive readings from vetted interpreters. Serves 21,000+ users with 40,000+ orders and 600K+ real-time messages, plus live sessions, a store, wallet, and a Django backend spanning ~30 business domains.",
+      ar: "سوق رائد لتفسير الأحلام والرؤى — يُرسل المستخدم حلمه فيستلم تفسيره من معبّرين موثوقين. يخدم 21,000+ مستخدم بـ 40,000+ طلب و600K+ رسالة لحظية، مع جلسات بثّ مباشر ومتجر ومحفظة وخلفية Django تغطّي نحو 30 مجالاً.",
     },
-    tags: ["Flutter", "Swift VoIP", "WebRTC", "Django", "Payments"],
+    tags: ["Flutter", "Django", "Real-time", "Payments"],
     links: [
       { label: appStore, href: "https://apps.apple.com/app/id6461119454" },
       { label: googlePlay, href: "https://play.google.com/store/apps/details?id=co.abber_dev.abber_app" },
+      { label: website, href: "https://abber.co" },
     ],
     featured: true,
     accent: "violet",
   },
   {
     name: "Maskani",
-    kind: { en: "Real-Estate Platform", ar: "منصّة عقارية" },
+    kind: { en: "Social Real-Estate Platform", ar: "منصّة عقارية اجتماعية" },
     blurb: {
-      en: "A full platform across three stacks — Flutter mobile, a Next.js / TypeScript web app, and a Dockerized Django backend — plus a Python multi-agent automation system running autonomously in production.",
-      ar: "منصّة كاملة عبر ثلاث تقنيات — تطبيق Flutter، وواجهة ويب Next.js / TypeScript، وخلفية Django بحاويات Docker — مع نظام أتمتة متعدّد الوكلاء بلغة Python يعمل ذاتياً في الإنتاج.",
+      en: "A social real-estate platform connecting property owners directly with clients — listings, services, jobs, a social feed, property requests, and real-time chat — built across three stacks: a Flutter app, an internal admin app, and a Next.js / TypeScript web app on a Dockerized Django backend.",
+      ar: "منصّة عقارية اجتماعية تربط الملّاك مباشرةً بالعملاء — إعلانات عقارية وخدمات ووظائف وموجز اجتماعي وطلبات عقارات ومحادثة لحظية — عبر ثلاث تقنيات: تطبيق Flutter، وتطبيق إدارة داخلي، وواجهة ويب Next.js / TypeScript على خلفية Django بحاويات Docker.",
     },
-    tags: ["Next.js", "Flutter", "Django", "Automation"],
-    links: [{ label: same("maskani.homes"), href: "https://maskani.homes" }],
+    tags: ["Next.js", "Flutter", "Django", "Real-time"],
+    links: [{ label: website, href: "https://maskani.homes" }],
     featured: true,
     accent: "cyan",
   },
   {
     name: "Wisal",
-    kind: { en: "Service Marketplace", ar: "سوق خدمات" },
+    kind: { en: "Consultation Marketplace", ar: "سوق استشارات" },
     blurb: {
-      en: "Booking and consultation marketplace with multiple payment methods, ledger-style reconciliation, and realtime communication on a Django backend.",
-      ar: "سوق حجز واستشارات بوسائل دفع متعددة، وتسوية دفترية، وتواصل لحظي على خلفية Django.",
+      en: "A professional consultation & service-booking marketplace connecting users with verified vendors via paid orders, chat, and VoIP calls — backed by a wallet and a real double-entry accounting engine — on a Django backend.",
+      ar: "سوق استشارات وحجز خدمات يربط المستخدمين بمزوّدين موثّقين عبر طلبات مدفوعة ومحادثة ومكالمات VoIP — مدعوماً بمحفظة ومحرّك محاسبة بالقيد المزدوج — على خلفية Django.",
     },
-    tags: ["Flutter", "Django", "5 Payment Methods"],
+    tags: ["Flutter", "Django", "VoIP", "Double-Entry Accounting"],
     links: [
       { label: appStore, href: "https://apps.apple.com/app/id6755353238" },
       { label: googlePlay, href: "https://play.google.com/store/apps/details?id=io.somow.wisalapp" },
+      { label: website, href: "https://wisalapp.com" },
     ],
     accent: "violet",
   },
   {
     name: "Azbah",
-    kind: { en: "Group Wallet", ar: "محفظة جماعية" },
+    kind: { en: "Expense-Splitting & Settle-Up", ar: "تقسيم وتحصيل المصاريف" },
     blurb: {
-      en: "A group-wallet system with double-entry accounting — chart of accounts and statement entries — on a Django REST / PostgreSQL backend with an operations admin panel.",
-      ar: "نظام محفظة جماعية بمحاسبة القيد المزدوج — دليل حسابات وقيود كشوف — على خلفية Django REST / PostgreSQL مع لوحة تشغيل إدارية.",
+      en: "A group expense-splitting & settle-up app — members form groups, log shared expenses, and settle inter-member claims via an in-app wallet or cash, all on a strict double-entry accounting ledger. Django REST / PostgreSQL backend with an operations admin panel.",
+      ar: "تطبيق تقسيم وتحصيل المصاريف الجماعية — يُنشئ الأعضاء مجموعات، ويسجّلون المصاريف المشتركة، ويسوّون المطالبات بينهم عبر محفظة داخل التطبيق أو نقداً، على دفتر محاسبة بالقيد المزدوج. خلفية Django REST / PostgreSQL مع لوحة تشغيل إدارية.",
     },
     tags: ["Flutter", "Django REST", "Double-Entry Accounting"],
-    links: [],
+    links: [
+      { label: appStore, href: "https://apps.apple.com/app/id6761391341" },
+      { label: googlePlay, href: "https://play.google.com/store/apps/details?id=io.somow.azbah" },
+      { label: website, href: "https://azbah.somow.sa" },
+    ],
     accent: "pink",
   },
   {
     name: "Manam",
-    kind: { en: "Consultation App", ar: "تطبيق استشارات" },
+    kind: { en: "Dream-Interpretation App", ar: "تطبيق تفسير أحلام" },
     blurb: {
-      en: "Audio consultation with recording, waveform, and resumable playback; RSA-encrypted payments (OTP + JWT) and tiered in-app subscriptions with server-side receipt validation.",
-      ar: "استشارات صوتية بتسجيل وموجة صوتية وتشغيل قابل للاستئناف؛ مدفوعات مشفّرة بـ RSA (OTP + JWT) واشتراكات داخل التطبيق بمستويات مع تحقّق خادمي من الإيصالات.",
+      en: "A focused dream-interpretation app — record or type your dream and submit it as a paid order to Abber's interpreters. A single-vertical spin-off of Abber on the same Django backend, with audio recording, RSA-encrypted payments, and tiered in-app subscriptions.",
+      ar: "تطبيق مُركّز لتفسير الأحلام — سجّل حلمك أو اكتبه وأرسله كطلب مدفوع لمعبّري عبر. نسخة عمودية من عبر على الخلفية نفسها، بتسجيل صوتي ومدفوعات مشفّرة بـ RSA واشتراكات بمستويات داخل التطبيق.",
     },
     tags: ["Flutter", "RSA Payments", "Subscriptions"],
     links: [
@@ -236,12 +243,12 @@ export const projects: Project[] = [
   },
   {
     name: "Moqawlat",
-    kind: { en: "Contracting ERP", ar: "نظام مقاولات" },
+    kind: { en: "Business Management (Contracting)", ar: "إدارة أعمال مقاولات" },
     blurb: {
-      en: "A 14-module construction-contracting ERP designed for white-label deployment — projects, contracts, accounting, and field operations.",
-      ar: "نظام تخطيط موارد للمقاولات من 14 وحدة مُصمّم للنشر بعلامة بيضاء — مشاريع وعقود ومحاسبة وعمليات ميدانية.",
+      en: "An Arabic, Android-first business-management app for a multi-line contracting enterprise — apiary, quarry, sawmill, construction, cars, and rentals — covering employees, accounts, debts, multi-currency transactions, and role-based permissions, on a Firebase backend.",
+      ar: "تطبيق إدارة أعمال عربي (يبدأ بأندرويد) لمؤسّسة مقاولات متعدّدة الأنشطة — مناحل ومقالع ومناشر وإنشاءات وسيّارات وتأجير — يغطّي الموظفين والحسابات والديون والمعاملات متعدّدة العملات والصلاحيات، على خلفية Firebase.",
     },
-    tags: ["Flutter", "Multi-Module", "Accounting"],
+    tags: ["Flutter", "Firebase", "Accounting"],
     links: [],
     accent: "cyan",
   },
@@ -258,12 +265,12 @@ export const projects: Project[] = [
   },
   {
     name: "Sweetra",
-    kind: { en: "Mobile Game", ar: "لعبة موبايل" },
+    kind: { en: "Mobile Game (Match-3)", ar: "لعبة موبايل (Match-3)" },
     blurb: {
-      en: "A published Flutter + Flame game shipped end-to-end through full CI/CD with automated tests.",
-      ar: "لعبة Flutter + Flame منشورة، أُنجزت من الألف إلى الياء عبر CI/CD كامل مع اختبارات آلية.",
+      en: "A published Flutter + Flame match-3 puzzle game with a social & competitive layer — teams, tournaments, leaderboards, gifts, and an in-app market — on a Firebase/Firestore backend, shipped through full CI/CD.",
+      ar: "لعبة ألغاز match-3 منشورة بـ Flutter + Flame مع طبقة اجتماعية وتنافسية — فرق وبطولات ولوحات صدارة وهدايا ومتجر داخلي — على خلفية Firebase/Firestore، وأُنجزت عبر CI/CD كامل.",
     },
-    tags: ["Flutter", "Flame", "CI/CD"],
+    tags: ["Flutter", "Flame", "Firebase"],
     links: [{ label: googlePlay, href: "https://play.google.com/store/apps/details?id=io.ar.sweetra" }],
     accent: "pink",
   },
@@ -273,14 +280,14 @@ export const projects: Project[] = [
 export type MiniProject = { name: string; kind: L; tags: string[] };
 
 export const moreProjects: MiniProject[] = [
-  { name: "AppProof", kind: { en: "Beta Testing Platform", ar: "منصّة اختبار تجريبي" }, tags: ["Flutter", "Django", "Web"] },
-  { name: "Wasla", kind: { en: "Community App", ar: "تطبيق مجتمعي" }, tags: ["Flutter", "Firebase", "Web"] },
+  { name: "AppProof", kind: { en: "App QA / Testing Marketplace", ar: "سوق اختبار تطبيقات" }, tags: ["Flutter", "Django", "Next.js"] },
+  { name: "Wasla", kind: { en: "Group-Link Directory", ar: "دليل روابط المجموعات" }, tags: ["Flutter", "Firebase"] },
   { name: "Lumi", kind: { en: "AI Learning for Kids", ar: "تعلّم ذكي للأطفال" }, tags: ["Flutter", "AI"] },
-  { name: "FactForge", kind: { en: "AI Media Automation", ar: "أتمتة محتوى بالذكاء" }, tags: ["Python", "Multi-Agent AI"] },
+  { name: "FactForge", kind: { en: "Multi-Agent AI Video Studio", ar: "استوديو فيديو بالوكلاء" }, tags: ["Python", "Multi-Agent AI"] },
   { name: "MikroTik Manager", kind: { en: "Router Management", ar: "إدارة راوترات" }, tags: ["Flutter", "Networking"] },
   { name: "Aleuhda", kind: { en: "Wallet App", ar: "تطبيق محفظة" }, tags: ["Flutter", "BLoC"] },
   { name: "Alminshar", kind: { en: "Accounting System", ar: "نظام محاسبة" }, tags: ["Flutter", "Accounting"] },
-  { name: "CopyPaste", kind: { en: "macOS Utility", ar: "أداة macOS" }, tags: ["Swift", "macOS"] },
+  { name: "EasyCopyPaste", kind: { en: "macOS Clipboard Manager", ar: "مدير حافظة macOS" }, tags: ["Swift", "macOS"] },
   { name: "Somow", kind: { en: "Company Website", ar: "موقع الشركة" }, tags: ["React", "JSX"] },
 ];
 
