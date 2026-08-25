@@ -17,8 +17,8 @@ export const profile = {
     ar: "أبني الأنظمة من الفكرة إلى التشغيل — من المتطلبات إلى الإنتاج.",
   } as L,
   about: {
-    en: "I'm a software engineer who owns systems end-to-end — turning business requirements into production software across mobile, web, and backend. Today I lead engineering at Somow, where I build and operate products used by 21,000+ people and coordinate the third-party services behind them. I care about clean architecture, reliability, and shipping things that hold up in production.",
-    ar: "مهندس برمجيات أتولّى الأنظمة من الفكرة إلى التشغيل — أُحوّل متطلبات العمل إلى برمجيات إنتاجية عبر الموبايل والويب والخلفية. أقود اليوم الهندسة في Somow، حيث أبني وأُشغّل منتجات يستخدمها 21,000+ مستخدم، وأُنسّق خدمات الطرف الثالث خلفها. يهمّني نظافة المعمارية، والموثوقية، وأن يصمد ما أشحنه في الإنتاج.",
+    en: "I'm a software engineer who owns systems end-to-end — turning business requirements into production software across mobile, web, and backend. Today I lead engineering at Somow, where I build and operate products used by 21,000+ people and coordinate the third-party services behind them. Languages and frameworks are tools, not identity: grounded in engineering principles, I pick up any new language or stack the problem needs — accelerated by modern AI-assisted workflows, and always to a high bar for clean, reliable, production-grade code.",
+    ar: "مهندس برمجيات أتولّى الأنظمة من الفكرة إلى التشغيل — أُحوّل متطلبات العمل إلى برمجيات إنتاجية عبر الموبايل والويب والخلفية. أقود اليوم الهندسة في Somow، حيث أبني وأُشغّل منتجات يستخدمها 21,000+ مستخدم، وأُنسّق خدمات الطرف الثالث خلفها. اللغات والأُطر أدوات لا هوية: انطلاقاً من المبادئ الهندسية، أتقن أي لغة أو تقنية جديدة يتطلّبها الحل بسرعة — مدعوماً بأحدث تدفّقات العمل المعزّزة بالذكاء الاصطناعي، وبمعيار عالٍ دائماً لكود نظيف وموثوق وجاهز للإنتاج.",
   } as L,
   location: { en: "Buraydah, Saudi Arabia", ar: "بريدة، السعودية" } as L,
   status: {
@@ -73,8 +73,8 @@ export const sections = {
     eyebrow: { en: "Capabilities", ar: "القدرات" } as L,
     title: { en: "The full lifecycle — and the stack behind it", ar: "دورة الحياة الكاملة — والتقنيات خلفها" } as L,
     subtitle: {
-      en: "Technologies are evidence, not identity. I own the system from requirements to production support; these are the tools I reach for.",
-      ar: "التقنيات دليل لا هويّة. أتولّى النظام من المتطلبات إلى الدعم الإنتاجي؛ وهذه أدواتي.",
+      en: "Technologies are evidence, not identity — I'm a software engineer first, and I adopt any new language or stack the problem calls for. I own the system from requirements to production support; these are the tools I reach for today.",
+      ar: "التقنيات دليل لا هويّة — أنا مهندس برمجيات أولاً، وأتبنّى أي لغة أو تقنية جديدة يتطلّبها الحل. أتولّى النظام من المتطلبات إلى الدعم الإنتاجي؛ وهذه هي الأدوات التي أستخدمها اليوم.",
     } as L,
   },
   experience: {
