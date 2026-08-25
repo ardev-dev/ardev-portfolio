@@ -33,6 +33,7 @@ export function Hero() {
 
       <Reveal delay={0.18}>
         <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-fg text-balance">{t(profile.tagline)}</p>
+        <p className="mx-auto mt-3 max-w-xl text-sm font-medium text-fg-muted text-balance">{t(profile.positioning)}</p>
       </Reveal>
 
       <Reveal delay={0.24}>

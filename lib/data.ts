@@ -16,6 +16,10 @@ export const profile = {
     en: "I engineer from first principles — and enter any software domain on demand.",
     ar: "أُهندس من المبادئ الأولى — وأدخل أي مجال برمجي عند الطلب.",
   } as L,
+  positioning: {
+    en: "An engineer who owns systems end-to-end — not an entry-level coder.",
+    ar: "مهندس يملك الأنظمة من الفكرة إلى التشغيل — لا مبرمج مبتدئ.",
+  } as L,
   about: {
     en: "I'm a software engineer defined by method, not by any language or framework — I work from first principles: analysis, system design, and problem-solving — an engineer who owns systems end-to-end, not an entry-level coder bound to one tool. That lets me enter any software-engineering domain on demand, including ones I've never used before, and ship production-grade systems. Today I lead engineering at Somow, building and operating products used by 21,000+ people. My track record proves it transfers — Java → Flutter → Django → Next.js → multi-agent AI — accelerated by AI-assisted workflows. Technologies are evidence of range; engineering is the discipline.",
     ar: "مهندس برمجيات يُعرَّف بالمنهج لا بلغة أو إطار — أعمل من المبادئ الأولى: التحليل وتصميم الأنظمة وحلّ المشكلات — مهندس يملك الأنظمة من الفكرة إلى التشغيل، لا مبرمج مبتدئ محصور بأداة. هذا يمكّنني من دخول أي مجال في هندسة البرمجيات عند الطلب — حتى ما لم أستخدمه من قبل — وشحن أنظمة جاهزة للإنتاج. أقود اليوم الهندسة في Somow، وأبني وأُشغّل منتجات يستخدمها 21,000+ مستخدم. وسجلّي يُثبت أن المنهج ينتقل — Java ← Flutter ← Django ← Next.js ← أنظمة وكلاء AI — مدعوماً بأدوات الذكاء الاصطناعي. التقنيات دليل اتساع؛ والهندسة هي التخصّص.",
