@@ -117,6 +117,9 @@ export function startTracking(onEvent?: (name: string, params: Record<string, un
   const counts = { clicks: 0, outboundClicks: 0, copies: 0, langSwitches: 0, blurCount: 0 };
   // نبضة بلا جديد = كتابة مهدورة؛ نرسل فقط عند تغيّر فعلي.
   let dirty = false;
+  // الأحداث تُجمَّع وتُرسَل ملحقةً بالنبضة التالية بدل كتابة وثيقة لكل حدث.
+  // يجب أن يسبق تعريفُه أوّلَ استدعاء لـ metrics() — وإلّا قرأناه في منطقة الموت الزمني.
+  const queue: Payload[] = [];
   let maxScrollPct = 0;
   const sectionTimeMs: Record<string, number> = {};
   const sectionsSeen = new Set<string>();
@@ -156,10 +159,6 @@ export function startTracking(onEvent?: (name: string, params: Record<string, un
 
   // ── البداية ──
   send({ action: "start", ...metrics(), ...environment() });
-
-  // الأحداث تُجمَّع وتُرسَل ملحقةً بالنبضة التالية بدل كتابة وثيقة لكل حدث —
-  // جلسة فيها 12 حدثاً كانت تكلّف 12 كتابة، والآن صفراً إضافيّاً.
-  const queue: Payload[] = [];
 
   const tracker: Tracker = {
     event: (name, label, value) => {

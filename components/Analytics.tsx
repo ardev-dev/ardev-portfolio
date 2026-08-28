@@ -28,13 +28,20 @@ export function Analytics() {
       if (!cancelled) analytics = a;
     });
 
-    const { stop } = startTracking((name, params) => {
-      if (analytics) logEvent(analytics, name, params as never);
-    });
+    // القياس لا يجوز أن يُسقِط الموقع أبداً: أي عطب في المتتبّع يُبتلع هنا
+    // بدل أن يصعد إلى شجرة React ويُظهر شاشة الخطأ للزائر.
+    let stop: (() => void) | null = null;
+    try {
+      stop = startTracking((name, params) => {
+        if (analytics) logEvent(analytics, name, params as never);
+      }).stop;
+    } catch (e) {
+      console.error("[analytics] تعذّر بدء التتبّع:", e);
+    }
 
     return () => {
       cancelled = true;
-      if (!stopped.current) {
+      if (stop && !stopped.current) {
         stopped.current = true;
         stop();
       }
