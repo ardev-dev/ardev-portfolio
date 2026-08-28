@@ -1,9 +1,37 @@
 rules_version = '2';
 
-// كل الكتابة تتمّ من الخادم (/api/track) عبر Firebase Admin، وهو يتجاوز هذه القواعد.
-// لذلك نُغلق كل وصول مباشر من المتصفح: لا قراءة لبيانات الزوّار ولا كتابة مزوَّرة.
+/**
+ * الكتابة تتمّ حصراً من الخادم (/api/track) عبر Firebase Admin، وهو يتجاوز هذه
+ * القواعد — فلا كتابة من المتصفح إطلاقاً، ولا إمكانية لتزوير الإحصاءات.
+ *
+ * القراءة مسموحة لبريد المالك وحده، ليقرأ لوحة التحكّم من Firestore مباشرةً
+ * بلا مسار خادمي وسيط.
+ */
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    function isOwner() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'ar.dev5311@gmail.com';
+    }
+
+    match /visits/{sessionId} {
+      allow read: if isOwner();
+      allow write: if false;
+    }
+
+    match /visitors/{visitorId} {
+      allow read: if isOwner();
+      allow write: if false;
+    }
+
+    match /stats/{day} {
+      allow read: if isOwner();
+      allow write: if false;
+    }
+
+    // أي شيء آخر مغلق افتراضيّاً.
     match /{document=**} {
       allow read, write: if false;
     }

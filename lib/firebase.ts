@@ -5,6 +5,8 @@
  */
 import { getApp, getApps, initializeApp, type FirebaseApp } from "firebase/app";
 import { getAnalytics, isSupported, type Analytics } from "firebase/analytics";
+import { getAuth, type Auth } from "firebase/auth";
+import { getFirestore, type Firestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC1YaNDggQ7qUxuRMXcbdaKiTpbQPd4fB8",
@@ -34,3 +36,19 @@ export async function initAnalytics(): Promise<Analytics | null> {
     return null;
   }
 }
+
+/** مصادقة العميل — تُستخدم في لوحة التحكّم فقط (دخول Google). */
+export function getClientAuth(): Auth {
+  return getAuth(getFirebaseApp());
+}
+
+/**
+ * قراءة Firestore من المتصفح — مسموحة لبريد المالك وحده عبر firestore.rules،
+ * فلا حاجة لمسار خادمي وسيط للوحة.
+ */
+export function getClientDb(): Firestore {
+  return getFirestore(getFirebaseApp());
+}
+
+/** البريد الوحيد المسموح له بفتح لوحة التحكّم (مطابق لما في firestore.rules). */
+export const OWNER_EMAIL = "ar.dev5311@gmail.com";

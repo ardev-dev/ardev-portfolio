@@ -1,0 +1,53 @@
+import type { Timestamp } from "firebase/firestore";
+
+export type Daily = {
+  id: string;
+  date?: string;
+  visits?: number;
+  newVisitors?: number;
+  returningVisitors?: number;
+  completedSessions?: number;
+  engagedSessions?: number;
+  totalActiveMs?: number;
+  byCountry?: Record<string, number>;
+  byCity?: Record<string, number>;
+  byDevice?: Record<string, number>;
+  byBrowser?: Record<string, number>;
+  byOs?: Record<string, number>;
+  byReferrer?: Record<string, number>;
+  byLang?: Record<string, number>;
+};
+
+export type Visit = {
+  id: string;
+  startedAt?: Timestamp;
+  lastSeenAt?: Timestamp;
+  durationMs?: number;
+  activeMs?: number;
+  maxScrollPct?: number;
+  ip?: string;
+  geo?: { country?: string; city?: string; countryRegion?: string; asOrganization?: string; timezone?: string };
+  browser?: string;
+  browserVersion?: string;
+  os?: string;
+  deviceType?: string;
+  isBot?: boolean;
+  returning?: boolean;
+  screen?: string;
+  viewport?: string;
+  connection?: string;
+  referrerHost?: string;
+  referrer?: string;
+  siteLang?: string;
+  browserTimezone?: string;
+  browserLanguages?: string;
+  utm?: { source?: string; medium?: string; campaign?: string };
+  sectionsSeen?: string[];
+  sectionTimeMs?: Record<string, number>;
+  eventCounts?: Record<string, number>;
+  eventLog?: { name?: string; label?: string; atMs?: number }[];
+  ttfbMs?: number;
+  loadMs?: number;
+  env?: string;
+  ended?: boolean;
+};

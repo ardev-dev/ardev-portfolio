@@ -115,27 +115,33 @@ export async function POST(req: Request) {
   const now = FieldValue.serverTimestamp();
   const doc = db.collection("visits").doc(sessionId);
 
-  try {
-    // ── حدث مسمّى: نقر على البريد/GitHub، مشاهدة قسم، تبديل لغة… ──
-    if (action === "event") {
-      const name = s(body.name, 60);
-      if (name) {
-        await doc.collection("events").add({
-          name,
-          label: s(body.label, 120),
-          value: n(body.value),
-          path: s(body.path, 200),
-          atMs: n(body.atMs), // منذ بداية الجلسة
-          createdAt: now,
-        });
-        await doc.set(
-          { lastSeenAt: now, [`eventCounts.${key(name)}`]: FieldValue.increment(1) },
-          { merge: true }
-        );
-      }
-      return reply(visitorId, isNewVisitor);
+  /**
+   * الأحداث تصل مُجمّعةً مع النبضة وتُخزَّن داخل وثيقة الجلسة نفسها:
+   * عدّادات في eventCounts + سجلّ زمني مقصوص في eventLog. لا وثيقة لكل حدث،
+   * فتبقى تكلفة الجلسة كتابات معدودة بدل عشرات.
+   */
+  function foldEvents(): Record<string, unknown> {
+    const list = Array.isArray(body.events) ? (body.events as Record<string, unknown>[]).slice(0, 40) : [];
+    if (!list.length) return {};
+
+    // نعدّ أوّلاً في خريطة عاديّة، ثم نحوّل مرّة واحدة إلى increment
+    // (قيم FieldValue غير قابلة للقراءة، فلا يمكن التراكم فوقها).
+    const tally = new Map<string, number>();
+    const log: Record<string, unknown>[] = [];
+    for (const e of list) {
+      const name = s(e?.name, 60);
+      if (!name) continue;
+      tally.set(key(name), (tally.get(key(name)) ?? 0) + 1);
+      log.push({ name, label: s(e?.label, 120), value: n(e?.value), atMs: n(e?.atMs) });
     }
 
+    const out: Record<string, unknown> = {};
+    for (const [k, c] of tally) out[`eventCounts.${k}`] = FieldValue.increment(c);
+    if (log.length) out.eventLog = FieldValue.arrayUnion(...log);
+    return out;
+  }
+
+  try {
     // مقاييس تراكميّة يرسلها العميل مع كل نبضة (نأخذها كما هي لتفادي ازدواج الجمع).
     const live = {
       lastSeenAt: now,
@@ -161,6 +167,7 @@ export async function POST(req: Request) {
       await doc.set(
         {
           ...live,
+          ...foldEvents(),
           visitorId,
           returning: !isNewVisitor,
           startedAt: now,
@@ -213,74 +220,74 @@ export async function POST(req: Request) {
         { merge: true }
       );
 
+      // ملفّ الزائر واليوميّات في دفعة واحدة — رحلة شبكة واحدة بدل ثلاث.
+      const batch = db.batch();
+
       // ملفّ الزائر التراكمي — يجيب: كم مرّة عاد؟ من أين؟ منذ متى يتابعنا؟
-      await db
-        .collection("visitors")
-        .doc(visitorId)
-        .set(
-          {
-            lastSeenAt: now,
-            sessions: FieldValue.increment(1),
-            lastIp: ip,
-            lastCountry: geo.country ?? null,
-            lastCity: geo.city ?? null,
-            lastDevice: info.deviceType,
-            lastBrowser: info.browser,
-            lastOs: info.os,
-            lastReferrerHost: s(body.referrerHost, 120) ?? null,
-            isBot: info.isBot,
-          },
-          { merge: true }
-        );
-      // يُكتب مرّة واحدة فقط — merge لا يدهسه في الجلسات اللاحقة.
-      if (isNewVisitor) {
-        await db.collection("visitors").doc(visitorId).set({ firstSeenAt: now }, { merge: true });
-      }
+      batch.set(
+        db.collection("visitors").doc(visitorId),
+        {
+          lastSeenAt: now,
+          sessions: FieldValue.increment(1),
+          lastIp: ip,
+          lastCountry: geo.country ?? null,
+          lastCity: geo.city ?? null,
+          lastDevice: info.deviceType,
+          lastBrowser: info.browser,
+          lastOs: info.os,
+          lastReferrerHost: s(body.referrerHost, 120) ?? null,
+          isBot: info.isBot,
+          // يُكتب مرّة واحدة فقط — merge لا يدهسه في الجلسات اللاحقة.
+          ...(isNewVisitor ? { firstSeenAt: now } : {}),
+        },
+        { merge: true }
+      );
 
       // عدّادات يوميّة جاهزة للقراءة بلا مسح كامل للمجموعة.
       if (!info.isBot) {
-        await db
-          .collection("stats")
-          .doc(`daily_${today()}`)
-          .set(
-            {
-              date: today(),
-              visits: FieldValue.increment(1),
-              newVisitors: FieldValue.increment(isNewVisitor ? 1 : 0),
-              returningVisitors: FieldValue.increment(isNewVisitor ? 0 : 1),
-              [`byCountry.${key(geo.country ?? "unknown")}`]: FieldValue.increment(1),
-              [`byCity.${key(geo.city ?? "unknown")}`]: FieldValue.increment(1),
-              [`byDevice.${key(info.deviceType)}`]: FieldValue.increment(1),
-              [`byBrowser.${key(info.browser)}`]: FieldValue.increment(1),
-              [`byOs.${key(info.os)}`]: FieldValue.increment(1),
-              [`byReferrer.${key(s(body.referrerHost, 60) ?? "direct")}`]: FieldValue.increment(1),
-              [`byLang.${key(s(body.siteLang, 8) ?? "en")}`]: FieldValue.increment(1),
-              updatedAt: now,
-            },
-            { merge: true }
-          );
+        batch.set(
+          db.collection("stats").doc(`daily_${today()}`),
+          {
+            date: today(),
+            visits: FieldValue.increment(1),
+            newVisitors: FieldValue.increment(isNewVisitor ? 1 : 0),
+            returningVisitors: FieldValue.increment(isNewVisitor ? 0 : 1),
+            [`byCountry.${key(geo.country ?? "unknown")}`]: FieldValue.increment(1),
+            [`byCity.${key(geo.city ?? "unknown")}`]: FieldValue.increment(1),
+            [`byDevice.${key(info.deviceType)}`]: FieldValue.increment(1),
+            [`byBrowser.${key(info.browser)}`]: FieldValue.increment(1),
+            [`byOs.${key(info.os)}`]: FieldValue.increment(1),
+            [`byReferrer.${key(s(body.referrerHost, 60) ?? "direct")}`]: FieldValue.increment(1),
+            [`byLang.${key(s(body.siteLang, 8) ?? "en")}`]: FieldValue.increment(1),
+            updatedAt: now,
+          },
+          { merge: true }
+        );
       }
+
+      await batch.commit();
     } else {
       // نبضة أو إغلاق: set(merge) يمنع الفشل لو ضاعت رسالة البداية.
-      await doc.set(live, { merge: true });
+      await doc.set({ ...live, ...foldEvents() }, { merge: true });
 
       if (action === "end" && !info.isBot) {
         const active = n(body.activeMs) ?? 0;
-        await db
-          .collection("visitors")
-          .doc(visitorId)
-          .set({ totalActiveMs: FieldValue.increment(active), lastSeenAt: now }, { merge: true });
-        await db
-          .collection("stats")
-          .doc(`daily_${today()}`)
-          .set(
-            {
-              totalActiveMs: FieldValue.increment(active),
-              completedSessions: FieldValue.increment(1),
-              engagedSessions: FieldValue.increment(active >= 10_000 ? 1 : 0),
-            },
-            { merge: true }
-          );
+        const batch = db.batch();
+        batch.set(
+          db.collection("visitors").doc(visitorId),
+          { totalActiveMs: FieldValue.increment(active), lastSeenAt: now },
+          { merge: true }
+        );
+        batch.set(
+          db.collection("stats").doc(`daily_${today()}`),
+          {
+            totalActiveMs: FieldValue.increment(active),
+            completedSessions: FieldValue.increment(1),
+            engagedSessions: FieldValue.increment(active >= 10_000 ? 1 : 0),
+          },
+          { merge: true }
+        );
+        await batch.commit();
       }
     }
   } catch (err) {
