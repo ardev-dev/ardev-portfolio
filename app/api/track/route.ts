@@ -135,8 +135,12 @@ export async function POST(req: Request) {
       log.push({ name, label: s(e?.label, 120), value: n(e?.value), atMs: n(e?.atMs) });
     }
 
-    const out: Record<string, unknown> = {};
-    for (const [k, c] of tally) out[`eventCounts.${k}`] = FieldValue.increment(c);
+    // خريطة متداخلة لا مفاتيح منقّطة: set(merge) يتعامل مع النقطة كجزء من اسم
+    // الحقل (فقط update() تفسّرها كمسار)، فالتنقيط هنا كان يُنشئ حقولاً مشوّهة.
+    const eventCounts: Record<string, unknown> = {};
+    for (const [k, c] of tally) eventCounts[k] = FieldValue.increment(c);
+
+    const out: Record<string, unknown> = { eventCounts };
     if (log.length) out.eventLog = FieldValue.arrayUnion(...log);
     return out;
   }
@@ -252,13 +256,13 @@ export async function POST(req: Request) {
             visits: FieldValue.increment(1),
             newVisitors: FieldValue.increment(isNewVisitor ? 1 : 0),
             returningVisitors: FieldValue.increment(isNewVisitor ? 0 : 1),
-            [`byCountry.${key(geo.country ?? "unknown")}`]: FieldValue.increment(1),
-            [`byCity.${key(geo.city ?? "unknown")}`]: FieldValue.increment(1),
-            [`byDevice.${key(info.deviceType)}`]: FieldValue.increment(1),
-            [`byBrowser.${key(info.browser)}`]: FieldValue.increment(1),
-            [`byOs.${key(info.os)}`]: FieldValue.increment(1),
-            [`byReferrer.${key(s(body.referrerHost, 60) ?? "direct")}`]: FieldValue.increment(1),
-            [`byLang.${key(s(body.siteLang, 8) ?? "en")}`]: FieldValue.increment(1),
+            byCountry: { [key(geo.country ?? "unknown")]: FieldValue.increment(1) },
+            byCity: { [key(geo.city ?? "unknown")]: FieldValue.increment(1) },
+            byDevice: { [key(info.deviceType)]: FieldValue.increment(1) },
+            byBrowser: { [key(info.browser)]: FieldValue.increment(1) },
+            byOs: { [key(info.os)]: FieldValue.increment(1) },
+            byReferrer: { [key(s(body.referrerHost, 60) ?? "direct")]: FieldValue.increment(1) },
+            byLang: { [key(s(body.siteLang, 8) ?? "en")]: FieldValue.increment(1) },
             updatedAt: now,
           },
           { merge: true }

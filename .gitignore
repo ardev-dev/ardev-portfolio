@@ -10,6 +10,11 @@ next-env.d.ts
 .vercel/
 .vercel
 
+# secrets — مفاتيح حسابات الخدمة لا تدخل المستودع أبداً
+secrets/
+*firebase-adminsdk*.json
+service-account*.json
+
 # misc
 .DS_Store
 *.tsbuildinfo
