@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono, Cairo } from "next/font/google";
 import "./globals.css";
 import { profile, socials } from "@/lib/data";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { Analytics } from "@/components/Analytics";
 
 /* خطوط ذاتيّة الاستضافة عبر next/font — غير حاجبة للعرض (LCP أفضل). */
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <LanguageProvider>{children}</LanguageProvider>
+        <Analytics />
       </body>
     </html>
   );

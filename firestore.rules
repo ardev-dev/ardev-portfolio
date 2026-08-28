@@ -1,0 +1,11 @@
+rules_version = '2';
+
+// كل الكتابة تتمّ من الخادم (/api/track) عبر Firebase Admin، وهو يتجاوز هذه القواعد.
+// لذلك نُغلق كل وصول مباشر من المتصفح: لا قراءة لبيانات الزوّار ولا كتابة مزوَّرة.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
