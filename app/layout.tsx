@@ -18,7 +18,7 @@ const cairo = Cairo({
 
 const NAME = profile.name.en;
 const ROLE = profile.role.en;
-const description = `${ROLE} with 5+ years owning the full software-development lifecycle — architecture, development, integration, deployment, and production support across mobile, web, and Django backends.`;
+const description = `${ROLE} and Technical Lead in Buraydah, Saudi Arabia. Six years building and operating production systems — Flutter apps, Django backends, Next.js web, payments and real-time platforms.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ardev.dev"),

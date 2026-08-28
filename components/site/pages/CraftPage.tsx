@@ -15,12 +15,12 @@ export function CraftPage() {
       <PageHead
         title={
           <>
-            {t({ en: "Track", ar: "المسار" })} <Em>{t({ en: "record", ar: "والأثر" })}</Em>
+            {t({ en: "Where I've", ar: "أين" })} <Em>{t({ en: "worked", ar: "عملت" })}</Em>
           </>
         }
         desc={t({
-          en: "Where I've owned systems — and what I've published in the open.",
-          ar: "أين تولّيتُ أنظمة كاملة، وما نشرتُه للعموم.",
+          en: "Roles, and what I've published in the open.",
+          ar: "الأدوار، وما نشرتُه للعموم.",
         })}
       />
 

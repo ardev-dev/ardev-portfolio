@@ -13,20 +13,20 @@ export const profile = {
   firstName: { en: "Abdulrahman", ar: "عبدالرحمن" } as L,
   role: { en: "Senior Software Engineer", ar: "مهندس برمجيات خبير" } as L,
   tagline: {
-    en: "I engineer from first principles — and enter any software domain on demand.",
-    ar: "أُهندس من المبادئ الأولى — وأدخل أي مجال برمجي عند الطلب.",
+    en: "I build software products and run them in production.",
+    ar: "أبني منتجات برمجية وأُشغّلها في الإنتاج.",
   } as L,
   positioning: {
-    en: "An engineer who owns systems end-to-end — not an entry-level coder.",
-    ar: "مهندس يملك الأنظمة من الفكرة إلى التشغيل — لا مبرمج مبتدئ.",
+    en: "Senior Software Engineer & Technical Lead at Somow.",
+    ar: "مهندس برمجيات خبير وقائد تقني في سُمو.",
   } as L,
   about: {
-    en: "I'm a software engineer defined by method, not by any language or framework — I work from first principles: analysis, system design, and problem-solving — an engineer who owns systems end-to-end, not an entry-level coder bound to one tool. That lets me enter any software-engineering domain on demand, including ones I've never used before, and ship production-grade systems. Today I lead engineering at Somow, building and operating products used by 21,000+ people. My track record proves it transfers — Java → Flutter → Django → Next.js → multi-agent AI — accelerated by AI-assisted workflows. Technologies are evidence of range; engineering is the discipline.",
-    ar: "مهندس برمجيات يُعرَّف بالمنهج لا بلغة أو إطار — أعمل من المبادئ الأولى: التحليل وتصميم الأنظمة وحلّ المشكلات — مهندس يملك الأنظمة من الفكرة إلى التشغيل، لا مبرمج مبتدئ محصور بأداة. هذا يمكّنني من دخول أي مجال في هندسة البرمجيات عند الطلب — حتى ما لم أستخدمه من قبل — وشحن أنظمة جاهزة للإنتاج. أقود اليوم الهندسة في Somow، وأبني وأُشغّل منتجات يستخدمها 21,000+ مستخدم. وسجلّي يُثبت أن المنهج ينتقل — Java ← Flutter ← Django ← Next.js ← أنظمة وكلاء AI — مدعوماً بأدوات الذكاء الاصطناعي. التقنيات دليل اتساع؛ والهندسة هي التخصّص.",
+    en: "I start with the problem, not the framework. Requirements, system design, implementation, testing, deployment — then production support, which is where most of the real decisions show up. That has taken me across mobile apps, Django backends, real-time systems, payment integrations and AI tooling. I've moved between stacks when the product required it: Java, then Flutter, then Django, then Next.js, then multi-agent systems. The tools changed; the process didn't.",
+    ar: "أبدأ من المشكلة لا من الإطار. تحليل المتطلبات، تصميم النظام، التنفيذ، الاختبار، النشر — ثم الدعم في الإنتاج، وهناك تظهر أغلب القرارات الحقيقية. هذا نقلني بين تطبيقات الجوّال وخلفيات Django والأنظمة اللحظية وتكاملات الدفع وأدوات الذكاء الاصطناعي. وانتقلتُ بين التقنيات حين تطلّب المنتج ذلك: Java ثم Flutter ثم Django ثم Next.js ثم أنظمة الوكلاء. تغيّرت الأدوات، ولم تتغيّر الطريقة.",
   } as L,
   location: { en: "Buraydah, Saudi Arabia", ar: "بريدة، السعودية" } as L,
   status: {
-    en: "Open to senior software engineering & technical leadership roles",
+    en: "Open to senior engineering and technical leadership roles",
     ar: "متاح لأدوار هندسية خبيرة وقيادة تقنية",
   } as L,
   email: "me@ardev.dev",
@@ -61,10 +61,10 @@ export const ui = {
 export const sections = {
   work: {
     eyebrow: { en: "Selected Work", ar: "أعمال مختارة" } as L,
-    title: { en: "Products I build & operate", ar: "منتجات أبنيها وأُشغّلها" } as L,
+    title: { en: "Products I build and operate", ar: "منتجات أبنيها وأُشغّلها" } as L,
     subtitle: {
-      en: "Production systems shipped end-to-end — mobile, web, and backend — across consultation, real-estate, delivery, and financial domains.",
-      ar: "أنظمة إنتاجية أُنجزها من الفكرة إلى التشغيل — موبايل وويب وخلفية — عبر مجالات الاستشارات والعقار والتوصيل والأنظمة المالية.",
+      en: "Systems I designed, built and still operate — mobile, web and backend.",
+      ar: "أنظمة صمّمتُها وبنيتُها وما زلتُ أُشغّلها — جوّال وويب وخلفية.",
     } as L,
   },
   openSource: {
@@ -75,15 +75,15 @@ export const sections = {
   },
   skills: {
     eyebrow: { en: "Capabilities", ar: "القدرات" } as L,
-    title: { en: "Method first — the stack is just evidence", ar: "المنهج أولاً — والتقنيات مجرّد دليل" } as L,
+    title: { en: "How I work", ar: "طريقتي في العمل" } as L,
     subtitle: {
-      en: "I engineer from first principles — analysis, design, and problem-solving — then reach for whatever a problem needs. Technologies are evidence of range, not identity; these are the tools I've reached for so far.",
-      ar: "أُهندس من المبادئ الأولى — تحليلٌ وتصميمٌ وحلّ مشكلات — ثم أستخدم ما يتطلّبه الحل. التقنيات دليل اتساعٍ لا هويّة؛ وهذه هي الأدوات التي استخدمتها حتى الآن.",
+      en: "The tools change; the engineering process stays the same. These are the ones I've used in production so far.",
+      ar: "تتغيّر الأدوات وتبقى الطريقة. وهذه ما استخدمتُه منها في الإنتاج حتى الآن.",
     } as L,
   },
   experience: {
     eyebrow: { en: "Experience", ar: "الخبرة" } as L,
-    title: { en: "Where I've owned systems", ar: "حيث تولّيتُ أنظمة كاملة" } as L,
+    title: { en: "Where I've worked", ar: "أين عملت" } as L,
   },
 };
 
@@ -178,8 +178,8 @@ export const projects: Project[] = [
     year: "2022 — Now",
     kind: { en: "Dream & Vision Interpretation Marketplace", ar: "سوق تفسير الأحلام والرؤى" },
     blurb: {
-      en: "A production marketplace connecting people with vetted interpreters — orders, live sessions, wallet, store, and a Django backend spanning ~30 business domains. I own its design, engineering, and day-to-day operation.",
-      ar: "سوق إنتاجي يربط الناس بمعبّرين موثوقين — طلبات وجلسات مباشرة ومحفظة ومتجر، وخلفية Django تغطّي نحو ٣٠ مجالاً. أملك تصميمه وهندسته وتشغيله اليومي.",
+      en: "A marketplace where someone sends a dream and gets it interpreted by a vetted interpreter. I built and run it end-to-end: a Django backend covering ~30 business domains, the Flutter app, payments, wallet, store, live sessions — and the production operation behind all of it.",
+      ar: "سوق يُرسل فيه المستخدم حلمه فيصله تفسيره من معبّر موثّق. بنيتُه وأُشغّله بكامله: خلفية Django تغطّي نحو ٣٠ مجالاً، وتطبيق Flutter، والمدفوعات والمحفظة والمتجر والجلسات المباشرة — والتشغيل الإنتاجي وراء ذلك كلّه.",
     },
     metrics: [
       { value: "21K+", label: { en: "users", ar: "مستخدم" } },
@@ -205,8 +205,8 @@ export const projects: Project[] = [
     year: "2024 — Now",
     kind: { en: "Social Real-Estate Platform", ar: "منصّة عقارية اجتماعية" },
     blurb: {
-      en: "Owners reach clients directly — listings, services, jobs, a social feed, property requests, and real-time chat. Delivered across three stacks at once: a Flutter app, an internal admin app, and a Next.js web app on a Dockerized Django backend.",
-      ar: "الملّاك يصلون إلى العملاء مباشرةً — إعلانات وخدمات ووظائف وموجز اجتماعي وطلبات عقار ومحادثة لحظية. مبنيّة على ثلاث تقنيات معاً: تطبيق Flutter، وتطبيق إدارة، وواجهة Next.js على خلفية Django بحاويات.",
+      en: "A real-estate platform where owners deal with clients directly — listings, services, jobs, property requests and real-time chat. I built three client applications against one Django platform in Docker: the Flutter app, an internal operations app, and the Next.js web app. It runs across six countries.",
+      ar: "منصّة عقارية يتعامل فيها الملّاك مع العملاء مباشرةً — إعلانات وخدمات ووظائف وطلبات عقار ومحادثة لحظية. بنيتُ ثلاث واجهات على منصّة Django واحدة بحاويات: تطبيق Flutter، وتطبيق تشغيل داخلي، وواجهة الويب بـ Next.js. تعمل في ستّ دول.",
     },
     metrics: [
       { value: "3", label: { en: "client stacks", ar: "واجهات" } },
@@ -225,8 +225,8 @@ export const projects: Project[] = [
     year: "2024 — Now",
     kind: { en: "Consultation Marketplace", ar: "سوق استشارات" },
     blurb: {
-      en: "Paid consultations with verified vendors over chat and VoIP, settled through a wallet on a real double-entry accounting engine — the kind of correctness you cannot retrofit later.",
-      ar: "استشارات مدفوعة مع مزوّدين موثّقين عبر المحادثة والمكالمات، تُسوّى بمحفظة على محرّك محاسبة بالقيد المزدوج — دقّةٌ لا يمكن إضافتها لاحقاً.",
+      en: "Paid consultations with verified vendors over chat and VoIP calls, settled through a wallet. I designed the money flows around double-entry accounting rules instead of treating the wallet as a running balance, so refunds, holds and payouts reconcile.",
+      ar: "استشارات مدفوعة مع مزوّدين موثّقين عبر المحادثة والمكالمات، تُسوّى بمحفظة. صمّمتُ التدفّقات المالية على قواعد القيد المزدوج بدل التعامل مع المحفظة كرصيد يزيد وينقص، فتتطابق الاستردادات والحجوزات والتحويلات.",
     },
     metrics: [
       { value: "2×", label: { en: "entry ledger", ar: "قيد مزدوج" } },
@@ -249,8 +249,8 @@ export const projects: Project[] = [
     year: "2025 — Now",
     kind: { en: "Group Expenses & Settle-Up", ar: "مشاركة المصاريف والتسوية" },
     blurb: {
-      en: "Members share expenses and settle claims by wallet or cash on a strict double-entry ledger, with an operations panel behind it. Money apps forgive nothing — every edge case is an accounting rule, not a UI state.",
-      ar: "أعضاء يتقاسمون المصاريف ويسوّون مطالباتهم بالمحفظة أو نقداً على دفتر بالقيد المزدوج، خلفه لوحة تشغيل. تطبيقات المال لا تسامح: كل حالة طرفيّة قاعدة محاسبية لا حالة واجهة.",
+      en: "Group members split expenses and settle claims between each other by wallet or cash, on a strict double-entry ledger with an operations panel behind it. Financial edge cases are resolved in the ledger rather than patched in the interface.",
+      ar: "أعضاء المجموعة يتقاسمون المصاريف ويسوّون مطالباتهم بينهم بالمحفظة أو نقداً، على دفتر بالقيد المزدوج خلفه لوحة تشغيل. الحالات المالية الطرفية تُحسم في الدفتر لا تُرقَّع في الواجهة.",
     },
     metrics: [
       { value: "PostgreSQL", label: { en: "ledger store", ar: "دفتر الحسابات" } },
@@ -273,8 +273,8 @@ export const projects: Project[] = [
     year: "2023",
     kind: { en: "Express-Delivery Platform", ar: "منصّة توصيل سريع" },
     blurb: {
-      en: "Five apps and a dashboard on one Django backend — customer, captain, business, employee, admin — with live GPS tracking over WebSocket. One domain model had to satisfy five very different jobs.",
-      ar: "خمسة تطبيقات ولوحة على خلفية Django واحدة — العميل والمندوب والمنشأة والموظّف والإدارة — مع تتبّع GPS لحظي عبر WebSocket. نموذج مجال واحد يخدم خمس وظائف مختلفة.",
+      en: "Customer, captain, business, employee and admin apps plus a web dashboard, all on one Django backend and one domain model, with live GPS tracking over WebSocket and REST APIs tuned for mobile networks.",
+      ar: "تطبيقات العميل والمندوب والمنشأة والموظّف والإدارة، ولوحة ويب معها، على خلفية Django واحدة ونموذج مجال واحد، مع تتبّع GPS لحظي عبر WebSocket وواجهات REST مضبوطة لشبكات الجوّال.",
     },
     metrics: [
       { value: "5", label: { en: "apps, one core", ar: "تطبيقات بنواة واحدة" } },
@@ -289,8 +289,8 @@ export const projects: Project[] = [
     year: "2025",
     kind: { en: "Multi-Agent AI System", ar: "نظام وكلاء ذكاء اصطناعي" },
     blurb: {
-      en: "A Python pipeline of autonomous agents that takes an idea to a published video — script, fact-check, TTS, render, publish — with no human in the loop. Agents are only as good as the contracts between them.",
-      ar: "خطّ إنتاج بايثون من وكلاء مستقلّين يأخذ الفكرة إلى فيديو منشور — نصّ، تدقيق حقائق، تحويل صوتي، إخراج، نشر — بلا تدخّل بشري. جودة الوكلاء من جودة العقود بينهم.",
+      en: "A Python pipeline of agents that takes an idea to a published video — script, fact-check, text-to-speech, render, publish — with no human step in between. Each stage hands the next a validated contract.",
+      ar: "خطّ إنتاج بايثون من وكلاء يأخذ الفكرة إلى فيديو منشور — نصّ، تدقيق حقائق، تحويل صوتي، إخراج، نشر — بلا خطوة بشرية بينها. كل مرحلة تُسلّم التالية عقداً مُتحقَّقاً منه.",
     },
     metrics: [
       { value: "6", label: { en: "agent stages", ar: "مراحل وكلاء" } },
@@ -368,8 +368,8 @@ export const roles: Role[] = [
     period: { en: "May 2022 — Present · Buraydah", ar: "مايو ٢٠٢٢ — الآن · بريدة" },
     points: [
       {
-        en: "Promoted from Flutter Developer; now own Abber, Wisal and Azbah end-to-end — analysis through production support.",
-        ar: "تُرقّيت من مطوّر Flutter؛ أملك اليوم عبر ووصال وعزبة من التحليل إلى الدعم الإنتاجي.",
+        en: "Promoted from Flutter Developer to Senior Software Engineer & Technical Lead. Responsible for Abber, Wisal and Azbah from architecture through production support.",
+        ar: "تُرقّيت من مطوّر Flutter إلى مهندس برمجيات خبير وقائد تقني. مسؤول عن عبر ووصال وعزبة من المعمارية إلى الدعم في الإنتاج.",
       },
       {
         en: "Cut QA-reported defects by 50% by introducing engineering standards, code review and production monitoring.",

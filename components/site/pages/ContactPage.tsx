@@ -80,14 +80,14 @@ export function ContactPage() {
             </span>
 
             <h2 className="mt-7 max-w-[13ch] font-display text-display text-ink text-balance lg:max-w-none">
-              {t({ en: "Have a system worth", ar: "لديك نظامٌ يستحقّ" })}{" "}
-              <Em className="text-grad">{t({ en: "building right?", ar: "أن يُبنى بإتقان؟" })}</Em>
+              {t({ en: "Building something", ar: "تبني نظاماً" })}{" "}
+              <Em className="text-grad">{t({ en: "that has to work?", ar: "لا يحتمل الخطأ؟" })}</Em>
             </h2>
 
             <p className="mt-6 max-w-md text-[15px] leading-relaxed text-fg">
               {t({
-                en: "Tell me what you're building and where it hurts. I read every message myself and reply within a day.",
-                ar: "أخبرني بما تبنيه وأين يؤلمك. أقرأ كل رسالة بنفسي وأردّ خلال يوم.",
+                en: "Tell me what you're building and what's breaking. I read every message myself and reply within a day.",
+                ar: "أخبرني بما تبنيه وما الذي يتعطّل فيه. أقرأ كل رسالة بنفسي وأردّ خلال يوم.",
               })}
             </p>
 

@@ -32,8 +32,8 @@ export default function Home() {
         label: { en: "Systems", ar: "أنظمة" },
         node: <SystemsPage slugs={["wasselak", "factforge"]} />,
       },
-      { id: "info", label: { en: "Method", ar: "المنهج" }, node: <MethodPage /> },
-      { id: "experience", label: { en: "Record", ar: "المسار" }, node: <CraftPage /> },
+      { id: "info", label: { en: "Approach", ar: "طريقتي" }, node: <MethodPage /> },
+      { id: "experience", label: { en: "Experience", ar: "الخبرة" }, node: <CraftPage /> },
       { id: "contact", label: { en: "Contact", ar: "تواصل" }, node: <ContactPage /> },
     ];
   }, []);

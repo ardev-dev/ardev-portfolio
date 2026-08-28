@@ -37,19 +37,19 @@ export function HeroPage() {
 
             <h1 className="font-display text-mega text-ink">
               <Line delay={0.15}>
-                <span className="text-grad">{t({ en: "I engineer systems,", ar: "أبني أنظمةً" })}</span>
+                <span className="text-grad">{t({ en: "I build software products", ar: "أبني منتجات برمجية" })}</span>
               </Line>
               <Line delay={0.28}>
-                <span className="text-grad">{t({ en: "products &", ar: "ومنتجاتٍ" })}</span>{" "}
-                <Em className="text-shine">{t({ en: "scale.", ar: "تصمد وتكبر." })}</Em>
+                <span className="text-grad">{t({ en: "and run them", ar: "وأُشغّلها" })}</span>{" "}
+                <Em className="text-shine">{t({ en: "in production.", ar: "في الإنتاج." })}</Em>
               </Line>
             </h1>
 
             <div  className="anim mt-10 flex flex-col gap-6 sm:mt-14 sm:flex-row sm:items-end sm:justify-between" style={{ "--d": "0.75s" } as React.CSSProperties}>
               <p className="max-w-sm text-[15px] leading-relaxed text-fg">
                 {t({
-                  en: "Senior Software Engineer & Technical Lead at Somow — six years owning products end-to-end.",
-                  ar: "مهندس برمجيات خبير وقائد تقني في سُمو — ستّ سنوات أملك فيها المنتج من فكرته إلى تشغيله.",
+                  en: "Senior Software Engineer & Technical Lead at Somow. Six years building and operating mobile, web and backend systems.",
+                  ar: "مهندس برمجيات خبير وقائد تقني في سُمو. ستّ سنوات في بناء وتشغيل أنظمة الجوّال والويب والخلفية.",
                 })}
               </p>
               <p className="text-[13px] text-fg-muted">

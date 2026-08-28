@@ -20,8 +20,8 @@ export function SystemsPage({ slugs }: { slugs: string[] }) {
           </>
         }
         desc={t({
-          en: "Platforms and pipelines where the interesting part was never the interface.",
-          ar: "منصّات وخطوط إنتاج لم تكن الواجهة يوماً هي الجزء الصعب فيها.",
+          en: "Platforms and pipelines that sit behind the apps.",
+          ar: "منصّات وخطوط إنتاج تقف خلف التطبيقات.",
         })}
       />
 

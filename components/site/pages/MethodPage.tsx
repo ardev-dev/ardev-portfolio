@@ -15,12 +15,12 @@ export function MethodPage() {
       <PageHead
         title={
           <>
-            {t({ en: "The", ar: "المنهج" })} <Em>{t({ en: "method", ar: "أوّلاً" })}</Em>
+            {t({ en: "How I", ar: "طريقتي في" })} <Em>{t({ en: "work", ar: "العمل" })}</Em>
           </>
         }
         desc={t({
-          en: "Technologies are evidence of range, not identity.",
-          ar: "التقنيات دليل اتّساع، لا هويّة.",
+          en: "The tools change; the process doesn't.",
+          ar: "تتغيّر الأدوات وتبقى الطريقة.",
         })}
       />
 
