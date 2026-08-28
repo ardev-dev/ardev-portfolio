@@ -27,8 +27,8 @@ export const profile = {
   /** نبذة البطل — مكتوبة كما أتحدّث، لا كما تُكتب السير الذاتية. */
   intro: [
     {
-      en: "I'm Abdulrahman, a software engineer in Buraydah. For six years I've built products and stayed with them after launch — Flutter apps, Django backends, Next.js web, payment integrations and real-time systems.",
-      ar: "أنا عبدالرحمن، مهندس برمجيات من بريدة. منذ ستّ سنوات أبني منتجات وأبقى معها بعد الإطلاق — تطبيقات Flutter، وخلفيات Django، وواجهات Next.js، وتكاملات الدفع والأنظمة اللحظية.",
+      en: "I'm Abdulrahman, a software engineer based in Buraydah. For six years I've built products and stayed with them after launch — Flutter apps, Django backends, Next.js web, payment integrations and real-time systems.",
+      ar: "أنا عبدالرحمن، مهندس برمجيات مقيم في بريدة. منذ ستّ سنوات أبني منتجات وأبقى معها بعد الإطلاق — تطبيقات Flutter، وخلفيات Django، وواجهات Next.js، وتكاملات الدفع والأنظمة اللحظية.",
     },
     {
       en: "Today I lead engineering at Somow and I'm responsible for Abber, Wisal and Azbah — from architecture and the backend through payments, releases and whatever breaks in production.",
@@ -41,7 +41,8 @@ export const profile = {
   ] as L[],
   facts: [
     { label: { en: "Role", ar: "الدور" } as L, value: { en: "Senior Software Engineer & Technical Lead", ar: "مهندس برمجيات خبير وقائد تقني" } as L },
-    { label: { en: "Company", ar: "الجهة" } as L, value: { en: "Somow · Buraydah", ar: "سُمو · بريدة" } as L },
+    { label: { en: "Company", ar: "الجهة" } as L, value: { en: "Somow", ar: "سُمو" } as L },
+    { label: { en: "Based in", ar: "مقيم في" } as L, value: { en: "Buraydah, Saudi Arabia", ar: "بريدة، السعودية" } as L },
     { label: { en: "Works on", ar: "يعمل على" } as L, value: { en: "Mobile · Backend · Web · Payments", ar: "جوّال · خلفية · ويب · مدفوعات" } as L },
     { label: { en: "Languages", ar: "اللغات" } as L, value: { en: "Arabic (native) · English (working)", ar: "العربية (أمّ) · الإنجليزية (عمل)" } as L },
   ],
