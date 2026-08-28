@@ -2,7 +2,22 @@
 
 Personal portfolio for **Abdulrahman Morshed (AR Dev)** — [ardev.dev](https://ardev.dev).
 
-Built with **Next.js 16 · React 19 · TypeScript · Tailwind CSS · Framer Motion** (same stack as maskani_web).
+Built with **Next.js 16 · React 19 · TypeScript · Tailwind CSS · Framer Motion**.
+
+## Design
+
+سطح شرائح بملء الشاشة (`components/site/Deck.tsx`): كل قسم صفحة تُقلَب بالعجلة
+أو اللمس أو الأسهم. كل الصفحات تبقى في DOM — فالمحتوى كامل لمحرّكات البحث
+وقارئات الشاشة، والانتقال إزاحة حتمية لا تنتظر اكتمال حركة سابقة. قبل أن
+يُركّب React تُعرض الصفحات مكدّسة وقابلة للتمرير، فالموقع يُقرأ حتى بلا JS.
+
+الثيم أحادي دافئ (`Editorial Dark`): التباين والطباعة يحملان التصميم، واللمسة
+اللونية الوحيدة تدرّج معدني. الإنجليزية تستعمل `Instrument Serif` المائل للتوكيد،
+والعربية لا — لا مائل في الطباعة العربية، والخطّ اللاتيني بلا حروف عربية أصلاً
+(`components/site/Em.tsx`).
+
+صور المشاريع حقيقيّة: لقطات App Store عبر واجهة iTunes lookup، ولقطات المواقع
+الحيّة بـ Chrome headless — في `public/apps/`.
 
 ## Develop
 

@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Cairo } from "next/font/google";
+import { Inter_Tight, Instrument_Serif, JetBrains_Mono, Cairo } from "next/font/google";
 import "./globals.css";
 import { profile, socials } from "@/lib/data";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { Analytics } from "@/components/Analytics";
 
 /* خطوط ذاتيّة الاستضافة عبر next/font — غير حاجبة للعرض (LCP أفضل). */
-const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
+const sans = Inter_Tight({ subsets: ["latin"], display: "swap", variable: "--font-sans" });
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: "italic", display: "swap", variable: "--font-serif" });
 const mono = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-mono" });
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08090c",
+  themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
 };
@@ -74,9 +75,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       dir="ltr"
-      className={`${inter.variable} ${mono.variable} ${cairo.variable}`}
+      className={`${sans.variable} ${serif.variable} ${mono.variable} ${cairo.variable}`}
     >
       <body className="font-sans antialiased">
+        {/* قبل الرسم: نُعلم CSS أن JS يعمل، فيُسمح بإخفاء عناصر الكشف. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

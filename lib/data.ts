@@ -148,274 +148,256 @@ export const marquee = [
 ];
 
 export type Project = {
+  slug: string;
   name: string;
+  nameAr?: string;
   kind: L;
   blurb: L;
+  /** ما أثبتَه المشروع فعليّاً — أرقام لا صفات. */
+  metrics?: { value: string; label: L }[];
   tags: string[];
   links: { label: L; href: string }[];
+  /** صور حقيقيّة: لقطات المتجر للتطبيقات، ولقطات الموقع الحيّ للويب. */
+  shots?: string[];
+  cover?: string;
+  icon?: string;
   featured?: boolean;
-  accent?: "violet" | "cyan" | "pink";
+  year: string;
 };
 
 const appStore: L = { en: "App Store", ar: "App Store" };
 const googlePlay: L = { en: "Google Play", ar: "Google Play" };
 const website: L = { en: "Website", ar: "الموقع" };
+const source: L = { en: "Source", ar: "المصدر" };
 
 export const projects: Project[] = [
   {
+    slug: "abber",
     name: "Abber",
-    kind: { en: "Dream-Interpretation Marketplace", ar: "سوق تفسير الأحلام" },
+    nameAr: "عبر",
+    year: "2022 — Now",
+    kind: { en: "Dream & Vision Interpretation Marketplace", ar: "سوق تفسير الأحلام والرؤى" },
     blurb: {
-      en: "Flagship dream & vision interpretation marketplace — users submit a dream and receive readings from vetted interpreters. Serves 21,000+ users with 40,000+ orders and 600K+ real-time messages, plus live sessions, a store, wallet, and a Django backend spanning ~30 business domains.",
-      ar: "سوق رائد لتفسير الأحلام والرؤى — يُرسل المستخدم حلمه فيستلم تفسيره من معبّرين موثوقين. يخدم 21,000+ مستخدم بـ 40,000+ طلب و600K+ رسالة لحظية، مع جلسات بثّ مباشر ومتجر ومحفظة وخلفية Django تغطّي نحو 30 مجالاً.",
+      en: "A production marketplace connecting people with vetted interpreters — orders, live sessions, wallet, store, and a Django backend spanning ~30 business domains. I own its design, engineering, and day-to-day operation.",
+      ar: "سوق إنتاجي يربط الناس بمعبّرين موثوقين — طلبات وجلسات مباشرة ومحفظة ومتجر، وخلفية Django تغطّي نحو ٣٠ مجالاً. أملك تصميمه وهندسته وتشغيله اليومي.",
     },
-    tags: ["Flutter", "Django", "Real-time", "Payments"],
+    metrics: [
+      { value: "21K+", label: { en: "users", ar: "مستخدم" } },
+      { value: "40K+", label: { en: "orders", ar: "طلب" } },
+      { value: "600K+", label: { en: "live messages", ar: "رسالة لحظية" } },
+      { value: "4.7★", label: { en: "App Store", ar: "App Store" } },
+    ],
+    tags: ["Flutter", "Django", "WebRTC", "Payments", "Real-time"],
     links: [
       { label: appStore, href: "https://apps.apple.com/app/id6461119454" },
       { label: googlePlay, href: "https://play.google.com/store/apps/details?id=co.abber_dev.abber_app" },
       { label: website, href: "https://abber.co" },
     ],
+    shots: ["/apps/abber-1.png", "/apps/abber-2.png", "/apps/abber-3.png", "/apps/abber-4.png"],
+    cover: "/apps/abber-web.png",
+    icon: "/apps/abber-icon.png",
     featured: true,
-    accent: "violet",
   },
   {
+    slug: "maskani",
     name: "Maskani",
+    nameAr: "مسكني",
+    year: "2024 — Now",
     kind: { en: "Social Real-Estate Platform", ar: "منصّة عقارية اجتماعية" },
     blurb: {
-      en: "A social real-estate platform connecting property owners directly with clients — listings, services, jobs, a social feed, property requests, and real-time chat — built across three stacks: a Flutter app, an internal admin app, and a Next.js / TypeScript web app on a Dockerized Django backend.",
-      ar: "منصّة عقارية اجتماعية تربط الملّاك مباشرةً بالعملاء — إعلانات عقارية وخدمات ووظائف وموجز اجتماعي وطلبات عقارات ومحادثة لحظية — عبر ثلاث تقنيات: تطبيق Flutter، وتطبيق إدارة داخلي، وواجهة ويب Next.js / TypeScript على خلفية Django بحاويات Docker.",
+      en: "Owners reach clients directly — listings, services, jobs, a social feed, property requests, and real-time chat. Delivered across three stacks at once: a Flutter app, an internal admin app, and a Next.js web app on a Dockerized Django backend.",
+      ar: "الملّاك يصلون إلى العملاء مباشرةً — إعلانات وخدمات ووظائف وموجز اجتماعي وطلبات عقار ومحادثة لحظية. مبنيّة على ثلاث تقنيات معاً: تطبيق Flutter، وتطبيق إدارة، وواجهة Next.js على خلفية Django بحاويات.",
     },
-    tags: ["Next.js", "Flutter", "Django", "Real-time"],
+    metrics: [
+      { value: "3", label: { en: "client stacks", ar: "واجهات" } },
+      { value: "6", label: { en: "countries", ar: "دول" } },
+      { value: "24/7", label: { en: "real-time chat", ar: "محادثة لحظية" } },
+    ],
+    tags: ["Next.js", "TypeScript", "Flutter", "Django", "Docker"],
     links: [{ label: website, href: "https://maskani.homes" }],
+    cover: "/apps/maskani-web.png",
     featured: true,
-    accent: "cyan",
   },
   {
+    slug: "wisal",
     name: "Wisal",
+    nameAr: "وصال",
+    year: "2024 — Now",
     kind: { en: "Consultation Marketplace", ar: "سوق استشارات" },
     blurb: {
-      en: "A professional consultation & service-booking marketplace connecting users with verified vendors via paid orders, chat, and VoIP calls — backed by a wallet and a real double-entry accounting engine — on a Django backend.",
-      ar: "سوق استشارات وحجز خدمات يربط المستخدمين بمزوّدين موثّقين عبر طلبات مدفوعة ومحادثة ومكالمات VoIP — مدعوماً بمحفظة ومحرّك محاسبة بالقيد المزدوج — على خلفية Django.",
+      en: "Paid consultations with verified vendors over chat and VoIP, settled through a wallet on a real double-entry accounting engine — the kind of correctness you cannot retrofit later.",
+      ar: "استشارات مدفوعة مع مزوّدين موثّقين عبر المحادثة والمكالمات، تُسوّى بمحفظة على محرّك محاسبة بالقيد المزدوج — دقّةٌ لا يمكن إضافتها لاحقاً.",
     },
-    tags: ["Flutter", "Django", "VoIP", "Double-Entry Accounting"],
+    metrics: [
+      { value: "2×", label: { en: "entry ledger", ar: "قيد مزدوج" } },
+      { value: "VoIP", label: { en: "in-app calls", ar: "مكالمات" } },
+    ],
+    tags: ["Flutter", "Django", "VoIP", "Double-Entry"],
     links: [
       { label: appStore, href: "https://apps.apple.com/app/id6755353238" },
       { label: googlePlay, href: "https://play.google.com/store/apps/details?id=io.somow.wisalapp" },
       { label: website, href: "https://wisalapp.com" },
     ],
-    accent: "violet",
+    shots: ["/apps/wisal-1.png", "/apps/wisal-2.png", "/apps/wisal-3.png"],
+    cover: "/apps/wisal-web.png",
+    icon: "/apps/wisal-icon.png",
   },
   {
+    slug: "azbah",
     name: "Azbah",
-    kind: { en: "Expense-Splitting & Settle-Up", ar: "تقسيم وتحصيل المصاريف" },
+    nameAr: "عزبة",
+    year: "2025 — Now",
+    kind: { en: "Group Expenses & Settle-Up", ar: "مشاركة المصاريف والتسوية" },
     blurb: {
-      en: "A group expense-splitting & settle-up app — members form groups, log shared expenses, and settle inter-member claims via an in-app wallet or cash, all on a strict double-entry accounting ledger. Django REST / PostgreSQL backend with an operations admin panel.",
-      ar: "تطبيق تقسيم وتحصيل المصاريف الجماعية — يُنشئ الأعضاء مجموعات، ويسجّلون المصاريف المشتركة، ويسوّون المطالبات بينهم عبر محفظة داخل التطبيق أو نقداً، على دفتر محاسبة بالقيد المزدوج. خلفية Django REST / PostgreSQL مع لوحة تشغيل إدارية.",
+      en: "Members share expenses and settle claims by wallet or cash on a strict double-entry ledger, with an operations panel behind it. Money apps forgive nothing — every edge case is an accounting rule, not a UI state.",
+      ar: "أعضاء يتقاسمون المصاريف ويسوّون مطالباتهم بالمحفظة أو نقداً على دفتر بالقيد المزدوج، خلفه لوحة تشغيل. تطبيقات المال لا تسامح: كل حالة طرفيّة قاعدة محاسبية لا حالة واجهة.",
     },
-    tags: ["Flutter", "Django REST", "Double-Entry Accounting"],
+    metrics: [
+      { value: "PostgreSQL", label: { en: "ledger store", ar: "دفتر الحسابات" } },
+      { value: "Django REST", label: { en: "backend", ar: "الخلفية" } },
+    ],
+    tags: ["Flutter", "Django REST", "PostgreSQL", "Accounting"],
     links: [
       { label: appStore, href: "https://apps.apple.com/app/id6761391341" },
       { label: googlePlay, href: "https://play.google.com/store/apps/details?id=io.somow.azbah" },
       { label: website, href: "https://azbah.somow.sa" },
     ],
-    accent: "pink",
+    shots: ["/apps/azbah-1.png", "/apps/azbah-2.png", "/apps/azbah-3.png"],
+    cover: "/apps/azbah-web.png",
+    icon: "/apps/azbah-icon.png",
   },
   {
-    name: "Manam",
-    kind: { en: "Dream-Interpretation App", ar: "تطبيق تفسير أحلام" },
-    blurb: {
-      en: "A focused dream-interpretation app — record or type your dream and submit it as a paid order to Abber's interpreters. A single-vertical spin-off of Abber on the same Django backend, with audio recording, RSA-encrypted payments, and tiered in-app subscriptions.",
-      ar: "تطبيق مُركّز لتفسير الأحلام — سجّل حلمك أو اكتبه وأرسله كطلب مدفوع لمعبّري عبر. نسخة عمودية من عبر على الخلفية نفسها، بتسجيل صوتي ومدفوعات مشفّرة بـ RSA واشتراكات بمستويات داخل التطبيق.",
-    },
-    tags: ["Flutter", "RSA Payments", "Subscriptions"],
-    links: [
-      { label: appStore, href: "https://apps.apple.com/us/app/id6743326831" },
-      { label: googlePlay, href: "https://play.google.com/store/apps/details?id=co.manams.manam" },
-    ],
-    accent: "cyan",
-  },
-  {
+    slug: "wasselak",
     name: "Wasselak",
+    nameAr: "وصّلك",
+    year: "2023",
     kind: { en: "Express-Delivery Platform", ar: "منصّة توصيل سريع" },
     blurb: {
-      en: "A multi-app express-delivery platform on a Django backend — customer, delivery-captain, business, employee, and admin apps plus a web dashboard — with real-time GPS tracking over WebSocket and optimized REST APIs.",
-      ar: "منصّة توصيل سريع متعددة التطبيقات على خلفية Django — تطبيقات العميل والمندوب والأعمال والموظّف والإدارة إضافةً إلى لوحة ويب — مع تتبّع GPS لحظي عبر WebSocket وواجهات REST مُحسّنة.",
+      en: "Five apps and a dashboard on one Django backend — customer, captain, business, employee, admin — with live GPS tracking over WebSocket. One domain model had to satisfy five very different jobs.",
+      ar: "خمسة تطبيقات ولوحة على خلفية Django واحدة — العميل والمندوب والمنشأة والموظّف والإدارة — مع تتبّع GPS لحظي عبر WebSocket. نموذج مجال واحد يخدم خمس وظائف مختلفة.",
     },
-    tags: ["Flutter", "Django", "Realtime GPS"],
-    links: [{ label: same("GitHub"), href: "https://github.com/wasselak-com" }],
-    accent: "violet",
+    metrics: [
+      { value: "5", label: { en: "apps, one core", ar: "تطبيقات بنواة واحدة" } },
+      { value: "GPS", label: { en: "live tracking", ar: "تتبّع لحظي" } },
+    ],
+    tags: ["Flutter", "Django", "WebSocket", "Maps"],
+    links: [{ label: source, href: "https://github.com/wasselak-com" }],
   },
   {
-    name: "Moqawlat",
-    kind: { en: "Business Management (Contracting)", ar: "إدارة أعمال مقاولات" },
+    slug: "factforge",
+    name: "FactForge",
+    year: "2025",
+    kind: { en: "Multi-Agent AI System", ar: "نظام وكلاء ذكاء اصطناعي" },
     blurb: {
-      en: "An Arabic, Android-first business-management app for a multi-line contracting enterprise — apiary, quarry, sawmill, construction, cars, and rentals — covering employees, accounts, debts, multi-currency transactions, and role-based permissions, on a Firebase backend.",
-      ar: "تطبيق إدارة أعمال عربي (يبدأ بأندرويد) لمؤسّسة مقاولات متعدّدة الأنشطة — مناحل ومقالع ومناشر وإنشاءات وسيّارات وتأجير — يغطّي الموظفين والحسابات والديون والمعاملات متعدّدة العملات والصلاحيات، على خلفية Firebase.",
+      en: "A Python pipeline of autonomous agents that takes an idea to a published video — script, fact-check, TTS, render, publish — with no human in the loop. Agents are only as good as the contracts between them.",
+      ar: "خطّ إنتاج بايثون من وكلاء مستقلّين يأخذ الفكرة إلى فيديو منشور — نصّ، تدقيق حقائق، تحويل صوتي، إخراج، نشر — بلا تدخّل بشري. جودة الوكلاء من جودة العقود بينهم.",
     },
-    tags: ["Flutter", "Firebase", "Accounting"],
+    metrics: [
+      { value: "6", label: { en: "agent stages", ar: "مراحل وكلاء" } },
+      { value: "0", label: { en: "human steps", ar: "خطوات بشرية" } },
+    ],
+    tags: ["Python", "Multi-Agent", "LLM Tooling", "Automation"],
     links: [],
-    accent: "cyan",
-  },
-  {
-    name: "Truck-go",
-    kind: { en: "Logistics Platform", ar: "منصّة لوجستية" },
-    blurb: {
-      en: "A logistics platform — customer and driver apps, a web dashboard, and a Python service layer (with an AI component) for routing and operations.",
-      ar: "منصّة لوجستية — تطبيقا العميل والسائق، ولوحة ويب، وطبقة خدمات Python (بمكوّن ذكاء اصطناعي) للتوجيه والعمليات.",
-    },
-    tags: ["Flutter", "Python", "AI"],
-    links: [{ label: same("GitHub"), href: "https://github.com/Truck-go" }],
-    accent: "violet",
-  },
-  {
-    name: "Sweetra",
-    kind: { en: "Mobile Game (Match-3)", ar: "لعبة موبايل (Match-3)" },
-    blurb: {
-      en: "A published Flutter + Flame match-3 puzzle game with a social & competitive layer — teams, tournaments, leaderboards, gifts, and an in-app market — on a Firebase/Firestore backend, shipped through full CI/CD.",
-      ar: "لعبة ألغاز match-3 منشورة بـ Flutter + Flame مع طبقة اجتماعية وتنافسية — فرق وبطولات ولوحات صدارة وهدايا ومتجر داخلي — على خلفية Firebase/Firestore، وأُنجزت عبر CI/CD كامل.",
-    },
-    tags: ["Flutter", "Flame", "Firebase"],
-    links: [{ label: googlePlay, href: "https://play.google.com/store/apps/details?id=io.ar.sweetra" }],
-    accent: "pink",
   },
 ];
 
-/** مشاريع إضافية (بطاقات مُدمجة) — من جرد المشاريع المحلية + GitHub، أوصاف مُتحقَّقة. */
-export type MiniProject = { name: string; kind: L; tags: string[] };
-
-export const moreProjects: MiniProject[] = [
-  { name: "AppProof", kind: { en: "App QA / Testing Marketplace", ar: "سوق اختبار تطبيقات" }, tags: ["Flutter", "Django", "Next.js"] },
-  { name: "Wasla", kind: { en: "Group-Link Directory", ar: "دليل روابط المجموعات" }, tags: ["Flutter", "Firebase"] },
-  { name: "Lumi", kind: { en: "AI Learning for Kids", ar: "تعلّم ذكي للأطفال" }, tags: ["Flutter", "AI"] },
-  { name: "FactForge", kind: { en: "Multi-Agent AI Video Studio", ar: "استوديو فيديو بالوكلاء" }, tags: ["Python", "Multi-Agent AI"] },
-  { name: "MikroTik Manager", kind: { en: "Router Management", ar: "إدارة راوترات" }, tags: ["Flutter", "Networking"] },
-  { name: "Aleuhda", kind: { en: "Wallet App", ar: "تطبيق محفظة" }, tags: ["Flutter", "BLoC"] },
-  { name: "Alminshar", kind: { en: "Accounting System", ar: "نظام محاسبة" }, tags: ["Flutter", "Accounting"] },
-  { name: "EasyCopyPaste", kind: { en: "macOS Clipboard Manager", ar: "مدير حافظة macOS" }, tags: ["Swift", "macOS"] },
-  { name: "Somow", kind: { en: "Company Website", ar: "موقع الشركة" }, tags: ["React", "JSX"] },
+/** أعمال أخرى — تُعرض كقائمة مقتضبة. */
+export const moreProjects: { name: string; kind: L }[] = [
+  { name: "Somow Platform", kind: { en: "Company platform & ops", ar: "منصّة الشركة والتشغيل" } },
+  { name: "Manam", kind: { en: "Interpreter workspace", ar: "مساحة عمل المعبّرين" } },
+  { name: "MT Admin Pro", kind: { en: "Operations dashboard", ar: "لوحة تشغيل" } },
+  { name: "Sweetra", kind: { en: "Commerce app", ar: "تطبيق تجاري" } },
+  { name: "Moqawlat", kind: { en: "Contracting platform", ar: "منصّة مقاولات" } },
+  { name: "AppProof", kind: { en: "Release QA tooling", ar: "أدوات فحص الإصدارات" } },
+  { name: "CutReact", kind: { en: "Video tooling", ar: "أدوات فيديو" } },
+  { name: "shared_utils", kind: { en: "Internal Flutter framework", ar: "إطار داخلي لـ Flutter" } },
 ];
 
-/** أرقام المقياس الحقيقية (جرد المشاريع + GitHub، 2026-08). */
-export const scale: { value: L; label: L }[] = [
-  { value: { en: "1M+", ar: "+مليون" }, label: { en: "Lines authored", ar: "سطر مؤلَّف" } },
-  { value: same("72"), label: { en: "Repositories", ar: "مستودعاً" } },
-  { value: same("12"), label: { en: "Product ventures", ar: "مشروعاً منتَجاً" } },
-  { value: same("30+"), label: { en: "Apps, panels & services", ar: "تطبيقاً ولوحةً وخدمة" } },
-];
+export type Pkg = {
+  name: string;
+  blurb: L;
+  points: string;
+  href: string;
+  note?: L;
+};
 
-export type Package = { name: string; blurb: L; meta: L; href?: string };
-
-export const packages: Package[] = [
-  {
-    name: "video_compressor_plus",
-    blurb: {
-      en: "Compress, trim, and mute videos and extract thumbnails using the platform's own encoders — no FFmpeg binaries, nothing added to app size. A maintained continuation of the unmaintained video_compress, adding the Swift Package Manager support four upstream PRs never got merged.",
-      ar: "ضغط الفيديوهات وقصّها وكتم صوتها واستخراج المصغّرات باستخدام مُرمِّزات النظام نفسها — دون ثنائيات FFmpeg، فلا يزيد حجم التطبيق. استمرارٌ مُصان لحزمة video_compress المهجورة، مع إضافة دعم Swift Package Manager الذي لم تُدمَج له أربعة طلبات سحب.",
-    },
-    meta: same("Dart · Swift · Kotlin · SPM"),
-    href: "https://pub.dev/packages/video_compressor_plus",
-  },
+export const packages: Pkg[] = [
   {
     name: "solar_community_icons",
     blurb: {
-      en: "Founder & maintainer. 2,500+ Solar community icons for Flutter in bold and linear styles — a perfect 160/160 pub score, used in production.",
-      ar: "المؤسِّس والمشرف. أكثر من 2,500 أيقونة Solar لـ Flutter بنمطي bold وlinear — بتقييم كامل 160/160، ومستخدمة في الإنتاج.",
+      en: "2,500+ icons packaged for Flutter — founder and maintainer.",
+      ar: "أكثر من ٢٥٠٠ أيقونة مهيّأة لـ Flutter — المؤسّس والمشرف.",
     },
-    meta: { en: "160 / 160 pub points · 2,500+ icons", ar: "‏160/160 نقطة · أكثر من 2,500 أيقونة" },
+    points: "160 / 160",
     href: "https://pub.dev/packages/solar_community_icons",
   },
   {
     name: "flutter_websocket_manager",
     blurb: {
-      en: "Production WebSocket connection manager for Flutter with auto-reconnection, lifecycle-aware state, and exponential backoff. Cross-platform: Android, iOS, macOS, Linux, Windows.",
-      ar: "مدير اتصال WebSocket إنتاجي لـ Flutter مع إعادة اتصال تلقائية، وحالة واعية بدورة الحياة، وتراجع أُسّي. متعدّد المنصّات: Android وiOS وmacOS وLinux وWindows.",
+      en: "Production WebSocket lifecycle — reconnection, backoff, typed events.",
+      ar: "إدارة دورة حياة WebSocket للإنتاج — إعادة اتصال وتراجع تدريجي وأحداث مُصنّفة.",
     },
-    meta: { en: "155 / 160 pub points · cross-platform", ar: "‏155/160 نقطة · متعدّد المنصّات" },
+    points: "155 / 160",
     href: "https://pub.dev/packages/flutter_websocket_manager",
   },
   {
-    name: "shared_utils",
+    name: "video_compressor_plus",
     blurb: {
-      en: "Internal Flutter framework reused across all production apps — typed networking, WebSocket/SSE managers (auto-reconnect, token refresh), persistent device identity, formatters, and media pickers.",
-      ar: "إطار Flutter داخلي مُعاد استخدامه عبر كل التطبيقات الإنتاجية — شبكات مُنمّطة، ومديرو WebSocket/SSE (إعادة اتصال وتجديد رمز)، وهويّة جهاز دائمة، ومنسّقات، ومنتقيات وسائط.",
+      en: "Native-encoder compression — no FFmpeg, no app-size bloat. Revived an abandoned package.",
+      ar: "ضغط بالمشفّر الأصلي — بلا FFmpeg وبلا تضخيم حجم التطبيق. إحياء لحزمة مهجورة.",
     },
-    meta: { en: "~13K LOC · reused across all apps", ar: "‏~13 ألف سطر · مُعاد عبر كل التطبيقات" },
-    // إطار داخلي خاصّ — بلا صفحة pub.dev عامّة
+    points: "pub.dev",
+    href: "https://pub.dev/packages/video_compressor_plus",
+    note: { en: "Adds Swift Package Manager support", ar: "أضافت دعم Swift Package Manager" },
   },
 ];
 
-export type Job = { role: L; org: L; period: L; summary: L; highlights: L[] };
-
-export const experience: Job[] = [
-  {
-    role: { en: "Senior Software Engineer & Technical Lead", ar: "مهندس برمجيات أول وقائد تقني" },
-    org: same("Somow"),
-    period: { en: "May 2022 — Present", ar: "مايو 2022 — حتى الآن" },
-    summary: {
-      en: "Own the full software-development lifecycle across 8 production codebases (5 mobile apps + 3 web dashboards), leading a team of 4–6 engineers.",
-      ar: "أتولّى دورة تطوير البرمجيات كاملة عبر 8 قواعد أكواد إنتاجية (5 تطبيقات موبايل + 3 لوحات ويب)، وأقود فريقاً من 4–6 مهندسين.",
-    },
-    highlights: [
-      {
-        en: "Reduced QA-reported defects by 50% via engineering standards, code review, and production monitoring.",
-        ar: "خفّضتُ الأعطال المُبلَّغة من الجودة بنسبة 50% عبر معايير هندسية ومراجعة أكواد ومراقبة إنتاجية.",
-      },
-      {
-        en: "Improved the operating model and delivery efficiency by bringing outsourced engineering work in-house.",
-        ar: "حسّنتُ نموذج التشغيل وكفاءة التسليم بجلب العمل الهندسي المُسنَد خارجياً إلى الداخل.",
-      },
-      {
-        en: "Primary technical liaison with external providers — payment gateways, Tamara, Meta, Huawei — owning SDK integration and account management.",
-        ar: "نقطة الاتصال التقنية الأساسية مع المزوّدين الخارجيين — بوابات الدفع، Tamara، Meta، Huawei — أتولّى تكامل الـ SDK وإدارة الحسابات.",
-      },
-      {
-        en: "Led weekly architecture reviews and authored the internal Clean Architecture handbook.",
-        ar: "قُدتُ مراجعات معمارية أسبوعية وألّفتُ الدليل الداخلي للمعمارية النظيفة.",
-      },
-    ],
-  },
-  {
-    role: { en: "Flutter Developer", ar: "مطوّر Flutter" },
-    org: { en: "Independent · Freelance", ar: "مستقل · عمل حرّ" },
-    period: { en: "2021 — 2022", ar: "2021 — 2022" },
-    summary: {
-      en: "Adopted Flutter and delivered cross-platform apps end-to-end, publishing production apps to the App Store and Google Play.",
-      ar: "تبنّيت Flutter وسلّمت تطبيقات متعددة المنصّات من الألف إلى الياء، ونشرت تطبيقات إنتاجية على App Store وGoogle Play.",
-    },
-    highlights: [
-      {
-        en: "Built REST-integrated apps with clean architecture and shipped them to the stores.",
-        ar: "بنيت تطبيقات مدمجة مع REST بمعمارية نظيفة ونشرتها على المتاجر.",
-      },
-    ],
-  },
-  {
-    role: { en: "Android Developer", ar: "مطوّر Android" },
-    org: { en: "Independent · Freelance", ar: "مستقل · عمل حرّ" },
-    period: { en: "2019 — 2020", ar: "2019 — 2020" },
-    summary: {
-      en: "Built and published production Android apps (Java) for clients — from requirements to Play Store release.",
-      ar: "بنيت ونشرت تطبيقات Android إنتاجية (Java) لعملاء — من المتطلبات إلى النشر على Play Store.",
-    },
-    highlights: [],
-  },
-];
-
-export const nav: { label: L; href: string }[] = [
-  { label: { en: "About", ar: "نبذة" }, href: "#about" },
-  { label: { en: "Experience", ar: "الخبرة" }, href: "#experience" },
-  { label: { en: "Work", ar: "الأعمال" }, href: "#work" },
-  { label: { en: "Open Source", ar: "مفتوح المصدر" }, href: "#open-source" },
-];
-
-/** عناوين الأقسام القصيرة (النمط التحريري). */
-export const heads = {
-  about: { en: "About", ar: "نبذة" } as L,
-  experience: { en: "Experience", ar: "الخبرة" } as L,
-  work: { en: "Selected Work", ar: "أعمال مختارة" } as L,
-  more: { en: "More", ar: "المزيد" } as L,
-  openSource: { en: "Open Source", ar: "مفتوح المصدر" } as L,
-  contact: { en: "Get in touch", ar: "لنتواصل" } as L,
-  currently: { en: "Currently working with", ar: "أعمل حالياً بـ" } as L,
-  viewGithub: { en: "All projects on GitHub", ar: "كل المشاريع على GitHub" } as L,
+export type Role = {
+  company: string;
+  title: L;
+  period: L;
+  href?: string;
+  points: L[];
 };
+
+export const roles: Role[] = [
+  {
+    company: "Somow",
+    href: "https://somow.sa",
+    title: { en: "Senior Software Engineer & Technical Lead", ar: "مهندس برمجيات أول وقائد تقني" },
+    period: { en: "May 2022 — Present · Buraydah", ar: "مايو ٢٠٢٢ — الآن · بريدة" },
+    points: [
+      {
+        en: "Promoted from Flutter Developer; now own Abber, Wisal and Azbah end-to-end — analysis through production support.",
+        ar: "تُرقّيت من مطوّر Flutter؛ أملك اليوم عبر ووصال وعزبة من التحليل إلى الدعم الإنتاجي.",
+      },
+      {
+        en: "Cut QA-reported defects by 50% by introducing engineering standards, code review and production monitoring.",
+        ar: "خفضتُ العيوب المُبلَّغة من الجودة ٥٠٪ عبر معايير هندسية ومراجعة كود ومراقبة إنتاج.",
+      },
+      {
+        en: "Led weekly architecture reviews for 4–6 engineers and wrote the Clean Architecture handbook the team works from.",
+        ar: "قدتُ مراجعات معمارية أسبوعية لفريق ٤–٦ مهندسين، وكتبتُ دليل المعمارية النظيفة المعتمد لدى الفريق.",
+      },
+      {
+        en: "Technical point of contact for external providers — Tamara, Meta, Huawei and payment gateways.",
+        ar: "نقطة الاتصال التقنية مع المزوّدين الخارجيين — تمارا وMeta وهواوي وبوّابات الدفع.",
+      },
+    ],
+  },
+  {
+    company: "Independent",
+    title: { en: "Flutter & Android Developer", ar: "مطوّر Flutter وأندرويد" },
+    period: { en: "2019 — 2022 · Remote", ar: "٢٠١٩ — ٢٠٢٢ · عن بُعد" },
+    points: [
+      {
+        en: "Shipped cross-platform apps with REST integrations to the App Store and Google Play.",
+        ar: "أطلقتُ تطبيقات متعدّدة المنصّات بتكاملات REST إلى App Store وGoogle Play.",
+      },
+      {
+        en: "Built production Android apps in Java for clients — requirements through Play Store release.",
+        ar: "بنيتُ تطبيقات أندرويد إنتاجية بلغة Java للعملاء — من المتطلبات إلى النشر.",
+      },
+    ],
+  },
+];

@@ -219,12 +219,22 @@ export function startTracking(onEvent?: (name: string, params: Record<string, un
   const onInteract = () => {
     lastInteraction = Date.now();
     dirty = true;
+    // قلب الشريحة يحدث بالعجلة والمفاتيح، فنلتقط التقدّم مع أي تفاعل.
+    const pct = readProgress();
+    if (pct > maxScrollPct) maxScrollPct = Math.min(pct, 100);
+  };
+
+  /** في سطح الشرائح يُنشر التقدّم على <html> بدل قياس ارتفاع التمرير. */
+  const readProgress = (): number => {
+    const d = document.documentElement.dataset;
+    if (d.deck) return Number(d.deckProgress ?? 0);
+    const h = document.documentElement.scrollHeight - innerHeight;
+    return h > 0 ? Math.round(((scrollY + innerHeight) / document.documentElement.scrollHeight) * 100) : 100;
   };
 
   const onScroll = () => {
     onInteract();
-    const h = document.documentElement.scrollHeight - innerHeight;
-    const pct = h > 0 ? Math.round(((scrollY + innerHeight) / document.documentElement.scrollHeight) * 100) : 100;
+    const pct = readProgress();
     if (pct > maxScrollPct) maxScrollPct = Math.min(pct, 100);
   };
 
@@ -284,6 +294,18 @@ export function startTracking(onEvent?: (name: string, params: Record<string, un
   addEventListener("beforeunload", finish);
 
   // ── الأقسام المقروءة ──
+  // في سطح الشرائح: الصفحة الظاهرة هي القسم — نراقب سمة <html> بدل التقاطع.
+  const deckWatch = setInterval(() => {
+    const id = document.documentElement.dataset.deckPage;
+    if (!id || id === currentSection) return;
+    accrue();
+    sectionsSeen.add(id);
+    currentSection = id;
+    sectionSince = Date.now();
+    dirty = true;
+    tracker.event("section_view", id);
+  }, 1200);
+
   const io = new IntersectionObserver(
     (entries) => {
       for (const en of entries) {
@@ -307,6 +329,7 @@ export function startTracking(onEvent?: (name: string, params: Record<string, un
 
   const stop = () => {
     clearInterval(beat);
+    clearInterval(deckWatch);
     io.disconnect();
     observers.forEach((o) => o?.disconnect());
     removeEventListener("scroll", onScroll);

@@ -1,27 +1,47 @@
-import { Background } from "@/components/Background";
-import { Nav } from "@/components/Nav";
-import { Hero } from "@/components/sections/Hero";
-import { Marquee } from "@/components/sections/Marquee";
-import { Bento } from "@/components/sections/Bento";
-import { Work } from "@/components/sections/Work";
-import { OpenSource } from "@/components/sections/OpenSource";
-import { Experience } from "@/components/sections/Experience";
-import { Contact } from "@/components/sections/Contact";
+"use client";
+
+import { useMemo } from "react";
+import { Backdrop } from "@/components/site/Backdrop";
+import { Nav } from "@/components/site/Nav";
+import { Deck, type Page } from "@/components/site/Deck";
+import { HeroPage } from "@/components/site/pages/HeroPage";
+import { ProjectPage } from "@/components/site/pages/ProjectPage";
+import { SystemsPage } from "@/components/site/pages/SystemsPage";
+import { MethodPage } from "@/components/site/pages/MethodPage";
+import { CraftPage } from "@/components/site/pages/CraftPage";
+import { ContactPage } from "@/components/site/pages/ContactPage";
+import { projects } from "@/lib/data";
+
+/** المشاريع ذات اللقطات تحصل كلٌّ منها على شريحة كاملة. */
+const SHOWCASE = ["abber", "maskani", "wisal", "azbah"];
 
 export default function Home() {
+  const pages = useMemo<Page[]>(() => {
+    const showcase = SHOWCASE.map((slug) => projects.find((p) => p.slug === slug)!).filter(Boolean);
+
+    return [
+      { id: "top", label: { en: "Intro", ar: "البداية" }, node: <HeroPage /> },
+      ...showcase.map((p, i) => ({
+        id: p.slug,
+        label: { en: p.name, ar: p.nameAr ?? p.name },
+        node: <ProjectPage p={p} index={i + 1} total={showcase.length} />,
+      })),
+      {
+        id: "work",
+        label: { en: "Systems", ar: "أنظمة" },
+        node: <SystemsPage slugs={["wasselak", "factforge"]} />,
+      },
+      { id: "info", label: { en: "Method", ar: "المنهج" }, node: <MethodPage /> },
+      { id: "experience", label: { en: "Record", ar: "المسار" }, node: <CraftPage /> },
+      { id: "contact", label: { en: "Contact", ar: "تواصل" }, node: <ContactPage /> },
+    ];
+  }, []);
+
   return (
     <>
-      <Background />
+      <Backdrop />
       <Nav />
-      <main className="relative">
-        <Hero />
-        <Marquee />
-        <Bento />
-        <Work />
-        <OpenSource />
-        <Experience />
-        <Contact />
-      </main>
+      <Deck pages={pages} />
     </>
   );
 }

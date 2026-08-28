@@ -1,8 +1,10 @@
 import type { Config } from "tailwindcss";
 
 /**
- * نظام تصميم ardev.dev — "Polished Product" (SaaS-grade، بروح Linear/Vercel/Stripe).
- * قاعدة داكنة عميقة، لمسة تدرّج نيلي→بنفسجي، بطاقات بعمق وحدود دقيقة، توهّجات ذوقية.
+ * نظام تصميم ardev.dev — "Editorial Dark".
+ * أحادي دافئ قريب من الأسود، بلا ألوان صارخة: التباين والطباعة يحملان التصميم،
+ * والمعدن (تدرّج أبيض→رمادي) هو اللمسة الوحيدة. أسماء الرموز محفوظة كما كانت
+ * حتى تستمرّ لوحة التحكّم بالعمل دون تعديل.
  */
 const config: Config = {
   content: [
@@ -13,50 +15,58 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: { DEFAULT: "#08090c", 900: "#08090c", 800: "#0d0e13", 700: "#14151c", 600: "#1b1d26" },
-        ink: "#f4f4f6", // العناوين
-        fg: { DEFAULT: "#a2a2ad", muted: "#77777f", faint: "#54545c" },
+        bg: { DEFAULT: "#0a0a0a", 900: "#0a0a0a", 800: "#101010", 700: "#161616", 600: "#1e1e1e" },
+        ink: "#f5f4f2",
+        fg: { DEFAULT: "#a8a6a2", muted: "#7a7873", faint: "#4f4d49" },
         accent: {
-          DEFAULT: "#818cf8",
-          indigo: "#6366f1",
-          violet: "#a78bfa",
-          fuchsia: "#e879f9",
-          soft: "rgba(129,140,248,0.14)",
+          DEFAULT: "#e8e6e1",
+          soft: "rgba(255,255,255,0.07)",
+          warm: "#c9c3b6",
+          dim: "#8f8b83",
         },
+        line: "rgba(255,255,255,0.08)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
         arabic: ["var(--font-cairo)", "Cairo", "Tajawal", "sans-serif"],
       },
       fontSize: {
-        mega: ["clamp(2.75rem, 6.5vw, 5.25rem)", { lineHeight: "1.02", letterSpacing: "-0.035em", fontWeight: "700" }],
-        display: ["clamp(2rem, 4.5vw, 3.25rem)", { lineHeight: "1.08", letterSpacing: "-0.03em", fontWeight: "700" }],
-        h2: ["clamp(1.5rem, 3vw, 2.1rem)", { lineHeight: "1.15", letterSpacing: "-0.02em", fontWeight: "700" }],
+        mega: ["clamp(2.5rem, 7.2vw, 6rem)", { lineHeight: "0.98", letterSpacing: "-0.042em", fontWeight: "600" }],
+        display: ["clamp(1.9rem, 4.6vw, 3.4rem)", { lineHeight: "1.06", letterSpacing: "-0.034em", fontWeight: "600" }],
+        h2: ["clamp(1.4rem, 3vw, 2rem)", { lineHeight: "1.14", letterSpacing: "-0.024em", fontWeight: "600" }],
       },
-      borderRadius: { xl: "0.9rem", "2xl": "1.15rem", "3xl": "1.6rem" },
+      borderRadius: { xl: "0.85rem", "2xl": "1.1rem", "3xl": "1.6rem", "4xl": "2rem" },
       boxShadow: {
-        card: "inset 0 1px 0 0 rgba(255,255,255,0.05), 0 10px 34px -14px rgba(0,0,0,0.7)",
-        lift: "inset 0 1px 0 0 rgba(255,255,255,0.08), 0 20px 50px -18px rgba(0,0,0,0.75)",
-        glow: "0 0 60px -12px rgba(129,140,248,0.5)",
-        "btn": "inset 0 1px 0 0 rgba(255,255,255,0.18), 0 8px 24px -8px rgba(99,102,241,0.5)",
+        card: "inset 0 1px 0 0 rgba(255,255,255,0.045), 0 12px 40px -18px rgba(0,0,0,0.9)",
+        lift: "inset 0 1px 0 0 rgba(255,255,255,0.09), 0 30px 70px -24px rgba(0,0,0,0.95)",
+        glow: "0 0 90px -20px rgba(255,255,255,0.22)",
+        btn: "inset 0 1px 0 0 rgba(255,255,255,0.22), 0 10px 30px -12px rgba(0,0,0,0.9)",
+        window: "0 60px 140px -40px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.06)",
       },
       backgroundImage: {
-        "accent-grad": "linear-gradient(120deg, #818cf8 0%, #a78bfa 45%, #e879f9 100%)",
-        "accent-grad-soft": "linear-gradient(120deg, rgba(129,140,248,0.16), rgba(232,121,249,0.10))",
-        "card-grad": "linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.008))",
-        grid: "linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px)",
+        "accent-grad": "linear-gradient(135deg, #ffffff 0%, #d9d6d0 48%, #8b8781 100%)",
+        "accent-grad-soft": "linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02))",
+        "card-grad": "linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012))",
+        grid: "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
       },
       keyframes: {
         marquee: { from: { transform: "translateX(0)" }, to: { transform: "translateX(-50%)" } },
-        "pulse-glow": { "0%,100%": { opacity: "0.6" }, "50%": { opacity: "1" } },
         shine: { from: { backgroundPosition: "200% center" }, to: { backgroundPosition: "-200% center" } },
+        float: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-8px)" } },
+        "scroll-cue": {
+          "0%": { transform: "translateY(-6px)", opacity: "0" },
+          "40%": { opacity: "1" },
+          "100%": { transform: "translateY(10px)", opacity: "0" },
+        },
       },
       animation: {
-        marquee: "marquee 40s linear infinite",
-        "pulse-glow": "pulse-glow 4s ease-in-out infinite",
-        shine: "shine 6s linear infinite",
+        marquee: "marquee 45s linear infinite",
+        shine: "shine 7s linear infinite",
+        float: "float 6s ease-in-out infinite",
+        "scroll-cue": "scroll-cue 2.2s ease-in-out infinite",
       },
     },
   },

@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --accent: #818cf8;
+  --bg: #0a0a0a;
+  --ink: #f5f4f2;
 }
 
 * {
@@ -12,12 +13,12 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 96px;
+  scroll-padding-top: 110px;
 }
 
 body {
-  background-color: #08090c;
-  color: #a2a2ad;
+  background-color: var(--bg);
+  color: #a8a6a2;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -25,80 +26,94 @@ body {
 }
 
 ::selection {
-  background: rgba(129, 140, 248, 0.3);
+  background: rgba(255, 255, 255, 0.16);
   color: #fff;
 }
 
 ::-webkit-scrollbar {
-  width: 11px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #08090c;
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #24252f;
+  background: #26262a;
   border-radius: 99px;
-  border: 3px solid #08090c;
+  border: 3px solid var(--bg);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #34353f;
+  background: #36363a;
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid rgba(255, 255, 255, 0.7);
   outline-offset: 3px;
   border-radius: 6px;
 }
 
 @layer components {
-  /* بطاقة بعمق (Linear-style): تدرّج داخلي + حدّ دقيق + إضاءة علوية */
+  /* سطح أساسي: تدرّج داخلي خفيف + حدّ دقيق + إضاءة علوية */
   .card {
-    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.008));
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 10px 34px -14px rgba(0, 0, 0, 0.7);
-    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.045), 0 12px 40px -18px rgba(0, 0, 0, 0.9);
+    transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
   }
   .card-hover:hover {
-    border-color: rgba(255, 255, 255, 0.16);
-    transform: translateY(-3px);
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 24px 55px -18px rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-4px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.09), 0 30px 70px -24px rgba(0, 0, 0, 0.95);
   }
 
-  /* حدّ متدرّج (premium) — إطار بلون التدرّج مع داخل داكن */
-  .grad-border {
-    position: relative;
-    background-clip: padding-box;
-    border: 1px solid transparent;
-  }
-  .grad-border::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(120deg, rgba(129, 140, 248, 0.7), rgba(232, 121, 249, 0.35), rgba(255, 255, 255, 0.05));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-
+  /* نصّ معدني — اللمسة اللونية الوحيدة في التصميم */
   .text-grad {
-    background: linear-gradient(120deg, #c7d2fe 0%, #a78bfa 45%, #f0abfc 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #e3e0da 42%, #8f8b83 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* زرّ أساسي */
+  /* لمعة تمرّ على النصّ ببطء */
+  .text-shine {
+    background: linear-gradient(100deg, #6b6862 0%, #ffffff 45%, #6b6862 70%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 7s linear infinite;
+  }
+
   .btn-primary {
-    background-image: linear-gradient(120deg, #6366f1, #8b5cf6);
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2), 0 8px 24px -8px rgba(99, 102, 241, 0.55);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-image: linear-gradient(180deg, #ffffff, #dedbd5);
+    color: #0a0a0a;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.9), 0 10px 30px -12px rgba(0, 0, 0, 0.9);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, filter 0.25s ease;
   }
   .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.25), 0 12px 30px -8px rgba(99, 102, 241, 0.7);
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+    box-shadow: inset 0 1px 0 0 #fff, 0 18px 40px -14px rgba(0, 0, 0, 1);
+  }
+
+  .btn-ghost {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.26);
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-2px);
+  }
+
+  /* إطار نافذة المتصفح في البطل */
+  .window {
+    background: linear-gradient(180deg, #171717 0%, #0e0e0e 100%);
+    box-shadow: 0 60px 140px -40px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+  .window-bar {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.03));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   }
 }
 
@@ -107,36 +122,88 @@ body {
     text-wrap: balance;
   }
   .mask-fade-x {
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
   }
-  .grid-bg {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 64px 64px;
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  }
+  /* حُبيبات فيلمية — تكسر نظافة التدرّجات فتبدو الشاشة أقرب إلى مادّة */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E");
   }
 }
 
-/* كشف عند التحميل — حركة CSS خالصة تنتهي مرئية */
-@keyframes reveal-up {
+/**
+ * الكشف: مرئي افتراضيّاً. الإخفاء لا يحدث إلا حين تُثبت الصفحة أن JS يعمل
+ * (html.js يُضاف قبل الرسم)، فلو تعطّل السكربت يبقى المحتوى مقروءاً بالكامل.
+ */
+@keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
     transform: none;
   }
 }
-.reveal {
-  animation: reveal-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+@keyframes word-in {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes blur-in {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
 }
 
-/* العربية: خط Cairo + RTL */
+.rv {
+  opacity: 1;
+}
+html.js .rv {
+  opacity: 0;
+}
+html.js .rv.in {
+  animation: rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* حركات البطل تعمل عند التحميل مباشرةً (fill-mode: both ينهيها مرئيّة) */
+html.js .word > span {
+  display: inline-block;
+  animation: word-in 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+html.js .blur-in {
+  animation: blur-in 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+html.js .rise {
+  animation: rise-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* العربية: Cairo لكل شيء عدا الأرقام أحاديّة المسافة */
 html[lang="ar"] body,
 html[lang="ar"] .font-sans,
-html[lang="ar"] .font-display,
-html[lang="ar"] .font-mono {
+html[lang="ar"] .font-display {
   font-family: var(--font-cairo), "Cairo", "Tajawal", sans-serif;
 }
 html[dir="rtl"] .marquee-track {
