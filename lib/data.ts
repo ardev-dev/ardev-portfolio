@@ -24,6 +24,27 @@ export const profile = {
     en: "I start with the problem, not the framework. Requirements, system design, implementation, testing, deployment — then production support, which is where most of the real decisions show up. That has taken me across mobile apps, Django backends, real-time systems, payment integrations and AI tooling. I've moved between stacks when the product required it: Java, then Flutter, then Django, then Next.js, then multi-agent systems. The tools changed; the process didn't.",
     ar: "أبدأ من المشكلة لا من الإطار. تحليل المتطلبات، تصميم النظام، التنفيذ، الاختبار، النشر — ثم الدعم في الإنتاج، وهناك تظهر أغلب القرارات الحقيقية. هذا نقلني بين تطبيقات الجوّال وخلفيات Django والأنظمة اللحظية وتكاملات الدفع وأدوات الذكاء الاصطناعي. وانتقلتُ بين التقنيات حين تطلّب المنتج ذلك: Java ثم Flutter ثم Django ثم Next.js ثم أنظمة الوكلاء. تغيّرت الأدوات، ولم تتغيّر الطريقة.",
   } as L,
+  /** نبذة البطل — مكتوبة كما أتحدّث، لا كما تُكتب السير الذاتية. */
+  intro: [
+    {
+      en: "I'm Abdulrahman, a software engineer in Buraydah. For six years I've built products and stayed with them after launch — Flutter apps, Django backends, Next.js web, payment integrations and real-time systems.",
+      ar: "أنا عبدالرحمن، مهندس برمجيات من بريدة. منذ ستّ سنوات أبني منتجات وأبقى معها بعد الإطلاق — تطبيقات Flutter، وخلفيات Django، وواجهات Next.js، وتكاملات الدفع والأنظمة اللحظية.",
+    },
+    {
+      en: "Today I lead engineering at Somow and I'm responsible for Abber, Wisal and Azbah — from architecture and the backend through payments, releases and whatever breaks in production.",
+      ar: "أقود اليوم الهندسة في سُمو، وأنا المسؤول عن عبر ووصال وعزبة — من المعمارية والخلفية إلى المدفوعات والإصدارات وما يتعطّل في الإنتاج.",
+    },
+    {
+      en: "The part I care about is what happens after launch: architecture the team can work in, review that catches things early, and monitoring that tells you before a user does. On my team that took QA-reported defects down by half.",
+      ar: "وما يعنيني حقّاً هو ما بعد الإطلاق: معمارية يعمل الفريق داخلها، ومراجعة تلتقط الخلل مبكّراً، ومراقبة تُخبرك قبل أن يُخبرك المستخدم. هذا خفّض العيوب المُبلَّغة من الجودة إلى النصف في فريقي.",
+    },
+  ] as L[],
+  facts: [
+    { label: { en: "Role", ar: "الدور" } as L, value: { en: "Senior Software Engineer & Technical Lead", ar: "مهندس برمجيات خبير وقائد تقني" } as L },
+    { label: { en: "Company", ar: "الجهة" } as L, value: { en: "Somow · Buraydah", ar: "سُمو · بريدة" } as L },
+    { label: { en: "Works on", ar: "يعمل على" } as L, value: { en: "Mobile · Backend · Web · Payments", ar: "جوّال · خلفية · ويب · مدفوعات" } as L },
+    { label: { en: "Languages", ar: "اللغات" } as L, value: { en: "Arabic (native) · English (working)", ar: "العربية (أمّ) · الإنجليزية (عمل)" } as L },
+  ],
   location: { en: "Buraydah, Saudi Arabia", ar: "بريدة، السعودية" } as L,
   status: {
     en: "Open to senior engineering and technical leadership roles",

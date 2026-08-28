@@ -20,19 +20,28 @@ export function Deck() {
   const { pages, index, mounted, go, step } = useDeck();
   const reduce = useReducedMotion();
   const { t } = useLang();
-  const touchY = useRef<number | null>(null);
+  // نلتقط عند بداية اللمسة سياقَها كاملاً: أين بدأت، وداخل أي حاوية قابلة
+  // للتمرير، وعند أي موضع تمرير — كلّها لازمة للتفريق بين "تمرير المحتوى"
+  // و"قلب الشريحة".
+  const touch = useRef<{ y: number; at: number; scroller: HTMLElement | null; top: number } | null>(null);
 
   useEffect(() => {
     if (!mounted) return;
 
+    /** الحاوية القابلة للتمرير التي تحوي هدف الحدث، إن كان لها فائض فعلي. */
+    const scrollerOf = (target: EventTarget | null): HTMLElement | null => {
+      const el = (target as HTMLElement)?.closest?.("[data-scroll]") as HTMLElement | null;
+      return el && el.scrollHeight - el.clientHeight > 4 ? el : null;
+    };
+
+    /** هل بقي في الحاوية مجال للتمرير في هذا الاتجاه؟ */
+    const canScroll = (el: HTMLElement, down: boolean) =>
+      down ? el.scrollTop + el.clientHeight < el.scrollHeight - 2 : el.scrollTop > 2;
+
     const onWheel = (e: WheelEvent) => {
-      // التمرير الداخلي أولاً (صفحة أطول من الشاشة على الجوّال)
-      const scroller = (e.target as HTMLElement)?.closest?.("[data-scroll]") as HTMLElement | null;
-      if (scroller && scroller.scrollHeight > scroller.clientHeight) {
-        const atTop = scroller.scrollTop <= 0;
-        const atEnd = scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 1;
-        if ((e.deltaY < 0 && !atTop) || (e.deltaY > 0 && !atEnd)) return;
-      }
+      // التمرير الداخلي أولاً (صفحة أطول من الشاشة)
+      const scroller = scrollerOf(e.target);
+      if (scroller && canScroll(scroller, e.deltaY > 0)) return;
       if (Math.abs(e.deltaY) < 12) return;
       e.preventDefault();
       step(e.deltaY > 0 ? 1 : -1);
@@ -49,12 +58,33 @@ export function Deck() {
       else if (e.key === "End") go(pages.length - 1);
     };
 
-    const onTouchStart = (e: TouchEvent) => (touchY.current = e.touches[0]?.clientY ?? null);
+    const onTouchStart = (e: TouchEvent) => {
+      const scroller = scrollerOf(e.target);
+      touch.current = {
+        y: e.touches[0]?.clientY ?? 0,
+        at: Date.now(),
+        scroller,
+        top: scroller?.scrollTop ?? 0,
+      };
+    };
+
     const onTouchEnd = (e: TouchEvent) => {
-      if (touchY.current === null) return;
-      const dy = touchY.current - (e.changedTouches[0]?.clientY ?? touchY.current);
-      if (Math.abs(dy) > 60) step(dy > 0 ? 1 : -1);
-      touchY.current = null;
+      const t0 = touch.current;
+      touch.current = null;
+      if (!t0) return;
+
+      const dy = t0.y - (e.changedTouches[0]?.clientY ?? t0.y);
+      if (Math.abs(dy) < 70) return;
+      const down = dy > 0;
+
+      if (t0.scroller) {
+        // تحرّك المحتوى فعلاً أثناء اللمسة → كان يقرأ لا يقلب صفحة.
+        if (Math.abs(t0.scroller.scrollTop - t0.top) > 2) return;
+        // ما زال في الحاوية مجال في هذا الاتجاه → التمرير من حقّها لا من حقّ السطح.
+        if (canScroll(t0.scroller, down)) return;
+      }
+
+      step(down ? 1 : -1);
     };
 
     window.addEventListener("wheel", onWheel, { passive: false });
