@@ -11,9 +11,12 @@
  */
 import { NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
+import { promises as dns } from "node:dns";
 import { FieldValue } from "firebase-admin/firestore";
 import { getDb } from "@/lib/firebase-admin";
 import { parseUa } from "@/lib/ua";
+import { ALERT_THRESHOLD, scoreSession } from "@/lib/score";
+import { sendAlert } from "@/lib/alerts";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -57,6 +60,30 @@ function geoFrom(h: Headers) {
 }
 
 const today = () => new Date().toISOString().slice(0, 10);
+
+/**
+ * عكس DNS لعنوان الزائر — كثير من شبكات الشركات والجامعات تكشف نطاقها،
+ * وهذه أقرب إشارة مجّانيّة إلى "من الجهة التي زارتنا".
+ * مخزَّن مؤقّتاً في ذاكرة النسخة، وبمهلة قصيرة حتى لا يؤخّر الاستجابة.
+ */
+const rdnsCache = new Map<string, string | null>();
+
+async function reverseDns(ip: string): Promise<string | null> {
+  if (ip === "unknown" || rdnsCache.has(ip)) return rdnsCache.get(ip) ?? null;
+  try {
+    const names = await Promise.race([
+      dns.reverse(ip),
+      new Promise<string[]>((_, rej) => setTimeout(() => rej(new Error("timeout")), 400)),
+    ]);
+    const host = names[0] ?? null;
+    if (rdnsCache.size > 500) rdnsCache.clear(); // سقف بسيط يمنع تسريب الذاكرة
+    rdnsCache.set(ip, host);
+    return host;
+  } catch {
+    rdnsCache.set(ip, null);
+    return null;
+  }
+}
 
 /** كوكي أوّل-طرف، httpOnly — يربط زيارات نفس الشخص عبر الجلسات والأيام. */
 function readVisitorId(req: Request): string | null {
@@ -164,6 +191,11 @@ export async function POST(req: Request) {
         : undefined,
       sectionTimeMs: typeof body.sectionTimeMs === "object" && body.sectionTimeMs ? body.sectionTimeMs : undefined,
       siteLang: s(body.siteLang, 8),
+      // Core Web Vitals من زائر حقيقي — أدقّ من أي قياس مخبري.
+      lcpMs: n(body.lcpMs, 600_000),
+      inpMs: n(body.inpMs, 600_000),
+      cls: typeof body.cls === "number" && Number.isFinite(body.cls) ? Math.round(body.cls * 1000) / 1000 : undefined,
+      exitSection: s(body.exitSection, 40),
       ended: action === "end",
     };
 
@@ -178,6 +210,7 @@ export async function POST(req: Request) {
           // ── الشبكة والموقع ──
           ip,
           geo,
+          rdns: await reverseDns(ip),
           // ── الجهاز والمتصفح ──
           userAgent: ua.slice(0, 512),
           browser: info.browser,
@@ -241,8 +274,24 @@ export async function POST(req: Request) {
           lastOs: info.os,
           lastReferrerHost: s(body.referrerHost, 120) ?? null,
           isBot: info.isBot,
-          // يُكتب مرّة واحدة فقط — merge لا يدهسه في الجلسات اللاحقة.
-          ...(isNewVisitor ? { firstSeenAt: now } : {}),
+          // آخر لمسة: من أين عاد هذه المرّة.
+          lastTouch: {
+            referrerHost: s(body.referrerHost, 120) ?? "direct",
+            utmSource: s(body.utmSource, 80) ?? null,
+            at: now,
+          },
+          // تُكتب مرّة واحدة فقط — merge لا يدهسها لاحقاً، فتبقى "أول لمسة" أصليّة.
+          ...(isNewVisitor
+            ? {
+                firstSeenAt: now,
+                firstTouch: {
+                  referrerHost: s(body.referrerHost, 120) ?? "direct",
+                  utmSource: s(body.utmSource, 80) ?? null,
+                  country: geo.country ?? null,
+                  landingPath: s(body.path, 200) ?? "/",
+                },
+              }
+            : {}),
         },
         { merge: true }
       );
@@ -276,9 +325,46 @@ export async function POST(req: Request) {
 
       if (action === "end" && !info.isBot) {
         const active = n(body.activeMs) ?? 0;
+
+        /**
+         * التقييم يُحسب هنا لا في اللوحة فقط، لأنّ التنبيه يعتمد عليه — واللوحة
+         * تعيد حسابه للعرض بنفس الدالّة، فلا يتفرّع المنطق.
+         */
+        const snap = await doc.get();
+        const d = snap.data() ?? {};
+        const score = scoreSession({
+          activeMs: active,
+          maxScrollPct: n(body.maxScrollPct, 100),
+          sectionsSeen: live.sectionsSeen as string[] | undefined,
+          eventCounts: d.eventCounts as Record<string, number> | undefined,
+          returning: d.returning as boolean | undefined,
+          isBot: false,
+        });
+
+        // نعتمد معرّف الزائر المحفوظ في الجلسة لا المقروء من الكوكي: لو ضاعت
+        // الكوكي بين البداية والإغلاق لا نُنشئ ملفّ زائر ثانياً لنفس الشخص.
+        const owner = (d.visitorId as string | undefined) ?? visitorId;
+
         const batch = db.batch();
+        batch.set(doc, { score: score.total, scoreReasons: score.reasons }, { merge: true });
+
+        // التنبيه مرّة واحدة لكل جلسة — alerted يمنع التكرار لو وصل end مرّتين.
+        if (score.total >= ALERT_THRESHOLD && !d.alerted) {
+          batch.set(doc, { alerted: true }, { merge: true });
+          void sendAlert({
+            score: score.total,
+            reasons: score.reasons,
+            city: geo.city,
+            country: geo.country,
+            org: (d.rdns as string | undefined) ?? geo.asOrganization,
+            referrer: d.referrerHost as string | undefined,
+            device: `${info.deviceType} · ${info.browser}`,
+            activeMs: active,
+            sessionId,
+          });
+        }
         batch.set(
-          db.collection("visitors").doc(visitorId),
+          db.collection("visitors").doc(owner),
           { totalActiveMs: FieldValue.increment(active), lastSeenAt: now },
           { merge: true }
         );
@@ -288,6 +374,7 @@ export async function POST(req: Request) {
             totalActiveMs: FieldValue.increment(active),
             completedSessions: FieldValue.increment(1),
             engagedSessions: FieldValue.increment(active >= 10_000 ? 1 : 0),
+            hotSessions: FieldValue.increment(score.total >= ALERT_THRESHOLD ? 1 : 0),
           },
           { merge: true }
         );

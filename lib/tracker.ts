@@ -122,6 +122,8 @@ export function startTracking(onEvent?: (name: string, params: Record<string, un
   const queue: Payload[] = [];
   let maxScrollPct = 0;
   const sectionTimeMs: Record<string, number> = {};
+  // Core Web Vitals من هذا الزائر تحديداً — قياس ميداني لا مخبري.
+  const vitals: { lcpMs?: number; inpMs?: number; cls: number } = { cls: 0 };
   const sectionsSeen = new Set<string>();
   let currentSection: string | null = null;
   let sectionSince = Date.now();
@@ -153,9 +155,46 @@ export function startTracking(onEvent?: (name: string, params: Record<string, un
       ...counts,
       sectionsSeen: [...sectionsSeen],
       sectionTimeMs,
+      lcpMs: vitals.lcpMs,
+      inpMs: vitals.inpMs,
+      cls: Math.round(vitals.cls * 1000) / 1000,
+      // أين توقّف عن القراءة — القسم الأخير الذي كان أمامه.
+      exitSection: currentSection ?? [...sectionsSeen].at(-1),
       siteLang: document.documentElement.lang || "en",
     };
   };
+
+  /** PerformanceObserver غير مدعوم في كل مكان، وأي عطب فيه لا يجوز أن يوقف القياس. */
+  const observe = (type: string, cb: (e: PerformanceEntry) => void) => {
+    try {
+      const po = new PerformanceObserver((list) => list.getEntries().forEach(cb));
+      po.observe({ type, buffered: true } as PerformanceObserverInit);
+      return po;
+    } catch {
+      return null;
+    }
+  };
+
+  const observers = [
+    // آخر قيمة LCP هي الصحيحة — المتصفح يُحدّثها حتى أول تفاعل.
+    observe("largest-contentful-paint", (e) => {
+      vitals.lcpMs = Math.round(e.startTime);
+      dirty = true;
+    }),
+    // INP تقريبيّة: أطول تأخّر تفاعل رصدناه.
+    observe("event", (e) => {
+      const d = (e as PerformanceEventTiming).duration;
+      if (d > (vitals.inpMs ?? 0)) {
+        vitals.inpMs = Math.round(d);
+        dirty = true;
+      }
+    }),
+    // CLS تراكميّة، ونتجاهل الإزاحات التي سبّبها المستخدم بنفسه.
+    observe("layout-shift", (e) => {
+      const ls = e as PerformanceEntry & { value: number; hadRecentInput: boolean };
+      if (!ls.hadRecentInput) vitals.cls += ls.value;
+    }),
+  ];
 
   // ── البداية ──
   send({ action: "start", ...metrics(), ...environment() });
@@ -269,6 +308,7 @@ export function startTracking(onEvent?: (name: string, params: Record<string, un
   const stop = () => {
     clearInterval(beat);
     io.disconnect();
+    observers.forEach((o) => o?.disconnect());
     removeEventListener("scroll", onScroll);
     removeEventListener("click", onClick, true);
     removeEventListener("copy", onCopy);

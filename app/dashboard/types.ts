@@ -8,6 +8,7 @@ export type Daily = {
   returningVisitors?: number;
   completedSessions?: number;
   engagedSessions?: number;
+  hotSessions?: number;
   totalActiveMs?: number;
   byCountry?: Record<string, number>;
   byCity?: Record<string, number>;
@@ -46,8 +47,31 @@ export type Visit = {
   sectionTimeMs?: Record<string, number>;
   eventCounts?: Record<string, number>;
   eventLog?: { name?: string; label?: string; atMs?: number }[];
+  rdns?: string;
+  score?: number;
+  scoreReasons?: string[];
+  alerted?: boolean;
+  visitorId?: string;
+  lcpMs?: number;
+  inpMs?: number;
+  cls?: number;
+  exitSection?: string;
   ttfbMs?: number;
   loadMs?: number;
   env?: string;
   ended?: boolean;
+};
+
+export type Visitor = {
+  id: string;
+  sessions?: number;
+  totalActiveMs?: number;
+  firstSeenAt?: Timestamp;
+  lastSeenAt?: Timestamp;
+  lastCountry?: string;
+  lastCity?: string;
+  lastDevice?: string;
+  firstTouch?: { referrerHost?: string; utmSource?: string; country?: string; landingPath?: string };
+  lastTouch?: { referrerHost?: string; utmSource?: string };
+  isBot?: boolean;
 };
