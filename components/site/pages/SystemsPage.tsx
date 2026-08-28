@@ -1,13 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { moreProjects, projects } from "@/lib/data";
 import { Shell, PageHead } from "@/components/site/pages/Shell";
 import { Em } from "@/components/site/Em";
 import { useLang } from "@/components/LanguageProvider";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 /** المشاريع التي لا لقطات لها + قائمة الأعمال الأخرى. */
 export function SystemsPage({ slugs }: { slugs: string[] }) {
@@ -30,13 +27,7 @@ export function SystemsPage({ slugs }: { slugs: string[] }) {
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {items.map((p, i) => (
-          <motion.article
-            key={p.slug}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 + i * 0.08, ease: EASE }}
-            className="card card-hover rounded-2xl p-6"
-          >
+          <article key={p.slug} className="anim card card-hover rounded-3xl p-6" style={{ "--d": "0.1s" } as React.CSSProperties}>
             <div className="flex items-baseline justify-between gap-3">
               <h3 className="font-display text-h2 text-ink">
                 {lang === "ar" && p.nameAr ? p.nameAr : p.name}
@@ -63,7 +54,7 @@ export function SystemsPage({ slugs }: { slugs: string[] }) {
               {p.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 font-mono text-[11px] text-fg-muted"
+                  className="glass rounded-lg px-2.5 py-1 font-mono text-[11px] text-fg-muted"
                   dir="ltr"
                 >
                   {tag}
@@ -87,16 +78,11 @@ export function SystemsPage({ slugs }: { slugs: string[] }) {
                 ))}
               </div>
             )}
-          </motion.article>
+          </article>
         ))}
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
-        className="mt-10 border-t border-white/[0.07] pt-8"
-      >
+      <div  className="anim mt-10 border-t border-white/[0.07] pt-8" style={{ "--d": "0.3s" } as React.CSSProperties}>
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-fg-faint">
           {t({ en: "Also built", ar: "وأيضاً" })}
         </p>
@@ -110,7 +96,7 @@ export function SystemsPage({ slugs }: { slugs: string[] }) {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </Shell>
   );
 }

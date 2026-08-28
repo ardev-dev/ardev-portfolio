@@ -1,31 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/lib/data";
 import { Shell } from "@/components/site/pages/Shell";
 import { useLang } from "@/components/LanguageProvider";
 import { cn } from "@/lib/utils";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
 function Phones({ shots, name }: { shots: string[]; name: string }) {
   return (
     <div className="flex items-center justify-center gap-3 sm:gap-4">
       {shots.slice(0, 3).map((s, i) => (
-        <motion.div
-          key={s}
-          initial={{ opacity: 0, y: 40, rotate: i === 0 ? -3 : i === 2 ? 3 : 0 }}
-          animate={{ opacity: 1, y: 0, rotate: i === 0 ? -3 : i === 2 ? 3 : 0 }}
-          transition={{ duration: 0.85, delay: 0.15 + i * 0.09, ease: EASE }}
-          className={cn(
+        <div key={s} className={cn("anim", cn(
             "w-[33%] max-w-[170px] shrink-0 lg:max-w-[190px]",
             i === 1 && "z-10 -mx-2 w-[36%] max-w-[185px] lg:max-w-[205px]",
             i === 2 && "hidden md:block"
-          )}
-        >
-          <div className="overflow-hidden rounded-[22px] border border-white/12 bg-black p-[5px] shadow-lift">
+          ))} style={{ "--d": "0.15s" } as React.CSSProperties}>
+          <div className="overflow-hidden rounded-[26px] border border-white/20 bg-black/60 p-[5px] shadow-lift backdrop-blur-xl">
             <Image
               src={s}
               alt={`${name} — ${i + 1}`}
@@ -36,7 +27,7 @@ function Phones({ shots, name }: { shots: string[]; name: string }) {
               className="h-auto w-full rounded-[17px]"
             />
           </div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
@@ -44,12 +35,7 @@ function Phones({ shots, name }: { shots: string[]; name: string }) {
 
 function BrowserShot({ src, alt, host }: { src: string; alt: string; host?: string }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 34 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.85, delay: 0.15, ease: EASE }}
-      className="window overflow-hidden rounded-xl"
-    >
+    <div  className="anim window overflow-hidden rounded-xl" style={{ "--d": "0.15s" } as React.CSSProperties}>
       <div className="window-bar flex items-center gap-1.5 px-3 py-2">
         <span className="h-2 w-2 rounded-full bg-white/25" />
         <span className="h-2 w-2 rounded-full bg-white/25" />
@@ -63,7 +49,7 @@ function BrowserShot({ src, alt, host }: { src: string; alt: string; host?: stri
       <div className="relative aspect-[16/10]">
         <Image src={src} alt={alt} fill sizes="(max-width: 1024px) 100vw, 640px" className="object-cover object-top" />
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -74,11 +60,7 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
   return (
     <Shell>
       <div className="grid items-center gap-10 md:grid-cols-[1fr_1.05fr] md:gap-10 lg:gap-16">
-        <motion.div
-          initial={{ opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, ease: EASE }}
-        >
+        <div  className="anim " style={{ "--d": "0s" } as React.CSSProperties}>
           <div className="flex items-center gap-3 font-mono text-[11px] text-fg-faint" dir="ltr">
             <span>
               {String(index).padStart(2, "0")} / {String(total).padStart(2, "0")}
@@ -94,7 +76,7 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
                 alt=""
                 width={52}
                 height={52}
-                className="rounded-[13px] border border-white/10"
+                className="rounded-[14px] border border-white/15 shadow-lift"
               />
             )}
             <div>
@@ -122,7 +104,7 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
             {p.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2 py-1 font-mono text-[11px] text-fg-muted"
+                className="glass rounded-lg px-2.5 py-1 font-mono text-[11px] text-fg-muted"
                 dir="ltr"
               >
                 {tag}
@@ -150,7 +132,7 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
               ))}
             </div>
           )}
-        </motion.div>
+        </div>
 
         <div className="min-w-0">
           {p.shots ? <Phones shots={p.shots} name={title} /> : p.cover ? (

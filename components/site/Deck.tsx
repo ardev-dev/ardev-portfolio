@@ -87,6 +87,7 @@ export function Deck() {
             key={p.id}
             id={p.id}
             aria-hidden={mounted ? i !== index : undefined}
+            data-active={mounted ? (i === index ? "true" : "false") : undefined}
             className={cn("w-full", mounted ? "h-full" : "min-h-screen")}
             style={
               mounted
@@ -106,12 +107,12 @@ export function Deck() {
 
       {mounted && (
         <>
-          <div dir="ltr" className="fixed bottom-6 left-1/2 z-40 flex -translate-x-1/2 items-center gap-4">
+          <div dir="ltr" className="glass-bar fixed bottom-6 left-1/2 z-40 flex -translate-x-1/2 items-center gap-3 rounded-full px-2 py-2">
             <button
               onClick={() => step(-1)}
               disabled={index === 0}
               aria-label={t({ en: "Previous", ar: "السابق" })}
-              className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-fg backdrop-blur-xl transition-colors hover:text-ink disabled:opacity-25"
+              className="glass grid h-10 w-10 place-items-center rounded-full text-fg transition-all hover:scale-105 hover:text-ink disabled:opacity-25 disabled:hover:scale-100"
             >
               <ArrowUp size={14} />
             </button>
@@ -122,7 +123,7 @@ export function Deck() {
               onClick={() => step(1)}
               disabled={index === pages.length - 1}
               aria-label={t({ en: "Next", ar: "التالي" })}
-              className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-fg backdrop-blur-xl transition-colors hover:text-ink disabled:opacity-25"
+              className="glass grid h-10 w-10 place-items-center rounded-full text-fg transition-all hover:scale-105 hover:text-ink disabled:opacity-25 disabled:hover:scale-100"
             >
               <ArrowDown size={14} />
             </button>

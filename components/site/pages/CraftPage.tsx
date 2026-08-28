@@ -1,13 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { packages, roles } from "@/lib/data";
 import { Shell, PageHead } from "@/components/site/pages/Shell";
 import { Em } from "@/components/site/Em";
 import { useLang } from "@/components/LanguageProvider";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 /** الخبرة والحزم المنشورة في صفحة واحدة: المسار ثم الدليل العام عليه. */
 export function CraftPage() {
@@ -30,12 +27,7 @@ export function CraftPage() {
       <div className="mt-10 grid gap-10 md:grid-cols-[1.15fr_1fr] md:gap-10 lg:gap-16">
         <div className="space-y-9">
           {roles.map((r, i) => (
-            <motion.div
-              key={r.company}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 + i * 0.1, ease: EASE }}
-            >
+            <div key={r.company} className="anim " style={{ "--d": "0.1s" } as React.CSSProperties}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 {r.href ? (
                   <a href={r.href} target="_blank" rel="noreferrer" className="text-[15px] text-ink hover:underline">
@@ -55,7 +47,7 @@ export function CraftPage() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -65,29 +57,20 @@ export function CraftPage() {
           </p>
           <div className="mt-5 space-y-3">
             {packages.map((p, i) => (
-              <motion.a
-                key={p.name}
-                href={p.href}
-                target="_blank"
-                rel="noreferrer"
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 + i * 0.08, ease: EASE }}
-                className="card card-hover group block rounded-xl p-4"
-              >
+              <a key={p.name} href={p.href} target="_blank" rel="noreferrer" className="anim card card-hover group block rounded-2xl p-4" style={{ "--d": "0.2s" } as React.CSSProperties}>
                 <div className="flex items-start justify-between gap-3">
                   <span className="font-mono text-[12.5px] text-ink" dir="ltr">
                     {p.name}
                   </span>
                   <span className="flex shrink-0 items-center gap-1.5">
-                    <span className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[11px] text-fg-muted" dir="ltr">
+                    <span className="glass rounded-md px-1.5 py-0.5 font-mono text-[11px] text-fg-muted" dir="ltr">
                       {p.points}
                     </span>
                     <ArrowUpRight size={12} className="text-fg-faint transition-colors group-hover:text-ink" />
                   </span>
                 </div>
                 <p className="mt-2 text-[12.5px] leading-relaxed text-fg-muted">{t(p.blurb)}</p>
-              </motion.a>
+              </a>
             ))}
           </div>
         </div>

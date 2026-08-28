@@ -26,7 +26,7 @@ export function Nav() {
 
         {/* شريط الأقسام: كل الشرائح، والحبّة تنزلق إلى النشط */}
         <nav aria-label={t({ en: "Sections", ar: "الأقسام" })} className="hidden xl:block">
-          <div className="flex items-center gap-0.5 rounded-full border border-white/[0.08] bg-white/[0.04] p-1 backdrop-blur-xl">
+          <div className="glass-bar flex items-center gap-0.5 rounded-full p-1">
             {pages.map((p, i) => (
               <button
                 key={p.id}
@@ -37,7 +37,7 @@ export function Nav() {
                 {i === index && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-full bg-white/[0.10]"
+                    className="absolute inset-0 rounded-full bg-white/[0.16] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35)]"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
@@ -68,7 +68,7 @@ export function Nav() {
           </button>
           <button
             onClick={() => setOpen((v) => !v)}
-            className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-ink xl:hidden"
+            className="glass grid h-9 w-9 place-items-center rounded-full text-ink xl:hidden"
             aria-label={t({ en: "Menu", ar: "القائمة" })}
             aria-expanded={open}
           >
@@ -84,7 +84,7 @@ export function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-5 grid grid-cols-2 gap-1 sm:grid-cols-3 rounded-2xl border border-white/[0.08] bg-bg-800/95 p-3 backdrop-blur-xl xl:hidden"
+            className="glass mx-5 grid grid-cols-2 gap-1 rounded-3xl p-3 sm:grid-cols-3 xl:hidden"
           >
             {pages.map((p, i) => (
               <button
