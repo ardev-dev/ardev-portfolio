@@ -53,7 +53,7 @@ export function SystemsPage({ slugs }: { slugs: string[] }) {
                     <dt className="font-display text-lg font-semibold text-ink" dir="ltr">
                       {m.value}
                     </dt>
-                    <dd className="mt-0.5 text-[10px] uppercase tracking-wider text-fg-muted">{t(m.label)}</dd>
+                    <dd className="mt-0.5 text-[11px] uppercase tracking-wider text-fg-muted">{t(m.label)}</dd>
                   </div>
                 ))}
               </dl>
@@ -63,7 +63,7 @@ export function SystemsPage({ slugs }: { slugs: string[] }) {
               {p.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 font-mono text-[10.5px] text-fg-muted"
+                  className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 font-mono text-[11px] text-fg-muted"
                   dir="ltr"
                 >
                   {tag}

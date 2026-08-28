@@ -11,7 +11,7 @@ export const profile = {
   brand: "AR Dev",
   name: { en: "Abdulrahman Morshed", ar: "عبدالرحمن مرشد" } as L,
   firstName: { en: "Abdulrahman", ar: "عبدالرحمن" } as L,
-  role: { en: "Senior Software Engineer", ar: "مهندس برمجيات أول" } as L,
+  role: { en: "Senior Software Engineer", ar: "مهندس برمجيات خبير" } as L,
   tagline: {
     en: "I engineer from first principles — and enter any software domain on demand.",
     ar: "أُهندس من المبادئ الأولى — وأدخل أي مجال برمجي عند الطلب.",
@@ -27,7 +27,7 @@ export const profile = {
   location: { en: "Buraydah, Saudi Arabia", ar: "بريدة، السعودية" } as L,
   status: {
     en: "Open to senior software engineering & technical leadership roles",
-    ar: "متاح لأدوار هندسة برمجيات أولى وقيادة تقنية",
+    ar: "متاح لأدوار هندسية خبيرة وقيادة تقنية",
   } as L,
   email: "me@ardev.dev",
 };
@@ -364,7 +364,7 @@ export const roles: Role[] = [
   {
     company: "Somow",
     href: "https://somow.sa",
-    title: { en: "Senior Software Engineer & Technical Lead", ar: "مهندس برمجيات أول وقائد تقني" },
+    title: { en: "Senior Software Engineer & Technical Lead", ar: "مهندس برمجيات خبير وقائد تقني" },
     period: { en: "May 2022 — Present · Buraydah", ar: "مايو ٢٠٢٢ — الآن · بريدة" },
     points: [
       {

@@ -16,8 +16,10 @@ const config: Config = {
     extend: {
       colors: {
         bg: { DEFAULT: "#0a0a0a", 900: "#0a0a0a", 800: "#101010", 700: "#161616", 600: "#1e1e1e" },
-        ink: "#f5f4f2",
-        fg: { DEFAULT: "#a8a6a2", muted: "#7a7873", faint: "#4f4d49" },
+        ink: "#f7f6f4",
+        // نسب التباين على #0a0a0a: fg ≈ 10.5:1 · muted ≈ 6.6:1 · faint ≈ 4.6:1
+        // (الحدّ الأدنى للنصّ الصغير 4.5:1 — القيم السابقة كانت 2.4:1 وغير مقروءة)
+        fg: { DEFAULT: "#c2bfb9", muted: "#9b9891", faint: "#7e7a73" },
         accent: {
           DEFAULT: "#e8e6e1",
           soft: "rgba(255,255,255,0.07)",

@@ -1,68 +1,53 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import { profile, socials, ui, type L } from "@/lib/data";
+import { profile, socials, ui } from "@/lib/data";
+import { useDeck } from "@/components/site/DeckContext";
 import { useLang } from "@/components/LanguageProvider";
 import { cn } from "@/lib/utils";
 
-const links: { label: L; href: string }[] = [
-  { label: { en: "Work", ar: "الأعمال" }, href: "#work" },
-  { label: { en: "Info", ar: "عنّي" }, href: "#info" },
-];
+const CV = "/Abdulrahman-Morshed-CV.pdf";
 
 export function Nav() {
   const { t, toggle } = useLang();
-  const [active, setActive] = useState("#work");
+  const { pages, index, go } = useDeck();
   const [open, setOpen] = useState(false);
-
-  // القسم الظاهر يحدّد الحبّة النشطة — بمراقب واحد بدل حساب مواضع عند كل تمرير.
-  useEffect(() => {
-    const targets = links
-      .map((l) => document.querySelector<HTMLElement>(l.href))
-      .filter((el): el is HTMLElement => Boolean(el));
-    if (!targets.length) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target.id) setActive(`#${visible.target.id}`);
-      },
-      { threshold: [0.15, 0.5], rootMargin: "-20% 0px -50% 0px" }
-    );
-    targets.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-5 sm:px-8">
-        {/* الاسم — يقوم مقام الشعار، فالطباعة هي الهويّة */}
-        <a href="#top" className="group leading-tight">
+      <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-5 py-5 sm:px-8">
+        {/* الاسم يقوم مقام الشعار — الطباعة هي الهويّة */}
+        <button onClick={() => go(0)} className="group shrink-0 text-start leading-tight">
           <div className="text-[15px] font-medium tracking-tight text-ink">{t(profile.name)}</div>
-          <div className="mt-0.5 text-[11px] text-fg-muted transition-colors group-hover:text-fg">{t(profile.role)}</div>
-        </a>
+          <div className="mt-0.5 hidden text-[11px] text-fg-muted transition-colors group-hover:text-fg sm:block">{t(profile.role)}</div>
+        </button>
 
-        {/* حبّة التنقّل المركزيّة */}
-        <nav className="pointer-events-auto absolute left-1/2 hidden -translate-x-1/2 md:block">
-          <div className="relative flex items-center gap-1 rounded-full border border-white/[0.08] bg-white/[0.04] p-1 backdrop-blur-xl">
-            {links.map((l) => (
-              <a key={l.href} href={l.href} className="relative rounded-full px-4 py-1.5 text-[13px] text-fg transition-colors hover:text-ink">
-                {active === l.href && (
+        {/* شريط الأقسام: كل الشرائح، والحبّة تنزلق إلى النشط */}
+        <nav aria-label={t({ en: "Sections", ar: "الأقسام" })} className="hidden xl:block">
+          <div className="flex items-center gap-0.5 rounded-full border border-white/[0.08] bg-white/[0.04] p-1 backdrop-blur-xl">
+            {pages.map((p, i) => (
+              <button
+                key={p.id}
+                onClick={() => go(i)}
+                aria-current={i === index}
+                className="relative rounded-full px-3 py-1.5 text-[12.5px] text-fg transition-colors hover:text-ink"
+              >
+                {i === index && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-full bg-white/[0.09]"
+                    className="absolute inset-0 rounded-full bg-white/[0.10]"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
-                <span className={cn("relative", active === l.href && "text-ink")}>{t(l.label)}</span>
-              </a>
+                <span className={cn("relative whitespace-nowrap", i === index && "text-ink")}>{t(p.label)}</span>
+              </button>
             ))}
           </div>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex shrink-0 items-center gap-4">
           <a
             href={socials.linkedin}
             target="_blank"
@@ -72,23 +57,19 @@ export function Nav() {
             LinkedIn <ArrowUpRight size={13} />
           </a>
           <a
-            href="/Abdulrahman-Morshed-CV.pdf"
+            href={CV}
             target="_blank"
             className="hidden items-center gap-0.5 text-[13px] text-fg transition-colors hover:text-ink sm:inline-flex"
           >
             {t({ en: "Resume", ar: "السيرة" })} <ArrowUpRight size={13} />
           </a>
-          <button
-            onClick={toggle}
-            className="hidden text-[13px] text-fg transition-colors hover:text-ink sm:block"
-            aria-label="Switch language"
-          >
+          <button onClick={toggle} className="text-[13px] text-fg transition-colors hover:text-ink" aria-label="Switch language">
             {t(ui.langLabel)}
           </button>
           <button
             onClick={() => setOpen((v) => !v)}
-            className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-ink md:hidden"
-            aria-label="Menu"
+            className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-ink xl:hidden"
+            aria-label={t({ en: "Menu", ar: "القائمة" })}
             aria-expanded={open}
           >
             {open ? <X size={16} /> : <Menu size={16} />}
@@ -103,23 +84,27 @@ export function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-5 flex flex-col gap-1 rounded-2xl border border-white/[0.08] bg-bg-800/95 p-3 backdrop-blur-xl md:hidden"
+            className="mx-5 grid grid-cols-2 gap-1 sm:grid-cols-3 rounded-2xl border border-white/[0.08] bg-bg-800/95 p-3 backdrop-blur-xl xl:hidden"
           >
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded-xl px-3 py-2.5 text-sm text-fg hover:bg-white/[0.05] hover:text-ink"
+            {pages.map((p, i) => (
+              <button
+                key={p.id}
+                onClick={() => {
+                  go(i);
+                  setOpen(false);
+                }}
+                className={cn(
+                  "rounded-xl px-3 py-2.5 text-start text-[13px] transition-colors",
+                  i === index ? "bg-white/[0.08] text-ink" : "text-fg hover:bg-white/[0.05] hover:text-ink"
+                )}
               >
-                {t(l.label)}
-              </a>
+                {t(p.label)}
+              </button>
             ))}
-            <a href={socials.linkedin} target="_blank" rel="noreferrer" className="rounded-xl px-3 py-2.5 text-sm text-fg">
+            <a href={socials.linkedin} target="_blank" rel="noreferrer" className="rounded-xl px-3 py-2.5 text-[13px] text-fg">
               LinkedIn
             </a>
-            <a href="/Abdulrahman-Morshed-CV.pdf"
-            target="_blank" className="rounded-xl px-3 py-2.5 text-sm text-fg">
+            <a href={CV} target="_blank" className="rounded-xl px-3 py-2.5 text-[13px] text-fg">
               {t({ en: "Resume", ar: "السيرة" })}
             </a>
           </motion.nav>

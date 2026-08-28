@@ -20,9 +20,9 @@ function Phones({ shots, name }: { shots: string[]; name: string }) {
           animate={{ opacity: 1, y: 0, rotate: i === 0 ? -3 : i === 2 ? 3 : 0 }}
           transition={{ duration: 0.85, delay: 0.15 + i * 0.09, ease: EASE }}
           className={cn(
-            "w-[35%] max-w-[190px] shrink-0",
-            i === 1 && "z-10 -mx-2 w-[38%] max-w-[205px]",
-            i === 2 && "hidden sm:block"
+            "w-[33%] max-w-[170px] shrink-0 lg:max-w-[190px]",
+            i === 1 && "z-10 -mx-2 w-[36%] max-w-[185px] lg:max-w-[205px]",
+            i === 2 && "hidden md:block"
           )}
         >
           <div className="overflow-hidden rounded-[22px] border border-white/12 bg-black p-[5px] shadow-lift">
@@ -55,7 +55,7 @@ function BrowserShot({ src, alt, host }: { src: string; alt: string; host?: stri
         <span className="h-2 w-2 rounded-full bg-white/25" />
         <span className="h-2 w-2 rounded-full bg-white/25" />
         {host && (
-          <span className="mx-auto font-mono text-[10px] text-fg-faint" dir="ltr">
+          <span className="mx-auto font-mono text-[11px] text-fg-faint" dir="ltr">
             {host}
           </span>
         )}
@@ -73,7 +73,7 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
 
   return (
     <Shell>
-      <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+      <div className="grid items-center gap-10 md:grid-cols-[1fr_1.05fr] md:gap-10 lg:gap-16">
         <motion.div
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
@@ -112,7 +112,7 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
                   <dt className="font-display text-xl font-semibold text-ink" dir="ltr">
                     {m.value}
                   </dt>
-                  <dd className="mt-0.5 text-[10px] uppercase tracking-wider text-fg-muted">{t(m.label)}</dd>
+                  <dd className="mt-0.5 text-[11px] uppercase tracking-wider text-fg-muted">{t(m.label)}</dd>
                 </div>
               ))}
             </dl>

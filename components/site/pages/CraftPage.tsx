@@ -27,7 +27,7 @@ export function CraftPage() {
         })}
       />
 
-      <div className="mt-10 grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+      <div className="mt-10 grid gap-10 md:grid-cols-[1.15fr_1fr] md:gap-10 lg:gap-16">
         <div className="space-y-9">
           {roles.map((r, i) => (
             <motion.div
@@ -80,7 +80,7 @@ export function CraftPage() {
                     {p.name}
                   </span>
                   <span className="flex shrink-0 items-center gap-1.5">
-                    <span className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[10px] text-fg-muted" dir="ltr">
+                    <span className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[11px] text-fg-muted" dir="ltr">
                       {p.points}
                     </span>
                     <ArrowUpRight size={12} className="text-fg-faint transition-colors group-hover:text-ink" />

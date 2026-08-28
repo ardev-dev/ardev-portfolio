@@ -45,7 +45,7 @@ export function Consent({ onChange }: { onChange: (state: ConsentState) => void 
       role="dialog"
       aria-live="polite"
       aria-label={t({ en: "Privacy", ar: "الخصوصية" })}
-      className="fixed bottom-4 z-[60] mx-4 max-w-[330px] rounded-2xl border border-white/[0.08] bg-bg-800/95 p-4 shadow-card backdrop-blur-xl ltr:left-4 rtl:right-4"
+      className="fixed bottom-20 z-[60] mx-4 max-w-[330px] sm:bottom-4 rounded-2xl border border-white/[0.08] bg-bg-800/95 p-4 shadow-card backdrop-blur-xl ltr:left-4 rtl:right-4"
     >
       <p className="text-[12.5px] leading-relaxed text-fg">
         {t({

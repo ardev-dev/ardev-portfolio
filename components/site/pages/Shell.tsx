@@ -19,7 +19,7 @@ export function Shell({
   return (
     <div
       data-scroll
-      className="h-full w-full overflow-y-auto overscroll-contain px-5 pb-24 pt-24 sm:px-8 sm:pt-28"
+      className="h-full w-full overflow-y-auto overscroll-contain px-5 pb-24 pt-24 sm:px-8 sm:pt-28 lg:pb-20"
     >
       <div className={cn("mx-auto flex min-h-full flex-col justify-center", wide ? "max-w-[1320px]" : "max-w-[1180px]", className)}>
         {children}

@@ -27,7 +27,7 @@ export function ContactPage() {
         transition={{ duration: 0.8, ease: EASE }}
       >
         <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-fg-faint">
-          {t({ en: "Available for senior roles", ar: "متاح لأدوار هندسية أولى" })}
+          {t({ en: "Available for senior roles", ar: "متاح لأدوار هندسية خبيرة" })}
         </p>
         <h2 className="mt-6 max-w-3xl font-display text-mega text-ink text-balance">
           {t({ en: "Have a system worth", ar: "لديك نظامٌ يستحقّ" })}{" "}

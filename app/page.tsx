@@ -3,7 +3,8 @@
 import { useMemo } from "react";
 import { Backdrop } from "@/components/site/Backdrop";
 import { Nav } from "@/components/site/Nav";
-import { Deck, type Page } from "@/components/site/Deck";
+import { Deck } from "@/components/site/Deck";
+import { DeckProvider, type Page } from "@/components/site/DeckContext";
 import { HeroPage } from "@/components/site/pages/HeroPage";
 import { ProjectPage } from "@/components/site/pages/ProjectPage";
 import { SystemsPage } from "@/components/site/pages/SystemsPage";
@@ -40,8 +41,10 @@ export default function Home() {
   return (
     <>
       <Backdrop />
-      <Nav />
-      <Deck pages={pages} />
+      <DeckProvider pages={pages}>
+        <Nav />
+        <Deck />
+      </DeckProvider>
     </>
   );
 }

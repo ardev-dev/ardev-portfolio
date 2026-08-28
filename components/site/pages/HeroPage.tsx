@@ -67,7 +67,7 @@ export function HeroPage() {
               <p className="max-w-sm text-[15px] leading-relaxed text-fg">
                 {t({
                   en: "Senior Software Engineer & Technical Lead at Somow — six years owning products end-to-end.",
-                  ar: "مهندس برمجيات أوّل وقائد تقني في سُمو — ستّ سنوات أملك فيها المنتج من فكرته إلى تشغيله.",
+                  ar: "مهندس برمجيات خبير وقائد تقني في سُمو — ستّ سنوات أملك فيها المنتج من فكرته إلى تشغيله.",
                 })}
               </p>
               <p className="text-[13px] text-fg-muted">
@@ -89,7 +89,7 @@ export function HeroPage() {
                 {s.value}
                 {s.suffix}
               </div>
-              <div className="mt-1 text-[10px] uppercase tracking-wider text-fg-muted">{t(s.label)}</div>
+              <div className="mt-1 text-[11px] uppercase tracking-wider text-fg-muted">{t(s.label)}</div>
             </div>
           ))}
         </motion.div>
