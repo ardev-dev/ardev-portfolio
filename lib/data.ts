@@ -509,7 +509,18 @@ export const catalog: WorkGroup[] = [
       { name: "Moqawlat", nameAr: "مقاولات", kind: { en: "Contracting platform", ar: "منصّة مقاولات" }, stack: ["Flutter"], year: "2026" },
       { name: "Purete", nameAr: "بيوريتي", kind: { en: "Multi-service Django behind NGINX, a database per service", ar: "عدّة خدمات Django خلف NGINX، قاعدة بيانات لكل خدمة" }, stack: ["Django", "Docker", "NGINX"], year: "2024" },
       { name: "AppProof", kind: { en: "Beta-testing platform — app, web, backend", ar: "منصّة اختبار إصدارات — تطبيق وويب وخلفية" }, stack: ["Flutter", "Django", "Next.js"], year: "2026" },
-      { name: "MT Admin Pro", kind: { en: "MikroTik router management", ar: "إدارة موجّهات MikroTik" }, stack: ["Flutter"], year: "2026" },
+    ],
+  },
+  {
+    id: "network",
+    title: { en: "Networking & infrastructure", ar: "الشبكات والبنية التحتية" },
+    desc: {
+      en: "Talking to hardware and the protocols underneath, not to an API someone wrapped for you.",
+      ar: "مخاطبة العتاد والبروتوكولات تحته، لا واجهة جاهزة لفّها لك غيرك.",
+    },
+    items: [
+      { name: "MikroTik Manager Pro", nameAr: "مدير MikroTik", kind: { en: "Router administration — dashboard, users, cards, logs, approvals, code-gated licensing", ar: "إدارة موجّهات — لوحة ومستخدمون وبطاقات وسجلّات وموافقات وترخيص بأكواد تفعيل" }, stack: ["Flutter", "MikroTik API", "Firebase"], year: "2026" },
+      { name: "Custom Socket Push", kind: { en: "Push notifications over a raw socket, without a vendor SDK", ar: "إشعارات فورية عبر مقبس خام، بلا حزمة مزوّد" }, stack: ["Dart"], year: "2023", href: "https://github.com/ardev-dev/custom-socket-push-notifications-flutter" },
     ],
   },
   {
@@ -574,7 +585,7 @@ export const catalog: WorkGroup[] = [
 /** أعمال ٢٠٢٠–٢٠٢٢ — تُعرض كأسماء فقط، فهي مرحلة تعلّم وتسليم مبكّر. */
 export const earlyWork = [
   "E-commerce", "KingLink", "Linkati", "Minasa", "Mapbox App", "Danya",
-  "Kashkash", "Home Work", "Clean Architecture", "Custom Socket Push",
+  "Kashkash", "Home Work", "Clean Architecture", "Story Flutter",
 ];
 
 /** أرقام الفهرس — محسوبة من GitHub، لا مقدّرة. */
