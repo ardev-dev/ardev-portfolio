@@ -112,8 +112,8 @@ export const sections = {
 /** أرقام تظهر كعدّادات متحرّكة. */
 export const stats: { value: number; suffix: string; label: L }[] = [
   { value: 6, suffix: "+", label: { en: "Years engineering", ar: "سنوات في الهندسة" } },
-  { value: 14, suffix: "+", label: { en: "Apps & services shipped", ar: "تطبيقات وخدمات مُنجَزة" } },
-  { value: 5, suffix: "+", label: { en: "Live on App Store & Play", ar: "منشورة على المتاجر" } },
+  { value: 98, suffix: "", label: { en: "Apps & services shipped", ar: "تطبيقات وخدمات مُنجَزة" } },
+  { value: 20, suffix: "", label: { en: "Live on Apple, Google & Huawei", ar: "منشورة الآن على المتاجر" } },
   { value: 7.6, suffix: "M+", label: { en: "Lines of code authored", ar: "أسطر برمجية مؤلَّفة" } },
 ];
 
@@ -514,6 +514,7 @@ export const catalog: WorkGroup[] = [
     items: [
       { name: "Manam", nameAr: "منام", kind: { en: "Interpreter workspace for Abber", ar: "مساحة عمل المعبّرين في عبر" }, stack: ["Swift", "Objective-C"], year: "2026" },
       { name: "Wasla", nameAr: "وصلة", kind: { en: "Group and channel directory, chat and challenges", ar: "دليل مجموعات وقنوات، مع دردشة وتحدّيات" }, stack: ["Flutter", "Firebase", "BLoC"], year: "2026" },
+      { name: "ardev.dev", kind: { en: "This portfolio — deck UI, bilingual, own analytics stack", ar: "هذا الملف — واجهة شرائح، ثنائي اللغة، بمنظومة تحليلات خاصة" }, stack: ["Next.js", "Firebase"], year: "2026", href: "https://ardev.dev" },
       { name: "AppProof", kind: { en: "Beta-testing platform — app, web, backend", ar: "منصّة اختبار إصدارات — تطبيق وويب وخلفية" }, stack: ["Flutter", "Django", "Next.js"], year: "2026" },
       { name: "MT Admin Pro", kind: { en: "MikroTik router management", ar: "إدارة موجّهات MikroTik" }, stack: ["Flutter"], year: "2026" },
       { name: "Lumi", nameAr: "لومي", kind: { en: "Arabic learning assistant for children", ar: "مساعد تعليمي ذكي للأطفال العرب" }, stack: ["Flutter"], year: "2026" },
