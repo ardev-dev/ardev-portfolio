@@ -114,7 +114,7 @@ export const stats: { value: number; suffix: string; label: L }[] = [
   { value: 6, suffix: "+", label: { en: "Years engineering", ar: "سنوات في الهندسة" } },
   { value: 14, suffix: "+", label: { en: "Apps & services shipped", ar: "تطبيقات وخدمات مُنجَزة" } },
   { value: 5, suffix: "+", label: { en: "Live on App Store & Play", ar: "منشورة على المتاجر" } },
-  { value: 1, suffix: "M+", label: { en: "Lines of code authored", ar: "أسطر برمجية مؤلَّفة" } },
+  { value: 7.6, suffix: "M+", label: { en: "Lines of code authored", ar: "أسطر برمجية مؤلَّفة" } },
 ];
 
 export type SkillGroup = { title: L; items: L[] };
