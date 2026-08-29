@@ -33,8 +33,8 @@ export function SystemsPage() {
       >
         {catalogStats.map((s) => (
           <div key={s.label.en}>
-            <dt className="font-display text-2xl font-semibold text-ink rtl:text-right" dir="ltr">
-              {s.value}
+            <dt className="font-display text-2xl font-semibold text-ink">
+              <span dir="ltr">{s.value}</span>
             </dt>
             <dd className="mt-0.5 text-[11px] uppercase tracking-wider text-fg-muted">{t(s.label)}</dd>
           </div>

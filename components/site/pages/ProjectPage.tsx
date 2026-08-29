@@ -91,8 +91,8 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
             <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
               {p.metrics.map((m) => (
                 <div key={m.label.en}>
-                  <dt className="font-display text-xl font-semibold text-ink rtl:text-right" dir="ltr">
-                    {m.value}
+                  <dt className="font-display text-xl font-semibold text-ink">
+                    <span dir="ltr">{m.value}</span>
                   </dt>
                   <dd className="mt-0.5 text-[11px] uppercase tracking-wider text-fg-muted">{t(m.label)}</dd>
                 </div>
