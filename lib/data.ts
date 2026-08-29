@@ -436,7 +436,7 @@ export type WorkGroup = {
 export const catalog: WorkGroup[] = [
   {
     id: "marketplaces",
-    title: { en: "Marketplaces & consultations", ar: "أسواق واستشارات" },
+    title: { en: "Consultations", ar: "استشارات" },
     desc: {
       en: "Two-sided products: a request goes in, a vetted professional answers, money moves.",
       ar: "منتجات ذات طرفين: يدخل الطلب، فيردّ مختصّ موثّق، وينتقل المال.",
