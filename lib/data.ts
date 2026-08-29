@@ -181,6 +181,8 @@ export type Project = {
   links: { label: L; href: string }[];
   /** صور حقيقيّة: لقطات المتجر للتطبيقات، ولقطات الموقع الحيّ للويب. */
   shots?: string[];
+  /** لوحة عرض جاهزة تحلّ محلّ الهواتف — تُستخدم كما هي بلا اقتصاص. */
+  showcase?: string;
   cover?: string;
   icon?: string;
   featured?: boolean;
@@ -216,6 +218,7 @@ export const projects: Project[] = [
       { label: website, href: "https://abber.co" },
     ],
     shots: ["/apps/abber-1.png", "/apps/abber-2.png", "/apps/abber-3.png", "/apps/abber-4.png"],
+    showcase: "/apps/abber-showcase.png",
     cover: "/apps/abber-web.png",
     icon: "/apps/abber-icon.png",
     featured: true,
