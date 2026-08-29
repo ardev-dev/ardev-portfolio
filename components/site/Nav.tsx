@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { profile, socials, ui } from "@/lib/data";
@@ -18,10 +19,20 @@ export function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-5 py-5 sm:px-8">
-        {/* الاسم يقوم مقام الشعار — الطباعة هي الهويّة */}
-        <button onClick={() => go(0)} className="group shrink-0 text-start leading-tight">
-          <div className="text-[15px] font-medium tracking-tight text-ink">{t(profile.name)}</div>
-          <div className="mt-0.5 hidden text-[11px] text-fg-muted transition-colors group-hover:text-fg sm:block">{t(profile.role)}</div>
+        {/* الشعار ثم الاسم — العلامة أوّلاً، والطباعة تكملها */}
+        <button onClick={() => go(0)} className="group flex shrink-0 items-center gap-2.5 text-start leading-tight">
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={512}
+            height={436}
+            priority
+            className="h-[26px] w-auto opacity-90 transition-opacity group-hover:opacity-100"
+          />
+          <span className="block">
+            <span className="block text-[15px] font-medium tracking-tight text-ink">{t(profile.name)}</span>
+            <span className="mt-0.5 hidden text-[11px] text-fg-muted transition-colors group-hover:text-fg sm:block">{t(profile.role)}</span>
+          </span>
         </button>
 
         {/* شريط الأقسام: كل الشرائح، والحبّة تنزلق إلى النشط */}

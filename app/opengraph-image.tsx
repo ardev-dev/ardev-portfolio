@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { profile, stats } from "@/lib/data";
 
@@ -10,6 +12,9 @@ export const contentType = "image/png";
  * satori لا يدعم backdrop-filter، فالزجاج مُحاكى بطبقات تدرّج وحافّة مضيئة.
  * المحتوى مشتقّ من البيانات، فلا يتقادم حين تتغيّر المسمّيات أو الأرقام.
  */
+/** العلامة نفسها المستخدمة في الشريط العلوي، مضمّنة كي يعمل التوليد بلا شبكة. */
+const mark = `data:image/png;base64,${readFileSync(join(process.cwd(), "public/logo-mark.png")).toString("base64")}`;
+
 export default function OpengraphImage() {
   return new ImageResponse(
     (
@@ -57,7 +62,8 @@ export default function OpengraphImage() {
               <div style={{ width: 9, height: 9, borderRadius: 999, background: "#5ad07a" }} />
               {profile.status.en}
             </div>
-            <div style={{ display: "flex", fontSize: 22, letterSpacing: 3, color: "#7e7a73" }}>ARDEV.DEV</div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={mark} alt="" height={54} style={{ opacity: 0.92 }} />
           </div>
 
           <div style={{ display: "flex", flexDirection: "column" }}>
