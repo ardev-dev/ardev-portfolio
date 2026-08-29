@@ -29,8 +29,8 @@ export default function Home() {
       })),
       {
         id: "work",
-        label: { en: "Systems", ar: "أنظمة" },
-        node: <SystemsPage slugs={["wasselak", "factforge"]} />,
+        label: { en: "Work", ar: "الأعمال" },
+        node: <SystemsPage />,
       },
       { id: "info", label: { en: "Approach", ar: "طريقتي" }, node: <MethodPage /> },
       { id: "experience", label: { en: "Experience", ar: "الخبرة" }, node: <CraftPage /> },

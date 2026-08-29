@@ -1,99 +1,114 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { moreProjects, projects } from "@/lib/data";
+import { catalog, catalogStats, earlyWork } from "@/lib/data";
 import { Shell, PageHead } from "@/components/site/pages/Shell";
 import { Em } from "@/components/site/Em";
 import { useLang } from "@/components/LanguageProvider";
 
-/** المشاريع التي لا لقطات لها + قائمة الأعمال الأخرى. */
-export function SystemsPage({ slugs }: { slugs: string[] }) {
+/**
+ * الفهرس الكامل للأعمال. صفحة طويلة عمداً — تمرّر داخلياً عبر Shell،
+ * والغرض إظهار الاتّساع الحقيقي بدل عيّنة منه.
+ */
+export function SystemsPage() {
   const { t, lang } = useLang();
-  const items = projects.filter((p) => slugs.includes(p.slug));
 
   return (
-    <Shell>
+    <Shell wide>
       <PageHead
         title={
           <>
-            {t({ en: "Other", ar: "أنظمة" })} <Em>{t({ en: "systems", ar: "أخرى" })}</Em>
+            {t({ en: "Everything", ar: "كل ما" })} <Em>{t({ en: "shipped", ar: "بنيتُه" })}</Em>
           </>
         }
         desc={t({
-          en: "Platforms and pipelines that sit behind the apps.",
-          ar: "منصّات وخطوط إنتاج تقف خلف التطبيقات.",
+          en: "Six years of work, grouped by what it is rather than when it happened.",
+          ar: "ستّ سنوات من العمل، مجموعة بحسب نوعها لا بحسب تاريخها.",
         })}
       />
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
-        {items.map((p, i) => (
-          <article key={p.slug} className="anim card card-hover rounded-3xl p-6" style={{ "--d": "0.1s" } as React.CSSProperties}>
-            <div className="flex items-baseline justify-between gap-3">
-              <h3 className="font-display text-h2 text-ink">
-                {lang === "ar" && p.nameAr ? p.nameAr : p.name}
-              </h3>
-              <span className="font-mono text-[11px] text-fg-faint">{p.year}</span>
-            </div>
-            <p className="mt-1 text-[12.5px] text-fg-muted">{t(p.kind)}</p>
-            <p className="mt-4 text-[13.5px] leading-relaxed text-fg">{t(p.blurb)}</p>
-
-            {p.metrics && (
-              <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
-                {p.metrics.map((m) => (
-                  <div key={m.label.en}>
-                    <dt className="font-display text-lg font-semibold text-ink" dir="ltr">
-                      {m.value}
-                    </dt>
-                    <dd className="mt-0.5 text-[11px] uppercase tracking-wider text-fg-muted">{t(m.label)}</dd>
-                  </div>
-                ))}
-              </dl>
-            )}
-
-            <div className="mt-5 flex flex-wrap gap-1.5">
-              {p.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="glass rounded-lg px-2.5 py-1 font-mono text-[11px] text-fg-muted"
-                  dir="ltr"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {p.links.length > 0 && (
-              <div className="mt-5 flex flex-wrap gap-4">
-                {p.links.map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group inline-flex items-center gap-1 text-[13px] text-ink"
-                  >
-                    {t(l.label)}
-                    <ArrowUpRight size={12} className="transition-transform group-hover:-translate-y-0.5" />
-                  </a>
-                ))}
-              </div>
-            )}
-          </article>
+      <dl
+        className="anim mt-8 grid grid-cols-2 gap-x-8 gap-y-5 border-b border-white/[0.07] pb-8 sm:grid-cols-4"
+        style={{ "--d": "0.05s" } as React.CSSProperties}
+      >
+        {catalogStats.map((s) => (
+          <div key={s.label.en}>
+            <dt className="font-display text-2xl font-semibold text-ink" dir="ltr">
+              {s.value}
+            </dt>
+            <dd className="mt-0.5 text-[11px] uppercase tracking-wider text-fg-muted">{t(s.label)}</dd>
+          </div>
         ))}
-      </div>
+      </dl>
 
-      <div  className="anim mt-10 border-t border-white/[0.07] pt-8" style={{ "--d": "0.3s" } as React.CSSProperties}>
+      {catalog.map((group, gi) => (
+        <section
+          key={group.id}
+          className="anim mt-10"
+          style={{ "--d": `${0.1 + gi * 0.05}s` } as React.CSSProperties}
+        >
+          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+            <h3 className="font-display text-h2 text-ink">{t(group.title)}</h3>
+            <p className="text-[12.5px] text-fg-muted">{t(group.desc)}</p>
+          </div>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {group.items.map((w) => {
+              const name = lang === "ar" && w.nameAr ? w.nameAr : w.name;
+              const Card = w.href ? "a" : "div";
+              return (
+                <Card
+                  key={w.name}
+                  {...(w.href ? { href: w.href, target: "_blank", rel: "noreferrer" } : {})}
+                  className="card card-hover group flex flex-col rounded-2xl p-4"
+                >
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h4 className="flex items-center gap-1 font-display text-[15px] font-semibold text-ink">
+                      {name}
+                      {w.href && (
+                        <ArrowUpRight
+                          size={12}
+                          className="text-fg-faint transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        />
+                      )}
+                    </h4>
+                    <span className="shrink-0 font-mono text-[10.5px] text-fg-faint" dir="ltr">
+                      {w.year}
+                    </span>
+                  </div>
+
+                  <p className="mt-1.5 text-[12.5px] leading-relaxed text-fg">{t(w.kind)}</p>
+
+                  <div className="mt-3 flex flex-wrap gap-1">
+                    {w.stack.map((s) => (
+                      <span
+                        key={s}
+                        className="glass rounded-md px-1.5 py-0.5 font-mono text-[10px] text-fg-muted"
+                        dir="ltr"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+
+      <div
+        className="anim mt-10 border-t border-white/[0.07] pt-7"
+        style={{ "--d": "0.35s" } as React.CSSProperties}
+      >
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-fg-faint">
-          {t({ en: "Also built", ar: "وأيضاً" })}
+          {t({ en: "Early work · 2020 — 2022", ar: "أعمال مبكّرة · ٢٠٢٠ — ٢٠٢٢" })}
         </p>
-        <div className="mt-5 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-4">
-          {moreProjects.map((m) => (
-            <div key={m.name} className="flex items-baseline justify-between gap-3 border-b border-white/[0.05] py-2.5">
-              <span className="text-[13px] text-ink" dir="ltr">
-                {m.name}
-              </span>
-              <span className="shrink-0 text-[11px] text-fg-muted">{t(m.kind)}</span>
-            </div>
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {earlyWork.map((n) => (
+            <span key={n} className="glass rounded-lg px-2.5 py-1 text-[12px] text-fg-muted" dir="ltr">
+              {n}
+            </span>
           ))}
         </div>
       </div>
