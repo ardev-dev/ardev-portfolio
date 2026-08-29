@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter_Tight, Instrument_Serif, JetBrains_Mono, Cairo } from "next/font/google";
 import "./globals.css";
-import { profile, socials } from "@/lib/data";
+import { profile, socials, storeApps } from "@/lib/data";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { Analytics } from "@/components/Analytics";
 
@@ -34,8 +34,26 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: NAME, url: "https://ardev.dev" }],
   creator: NAME,
-  alternates: { canonical: "/" },
-  robots: { index: true, follow: true },
+  applicationName: profile.brand,
+  category: "technology",
+  // نسخة عربية حقيقية على معامل قابل للفهرسة — Googlebot يُصيّر JS فيقرأها.
+  alternates: {
+    canonical: "/",
+    languages: { en: "/", ar: "/?lang=ar", "x-default": "/" },
+  },
+  // max-image-preview:large يفتح معاينة الصورة الكبيرة في النتائج،
+  // وmax-snippet:-1 يرفع سقف المقتطف — كلاهما شرط للنتائج الغنيّة.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     type: "website",
     url: "https://ardev.dev/",
@@ -58,16 +76,73 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const SITE = "https://ardev.dev";
+
+/**
+ * رسم بياني واحد بدل كيان معزول: الشخص، والموقع، وصفحة الملف، والتطبيقات
+ * المنشورة. الربط بـ @id يجعل محرّك البحث يفهمها كيانات مترابطة لا مقاطع مستقلّة.
+ */
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: NAME,
-  alternateName: profile.brand,
-  jobTitle: ROLE,
-  url: "https://ardev.dev",
-  email: profile.email,
-  sameAs: [socials.github, socials.pubdev, socials.linkedin],
-  knowsAbout: ["Software Engineering", "Django", "Flutter", "Next.js", "TypeScript", "Python", "System Architecture"],
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE}/#person`,
+      name: NAME,
+      alternateName: [profile.brand, "عبدالرحمن مرشد"],
+      jobTitle: ROLE,
+      description,
+      url: SITE,
+      email: profile.email,
+      image: `${SITE}/logo-mark.png`,
+      knowsLanguage: ["ar", "en"],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Buraydah",
+        addressRegion: "Al-Qassim",
+        addressCountry: "SA",
+      },
+      worksFor: {
+        "@type": "Organization",
+        "@id": "https://somow.sa/#organization",
+        name: "Somow",
+        url: "https://somow.sa",
+      },
+      sameAs: [socials.github, socials.pubdev, socials.linkedin],
+      knowsAbout: [
+        "Software Engineering", "System Architecture", "Flutter", "Dart", "Django", "Python",
+        "Next.js", "TypeScript", "REST APIs", "WebRTC", "WebSocket", "Payment Integration",
+        "Firebase", "Docker", "Clean Architecture",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      url: SITE,
+      name: `${NAME} — ${ROLE}`,
+      description,
+      inLanguage: ["en", "ar"],
+      publisher: { "@id": `${SITE}/#person` },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE}/#profilepage`,
+      url: SITE,
+      name: `${NAME} — ${ROLE}`,
+      isPartOf: { "@id": `${SITE}/#website` },
+      mainEntity: { "@id": `${SITE}/#person` },
+      inLanguage: "en",
+    },
+    ...storeApps.map((a) => ({
+      "@type": "MobileApplication",
+      name: a.name,
+      applicationCategory: a.category,
+      operatingSystem: "iOS, Android",
+      author: { "@id": `${SITE}/#person` },
+      url: a.url,
+      sameAs: a.stores,
+    })),
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

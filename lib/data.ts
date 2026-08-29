@@ -597,3 +597,34 @@ export const catalogStats = [
   { value: "7", label: { en: "published packages", ar: "حزمة منشورة" } },
   { value: "2019", label: { en: "shipping since", ar: "أُطلق منذ" } },
 ];
+
+/** التطبيقات المنشورة في المتاجر — تُستخدم في بيانات schema.org المهيكلة. */
+export const storeApps = [
+  {
+    name: "Abber",
+    category: "LifestyleApplication",
+    url: "https://abber.co",
+    stores: [
+      "https://apps.apple.com/app/id6461119454",
+      "https://play.google.com/store/apps/details?id=co.abber_dev.abber_app",
+    ],
+  },
+  {
+    name: "Wisal",
+    category: "BusinessApplication",
+    url: "https://wisalapp.com",
+    stores: [
+      "https://apps.apple.com/app/id6755353238",
+      "https://play.google.com/store/apps/details?id=io.somow.wisalapp",
+    ],
+  },
+  {
+    name: "Azbah",
+    category: "FinanceApplication",
+    url: "https://azbah.somow.sa",
+    stores: [
+      "https://apps.apple.com/app/id6761391341",
+      "https://play.google.com/store/apps/details?id=io.somow.azbah",
+    ],
+  },
+];

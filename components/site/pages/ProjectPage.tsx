@@ -18,7 +18,7 @@ function Phones({ shots, name }: { shots: string[]; name: string }) {
           <div className="overflow-hidden rounded-[26px] border border-white/20 bg-black/60 p-[5px] shadow-lift backdrop-blur-xl">
             <Image
               src={s}
-              alt={`${name} — ${i + 1}`}
+              alt={`${name} — app screen ${i + 1}`}
               width={626}
               height={1354}
               sizes="210px"

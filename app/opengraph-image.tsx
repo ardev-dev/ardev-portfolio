@@ -65,7 +65,7 @@ export default function OpengraphImage() {
                 display: "flex",
                 marginLeft: "auto",
                 marginRight: "auto",
-                fontSize: 17,
+                fontSize: 19,
                 letterSpacing: 1,
                 color: "#7e7a73",
               }}
@@ -80,7 +80,7 @@ export default function OpengraphImage() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
-              padding: "30px 44px 34px",
+              padding: "36px 50px 42px",
             }}
           >
             <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
@@ -89,11 +89,11 @@ export default function OpengraphImage() {
                   display: "flex",
                   alignItems: "center",
                   gap: 11,
-                  padding: "8px 17px",
+                  padding: "10px 20px",
                   borderRadius: 999,
                   border: "1px solid rgba(255,255,255,0.14)",
                   background: "rgba(255,255,255,0.06)",
-                  fontSize: 19,
+                  fontSize: 22,
                   color: "#c2bfb9",
                 }}
               >
@@ -101,27 +101,27 @@ export default function OpengraphImage() {
                 {profile.status.en}
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={mark} alt="" height={44} style={{ opacity: 0.92 }} />
+              <img src={mark} alt="" height={54} style={{ opacity: 0.92 }} />
             </div>
 
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div
-                style={{ display: "flex", fontSize: 70, fontWeight: 600, letterSpacing: -3, lineHeight: 1.02 }}
+                style={{ display: "flex", fontSize: 88, fontWeight: 600, letterSpacing: -3.6, lineHeight: 1.02 }}
               >
-                {`${profile.name.en} —`}
+                {profile.name.en}
               </div>
-              <div style={{ display: "flex", fontSize: 60, fontFamily: "Instrument Serif", color: "#c2bfb9" }}>
-                software engineer.
+              <div style={{ display: "flex", fontSize: 74, fontFamily: "Instrument Serif", color: "#c2bfb9" }}>
+                {profile.role.en}
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: 44 }}>
+            <div style={{ display: "flex", gap: 52 }}>
               {stats.map((s) => (
                 <div key={s.label.en} style={{ display: "flex", flexDirection: "column" }}>
-                  <div style={{ display: "flex", fontSize: 34, fontWeight: 600, letterSpacing: -1.2 }}>
+                  <div style={{ display: "flex", fontSize: 44, fontWeight: 600, letterSpacing: -1.5 }}>
                     {`${s.value}${s.suffix}`}
                   </div>
-                  <div style={{ marginTop: 3, fontSize: 16.5, color: "#7e7a73" }}>{s.label.en}</div>
+                  <div style={{ marginTop: 4, fontSize: 19, color: "#7e7a73" }}>{s.label.en}</div>
                 </div>
               ))}
             </div>
