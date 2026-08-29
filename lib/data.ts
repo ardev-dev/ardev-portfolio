@@ -498,7 +498,7 @@ export const catalog: WorkGroup[] = [
     title: { en: "Commerce & retail", ar: "التجارة والتجزئة" },
     desc: { en: "Catalogue, cart, checkout — and the back office behind them.", ar: "كتالوج وسلّة ودفع — وما خلفها من إدارة." },
     items: [
-      { name: "Kashkash", nameAr: "كشكش", kind: { en: "Django storefront backend — Docker, CI, production settings split", ar: "خلفية متجر بـ Django — Docker وتكامل مستمرّ وفصل إعدادات الإنتاج" }, stack: ["Django", "Docker"], year: "2025" },
+      { name: "Khashkhash", nameAr: "خشخاش", kind: { en: "Django storefront backend — Docker, CI, production settings split", ar: "خلفية متجر بـ Django — Docker وتكامل مستمرّ وفصل إعدادات الإنتاج" }, stack: ["Django", "Docker"], year: "2025" },
       { name: "Danya", nameAr: "دانيا", kind: { en: "Django store with accounts and product catalogue", ar: "متجر Django بحسابات وكتالوج منتجات" }, stack: ["Django"], year: "2023" },
       { name: "E-commerce", kind: { en: "Django storefront with blog and dashboard", ar: "متجر Django بمدوّنة ولوحة تحكّم" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/E-commerce" },
       { name: "E-commerce Pro", kind: { en: "Full storefront and admin", ar: "متجر كامل بلوحة إدارة" }, stack: ["JavaScript", "CSS"], year: "2021", href: "https://github.com/ardev-dev/E-commerce-Pro" },
