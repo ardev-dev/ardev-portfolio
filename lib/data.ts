@@ -534,7 +534,7 @@ export const catalog: WorkGroup[] = [
     desc: { en: "Arabic-first learning, where the language is the hard part.", ar: "تعلّم عربي أوّلاً، واللغة نفسها هي الجزء الصعب." },
     items: [
       { name: "Lumi", nameAr: "لومي", kind: { en: "Arabic learning assistant for children", ar: "مساعد تعليمي ذكي للأطفال العرب" }, stack: ["Flutter"], year: "2026" },
-      { name: "Minasa", nameAr: "منصّة", kind: { en: "Teaching platform — teacher and student accounts", ar: "منصّة تعليمية — حسابات معلّمين وطلاب" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/minasa" },
+      { name: "Minasa", nameAr: "منصة", kind: { en: "Teaching platform — teacher and student accounts", ar: "منصّة تعليمية — حسابات معلّمين وطلاب" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/minasa" },
       { name: "Library System", nameAr: "نظام مكتبة", kind: { en: "Cataloguing and lending", ar: "فهرسة وإعارة" }, stack: ["Python"], year: "2021", href: "https://github.com/ardev-dev/system-Library" },
     ],
   },
