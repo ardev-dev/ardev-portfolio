@@ -135,22 +135,7 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
         </div>
 
         <div className="min-w-0">
-          {p.showcase ? (
-            <div
-              className="anim overflow-hidden rounded-xl border border-white/12 shadow-lift"
-              style={{ "--d": "0.15s" } as React.CSSProperties}
-            >
-              <Image
-                src={p.showcase}
-                alt={title}
-                width={1920}
-                height={1080}
-                sizes="(max-width: 1024px) 100vw, 680px"
-                priority
-                className="h-auto w-full"
-              />
-            </div>
-          ) : p.shots ? <Phones shots={p.shots} name={title} /> : p.cover ? (
+          {p.shots ? <Phones shots={p.shots} name={title} /> : p.cover ? (
             <BrowserShot src={p.cover} alt={title} host={p.links[0]?.href.replace(/^https?:\/\//, "")} />
           ) : (
             <div className="card grid aspect-[16/10] place-items-center rounded-xl">
