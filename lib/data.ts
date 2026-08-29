@@ -463,6 +463,7 @@ export const catalog: WorkGroup[] = [
     items: [
       { name: "Wasselak", nameAr: "وصّلك", kind: { en: "Five apps on one core — customer, captain, business, staff, admin", ar: "خمسة تطبيقات بنواة واحدة — عميل ومندوب ومنشأة وموظّف وإدارة" }, stack: ["Flutter", "Django", "WebSocket"], year: "2023" },
       { name: "TruckGo", nameAr: "ترك جو", kind: { en: "Freight · shipper app, driver app, web, ML service", ar: "شحن · تطبيق عميل وسائق وويب وخدمة تعلّم آلي" }, stack: ["Flutter", "Python"], year: "2023" },
+      { name: "Mapbox App", kind: { en: "Live map and route tracking", ar: "خريطة حيّة وتتبّع مسارات" }, stack: ["Flutter", "Mapbox"], year: "2023", href: "https://github.com/ardev-dev/mapbox_app" },
       { name: "Mawsil · DBCargo · Shipperit", kind: { en: "Food delivery and cargo apps with REST backends", ar: "توصيل طعام وشحن بواجهات REST" }, stack: ["Flutter", "Node"], year: "2022" },
     ],
   },
@@ -471,10 +472,11 @@ export const catalog: WorkGroup[] = [
     title: { en: "Accounting & payments", ar: "المحاسبة والمدفوعات" },
     desc: { en: "Ledgers, wallets and gateways — where a rounding error is a real loss.", ar: "دفاتر ومحافظ وبوّابات — حيث خطأ التقريب خسارة حقيقية." },
     items: [
+      { name: "Kushak", nameAr: "كشك", kind: { en: "Accounting for kiosks and shops — branches, settlements, invoices, staff, stock", ar: "محاسبة الأكشاك والمحلات — فروع وتسويات وفواتير وموظّفون ومخزون" }, stack: ["Flutter", "Firebase"], year: "2026" },
       { name: "Alminshar", nameAr: "المنشار", kind: { en: "Accounting system for a sawmill business", ar: "نظام محاسبي لمنشرة" }, stack: ["Flutter"], year: "2024" },
       { name: "Azbah", nameAr: "عزبة", kind: { en: "Expense splitting and settle-up on a double-entry ledger", ar: "تقسيم المصاريف والتسوية على قيد مزدوج" }, stack: ["Flutter", "Django"], year: "2024 — Now", href: "https://azbah.somow.sa" },
       { name: "Ezbh", nameAr: "عزبة (الأولى)", kind: { en: "Group management with its own financial system", ar: "إدارة مجموعات بنظام مالي خاص" }, stack: ["Flutter"], year: "2025" },
-      { name: "Aleuhda", nameAr: "الوحدة", kind: { en: "Wallet with top-ups and payment verification", ar: "محفظة بشحن رصيد وتحقّق من الدفع" }, stack: ["Flutter"], year: "2022" },
+      { name: "Aleuhda", nameAr: "عهدة", kind: { en: "Payments — payment requests, wallet and verification, on its own organisation", ar: "مدفوعات — طلبات دفع ومحفظة وتحقّق، بمؤسّسة مستقلّة" }, stack: ["Flutter"], year: "2022" },
       { name: "Payment gateways", nameAr: "بوّابات الدفع", kind: { en: "HyperPay, Apple Pay, STC Pay and Tamara in production apps", ar: "تمارا · HyperPay · Apple Pay · STC Pay — في تطبيقات إنتاج" }, stack: ["3D Secure", "Dart", "Kotlin"], year: "2023 — Now" },
     ],
   },
@@ -485,6 +487,8 @@ export const catalog: WorkGroup[] = [
     items: [
       { name: "Wasla", nameAr: "وصلة", kind: { en: "Group and channel directory with chat, questions and challenges", ar: "دليل مجموعات وقنوات بدردشة وتساؤلات وتحدّيات" }, stack: ["Flutter", "Firebase", "BLoC"], year: "2026" },
       { name: "Social Network", kind: { en: "Feed, profiles and following", ar: "خلاصة وملفّات ومتابعة" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/social-network" },
+      { name: "KingLink", nameAr: "كينج لينك", kind: { en: "WhatsApp group-link directory", ar: "دليل روابط مجموعات واتساب" }, stack: ["Flutter"], year: "2022" },
+      { name: "Linkati", nameAr: "لينكاتي", kind: { en: "Link directory and sharing", ar: "دليل روابط ومشاركتها" }, stack: ["Flutter", "Firebase"], year: "2023" },
       { name: "Story", nameAr: "ستوري", kind: { en: "Stories and short-form publishing", ar: "قصص ونشر قصير" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/story-flutter" },
       { name: "Blogstory · Mogamo3aty", kind: { en: "Blogging and group apps", ar: "تدوين ومجموعات" }, stack: ["Flutter"], year: "2024" },
     ],
@@ -494,8 +498,9 @@ export const catalog: WorkGroup[] = [
     title: { en: "Commerce & retail", ar: "التجارة والتجزئة" },
     desc: { en: "Catalogue, cart, checkout — and the back office behind them.", ar: "كتالوج وسلّة ودفع — وما خلفها من إدارة." },
     items: [
-      { name: "Sweetra", nameAr: "سويترا", kind: { en: "Commerce app, live on the stores", ar: "تطبيق تجاري منشور في المتاجر" }, stack: ["Flutter"], year: "2026" },
-      { name: "Kushak", nameAr: "كشك", kind: { en: "Retail ordering app", ar: "تطبيق طلبات تجزئة" }, stack: ["Flutter"], year: "2026" },
+      { name: "Kashkash", nameAr: "كشكش", kind: { en: "Django storefront backend — Docker, CI, production settings split", ar: "خلفية متجر بـ Django — Docker وتكامل مستمرّ وفصل إعدادات الإنتاج" }, stack: ["Django", "Docker"], year: "2025" },
+      { name: "Danya", nameAr: "دانيا", kind: { en: "Django store with accounts and product catalogue", ar: "متجر Django بحسابات وكتالوج منتجات" }, stack: ["Django"], year: "2023" },
+      { name: "E-commerce", kind: { en: "Django storefront with blog and dashboard", ar: "متجر Django بمدوّنة ولوحة تحكّم" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/E-commerce" },
       { name: "E-commerce Pro", kind: { en: "Full storefront and admin", ar: "متجر كامل بلوحة إدارة" }, stack: ["JavaScript", "CSS"], year: "2021", href: "https://github.com/ardev-dev/E-commerce-Pro" },
       { name: "Mateam", nameAr: "مطعمي", kind: { en: "Restaurant management site and app", ar: "موقع وتطبيق لإدارة المطاعم" }, stack: ["JavaScript", "Flutter"], year: "2021", href: "https://github.com/ardev-dev/Mateam" },
     ],
@@ -529,6 +534,7 @@ export const catalog: WorkGroup[] = [
     desc: { en: "Arabic-first learning, where the language is the hard part.", ar: "تعلّم عربي أوّلاً، واللغة نفسها هي الجزء الصعب." },
     items: [
       { name: "Lumi", nameAr: "لومي", kind: { en: "Arabic learning assistant for children", ar: "مساعد تعليمي ذكي للأطفال العرب" }, stack: ["Flutter"], year: "2026" },
+      { name: "Minasa", nameAr: "منصّة", kind: { en: "Teaching platform — teacher and student accounts", ar: "منصّة تعليمية — حسابات معلّمين وطلاب" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/minasa" },
       { name: "Library System", nameAr: "نظام مكتبة", kind: { en: "Cataloguing and lending", ar: "فهرسة وإعارة" }, stack: ["Python"], year: "2021", href: "https://github.com/ardev-dev/system-Library" },
     ],
   },
@@ -537,6 +543,7 @@ export const catalog: WorkGroup[] = [
     title: { en: "Games", ar: "ألعاب" },
     desc: { en: "Built for the parts engineering rarely asks for — timing, feel and state.", ar: "بُنيت لأجزاء نادراً ما تطلبها الهندسة — التوقيت والإحساس والحالة." },
     items: [
+      { name: "Sweetra", nameAr: "سويترا", kind: { en: "Match-three candy game — Flame engine, economy, in-app purchases, ads", ar: "لعبة مطابقة حلوى — بمحرّك Flame واقتصاد داخلي ومشتريات وإعلانات" }, stack: ["Flutter", "Flame", "Firebase"], year: "2026" },
       { name: "Jumal", nameAr: "جُمل", kind: { en: "Arabic word-search with a saved progression system", ar: "بحث عن الكلمات العربية بنظام تقدّم محفوظ" }, stack: ["Flutter", "Hive"], year: "2026", href: "https://github.com/ardev-dev/jumal" },
       { name: "TicTacTonz", nameAr: "اتحداك", kind: { en: "Two-player match game", ar: "لعبة تحدٍّ بين لاعبين" }, stack: ["Flutter"], year: "2022", href: "https://github.com/ardev-dev/tictactonz" },
       { name: "Crush Game", kind: { en: "Match-three puzzle", ar: "لعبة مطابقة ثلاثية" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/crush-game" },
@@ -564,6 +571,7 @@ export const catalog: WorkGroup[] = [
       { name: "shared_utils", kind: { en: "The internal Flutter framework the team builds on", ar: "الإطار الداخلي لـ Flutter الذي يبني عليه الفريق" }, stack: ["Dart"], year: "2026", href: "https://github.com/AbberApp/shared_utils" },
       { name: "voice_call_core", kind: { en: "Voice-call plugin behind Abber's calls", ar: "إضافة المكالمات الصوتية خلف مكالمات عبر" }, stack: ["Dart", "Swift"], year: "2025", href: "https://github.com/AbberApp/voice_call_core" },
       { name: "hyperpay_flutter_plugin", kind: { en: "HyperPay gateway binding for Flutter", ar: "ربط بوّابة HyperPay بـ Flutter" }, stack: ["Dart", "Kotlin"], year: "2023", href: "https://github.com/ardev-dev/hyperpay_flutte_plugin" },
+      { name: "clean-architecture", kind: { en: "The Clean Architecture reference the team builds from", ar: "المرجع المعماري الذي يبني عليه الفريق" }, stack: ["Dart"], year: "2023", href: "https://github.com/ardev-dev/clean-architecture" },
       { name: "intl_phone_utils", kind: { en: "Phone-number parsing and formatting", ar: "تحليل أرقام الهواتف وتنسيقها" }, stack: ["Dart"], year: "2023", href: "https://github.com/ardev-dev/intl_phone_utils" },
     ],
   },
@@ -580,12 +588,6 @@ export const catalog: WorkGroup[] = [
       { name: "numwords · codesnap · markflow · units · age", kind: { en: "Numbers to words, code images, Markdown, conversion, dates", ar: "أرقام إلى كلمات، وصور كود، وماركداون، وتحويل وحدات، وتواريخ" }, stack: ["Next.js", "TypeScript"], year: "2026" },
     ],
   },
-];
-
-/** أعمال ٢٠٢٠–٢٠٢٢ — تُعرض كأسماء فقط، فهي مرحلة تعلّم وتسليم مبكّر. */
-export const earlyWork = [
-  "E-commerce", "KingLink", "Linkati", "Minasa", "Mapbox App", "Danya",
-  "Kashkash", "Home Work", "Clean Architecture", "Story Flutter",
 ];
 
 /** أرقام الفهرس — محسوبة من GitHub، لا مقدّرة. */

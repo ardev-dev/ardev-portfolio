@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { catalog, catalogStats, earlyWork } from "@/lib/data";
+import { catalog, catalogStats } from "@/lib/data";
 import { Shell, PageHead } from "@/components/site/pages/Shell";
 import { Em } from "@/components/site/Em";
 import { useLang } from "@/components/LanguageProvider";
@@ -97,21 +97,6 @@ export function SystemsPage() {
         </section>
       ))}
 
-      <div
-        className="anim mt-10 border-t border-white/[0.07] pt-7"
-        style={{ "--d": "0.35s" } as React.CSSProperties}
-      >
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-fg-faint">
-          {t({ en: "Early work · 2020 — 2022", ar: "أعمال مبكّرة · 2020 — 2022" })}
-        </p>
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {earlyWork.map((n) => (
-            <span key={n} className="glass rounded-lg px-2.5 py-1 text-[12px] text-fg-muted" dir="ltr">
-              {n}
-            </span>
-          ))}
-        </div>
-      </div>
     </Shell>
   );
 }
