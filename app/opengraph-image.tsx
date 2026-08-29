@@ -1,13 +1,14 @@
 import { ImageResponse } from "next/og";
-import { profile } from "@/lib/data";
+import { profile, stats } from "@/lib/data";
 
 export const alt = `${profile.name.en} — ${profile.role.en}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /**
- * صورة المشاركة تُولَّد من البيانات نفسها، فلا تتقادم حين تتغيّر المسمّيات.
- * بلا خطوط خارجيّة: الخطّ الافتراضي يكفي هنا ويُبقي التوليد سريعاً وموثوقاً.
+ * صورة المشاركة تتبع ثيم الموقع نفسه — لوح زجاجي على أرضيّة داكنة.
+ * satori لا يدعم backdrop-filter، فالزجاج مُحاكى بطبقات تدرّج وحافّة مضيئة.
+ * المحتوى مشتقّ من البيانات، فلا يتقادم حين تتغيّر المسمّيات أو الأرقام.
  */
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -17,26 +18,65 @@ export default function OpengraphImage() {
           height: "100%",
           width: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          background: "linear-gradient(150deg, #101010 0%, #0a0a0a 55%, #050505 100%)",
-          padding: 72,
-          color: "#f5f4f2",
+          padding: 56,
+          background: "#0a0a0a",
+          backgroundImage:
+            "radial-gradient(1100px 620px at 78% -12%, rgba(255,255,255,0.09), transparent 62%)," +
+            "radial-gradient(760px 460px at 6% 108%, rgba(255,255,255,0.05), transparent 60%)",
+          color: "#f7f6f4",
         }}
       >
-        <div style={{ display: "flex", fontSize: 26, color: "#7a7873", letterSpacing: 2 }}>ARDEV.DEV</div>
+        {/* اللوح الزجاجي */}
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            borderRadius: 34,
+            padding: 56,
+            border: "1px solid rgba(255,255,255,0.13)",
+            background:
+              "linear-gradient(160deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.045) 46%, rgba(255,255,255,0.02) 100%)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                padding: "9px 18px",
+                borderRadius: 999,
+                border: "1px solid rgba(255,255,255,0.14)",
+                background: "rgba(255,255,255,0.06)",
+                fontSize: 21,
+                color: "#c2bfb9",
+              }}
+            >
+              <div style={{ width: 9, height: 9, borderRadius: 999, background: "#5ad07a" }} />
+              {profile.status.en}
+            </div>
+            <div style={{ display: "flex", fontSize: 22, letterSpacing: 3, color: "#7e7a73" }}>ARDEV.DEV</div>
+          </div>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 84, letterSpacing: -3, lineHeight: 1.05 }}>{profile.name.en}</div>
-          <div style={{ marginTop: 14, fontSize: 40, color: "#a8a6a2" }}>{profile.role.en}</div>
-        </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ fontSize: 88, letterSpacing: -3.5, lineHeight: 1.04 }}>{profile.name.en}</div>
+            <div style={{ marginTop: 12, fontSize: 38, color: "#9b9891", letterSpacing: -0.8 }}>
+              {profile.role.en}
+            </div>
+          </div>
 
-        <div style={{ display: "flex", gap: 40, fontSize: 24, color: "#7a7873" }}>
-          <span>21,000+ users</span>
-          <span>·</span>
-          <span>6+ years</span>
-          <span>·</span>
-          <span>Buraydah, Saudi Arabia</span>
+          <div style={{ display: "flex", gap: 56 }}>
+            {stats.map((s) => (
+              <div key={s.label.en} style={{ display: "flex", flexDirection: "column" }}>
+                <div style={{ display: "flex", fontSize: 40, letterSpacing: -1.5 }}>
+                  {`${s.value}${s.suffix}`}
+                </div>
+                <div style={{ marginTop: 4, fontSize: 19, color: "#7e7a73" }}>{s.label.en}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     ),
