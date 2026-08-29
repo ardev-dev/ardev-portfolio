@@ -60,12 +60,13 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
     <Shell>
       <div className="grid items-center gap-10 md:grid-cols-[1fr_1.05fr] md:gap-10 lg:gap-16">
         <div  className="anim " style={{ "--d": "0s" } as React.CSSProperties}>
-          <div className="flex items-center gap-3 font-mono text-[11px] text-fg-faint rtl:justify-end" dir="ltr">
-            <span>
+          {/* الترتيب يتبع اتجاه الصفحة: الرقم أوّلاً في القراءة، ثم السنة. */}
+          <div className="flex items-center gap-3 font-mono text-[11px] text-fg-faint">
+            <span dir="ltr">
               {String(index).padStart(2, "0")} / {String(total).padStart(2, "0")}
             </span>
             <span className="h-px w-8 bg-white/15" />
-            <span>{lang === "ar" ? p.year.replace("Now", "الآن") : p.year}</span>
+            <span dir="ltr">{lang === "ar" ? p.year.replace("Now", "الآن") : p.year}</span>
           </div>
 
           <div className="mt-6 flex items-center gap-3.5">

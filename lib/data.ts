@@ -517,15 +517,41 @@ export const catalog: WorkGroup[] = [
       { name: "AppProof", kind: { en: "Beta-testing platform — app, web, backend", ar: "منصّة اختبار إصدارات — تطبيق وويب وخلفية" }, stack: ["Flutter", "Django", "Next.js"], year: "2026" },
       { name: "MT Admin Pro", kind: { en: "MikroTik router management", ar: "إدارة موجّهات MikroTik" }, stack: ["Flutter"], year: "2026" },
       { name: "Lumi", nameAr: "لومي", kind: { en: "Arabic learning assistant for children", ar: "مساعد تعليمي ذكي للأطفال العرب" }, stack: ["Flutter"], year: "2026" },
-      { name: "Ezbh", nameAr: "عزبة (الأولى)", kind: { en: "Group management with wallet, chat and locations", ar: "إدارة مجموعات بمحفظة ودردشة ومواقع" }, stack: ["Flutter"], year: "2025" },
       { name: "Sweetra", nameAr: "سويترا", kind: { en: "Commerce app, live on the stores", ar: "تطبيق تجاري منشور في المتاجر" }, stack: ["Flutter"], year: "2026" },
       { name: "Moqawlat", nameAr: "مقاولات", kind: { en: "Contracting platform", ar: "منصّة مقاولات" }, stack: ["Flutter"], year: "2026" },
       { name: "WhatsApp Notification Saver", kind: { en: "Recovers deleted messages from the notification log", ar: "يستعيد الرسائل المحذوفة من سجلّ الإشعارات" }, stack: ["Flutter", "Android"], year: "2026" },
-      { name: "Jumal", nameAr: "جُمل", kind: { en: "Arabic word-search game with saved progress", ar: "لعبة بحث عن الكلمات العربية بحفظ للتقدّم" }, stack: ["Flutter", "Hive"], year: "2026", href: "https://github.com/ardev-dev/jumal" },
       { name: "CopyPaste", kind: { en: "macOS menu-bar clipboard manager", ar: "مدير حافظة في شريط قوائم macOS" }, stack: ["SwiftUI"], year: "2026" },
-      { name: "Alminshar", nameAr: "المنشار", kind: { en: "Accounting for a sawmill business", ar: "نظام محاسبة لمنشرة" }, stack: ["Flutter"], year: "2024" },
-      { name: "Aleuhda", nameAr: "الوحدة", kind: { en: "Wallet-based app with payment verification", ar: "تطبيق بمحفظة وتحقّق من الدفع" }, stack: ["Flutter"], year: "2022" },
       { name: "Kushak", nameAr: "كشك", kind: { en: "Retail app", ar: "تطبيق بيع" }, stack: ["Flutter"], year: "2026" },
+    ],
+  },
+  {
+    id: "finance",
+    title: { en: "Accounting & finance", ar: "أنظمة محاسبية ومالية" },
+    desc: {
+      en: "Ledgers, wallets and payment flows — where a rounding error is a real loss.",
+      ar: "دفاتر ومحافظ ومسارات دفع — حيث خطأ التقريب خسارة حقيقية.",
+    },
+    items: [
+      { name: "Alminshar", nameAr: "المنشار", kind: { en: "Accounting system for a sawmill business", ar: "نظام محاسبي لمنشرة" }, stack: ["Flutter"], year: "2024" },
+      { name: "Ezbh", nameAr: "عزبة (الأولى)", kind: { en: "Group management with its own financial system", ar: "إدارة مجموعات بنظام مالي خاص" }, stack: ["Flutter"], year: "2025" },
+      { name: "Aleuhda", nameAr: "الوحدة", kind: { en: "Wallet with top-ups and payment verification", ar: "محفظة بشحن رصيد وتحقّق من الدفع" }, stack: ["Flutter"], year: "2022" },
+      { name: "Abber Wallet", nameAr: "محفظة عبر", kind: { en: "Wallet, payouts and subscriptions inside Abber", ar: "محفظة ومستحقّات واشتراكات داخل عبر" }, stack: ["Django", "Payments"], year: "2023 — Now" },
+      { name: "HyperPay integration", nameAr: "تكامل HyperPay", kind: { en: "Card gateway wired into production apps", ar: "بوّابة بطاقات موصولة بتطبيقات إنتاج" }, stack: ["Dart", "Kotlin"], year: "2023" },
+      { name: "Tamara integration", nameAr: "تكامل تمارا", kind: { en: "Buy-now-pay-later checkout", ar: "دفع مؤجّل عند الشراء" }, stack: ["Flutter", "Django"], year: "2024" },
+    ],
+  },
+  {
+    id: "games",
+    title: { en: "Games", ar: "ألعاب" },
+    desc: {
+      en: "Built for the parts engineering rarely asks for — timing, feel and state.",
+      ar: "بُنيت لأجزاء نادراً ما تطلبها الهندسة — التوقيت والإحساس والحالة.",
+    },
+    items: [
+      { name: "Jumal", nameAr: "جُمل", kind: { en: "Arabic word-search with a saved progression system", ar: "بحث عن الكلمات العربية بنظام تقدّم محفوظ" }, stack: ["Flutter", "Hive"], year: "2026", href: "https://github.com/ardev-dev/jumal" },
+      { name: "TicTacTonz", nameAr: "اتحداك", kind: { en: "Two-player match game", ar: "لعبة تحدٍّ بين لاعبين" }, stack: ["Flutter"], year: "2022", href: "https://github.com/ardev-dev/tictactonz" },
+      { name: "Crush Game", kind: { en: "Match-three puzzle", ar: "لعبة مطابقة ثلاثية" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/crush-game" },
+      { name: "Hue Mixer", kind: { en: "Colour-mixing puzzle with a native engine", ar: "لغز خلط ألوان بمحرّك أصلي" }, stack: ["C++", "Flutter"], year: "2025", href: "https://github.com/ardev-dev/hue_mixer" },
     ],
   },
   {
@@ -577,7 +603,7 @@ export const catalog: WorkGroup[] = [
 export const earlyWork = [
   "E-commerce Pro", "Mateam", "Mawsil", "DBCargo", "Shipperit", "KingLink",
   "Dalal", "Story", "Social Network", "Linkati", "Mogamo3aty", "Blogstory",
-  "Minasa", "TicTacToe", "Crush Game", "Library System", "Hue Mixer",
+  "Minasa", "Library System", "Mapbox App", "Clean Architecture",
 ];
 
 /** أرقام الفهرس — محسوبة من GitHub، لا مقدّرة. */
