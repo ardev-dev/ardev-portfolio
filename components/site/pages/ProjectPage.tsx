@@ -9,12 +9,11 @@ import { cn } from "@/lib/utils";
 
 function Phones({ shots, name }: { shots: string[]; name: string }) {
   return (
-    <div className="flex items-center justify-center gap-3 sm:gap-4">
+    <div className="flex items-center justify-center gap-2 sm:gap-4">
       {shots.slice(0, 3).map((s, i) => (
         <div key={s} className={cn("anim", cn(
             "w-[33%] max-w-[170px] shrink-0 lg:max-w-[190px]",
             i === 1 && "z-10 -mx-2 w-[36%] max-w-[185px] lg:max-w-[205px]",
-            i === 2 && "hidden md:block"
           ))} style={{ "--d": "0.15s" } as React.CSSProperties}>
           <div className="overflow-hidden rounded-[26px] border border-white/20 bg-black/60 p-[5px] shadow-lift backdrop-blur-xl">
             <Image

@@ -14,7 +14,7 @@ import { ContactPage } from "@/components/site/pages/ContactPage";
 import { projects } from "@/lib/data";
 
 /** المشاريع ذات اللقطات تحصل كلٌّ منها على شريحة كاملة. */
-const SHOWCASE = ["abber", "maskani", "wisal", "azbah"];
+const SHOWCASE = ["abber", "maskani", "azbah", "wisal"];
 
 export default function Home() {
   const pages = useMemo<Page[]>(() => {
