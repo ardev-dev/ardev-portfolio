@@ -33,7 +33,7 @@ export function SystemsPage() {
       >
         {catalogStats.map((s) => (
           <div key={s.label.en}>
-            <dt className="font-display text-2xl font-semibold text-ink" dir="ltr">
+            <dt className="font-display text-2xl font-semibold text-ink rtl:text-right" dir="ltr">
               {s.value}
             </dt>
             <dd className="mt-0.5 text-[11px] uppercase tracking-wider text-fg-muted">{t(s.label)}</dd>
@@ -73,7 +73,7 @@ export function SystemsPage() {
                       )}
                     </h4>
                     <span className="shrink-0 font-mono text-[10.5px] text-fg-faint" dir="ltr">
-                      {w.year}
+                      {lang === "ar" ? w.year.replace("Now", "الآن") : w.year}
                     </span>
                   </div>
 
@@ -102,7 +102,7 @@ export function SystemsPage() {
         style={{ "--d": "0.35s" } as React.CSSProperties}
       >
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-fg-faint">
-          {t({ en: "Early work · 2020 — 2022", ar: "أعمال مبكّرة · ٢٠٢٠ — ٢٠٢٢" })}
+          {t({ en: "Early work · 2020 — 2022", ar: "أعمال مبكّرة · 2020 — 2022" })}
         </p>
         <div className="mt-4 flex flex-wrap gap-1.5">
           {earlyWork.map((n) => (

@@ -60,12 +60,12 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
     <Shell>
       <div className="grid items-center gap-10 md:grid-cols-[1fr_1.05fr] md:gap-10 lg:gap-16">
         <div  className="anim " style={{ "--d": "0s" } as React.CSSProperties}>
-          <div className="flex items-center gap-3 font-mono text-[11px] text-fg-faint" dir="ltr">
+          <div className="flex items-center gap-3 font-mono text-[11px] text-fg-faint rtl:justify-end" dir="ltr">
             <span>
               {String(index).padStart(2, "0")} / {String(total).padStart(2, "0")}
             </span>
             <span className="h-px w-8 bg-white/15" />
-            <span>{p.year}</span>
+            <span>{lang === "ar" ? p.year.replace("Now", "الآن") : p.year}</span>
           </div>
 
           <div className="mt-6 flex items-center gap-3.5">
@@ -90,7 +90,7 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
             <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
               {p.metrics.map((m) => (
                 <div key={m.label.en}>
-                  <dt className="font-display text-xl font-semibold text-ink" dir="ltr">
+                  <dt className="font-display text-xl font-semibold text-ink rtl:text-right" dir="ltr">
                     {m.value}
                   </dt>
                   <dd className="mt-0.5 text-[11px] uppercase tracking-wider text-fg-muted">{t(m.label)}</dd>

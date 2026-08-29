@@ -119,10 +119,10 @@ export function ContactPage() {
             {channels.map((c, i) => (
               <a key={c.label} href={c.href} target="_blank" rel="noreferrer" className="anim card card-hover group flex items-center justify-between gap-4 rounded-2xl px-5 py-4" style={{ "--d": "0.15s" } as React.CSSProperties}>
                 <span className="min-w-0">
-                  <span className="block text-[14px] text-ink" dir="ltr">
+                  <span className="block text-[14px] text-ink rtl:text-right" dir="ltr">
                     {c.label}
                   </span>
-                  <span className="mt-0.5 block truncate font-mono text-[11px] text-fg-muted" dir="ltr">
+                  <span className="mt-0.5 block truncate font-mono text-[11px] text-fg-muted rtl:text-right" dir="ltr">
                     {c.handle}
                   </span>
                 </span>

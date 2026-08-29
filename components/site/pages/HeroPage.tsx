@@ -90,7 +90,7 @@ export function HeroPage() {
         >
           {stats.map((s) => (
             <div key={s.label.en} className="glass rounded-2xl px-5 py-5 text-center">
-              <div className="font-display text-2xl font-semibold text-ink" dir="ltr">
+              <div className="font-display text-2xl font-semibold text-ink rtl:text-right" dir="ltr">
                 {s.value}
                 {s.suffix}
               </div>
