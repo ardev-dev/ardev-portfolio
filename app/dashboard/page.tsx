@@ -70,14 +70,108 @@ function toCsv(rows: Visit[]): string {
 
 /* ─── لبنات الواجهة ────────────────────────────────────────────────────────── */
 
-function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
+/** فرق النسبة عن المدى السابق. null يعني لا مدى سابق للمقارنة (مثل «كل الوقت»). */
+function Delta({ now, before }: { now: number; before: number | null }) {
+  if (before === null) return null;
+  if (!before) return <span className="text-fg-faint">جديد</span>;
+  const pct = Math.round(((now - before) / before) * 100);
+  const up = pct >= 0;
+  return (
+    <span className={up ? "text-emerald-400" : "text-rose-400"} dir="ltr">
+      {up ? "▲" : "▼"} {Math.abs(pct)}%
+    </span>
+  );
+}
+
+function Stat({
+  label,
+  value,
+  sub,
+  now,
+  before,
+}: {
+  label: string;
+  value: string;
+  sub?: string;
+  now?: number;
+  before?: number | null;
+}) {
   return (
     <div className="card rounded-2xl px-4 py-5">
       <div className="text-xs text-fg">{label}</div>
-      <div className="mt-1.5 font-display text-3xl font-bold text-ink" dir="ltr">
-        {value}
+      <div className="mt-1.5 flex items-baseline gap-2">
+        <span className="font-display text-3xl font-bold text-ink" dir="ltr">
+          {value}
+        </span>
+        {now !== undefined && before !== undefined && (
+          <span className="font-mono text-[11px]">
+            <Delta now={now} before={before} />
+          </span>
+        )}
       </div>
       {sub && <div className="mt-1 font-mono text-[11px] text-fg-muted">{sub}</div>}
+    </div>
+  );
+}
+
+/**
+ * قمع الأقسام: كم زائراً بلغ كل شريحة، وأين غادر. الترتيب ترتيب الكشف نفسه،
+ * فالانخفاض بين صفّين يقرأ مباشرةً كنسبة تسرّب عند تلك الشريحة.
+ */
+const DECK = [
+  { id: "top", label: "البداية" },
+  { id: "abber", label: "عبر" },
+  { id: "maskani", label: "مسكني" },
+  { id: "azbah", label: "عزبة" },
+  { id: "wisal", label: "وصال" },
+  { id: "work", label: "الأعمال" },
+  { id: "info", label: "طريقتي" },
+  { id: "experience", label: "الخبرة" },
+  { id: "contact", label: "تواصل" },
+];
+
+function Funnel({ visits }: { visits: Visit[] }) {
+  const rows = useMemo(() => {
+    const seen = new Map<string, number>();
+    const exit = new Map<string, number>();
+    for (const v of visits) {
+      for (const sec of new Set(v.sectionsSeen ?? [])) seen.set(sec, (seen.get(sec) ?? 0) + 1);
+      if (v.exitSection) exit.set(v.exitSection, (exit.get(v.exitSection) ?? 0) + 1);
+    }
+    return DECK.map((d) => ({ ...d, seen: seen.get(d.id) ?? 0, exit: exit.get(d.id) ?? 0 }));
+  }, [visits]);
+
+  const top = Math.max(1, rows[0]?.seen ?? 1);
+
+  return (
+    <div className="card rounded-2xl p-5">
+      <h2 className="text-sm font-semibold text-ink">قمع الأقسام — أين يتوقّف الزوّار</h2>
+      <div className="mt-4 space-y-1.5">
+        {rows.map((r, i) => {
+          const prev = i === 0 ? r.seen : rows[i - 1]!.seen;
+          const drop = prev ? Math.round(((prev - r.seen) / prev) * 100) : 0;
+          return (
+            <div key={r.id} className="grid grid-cols-[5.5rem_1fr_auto] items-center gap-3">
+              <span className="truncate text-xs text-fg">{r.label}</span>
+              <div className="h-5 overflow-hidden rounded bg-white/[0.05]">
+                <div
+                  className="h-full rounded bg-accent/70"
+                  style={{ width: `${Math.max((r.seen / top) * 100, r.seen ? 2 : 0)}%` }}
+                />
+              </div>
+              <span className="w-24 text-end font-mono text-[11px]" dir="ltr">
+                <span className="text-ink">{r.seen}</span>
+                {i > 0 && drop > 0 && <span className="text-rose-400"> −{drop}%</span>}
+                {r.exit > 0 && <span className="text-fg-faint"> ⤶{r.exit}</span>}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      <p className="mt-3 text-[11px] text-fg-muted">
+        العدد = من بلغ القسم · <span className="text-rose-400">−٪</span> تسرّب عن الذي قبله ·
+        <span className="text-fg-faint"> ⤶</span> من غادر الموقع عنده.
+      </p>
     </div>
   );
 }
@@ -402,6 +496,20 @@ export default function Dashboard() {
     });
   }, [daily, bounds]);
 
+  // المدى السابق بالطول نفسه — أساس المقارنة. «كل الوقت» لا سابق له.
+  const prevRange = useMemo(() => {
+    if (rangeKey === "all") return null;
+    const to = bounds.to === Infinity ? Date.now() : bounds.to;
+    const span = to - bounds.from;
+    if (!isFinite(span) || span <= 0) return null;
+    const byDate = new Map(daily.map((d) => [d.date ?? d.id.replace("daily_", ""), d]));
+    const n = Math.min(Math.max(1, Math.round(span / 86_400_000)), 90);
+    return Array.from({ length: n }, (_, i) => {
+      const k = dayKey(new Date(bounds.from - span + i * 86_400_000));
+      return byDate.get(k) ?? ({ id: k, date: k, visits: 0 } as Daily);
+    });
+  }, [daily, bounds, rangeKey]);
+
   const shown = useMemo(() => {
     const rows = visits
       .filter((v) => (hideBots ? !v.isBot : true))
@@ -415,6 +523,7 @@ export default function Dashboard() {
   }, [visits, hideBots, ignored, bounds, sortByScore]);
 
   const sum = (rows: Daily[], f: keyof Daily) => rows.reduce((a, r) => a + ((r[f] as number) ?? 0), 0);
+  const before = (f: keyof Daily) => (prevRange ? sum(prevRange, f) : null);
   const totalVisits = sum(range, "visits");
   const totalActive = sum(range, "totalActiveMs");
   const completed = sum(range, "completedSessions");
@@ -577,9 +686,23 @@ export default function Dashboard() {
           label="الزيارات"
           value={String(totalVisits)}
           sub={`${sum(range, "newVisitors")} زائر جديد · ${liveNow} الآن`}
+          now={totalVisits}
+          before={before("visits")}
         />
-        <Stat label="فرص تستحقّ المتابعة" value={String(hot)} sub={`تقييم ٥٥+`} />
-        <Stat label="متوسّط الزمن النشط" value={fmtDuration(completed ? totalActive / completed : 0)} sub="لكل جلسة مكتملة" />
+        <Stat label="فرص تستحقّ المتابعة" value={String(hot)} sub="تقييم ٥٥+" now={hot} before={before("hotSessions")} />
+        <Stat
+          label="متوسّط الزمن النشط"
+          value={fmtDuration(completed ? totalActive / completed : 0)}
+          sub="لكل جلسة مكتملة"
+          now={completed ? totalActive / completed : 0}
+          before={
+            prevRange
+              ? sum(prevRange, "completedSessions")
+                ? sum(prevRange, "totalActiveMs") / sum(prevRange, "completedSessions")
+                : 0
+              : null
+          }
+        />
         <Stat
           label="LCP / INP الوسيط"
           value={vitals.lcp ? `${(vitals.lcp / 1000).toFixed(1)}s` : "—"}
@@ -596,6 +719,10 @@ export default function Dashboard() {
       <section className="mt-4 grid gap-4 lg:grid-cols-[1.6fr_1fr]">
         <DailyBars rows={range} />
         <HourlyBars visits={shown.map(({ v }) => v)} />
+      </section>
+
+      <section className="mt-4">
+        <Funnel visits={shown.map(({ v }) => v)} />
       </section>
 
       <section className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
