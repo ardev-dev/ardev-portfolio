@@ -331,7 +331,7 @@ export default function Dashboard() {
   const [visitors, setVisitors] = useState<Visitor[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const [rangeKey, setRangeKey] = useState<RangeKey>("d7");
+  const [rangeKey, setRangeKey] = useState<RangeKey>("today");
   const [customFrom, setCustomFrom] = useState("");
   const [customTo, setCustomTo] = useState("");
   const [hideBots, setHideBots] = useState(true);
