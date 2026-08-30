@@ -27,7 +27,15 @@ export type Visit = {
   activeMs?: number;
   maxScrollPct?: number;
   ip?: string;
-  geo?: { country?: string; city?: string; countryRegion?: string; asOrganization?: string; timezone?: string };
+  geo?: {
+    country?: string;
+    city?: string;
+    countryRegion?: string;
+    asOrganization?: string;
+    timezone?: string;
+    latitude?: string;
+    longitude?: string;
+  };
   browser?: string;
   browserVersion?: string;
   os?: string;

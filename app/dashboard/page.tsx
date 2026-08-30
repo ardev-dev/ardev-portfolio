@@ -104,15 +104,20 @@ function DailyBars({ rows }: { rows: Daily[] }) {
   return (
     <div className="card rounded-2xl p-5">
       <h2 className="text-sm font-semibold text-ink">الزيارات اليوميّة</h2>
-      <div className="mt-5 flex h-40 items-end gap-[2px]" dir="ltr">
+      <div className="mt-5 flex h-40 items-end gap-[3px]" dir="ltr">
         {rows.map((r) => {
           const v = r.visits ?? 0;
           const hot = r.hotSessions ?? 0;
+          // حدّ أدنى ملموس: يوم بزيارة واحدة بجانب يوم بأربعين يجب أن يظل مرئيّاً.
+          const h = v ? Math.max((v / max) * 100, 8) : 1.5;
           return (
             <div key={r.id} className="group relative flex-1" title={`${r.date}: ${v} زيارة · ${hot} فرصة`}>
+              {rows.length <= 31 && v > 0 && (
+                <div className="mb-1 text-center font-mono text-[9px] text-fg-muted">{v}</div>
+              )}
               <div
-                className="w-full rounded-t bg-accent/80 transition-colors group-hover:bg-accent"
-                style={{ height: `${Math.max((v / max) * 100, v ? 3 : 0)}%` }}
+                className={`w-full rounded-t transition-colors ${v ? "bg-accent/80 group-hover:bg-accent" : "bg-white/10"}`}
+                style={{ height: `${h}%` }}
               />
               <span className="pointer-events-none absolute -top-6 left-1/2 hidden -translate-x-1/2 whitespace-nowrap rounded bg-bg-900 px-1.5 py-0.5 font-mono text-[10px] text-ink shadow-card group-hover:block">
                 {v}
@@ -124,6 +129,39 @@ function DailyBars({ rows }: { rows: Daily[] }) {
       <div className="mt-2 flex justify-between border-t border-white/[0.06] pt-2 font-mono text-[10px] text-fg-muted" dir="ltr">
         <span>{rows[0]?.date}</span>
         <span>{rows.at(-1)?.date}</span>
+      </div>
+    </div>
+  );
+}
+
+/** توزيع الجلسات على ساعات اليوم بتوقيت الرياض — يكشف متى يزورك الناس فعلاً. */
+function HourlyBars({ visits }: { visits: Visit[] }) {
+  const buckets = useMemo(() => {
+    const b = new Array(24).fill(0) as number[];
+    for (const v of visits) {
+      const t = v.startedAt?.toDate();
+      if (!t) continue;
+      const h = Math.floor(((t.getTime() + RIYADH_OFFSET_MS) % 86_400_000) / 3_600_000);
+      b[h] += 1;
+    }
+    return b;
+  }, [visits]);
+  const max = Math.max(1, ...buckets);
+  return (
+    <div className="card rounded-2xl p-5">
+      <h2 className="text-sm font-semibold text-ink">ساعات الزيارة · بتوقيت الرياض</h2>
+      <div className="mt-5 flex h-28 items-end gap-[2px]" dir="ltr">
+        {buckets.map((n, h) => (
+          <div key={h} className="group relative flex-1" title={`${h}:00 — ${n} جلسة`}>
+            <div
+              className={`w-full rounded-t ${n ? "bg-accent/70 group-hover:bg-accent" : "bg-white/10"}`}
+              style={{ height: `${n ? Math.max((n / max) * 100, 8) : 1.5}%` }}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="mt-2 flex justify-between border-t border-white/[0.06] pt-2 font-mono text-[10px] text-fg-muted" dir="ltr">
+        <span>00</span><span>06</span><span>12</span><span>18</span><span>23</span>
       </div>
     </div>
   );
@@ -163,6 +201,7 @@ function SessionRow({ v, score, onIgnore }: { v: Visit; score: number; onIgnore:
       >
         <td className="py-2.5 pe-3"><ScoreBadge score={score} /></td>
         <td className="py-2.5 pe-3 text-xs text-fg">{fmtTime(v.startedAt)}</td>
+        <td className="py-2.5 pe-3 font-mono text-[11px] text-ink" dir="ltr">{v.ip ?? "—"}</td>
         <td className="py-2.5 pe-3 text-xs text-ink">
           {[v.geo?.city, v.geo?.country].filter(Boolean).join("، ") || "—"}
           {v.rdns && <div className="font-mono text-[10px] text-accent" dir="ltr">{v.rdns}</div>}
@@ -177,7 +216,7 @@ function SessionRow({ v, score, onIgnore }: { v: Visit; score: number; onIgnore:
       </tr>
       {open && (
         <tr className="border-t border-white/[0.06] bg-white/[0.02]">
-          <td colSpan={8} className="p-4">
+          <td colSpan={9} className="p-4">
             <dl className="grid gap-x-6 gap-y-2 text-xs sm:grid-cols-2 lg:grid-cols-3">
               {(
                 [
@@ -186,6 +225,7 @@ function SessionRow({ v, score, onIgnore }: { v: Visit; score: number; onIgnore:
                   ["اسم الشبكة (rDNS)", v.rdns],
                   ["المزوّد", v.geo?.asOrganization],
                   ["المنطقة", v.geo?.countryRegion],
+                  ["الإحداثيّات (تقديريّة)", v.geo?.latitude && v.geo?.longitude ? `${v.geo.latitude}, ${v.geo.longitude}` : undefined],
                   ["توقيت الزائر", v.browserTimezone],
                   ["لغات المتصفح", v.browserLanguages],
                   ["لغة الموقع", v.siteLang],
@@ -238,11 +278,49 @@ function SessionRow({ v, score, onIgnore }: { v: Visit; score: number; onIgnore:
 
 /* ─── الصفحة ───────────────────────────────────────────────────────────────── */
 
-const RANGES = [
-  { days: 7, label: "٧ أيام" },
-  { days: 14, label: "١٤ يوماً" },
-  { days: 30, label: "٣٠ يوماً" },
+type RangeKey = "today" | "yesterday" | "d2" | "d7" | "d30" | "all" | "custom";
+
+const RANGES: { key: RangeKey; label: string }[] = [
+  { key: "today", label: "اليوم" },
+  { key: "yesterday", label: "أمس" },
+  { key: "d2", label: "أول أمس" },
+  { key: "d7", label: "٧ أيام" },
+  { key: "d30", label: "٣٠ يوماً" },
+  { key: "all", label: "كل الوقت" },
+  { key: "custom", label: "مخصّص" },
 ];
+
+/** بداية اليوم بتوقيت الرياض (+٣) معبَّراً عنها كلحظة مطلقة. */
+const RIYADH_OFFSET_MS = 3 * 3600_000;
+const riyadhDayStart = (daysAgo: number) => {
+  const now = Date.now() + RIYADH_OFFSET_MS;
+  const midnight = Math.floor(now / 86_400_000) * 86_400_000;
+  return midnight - daysAgo * 86_400_000 - RIYADH_OFFSET_MS;
+};
+
+/** يحوّل الاختيار إلى حدّين زمنيّين. الحدّ الأعلى مفتوح حين يشمل الآن. */
+function resolveRange(key: RangeKey, from: string, to: string): { from: number; to: number } {
+  const DAY = 86_400_000;
+  switch (key) {
+    case "today":
+      return { from: riyadhDayStart(0), to: Infinity };
+    case "yesterday":
+      return { from: riyadhDayStart(1), to: riyadhDayStart(0) };
+    case "d2":
+      return { from: riyadhDayStart(2), to: riyadhDayStart(1) };
+    case "d7":
+      return { from: riyadhDayStart(6), to: Infinity };
+    case "d30":
+      return { from: riyadhDayStart(29), to: Infinity };
+    case "all":
+      return { from: 0, to: Infinity };
+    case "custom": {
+      const a = from ? new Date(`${from}T00:00:00+03:00`).getTime() : 0;
+      const b = to ? new Date(`${to}T00:00:00+03:00`).getTime() + DAY : Infinity;
+      return { from: a, to: b };
+    }
+  }
+}
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
@@ -253,7 +331,9 @@ export default function Dashboard() {
   const [visitors, setVisitors] = useState<Visitor[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const [days, setDays] = useState(14);
+  const [rangeKey, setRangeKey] = useState<RangeKey>("d7");
+  const [customFrom, setCustomFrom] = useState("");
+  const [customTo, setCustomTo] = useState("");
   const [hideBots, setHideBots] = useState(true);
   const [sortByScore, setSortByScore] = useState(false);
   const [ignored, setIgnored] = useState<string[]>([]);
@@ -303,26 +383,36 @@ export default function Dashboard() {
     });
   }, []);
 
+  const bounds = useMemo(
+    () => resolveRange(rangeKey, customFrom, customTo),
+    [rangeKey, customFrom, customTo]
+  );
+
   // المدى المختار بترتيب زمني، مع تصفير الأيام الغائبة حتى لا ينكمش المحور.
   const range = useMemo(() => {
     const byDate = new Map(daily.map((d) => [d.date ?? d.id.replace("daily_", ""), d]));
-    return Array.from({ length: days }, (_, i) => {
-      const d = new Date();
-      d.setDate(d.getDate() - (days - 1 - i));
-      const k = dayKey(d);
+    const first = bounds.from === 0
+      ? Math.min(...[...byDate.keys()].map((k) => new Date(`${k}T00:00:00Z`).getTime()), Date.now())
+      : bounds.from;
+    const last = bounds.to === Infinity ? Date.now() : bounds.to - 1;
+    const n = Math.min(Math.max(1, Math.round((last - first) / 86_400_000) + 1), 90);
+    return Array.from({ length: n }, (_, i) => {
+      const k = dayKey(new Date(first + i * 86_400_000));
       return byDate.get(k) ?? ({ id: k, date: k, visits: 0 } as Daily);
     });
-  }, [daily, days]);
+  }, [daily, bounds]);
 
   const shown = useMemo(() => {
-    const cutoff = Date.now() - days * 86_400_000;
     const rows = visits
       .filter((v) => (hideBots ? !v.isBot : true))
       .filter((v) => !(v.visitorId && ignored.includes(v.visitorId)))
-      .filter((v) => (v.startedAt ? v.startedAt.toDate().getTime() >= cutoff : true))
+      .filter((v) => {
+        const t = v.startedAt?.toDate().getTime();
+        return t === undefined ? true : t >= bounds.from && t < bounds.to;
+      })
       .map((v) => ({ v, score: v.score ?? scoreSession(v).total }));
     return sortByScore ? [...rows].sort((a, b) => b.score - a.score) : rows;
-  }, [visits, hideBots, ignored, days, sortByScore]);
+  }, [visits, hideBots, ignored, bounds, sortByScore]);
 
   const sum = (rows: Daily[], f: keyof Daily) => rows.reduce((a, r) => a + ((r[f] as number) ?? 0), 0);
   const totalVisits = sum(range, "visits");
@@ -337,6 +427,12 @@ export default function Dashboard() {
       cls: median(shown.map(({ v }) => v.cls ?? 0).filter((x) => x > 0)),
     }),
     [shown]
+  );
+
+  // "الآن": جلسة نُبض قلبها خلال آخر خمس دقائق.
+  const liveNow = useMemo(
+    () => visits.filter((v) => (v.lastSeenAt?.toDate().getTime() ?? 0) > Date.now() - 300_000).length,
+    [visits]
   );
 
   const topVisitors = useMemo(
@@ -422,15 +518,32 @@ export default function Dashboard() {
       <div className="mt-6 flex flex-wrap items-center gap-2">
         {RANGES.map((r) => (
           <button
-            key={r.days}
-            onClick={() => setDays(r.days)}
+            key={r.key}
+            onClick={() => setRangeKey(r.key)}
             className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${
-              days === r.days ? "border-accent/40 bg-accent-soft text-accent" : "border-white/10 text-fg hover:text-ink"
+              rangeKey === r.key ? "border-accent/40 bg-accent-soft text-accent" : "border-white/10 text-fg hover:text-ink"
             }`}
           >
             {r.label}
           </button>
         ))}
+        {rangeKey === "custom" && (
+          <span className="flex items-center gap-1.5" dir="ltr">
+            <input
+              type="date"
+              value={customFrom}
+              onChange={(e) => setCustomFrom(e.target.value)}
+              className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 font-mono text-xs text-ink"
+            />
+            <span className="text-fg-muted">→</span>
+            <input
+              type="date"
+              value={customTo}
+              onChange={(e) => setCustomTo(e.target.value)}
+              className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 font-mono text-xs text-ink"
+            />
+          </span>
+        )}
         <span className="mx-1 h-4 w-px bg-white/10" />
         <button
           onClick={() => setHideBots((b) => !b)}
@@ -460,7 +573,11 @@ export default function Dashboard() {
       {error && <p className="mt-6 text-sm text-rose-400">{error}</p>}
 
       <section className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Stat label="الزيارات" value={String(totalVisits)} sub={`${sum(range, "newVisitors")} زائر جديد`} />
+        <Stat
+          label="الزيارات"
+          value={String(totalVisits)}
+          sub={`${sum(range, "newVisitors")} زائر جديد · ${liveNow} الآن`}
+        />
         <Stat label="فرص تستحقّ المتابعة" value={String(hot)} sub={`تقييم ٥٥+`} />
         <Stat label="متوسّط الزمن النشط" value={fmtDuration(completed ? totalActive / completed : 0)} sub="لكل جلسة مكتملة" />
         <Stat
@@ -470,8 +587,15 @@ export default function Dashboard() {
         />
       </section>
 
-      <section className="mt-4">
+      <p className="mt-3 text-[11px] text-fg-muted">
+        الموقع مُستنتَج من عنوان IP، أي أنه يشير إلى مخرج مزوّد الخدمة لا إلى مكان الزائر —
+        اشتراك جوّال في بريدة قد يظهر «الرياض». الدقّة الحقيقيّة تتطلّب إذن الموقع من المتصفّح،
+        ولم أطلبه لأنه يُنفّر الزائر.
+      </p>
+
+      <section className="mt-4 grid gap-4 lg:grid-cols-[1.6fr_1fr]">
         <DailyBars rows={range} />
+        <HourlyBars visits={shown.map(({ v }) => v)} />
       </section>
 
       <section className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -510,7 +634,7 @@ export default function Dashboard() {
         <table className="mt-4 w-full min-w-[920px] text-start">
           <thead>
             <tr className="font-mono text-[10px] uppercase tracking-wider text-fg-muted">
-              {["التقييم", "الوقت", "المكان", "الجهاز", "نشط", "تمرير", "المصدر", "الأحداث"].map((h) => (
+              {["التقييم", "الوقت", "IP", "المكان", "الجهاز", "نشط", "تمرير", "المصدر", "الأحداث"].map((h) => (
                 <th key={h} className="pb-2 pe-3 text-start font-normal">{h}</th>
               ))}
             </tr>
