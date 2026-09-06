@@ -22,7 +22,7 @@ export function Nav() {
         {/* الشعار ثم الاسم — العلامة أوّلاً، والطباعة تكملها */}
         <button onClick={() => go(0)} className="group flex shrink-0 items-center gap-2.5 text-start leading-tight">
           <Image
-            src="/logo-mark.png"
+            src="/logo-mark.webp"
             alt=""
             width={512}
             height={436}
