@@ -12,6 +12,8 @@ import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { getClientAuth, getClientDb, OWNER_EMAIL } from "@/lib/firebase";
 import { scoreLabel, scoreSession } from "@/lib/score";
 import type { Daily, Visit, Visitor } from "./types";
+import { buildPeople } from "./people";
+import { ChannelsSection, PeopleSection } from "./PeopleSection";
 
 /* ─── مساعدات عرض ──────────────────────────────────────────────────────────── */
 
@@ -522,6 +524,20 @@ export default function Dashboard() {
     return sortByScore ? [...rows].sort((a, b) => b.score - a.score) : rows;
   }, [visits, hideBots, ignored, bounds, sortByScore]);
 
+  // ⚠️ **الوحدة شخصٌ لا جلسة.** عند أحد عشر زائراً تكون النسب المئوية ضجيجاً،
+  // والقيمة كلّها في النظر إلى كل شخصٍ على حدة — من أين اكتشفك، وكم عاد،
+  // وهل فتح سيرتك. لذلك يتصدّر هذا القسم اللوحة والمخطّطات تتبعه.
+  const people = useMemo(() => buildPeople(shown.map(({ v }) => v)), [shown]);
+
+  const perSource = useMemo(() => {
+    const m: Record<string, number> = {};
+    for (const { v } of shown) {
+      const k = v.utm?.source ?? v.referrerHost ?? "direct";
+      m[k] = (m[k] ?? 0) + 1;
+    }
+    return m;
+  }, [shown]);
+
   const sum = (rows: Daily[], f: keyof Daily) => rows.reduce((a, r) => a + ((r[f] as number) ?? 0), 0);
   const before = (f: keyof Daily) => (prevRange ? sum(prevRange, f) : null);
   const totalVisits = sum(range, "visits");
@@ -719,6 +735,26 @@ export default function Dashboard() {
       <section className="mt-4 grid gap-4 lg:grid-cols-[1.6fr_1fr]">
         <DailyBars rows={range} />
         <HourlyBars visits={shown.map(({ v }) => v)} />
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-sm font-semibold text-ink">
+          الأشخاص ({people.length}) — مرتّبون بالنيّة لا بالزمن
+        </h2>
+        <p className="mt-1 text-[12px] text-fg/70">
+          من فتح سيرتك أو نقر وسيلة تواصل يتصدّر، ثم الأكثر انتباهاً. اضغط
+          «انسخ للمتابعة» لتأخذ ملخّصاً جاهزاً تبدأ به رسالة.
+        </p>
+        <div className="mt-3">
+          <PeopleSection people={people} />
+        </div>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-sm font-semibold text-ink">قنوات موسومة — علاج «مباشر»</h2>
+        <div className="mt-3">
+          <ChannelsSection perSource={perSource} />
+        </div>
       </section>
 
       <section className="mt-4">
