@@ -7,5 +7,13 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  // ⚠️ **الخطّ العربيّ يُفرَض هنا، ولا يكفي `dir="rtl"`.** جذر المستند
+  // `lang="en"` (الموقع إنجليزيّ أساساً)، وقاعدة Cairo في `globals.css`
+  // مشروطة بـ`html[lang="ar"]` — فكان كل نصّ عربيّ في اللوحة يُرسَم بـ
+  // Inter Tight اللاتينيّ وبديله: حروفٌ متفاوتة الارتفاع وتشكيلٌ مكسور.
+  return (
+    <div lang="ar" dir="rtl" className="font-arabic">
+      {children}
+    </div>
+  );
 }

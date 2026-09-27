@@ -209,32 +209,42 @@ export default function Dashboard() {
     return (
       <Shell>
         <p className="text-fg">هذا الحساب لا يملك الوصول.</p>
-        <button onClick={() => signOut(getClientAuth())} className="mt-3 text-sm text-fg/70 underline">خروج</button>
+        <button onClick={() => signOut(getClientAuth())} className="mt-3 text-sm text-fg-muted underline">خروج</button>
       </Shell>
     );
   }
 
-  const toneCls = v.tone === "good" ? "border-emerald-500/30 bg-emerald-500/[0.06]"
-    : v.tone === "warn" ? "border-amber-500/30 bg-amber-500/[0.06]"
-      : "border-white/10 bg-white/[0.03]";
+  // ⚠️ **الحالة تُقال بالشريط لا بتلوين البطاقة كلّها.** خلفيةٌ خضراء أو
+  // كهرمانية تُخرج اللوحة عن لوحة الموقع الرماديّة الدافئة؛ وشريطٌ جانبيّ
+  // رفيع يكفي للتمييز ويُبقي النصّ هو البطل.
+  const toneBar = v.tone === "good" ? "before:bg-ink"
+    : v.tone === "warn" ? "before:bg-fg-muted"
+      : "before:bg-fg-faint";
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8" dir="rtl">
+    <main className="mx-auto max-w-5xl px-5 py-10 sm:px-6">
       <header className="flex flex-wrap items-center gap-3">
-        <h1 className="text-lg font-semibold text-ink">من زار موقعك</h1>
+        <div>
+          <h1 className="text-[22px] font-semibold leading-tight tracking-[-0.01em] text-ink">
+            من زار موقعك
+          </h1>
+          <p className="mt-0.5 text-[12px] text-fg-faint">لوحة خاصّة — غير مفهرسة</p>
+        </div>
         <div className="ms-auto flex items-center gap-1">
           {RANGES.map((r) => (
             <button
               key={r.key}
               onClick={() => setRangeKey(r.key)}
-              className={`rounded-lg border px-2.5 py-1 text-xs ${
-                rangeKey === r.key ? "border-accent/40 bg-accent-soft text-accent" : "border-white/10 text-fg"
+              className={`rounded-lg border px-3 py-1.5 text-[12px] transition-colors ${
+                rangeKey === r.key
+                  ? "border-transparent bg-ink font-semibold text-bg"
+                  : "border-line text-fg-muted hover:border-white/20 hover:text-ink"
               }`}
             >
               {r.label}
             </button>
           ))}
-          <button onClick={() => void load()} className="ms-2 text-xs text-fg/70 underline">
+          <button onClick={() => void load()} className="ms-2 text-[12px] text-fg-faint underline-offset-4 hover:text-ink hover:underline">
             {loading ? "…" : "تحديث"}
           </button>
         </div>
@@ -243,47 +253,51 @@ export default function Dashboard() {
       {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
 
       {/* ① الحكم */}
-      <section className={`mt-5 rounded-2xl border p-4 ${toneCls}`}>
-        <p className="text-[15px] leading-relaxed text-ink">{v.line}</p>
+      <section
+        className={`relative mt-6 overflow-hidden rounded-2xl border border-line bg-bg-800/60 p-5 shadow-card
+          before:absolute before:inset-y-0 before:end-0 before:w-[3px] ${toneBar}`}
+      >
+        <p className="text-[17px] font-medium leading-[1.85] text-ink">{v.line}</p>
       </section>
 
       {/* ② ماذا أفعل */}
-      <section className="mt-5">
-        <h2 className="text-sm font-semibold text-ink">ماذا أفعل الآن</h2>
-        <ul className="mt-2 space-y-1.5">
+      <section className="mt-8">
+        <h2 className="text-[13px] font-semibold uppercase tracking-[0.12em] text-fg-faint">ماذا أفعل الآن</h2>
+        <ul className="mt-3 space-y-2">
           {todo.map((t, i) => (
-            <li key={i} className="flex gap-2 text-[13px] text-fg">
-              <span className="text-accent">←</span>{t}
+            <li key={i} className="flex gap-2.5 rounded-xl border border-line bg-bg-800/40 px-3.5 py-2.5 text-[13px] leading-relaxed text-fg">
+              <span className="mt-[2px] shrink-0 text-ink">←</span>
+              <span>{t}</span>
             </li>
           ))}
         </ul>
       </section>
 
       {/* ③ الأشخاص */}
-      <section className="mt-7">
-        <h2 className="text-sm font-semibold text-ink">الأشخاص ({people.length})</h2>
-        <p className="mt-1 text-[12px] text-fg/70">
+      <section className="mt-10">
+        <h2 className="text-[13px] font-semibold uppercase tracking-[0.12em] text-fg-faint">الأشخاص ({people.length})</h2>
+        <p className="mt-1 text-[12px] text-fg-muted">
           مرتّبون بالنيّة لا بالزمن: من فتح سيرتك أو نقر تواصلاً يتصدّر.
         </p>
         <div className="mt-3"><PeopleSection people={people} /></div>
       </section>
 
       {/* ④ القنوات */}
-      <section className="mt-7">
-        <h2 className="text-sm font-semibold text-ink">روابط القنوات</h2>
+      <section className="mt-10">
+        <h2 className="text-[13px] font-semibold uppercase tracking-[0.12em] text-fg-faint">روابط القنوات</h2>
         <div className="mt-2"><ChannelsSection perSource={perChannel} /></div>
       </section>
 
       {/* ⑤ الإعدادات والتفاصيل — مطويّة */}
-      <section className="mt-7">
-        <button onClick={() => setShowTech((s) => !s)} className="text-xs text-fg/70 underline">
+      <section className="mt-10">
+        <button onClick={() => setShowTech((s) => !s)} className="text-[12px] text-fg-faint underline-offset-4 hover:text-ink">
           {showTech ? "إخفاء الإعدادات" : "الإعدادات واستثناء زياراتك"}
         </button>
         {showTech && (
-          <div className="mt-3 space-y-4 rounded-2xl border border-white/10 p-4">
+          <div className="mt-3 space-y-4 rounded-2xl border border-line bg-bg-800/40 p-4">
             <div>
               <h3 className="text-[13px] font-semibold text-ink">استثناء زياراتك</h3>
-              <p className="mt-1 text-[12px] text-fg/70">
+              <p className="mt-1 text-[12px] text-fg-muted">
                 طريقتان تسدّان ثغرتَي بعضهما: زيارة <span className="font-mono">ardev.dev/me</span>{" "}
                 تستثني هذا المتصفّح، وتسجيل عنوانك يستثني شبكتك كلّها.
               </p>
@@ -291,7 +305,7 @@ export default function Dashboard() {
                 <span className="font-mono text-[12px] text-fg" dir="ltr">{myIp || "…"}</span>
                 {myIp && !ips.includes(myIp) && (
                   <button onClick={() => void saveIp([...ips, myIp])}
-                          className="rounded-lg border border-white/15 px-2 py-1 text-[11px] text-ink">
+                          className="rounded-lg border border-line px-2.5 py-1 text-[11px] text-ink transition-colors hover:border-white/25">
                     استثنِ عنواني الحالي
                   </button>
                 )}
@@ -311,7 +325,7 @@ export default function Dashboard() {
 
             <div>
               <h3 className="text-[13px] font-semibold text-ink">الجلسات الخام</h3>
-              <p className="mt-1 text-[12px] text-fg/70">
+              <p className="mt-1 text-[12px] text-fg-muted">
                 {visits.length} جلسة محمّلة · {visits.filter((x) => x.isBot).length} منها زحفٌ آليّ مُستبعَد.
               </p>
             </div>
@@ -319,7 +333,7 @@ export default function Dashboard() {
         )}
       </section>
 
-      <footer className="mt-10 flex items-center gap-3 text-[11px] text-fg/50">
+      <footer className="mt-10 flex items-center gap-3 text-[11px] text-fg-faint">
         <span>{user.email}</span>
         <button onClick={() => signOut(getClientAuth())} className="underline">خروج</button>
       </footer>

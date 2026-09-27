@@ -40,7 +40,7 @@ function CopyButton({ text, label }: { text: string; label: string }) {
           setTimeout(() => setDone(false), 1600);
         });
       }}
-      className="inline-flex items-center gap-1 rounded-lg border border-white/10 px-2 py-1 text-[11px] text-fg hover:text-ink"
+      className="inline-flex items-center gap-1 rounded-lg border border-line px-2 py-1 text-[11px] text-fg transition-colors hover:border-white/25 hover:text-ink"
     >
       {done ? <Check size={12} /> : <Copy size={12} />} {done ? "نُسخ" : label}
     </button>
@@ -51,26 +51,30 @@ function CopyButton({ text, label }: { text: string; label: string }) {
 
 function Heat({ p }: { p: Person }) {
   // ⚠️ النيّة المُعلَنة تسبق الرقم: من فتح سيرتك «فرصة» ولو قصُرت زيارته.
+  //
+  // ⚠️ **والتمييز بالوزن لا باللون.** لوحة الموقع رماديّة دافئة أحاديّة،
+  // وإقحام أخضرَ وكهرمانيّ وأزرق فيها يجعل اللوحة تبدو غريبةً عن الموقع
+  // الذي تخدمه. فالأهمّ يُعلَن بخلفيةٍ ممتلئة، والأدنى بحدٍّ خافت.
   const tone = p.contacted
-    ? { t: "تواصل", c: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30" }
+    ? { t: "تواصل", c: "bg-ink text-bg border-transparent font-semibold" }
     : p.openedCv
-      ? { t: "فتح السيرة", c: "bg-amber-500/15 text-amber-300 border-amber-500/30" }
+      ? { t: "فتح السيرة", c: "bg-accent-soft text-ink border-white/20" }
       : p.score >= 55
-        ? { t: "مهتمّ", c: "bg-sky-500/15 text-sky-300 border-sky-500/30" }
-        : { t: "عابر", c: "bg-white/5 text-fg border-white/10" };
+        ? { t: "مهتمّ", c: "border-line text-fg" }
+        : { t: "عابر", c: "border-transparent text-fg-faint" };
   return (
-    <span className={`rounded-full border px-2 py-0.5 text-[11px] ${tone.c}`}>{tone.t}</span>
+    <span className={`rounded-full border px-2 py-0.5 text-[11px] leading-5 ${tone.c}`}>{tone.t}</span>
   );
 }
 
 function PersonCard({ p }: { p: Person }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-4">
+    <div className="rounded-2xl border border-line bg-bg-800/60 p-4 shadow-card">
       <div className="flex flex-wrap items-center gap-2">
         <Heat p={p} />
-        <span className="font-mono text-[11px] text-fg/60">{p.visitorId.slice(0, 8)}</span>
-        <span className="ms-auto text-[11px] text-fg/60">
+        <span className="font-mono text-[11px] text-fg-faint">{p.visitorId.slice(0, 8)}</span>
+        <span className="ms-auto text-[11px] text-fg-faint">
           {day(p.firstAt)} ← {day(p.lastAt)}
         </span>
       </div>
@@ -94,30 +98,30 @@ function PersonCard({ p }: { p: Person }) {
 
       <div className="mt-2 flex flex-wrap gap-1.5">
         {p.openedCv && (
-          <span className="inline-flex items-center gap-1 rounded-lg bg-amber-500/10 px-2 py-0.5 text-[11px] text-amber-300">
+          <span className="inline-flex items-center gap-1 rounded-lg border border-white/15 bg-accent-soft px-2 py-0.5 text-[11px] text-ink">
             <FileText size={11} /> فتح السيرة
           </span>
         )}
         {p.contacted && (
-          <span className="inline-flex items-center gap-1 rounded-lg bg-emerald-500/10 px-2 py-0.5 text-[11px] text-emerald-300">
+          <span className="inline-flex items-center gap-1 rounded-lg bg-ink px-2 py-0.5 text-[11px] font-semibold text-bg">
             <MessageSquare size={11} /> نقر تواصل
           </span>
         )}
         {p.sections.slice(0, 4).map((s) => (
-          <span key={s} className="rounded-lg bg-white/5 px-2 py-0.5 text-[11px] text-fg/80">{s}</span>
+          <span key={s} className="rounded-lg border border-line px-2 py-0.5 text-[11px] text-fg-muted">{s}</span>
         ))}
       </div>
 
       <div className="mt-3 flex items-center gap-2">
         <CopyButton text={followUpText(p)} label="انسخ للمتابعة" />
         <button type="button" onClick={() => setOpen((v) => !v)}
-                className="text-[11px] text-fg/70 hover:text-ink">
+                className="text-[11px] text-fg-muted hover:text-ink">
           {open ? "إخفاء الزيارات" : `الزيارات (${p.sessions.length})`}
         </button>
       </div>
 
       {open && (
-        <ol className="mt-3 space-y-1 border-s border-white/10 ps-3 text-[11px] text-fg/80">
+        <ol className="mt-3 space-y-1 border-s border-line ps-3 text-[11px] text-fg-muted">
           {p.sessions.map((s, i) => (
             <li key={s.id ?? i}>
               {day(s.startedAt ? s.startedAt.toDate() : null)} · {srcAr(s.referrerHost ?? "direct")} ·{" "}
@@ -135,7 +139,7 @@ function PersonCard({ p }: { p: Person }) {
 
 export function PeopleSection({ people }: { people: Person[] }) {
   if (!people.length) {
-    return <p className="text-[13px] text-fg/70">لا زوّار في هذا المدى.</p>;
+    return <p className="text-[13px] text-fg-muted">لا زوّار في هذا المدى.</p>;
   }
   return (
     <div className="grid gap-3 md:grid-cols-2">
@@ -154,7 +158,7 @@ export function PeopleSection({ people }: { people: Person[] }) {
 export function ChannelsSection({ perSource }: { perSource: Record<string, number> }) {
   return (
     <div className="space-y-2">
-      <p className="text-[12px] text-fg/70">
+      <p className="text-[12px] text-fg-muted">
         انسخ رابط القناة والصقه في موضعها — ولا تنشر <span className="font-mono">ardev.dev</span> عارياً
         بعد اليوم، فالزيارة بلا وسمٍ تصل مجهولة المصدر.
       </p>
@@ -162,13 +166,13 @@ export function ChannelsSection({ perSource }: { perSource: Record<string, numbe
         {CHANNELS.map((c) => {
           const hits = perSource[c.key] ?? 0;
           return (
-            <div key={c.key} className="flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2">
+            <div key={c.key} className="flex items-center gap-2 rounded-xl border border-line bg-bg-800/40 px-3 py-2.5">
               <div className="min-w-0 flex-1">
                 <div className="text-[12px] text-ink">{c.label}</div>
-                <div className="truncate text-[11px] text-fg/60">{c.where}</div>
+                <div className="truncate text-[11px] text-fg-faint">{c.where}</div>
               </div>
               {hits > 0 && (
-                <span className="rounded-full bg-sky-500/15 px-2 py-0.5 text-[11px] text-sky-300">
+                <span className="rounded-full border border-line px-2 py-0.5 text-[11px] tabular-nums text-ink">
                   {hits}
                 </span>
               )}
