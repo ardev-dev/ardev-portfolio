@@ -101,10 +101,39 @@ export type Tracker = { event: (name: string, label?: string, value?: number) =>
  * يبدأ التتبّع ويُرجع دالة إيقاف + مُرسِل أحداث.
  * onEvent يُمرَّر إليه كل حدث مسمّى ليُعكَس أيضاً على Firebase Analytics.
  */
+/**
+ * علامة «هذا أنا» — تُخزَّن محلياً ولا تنتهي.
+ *
+ * ⚠️ **بلا استثنائك كانت بياناتك أنت ثلث القياس.** أكثر «زائر» تكراراً في
+ * ثمانية وعشرين يوماً كان ثماني جلسات وخمس عشرة دقيقة من الرياض — وهو صاحب
+ * الموقع يتفقّده. وكل نسبةٍ تُقرأ فوق ذلك مشوّهة: المصدر، والانتباه، ونسبة
+ * العائدين (٢٧ من ٣٣).
+ *
+ * تُفعَّل بفتح `?me=1` مرّة واحدة على كل جهازٍ تستعمله، وتُلغى بـ`?me=0`.
+ */
+const OWNER_KEY = "ardev_owner";
+
+export function isOwnerDevice(): boolean {
+  try {
+    const q = new URLSearchParams(location.search).get("me");
+    if (q === "1") localStorage.setItem(OWNER_KEY, "1");
+    if (q === "0") localStorage.removeItem(OWNER_KEY);
+    return localStorage.getItem(OWNER_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
 export function startTracking(onEvent?: (name: string, params: Record<string, unknown>) => void): {
   stop: () => void;
   tracker: Tracker;
 } {
+  // ⚠️ الخروج هنا **قبل** أيّ كتابة: تسجيل الجلسة ثم تجاهلها لاحقاً في اللوحة
+  // يُبقي التشويه في القاعدة نفسها ويُضاعف حجمها بلا فائدة.
+  if (isOwnerDevice()) {
+    return { stop: () => {}, tracker: { event: () => {} } };
+  }
+
   const sid = sessionId();
   const started = Date.now();
 
@@ -244,14 +273,28 @@ export function startTracking(onEvent?: (name: string, params: Record<string, un
     const a = (e.target as Element | null)?.closest?.("a");
     if (!a) return;
     const href = a.getAttribute("href") ?? "";
+
     if (href.startsWith("mailto:")) tracker.event("contact_email", href.slice(7, 80));
+    else if (href.startsWith("tel:")) tracker.event("contact_phone", href.slice(4, 40));
+    // ⚠️ **فتح السيرة الذاتية كان لا يُسجَّل إطلاقاً.** الرابط نسبيّ
+    // (`/Abdulrahman-Morshed-CV.pdf`) فلا يطابق `mailto:` ولا `https?:`
+    // الخارجيّ ولا `#` — فكان يسقط من كل الفروع بصمت. وهو **أقوى إشارة نيّة**
+    // في موقع سيرة ذاتية: من يفتح الملفّ يفكّر في التوظيف لا في التصفّح.
+    else if (/\.(pdf|docx?)($|\?)/i.test(href)) tracker.event("cv_open", href.split("/").pop()?.slice(0, 60));
     else if (/^https?:/i.test(href) && !href.includes(location.hostname)) {
       counts.outboundClicks++;
       let host = href;
       try {
         host = new URL(href).hostname;
       } catch {}
-      tracker.event("outbound_click", host);
+      // ⚠️ الوجهات التي تعني «يريد التواصل» تُسمّى بذاتها: تجميعها كلّها تحت
+      // `outbound_click` يخلط من ذهب إلى لينكدإن ليُراسلك بمن فتح مستودعاً
+      // على جيت هَب ليقرأ كوداً. والفرق بينهما هو الفرصة نفسها.
+      const intent = /wa\.me|whatsapp/i.test(host) ? "contact_whatsapp"
+        : /linkedin/i.test(host) ? "contact_linkedin"
+        : /t\.me|telegram/i.test(host) ? "contact_telegram"
+        : null;
+      tracker.event(intent ?? "outbound_click", host);
     } else if (href.startsWith("#")) tracker.event("nav_click", href.slice(1, 40));
   };
 

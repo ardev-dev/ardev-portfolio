@@ -66,6 +66,17 @@ const today = () => new Date().toISOString().slice(0, 10);
  * وهذه أقرب إشارة مجّانيّة إلى "من الجهة التي زارتنا".
  * مخزَّن مؤقّتاً في ذاكرة النسخة، وبمهلة قصيرة حتى لا يؤخّر الاستجابة.
  */
+/**
+ * شبكات المعاينة ومراكز البيانات — **إشارة أصدق من وكيل المستخدم**.
+ *
+ * ⚠️ **كشف البوتات بالـUA وحده يفوت أخطرها.** ثلاث «زيارات أمريكية
+ * وأيرلندية» جاءت بوكيل Chrome 139 عاديّ على Windows، فمرّت `isBot: false`
+ * — وعكسُ DNS كشفها جميعاً: `fwdproxy-*.fbsv.net`، وهي وكلاء Meta لمعاينة
+ * الروابط. وفي موقعٍ زوّاره أحد عشر، ثلاث جلسات وهمية تُزيّف كل نسبة.
+ */
+const DATACENTER_RDNS =
+  /fbsv\.net|facebook|fbcdn|1e100\.net|googleusercontent|amazonaws|azure|cloudfront|linode|digitalocean|hetzner|ovh|contabo|scaleway|vultr|oracle(cloud)?|crawl|bot|proxy|spider/i;
+
 const rdnsCache = new Map<string, string | null>();
 
 async function reverseDns(ip: string): Promise<string | null> {
@@ -199,6 +210,10 @@ export async function POST(req: Request) {
       ended: action === "end",
     };
 
+    // عكس DNS يُحسب مرّة ويُستعمل مرّتين: للتخزين ولتقرير «آليّ أم بشر».
+    const rdnsHost = await reverseDns(ip);
+    const automated = !!rdnsHost && DATACENTER_RDNS.test(rdnsHost);
+
     if (action === "start") {
       await doc.set(
         {
@@ -210,7 +225,7 @@ export async function POST(req: Request) {
           // ── الشبكة والموقع ──
           ip,
           geo,
-          rdns: await reverseDns(ip),
+          rdns: rdnsHost,
           // ── الجهاز والمتصفح ──
           userAgent: ua.slice(0, 512),
           browser: info.browser,
@@ -219,7 +234,8 @@ export async function POST(req: Request) {
           osVersion: info.osVersion,
           engine: info.engine,
           deviceType: info.deviceType,
-          isBot: info.isBot,
+          // الوكيل **أو** الشبكة: أيّهما دلّ كفى.
+          isBot: info.isBot || automated,
           // ── تلميحات العميل ──
           screen: s(body.screen, 24),
           viewport: s(body.viewport, 24),
@@ -273,7 +289,7 @@ export async function POST(req: Request) {
           lastBrowser: info.browser,
           lastOs: info.os,
           lastReferrerHost: s(body.referrerHost, 120) ?? null,
-          isBot: info.isBot,
+          isBot: info.isBot || automated,
           // آخر لمسة: من أين عاد هذه المرّة.
           lastTouch: {
             referrerHost: s(body.referrerHost, 120) ?? "direct",
