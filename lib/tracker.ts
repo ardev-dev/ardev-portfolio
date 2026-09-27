@@ -84,6 +84,8 @@ function environment() {
     path: location.pathname + location.search,
     referrer: document.referrer || undefined,
     referrerHost: referrerHost ?? "direct",
+    // القناة من المسار القصير تسبق `utm_source`: هي ما ننشره فعلاً.
+    channel: channelFromCookie(),
     utmSource: q.get("utm_source") ?? undefined,
     utmMedium: q.get("utm_medium") ?? undefined,
     utmCampaign: q.get("utm_campaign") ?? undefined,
@@ -111,17 +113,38 @@ export type Tracker = { event: (name: string, label?: string, value?: number) =>
  *
  * تُفعَّل بفتح `?me=1` مرّة واحدة على كل جهازٍ تستعمله، وتُلغى بـ`?me=0`.
  */
-const OWNER_KEY = "ardev_owner";
+const OWNER_COOKIE = "ardev_owner";
+const CH_COOKIE = "ardev_ch";
 
-export function isOwnerDevice(): boolean {
+const cookie = (name: string): string | undefined => {
   try {
-    const q = new URLSearchParams(location.search).get("me");
-    if (q === "1") localStorage.setItem(OWNER_KEY, "1");
-    if (q === "0") localStorage.removeItem(OWNER_KEY);
-    return localStorage.getItem(OWNER_KEY) === "1";
+    return document.cookie
+      .split("; ")
+      .find((c) => c.startsWith(`${name}=`))
+      ?.split("=")[1];
   } catch {
-    return false;
+    return undefined;
   }
+};
+
+/**
+ * هل هذا جهاز صاحب الموقع؟
+ *
+ * ⚠️ **بلا استثنائه كانت بياناته ثلث القياس.** أكثر «زائر» تكراراً في ثمانية
+ * وعشرين يوماً كان ثماني جلسات وخمس عشرة دقيقة من الرياض — وهو المالك يتفقّد
+ * موقعه. وكل نسبةٍ تُقرأ فوق ذلك مشوّهة: المصدر والانتباه ونسبة العائدين.
+ *
+ * ⚠️ **وكعكة لا `localStorage`** — تُضبط بزيارة `ardev.dev/me` مرّةً على كل
+ * جهاز (بلا معاملات استعلام، انظر `middleware.ts`)، ويقرؤها **الخادم** أيضاً
+ * فيمتنع عن الكتابة من أصلها.
+ */
+export function isOwnerDevice(): boolean {
+  return cookie(OWNER_COOKIE) === "1";
+}
+
+/** القناة التي جاء منها الزائر — من مسارٍ قصير مثل `/in`، لا من `?utm_source`. */
+export function channelFromCookie(): string | undefined {
+  return cookie(CH_COOKIE);
 }
 
 export function startTracking(onEvent?: (name: string, params: Record<string, unknown>) => void): {

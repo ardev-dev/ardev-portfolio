@@ -79,6 +79,35 @@ const DATACENTER_RDNS =
 
 const rdnsCache = new Map<string, string | null>();
 
+/**
+ * عناوين المالك المستثناة — تُقرأ من `config/owner` وتُخزَّن خمس دقائق.
+ *
+ * ⚠️ **الكعكة وحدها لا تكفي**: تُمحى مع بيانات المتصفّح، ولا تعمل في التصفّح
+ * الخفيّ، وتحتاج ضبطاً على كل جهاز. والعنوان يغطّي كل أجهزة البيت أو المكتب
+ * دفعةً واحدة — فالاثنان معاً يسدّان ثغرتَي بعضهما.
+ *
+ * ⚠️ **ويُقرأ مخزَّناً لا عند كل نبضة**: نبضة كل بضع ثوانٍ لكل زائر تعني
+ * قراءةً إضافية من Firestore في كل مرّة، وهي كلفةٌ بلا مقابل لقيمةٍ تتغيّر
+ * مرّاتٍ في السنة.
+ */
+let ownerIps: { at: number; list: string[] } = { at: 0, list: [] };
+const OWNER_IPS_TTL = 5 * 60_000;
+
+async function isOwnerIp(db: FirebaseFirestore.Firestore, ip: string): Promise<boolean> {
+  if (ip === "unknown") return false;
+  if (Date.now() - ownerIps.at > OWNER_IPS_TTL) {
+    try {
+      const snap = await db.collection("config").doc("owner").get();
+      const raw = snap.exists ? (snap.data()?.ips as unknown) : null;
+      ownerIps = { at: Date.now(), list: Array.isArray(raw) ? raw.map(String) : [] };
+    } catch {
+      // تعذّرت القراءة: لا نستثني أحداً — تسجيل زيارةٍ زائدة أهون من فقد بيانات.
+      ownerIps = { at: Date.now(), list: ownerIps.list };
+    }
+  }
+  return ownerIps.list.includes(ip);
+}
+
 async function reverseDns(ip: string): Promise<string | null> {
   if (ip === "unknown" || rdnsCache.has(ip)) return rdnsCache.get(ip) ?? null;
   try {
@@ -118,9 +147,28 @@ function reply(visitorId: string, isNew: boolean) {
   return res;
 }
 
+/**
+ * يُرجع عنوان صاحب الطلب — ليضيفه المالك إلى قائمة الاستثناء من اللوحة.
+ *
+ * ⚠️ لا يكشف شيئاً: كل طالبٍ يرى **عنوانه هو** ولا يرى غيره، وهو يعرفه أصلاً.
+ */
+export async function GET(req: Request) {
+  return NextResponse.json({ ip: clientIp(req.headers) });
+}
+
 export async function POST(req: Request) {
   const db = getDb();
   if (!db) return new NextResponse(null, { status: 204 }); // لا اعتماديّات → تجاهل بصمت
+
+  // ── استثناء المالك: قبل أيّ قراءةٍ للجسم أو كتابةٍ في القاعدة ──
+  //
+  // كعكةٌ تُضبط بزيارة `/me`، **أو** عنوانٌ مسجَّل في `config/owner`. الأولى
+  // تكفي جهازاً، والثاني يغطّي الشبكة كلّها — والاثنان معاً يسدّان ثغرتَي
+  // بعضهما (مسح المتصفّح · تغيّر العنوان).
+  const ownerCookie = /(?:^|;\s*)ardev_owner=1(?:;|$)/.test(req.headers.get("cookie") ?? "");
+  if (ownerCookie || (await isOwnerIp(db, clientIp(req.headers)))) {
+    return new NextResponse(null, { status: 204 });
+  }
 
   let body: Record<string, unknown>;
   try {
@@ -261,6 +309,9 @@ export async function POST(req: Request) {
           path: s(body.path, 200),
           referrer: s(body.referrer, 300),
           referrerHost: s(body.referrerHost, 120),
+          // القناة من المسار القصير (`/in` · `/wa` …) — أدقّ من الإحالة لأنّ
+          // متصفّحات التطبيقات تحذف `referrer` عمداً.
+          channel: s(body.channel, 40),
           utm: {
             source: s(body.utmSource, 80),
             medium: s(body.utmMedium, 80),

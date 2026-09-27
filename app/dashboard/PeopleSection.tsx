@@ -160,7 +160,7 @@ export function ChannelsSection({ perSource }: { perSource: Record<string, numbe
       </p>
       <div className="grid gap-2 md:grid-cols-2">
         {CHANNELS.map((c) => {
-          const hits = perSource[c.source] ?? 0;
+          const hits = perSource[c.key] ?? 0;
           return (
             <div key={c.key} className="flex items-center gap-2 rounded-xl border border-white/10 px-3 py-2">
               <div className="min-w-0 flex-1">

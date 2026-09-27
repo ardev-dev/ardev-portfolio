@@ -1,447 +1,130 @@
 "use client";
 
+/**
+ * ─── لوحة الزيارات ─────────────────────────────────────────────────────────
+ *
+ * ⚠️ **أُعيد بناؤها من الصفر لأنّ سابقتها لم تكن تُقرأ.** كانت مخطّطاتٍ
+ * تجميعية — دول ومدن ومتصفّحات وساعات وقمع — وهو تصميمٌ صحيح لموقعٍ فيه آلاف
+ * الزوّار، وخاطئ تماماً هنا: الموقع رأى **أحد عشر زائراً في ثمانية وعشرين
+ * يوماً**. «٧٣٪ من السعودية» تعني ٢٤ جلسة، و«ذروة الساعة ٩» تعني ثلاث زيارات.
+ * نسبةٌ مئوية من عيّنةٍ بهذا الحجم رقمٌ يوهم الدقّة ولا يحملها.
+ *
+ * **المبدأ الجديد: إجاباتٌ لا رسوم.** اللوحة تجيب ثلاثة أسئلة بالترتيب:
+ *   ① ماذا جرى؟ — جملةٌ واحدة بالعربية، لا بطاقات أرقام.
+ *   ② من هم؟ — بطاقة لكل **شخص** لا لكل جلسة، مرتّبين بالنيّة لا بالزمن.
+ *   ③ ماذا أفعل الآن؟ — خطوات مشتقّة من البيانات نفسها.
+ * والتفاصيل التقنية تبقى متاحةً **مطويّة** لمن أرادها، لا متصدّرة.
+ */
+
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
-  type User,
+  GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, type User,
 } from "firebase/auth";
-import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, limit, orderBy, query, setDoc } from "firebase/firestore";
 import { getClientAuth, getClientDb, OWNER_EMAIL } from "@/lib/firebase";
-import { scoreLabel, scoreSession } from "@/lib/score";
-import type { Daily, Visit, Visitor } from "./types";
-import { buildPeople } from "./people";
+import type { Visit } from "./types";
+import { buildPeople, type Person } from "./people";
 import { ChannelsSection, PeopleSection } from "./PeopleSection";
 
-/* ─── مساعدات عرض ──────────────────────────────────────────────────────────── */
+/* ─── مدى زمنيّ ────────────────────────────────────────────────────────────── */
 
-const fmtDuration = (ms = 0) => {
-  const sec = Math.round(ms / 1000);
-  if (sec < 60) return `${sec}ث`;
-  return `${Math.floor(sec / 60)}د ${sec % 60}ث`;
-};
+const RANGES = [
+  { key: "7", label: "٧ أيّام", days: 7 },
+  { key: "30", label: "٣٠ يوماً", days: 30 },
+  { key: "90", label: "٩٠ يوماً", days: 90 },
+  { key: "all", label: "كل الوقت", days: 3650 },
+] as const;
 
-const fmtTime = (t?: { toDate: () => Date }) =>
-  t ? t.toDate().toLocaleString("ar-SA", { dateStyle: "short", timeStyle: "short" }) : "—";
+type RangeKey = (typeof RANGES)[number]["key"];
 
-const dayKey = (d: Date) => d.toISOString().slice(0, 10);
-
-/** قائمة تجاهل محليّة — لاستبعاد زياراتك أنت بلا أي كتابة في القاعدة. */
-const IGNORE_KEY = "ardev_dash_ignore";
-const readIgnored = (): string[] => {
-  try {
-    return JSON.parse(localStorage.getItem(IGNORE_KEY) ?? "[]") as string[];
-  } catch {
-    return [];
-  }
-};
-
-function mergeMaps(rows: Daily[], field: keyof Daily): [string, number][] {
-  const out = new Map<string, number>();
-  for (const r of rows) {
-    const m = r[field] as Record<string, number> | undefined;
-    if (!m) continue;
-    for (const [k, v] of Object.entries(m)) out.set(k, (out.get(k) ?? 0) + v);
-  }
-  return [...out.entries()].sort((a, b) => b[1] - a[1]);
-}
-
-/** الوسيط أصدق من المتوسّط في مقاييس الأداء — قيمة شاذّة واحدة لا تُزيحه. */
-const median = (xs: number[]) => {
-  if (!xs.length) return 0;
-  const s = [...xs].sort((a, b) => a - b);
-  return s[Math.floor(s.length / 2)]!;
-};
-
-function toCsv(rows: Visit[]): string {
-  const cols = [
-    "id", "startedAt", "score", "ip", "rdns", "country", "city", "deviceType", "browser", "os",
-    "activeMs", "durationMs", "maxScrollPct", "referrerHost", "siteLang", "exitSection", "lcpMs", "inpMs", "cls",
-  ];
-  const cell = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
-  const line = (v: Visit) =>
-    [
-      v.id, v.startedAt?.toDate().toISOString(), v.score, v.ip, v.rdns, v.geo?.country, v.geo?.city,
-      v.deviceType, v.browser, v.os, v.activeMs, v.durationMs, v.maxScrollPct, v.referrerHost,
-      v.siteLang, v.exitSection, v.lcpMs, v.inpMs, v.cls,
-    ].map(cell).join(",");
-  return [cols.join(","), ...rows.map(line)].join("\n");
-}
-
-/* ─── لبنات الواجهة ────────────────────────────────────────────────────────── */
-
-/** فرق النسبة عن المدى السابق. null يعني لا مدى سابق للمقارنة (مثل «كل الوقت»). */
-function Delta({ now, before }: { now: number; before: number | null }) {
-  if (before === null) return null;
-  if (!before) return <span className="text-fg-faint">جديد</span>;
-  const pct = Math.round(((now - before) / before) * 100);
-  const up = pct >= 0;
-  return (
-    <span className={up ? "text-emerald-400" : "text-rose-400"} dir="ltr">
-      {up ? "▲" : "▼"} {Math.abs(pct)}%
-    </span>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  sub,
-  now,
-  before,
-}: {
-  label: string;
-  value: string;
-  sub?: string;
-  now?: number;
-  before?: number | null;
-}) {
-  return (
-    <div className="card rounded-2xl px-4 py-5">
-      <div className="text-xs text-fg">{label}</div>
-      <div className="mt-1.5 flex items-baseline gap-2">
-        <span className="font-display text-3xl font-bold text-ink" dir="ltr">
-          {value}
-        </span>
-        {now !== undefined && before !== undefined && (
-          <span className="font-mono text-[11px]">
-            <Delta now={now} before={before} />
-          </span>
-        )}
-      </div>
-      {sub && <div className="mt-1 font-mono text-[11px] text-fg-muted">{sub}</div>}
-    </div>
-  );
-}
+/* ─── جملة الحكم ───────────────────────────────────────────────────────────── */
 
 /**
- * قمع الأقسام: كم زائراً بلغ كل شريحة، وأين غادر. الترتيب ترتيب الكشف نفسه،
- * فالانخفاض بين صفّين يقرأ مباشرةً كنسبة تسرّب عند تلك الشريحة.
+ * ⚠️ **بطاقات الأرقام لا تُفسَّر، والجملة تُفسَّر.** «٣٣ زيارة · ١١ زائراً ·
+ * ١٨ث» أرقامٌ يقرؤها صاحبها فلا يعرف أهي جيّدة أم سيّئة. الجملة تقول الحكم
+ * صراحةً — وهي أصعب على الكاتب وأسهل على القارئ، وهذا هو المقصود.
  */
-const DECK = [
-  { id: "top", label: "البداية" },
-  { id: "abber", label: "عبر" },
-  { id: "maskani", label: "مسكني" },
-  { id: "azbah", label: "عزبة" },
-  { id: "wisal", label: "وصال" },
-  { id: "work", label: "الأعمال" },
-  { id: "info", label: "طريقتي" },
-  { id: "experience", label: "الخبرة" },
-  { id: "contact", label: "تواصل" },
-];
+function verdict(people: Person[], days: number): { line: string; tone: "good" | "warn" | "bad" } {
+  const n = people.length;
+  if (!n) return { line: `لا زوّار في آخر ${days} يوماً — الموقع لم يره أحد.`, tone: "bad" };
 
-function Funnel({ visits }: { visits: Visit[] }) {
-  const rows = useMemo(() => {
-    const seen = new Map<string, number>();
-    const exit = new Map<string, number>();
-    for (const v of visits) {
-      for (const sec of new Set(v.sectionsSeen ?? [])) seen.set(sec, (seen.get(sec) ?? 0) + 1);
-      if (v.exitSection) exit.set(v.exitSection, (exit.get(v.exitSection) ?? 0) + 1);
-    }
-    return DECK.map((d) => ({ ...d, seen: seen.get(d.id) ?? 0, exit: exit.get(d.id) ?? 0 }));
-  }, [visits]);
+  const contacted = people.filter((p) => p.contacted).length;
+  const cv = people.filter((p) => p.openedCv).length;
+  const repeat = people.filter((p) => p.sessions.length > 1).length;
 
-  const top = Math.max(1, rows[0]?.seen ?? 1);
+  const head = `${n} ${n === 1 ? "شخصاً واحداً زار" : n === 2 ? "شخصين زارا" : "أشخاص زاروا"} موقعك`;
 
-  return (
-    <div className="card rounded-2xl p-5">
-      <h2 className="text-sm font-semibold text-ink">قمع الأقسام — أين يتوقّف الزوّار</h2>
-      <div className="mt-4 space-y-1.5">
-        {rows.map((r, i) => {
-          const prev = i === 0 ? r.seen : rows[i - 1]!.seen;
-          const drop = prev ? Math.round(((prev - r.seen) / prev) * 100) : 0;
-          return (
-            <div key={r.id} className="grid grid-cols-[5.5rem_1fr_auto] items-center gap-3">
-              <span className="truncate text-xs text-fg">{r.label}</span>
-              <div className="h-5 overflow-hidden rounded bg-white/[0.05]">
-                <div
-                  className="h-full rounded bg-accent/70"
-                  style={{ width: `${Math.max((r.seen / top) * 100, r.seen ? 2 : 0)}%` }}
-                />
-              </div>
-              <span className="w-24 text-end font-mono text-[11px]" dir="ltr">
-                <span className="text-ink">{r.seen}</span>
-                {i > 0 && drop > 0 && <span className="text-rose-400"> −{drop}%</span>}
-                {r.exit > 0 && <span className="text-fg-faint"> ⤶{r.exit}</span>}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-      <p className="mt-3 text-[11px] text-fg-muted">
-        العدد = من بلغ القسم · <span className="text-rose-400">−٪</span> تسرّب عن الذي قبله ·
-        <span className="text-fg-faint"> ⤶</span> من غادر الموقع عنده.
-      </p>
-    </div>
-  );
+  if (contacted) {
+    return {
+      line: `${head} — و${contacted} منهم نقر وسيلة تواصل. تابِعهم اليوم قبل أن يبرد الاهتمام.`,
+      tone: "good",
+    };
+  }
+  if (cv) {
+    return {
+      line: `${head} — و${cv} منهم فتح سيرتك الذاتية ولم يتواصل. هؤلاء أقرب فرصك.`,
+      tone: "good",
+    };
+  }
+  if (repeat) {
+    return {
+      line: `${head} — ${repeat} منهم عاد أكثر من مرّة، لكن لا أحد فتح سيرتك. الاهتمام موجود ولم يتحوّل إلى خطوة.`,
+      tone: "warn",
+    };
+  }
+  return {
+    line: `${head} — كلّهم مرّوا مرّةً واحدة بلا تفاعل. المشكلة في عدد الزوّار لا في الموقع.`,
+    tone: "warn",
+  };
 }
 
-function ScoreBadge({ score }: { score: number }) {
-  const { text, tone } = scoreLabel(score);
-  const cls =
-    tone === "hot"
-      ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-300"
-      : tone === "warm"
-        ? "border-accent/30 bg-accent-soft text-accent"
-        : "border-white/10 bg-white/[0.04] text-fg-muted";
-  return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] ${cls}`}>
-      <span className="font-mono" dir="ltr">{score}</span>
-      {text}
-    </span>
-  );
-}
+/* ─── ماذا أفعل الآن ───────────────────────────────────────────────────────── */
 
-/** أعمدة الزيارات — سلسلة واحدة بلون واحد، فالعنوان يكفي عن مفتاح ألوان. */
-function DailyBars({ rows }: { rows: Daily[] }) {
-  const max = Math.max(1, ...rows.map((r) => r.visits ?? 0));
-  return (
-    <div className="card rounded-2xl p-5">
-      <h2 className="text-sm font-semibold text-ink">الزيارات اليوميّة</h2>
-      <div className="mt-5 flex h-40 items-end gap-[3px]" dir="ltr">
-        {rows.map((r) => {
-          const v = r.visits ?? 0;
-          const hot = r.hotSessions ?? 0;
-          // حدّ أدنى ملموس: يوم بزيارة واحدة بجانب يوم بأربعين يجب أن يظل مرئيّاً.
-          const h = v ? Math.max((v / max) * 100, 8) : 1.5;
-          return (
-            <div key={r.id} className="group relative flex-1" title={`${r.date}: ${v} زيارة · ${hot} فرصة`}>
-              {rows.length <= 31 && v > 0 && (
-                <div className="mb-1 text-center font-mono text-[9px] text-fg-muted">{v}</div>
-              )}
-              <div
-                className={`w-full rounded-t transition-colors ${v ? "bg-accent/80 group-hover:bg-accent" : "bg-white/10"}`}
-                style={{ height: `${h}%` }}
-              />
-              <span className="pointer-events-none absolute -top-6 left-1/2 hidden -translate-x-1/2 whitespace-nowrap rounded bg-bg-900 px-1.5 py-0.5 font-mono text-[10px] text-ink shadow-card group-hover:block">
-                {v}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-      <div className="mt-2 flex justify-between border-t border-white/[0.06] pt-2 font-mono text-[10px] text-fg-muted" dir="ltr">
-        <span>{rows[0]?.date}</span>
-        <span>{rows.at(-1)?.date}</span>
-      </div>
-    </div>
-  );
-}
+/** كل بند فعلٌ محدّد لا ملاحظة عامّة — وإلّا صار القسم زينة. */
+function actions(people: Person[], untaggedShare: number): string[] {
+  const out: string[] = [];
 
-/** توزيع الجلسات على ساعات اليوم بتوقيت الرياض — يكشف متى يزورك الناس فعلاً. */
-function HourlyBars({ visits }: { visits: Visit[] }) {
-  const buckets = useMemo(() => {
-    const b = new Array(24).fill(0) as number[];
-    for (const v of visits) {
-      const t = v.startedAt?.toDate();
-      if (!t) continue;
-      const h = Math.floor(((t.getTime() + RIYADH_OFFSET_MS) % 86_400_000) / 3_600_000);
-      b[h] += 1;
-    }
-    return b;
-  }, [visits]);
-  const max = Math.max(1, ...buckets);
-  return (
-    <div className="card rounded-2xl p-5">
-      <h2 className="text-sm font-semibold text-ink">ساعات الزيارة · بتوقيت الرياض</h2>
-      <div className="mt-5 flex h-28 items-end gap-[2px]" dir="ltr">
-        {buckets.map((n, h) => (
-          <div key={h} className="group relative flex-1" title={`${h}:00 — ${n} جلسة`}>
-            <div
-              className={`w-full rounded-t ${n ? "bg-accent/70 group-hover:bg-accent" : "bg-white/10"}`}
-              style={{ height: `${n ? Math.max((n / max) * 100, 8) : 1.5}%` }}
-            />
-          </div>
-        ))}
-      </div>
-      <div className="mt-2 flex justify-between border-t border-white/[0.06] pt-2 font-mono text-[10px] text-fg-muted" dir="ltr">
-        <span>00</span><span>06</span><span>12</span><span>18</span><span>23</span>
-      </div>
-    </div>
-  );
-}
+  const hot = people.filter((p) => p.contacted || p.openedCv);
+  for (const p of hot.slice(0, 3)) {
+    out.push(
+      `تابِع ${p.places[0] ?? "زائراً"} — ${p.openedCv ? "فتح سيرتك" : "نقر وسيلة تواصل"}`
+      + ` وجاء عبر ${p.firstSource === "direct" ? "رابط غير موسوم" : p.firstSource}.`,
+    );
+  }
 
-function Breakdown({ title, rows }: { title: string; rows: [string, number][] }) {
-  const max = Math.max(1, ...rows.map(([, v]) => v));
-  return (
-    <div className="card rounded-2xl p-5">
-      <h2 className="text-sm font-semibold text-ink">{title}</h2>
-      {rows.length === 0 && <p className="mt-3 text-xs text-fg-muted">لا بيانات بعد.</p>}
-      <div className="mt-4 space-y-2">
-        {rows.slice(0, 8).map(([k, v]) => (
-          <div key={k} className="grid grid-cols-[1fr_auto] items-center gap-3">
-            <div className="min-w-0">
-              <div className="truncate text-xs text-ink">{k}</div>
-              <div className="mt-1 h-1.5 rounded-full bg-white/[0.06]">
-                <div className="h-full rounded-full bg-accent/70" style={{ width: `${(v / max) * 100}%` }} />
-              </div>
-            </div>
-            <span className="font-mono text-xs text-fg-muted">{v}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+  const loyal = people.filter((p) => !p.openedCv && !p.contacted && p.sessions.length >= 3);
+  if (loyal.length) {
+    out.push(
+      `${loyal.length} ${loyal.length === 1 ? "شخص عاد" : "أشخاص عادوا"} ثلاث مرّات فأكثر بلا أن يفتح سيرتك`
+      + ` — اجعل زرّ السيرة أوضح في أوّل الشاشة.`,
+    );
+  }
 
-function SessionRow({ v, score, onIgnore }: { v: Visit; score: number; onIgnore: (id: string) => void }) {
-  const [open, setOpen] = useState(false);
-  const events = Object.entries(v.eventCounts ?? {});
-  return (
-    <>
-      <tr
-        onClick={() => setOpen((o) => !o)}
-        className="cursor-pointer border-t border-white/[0.06] transition-colors hover:bg-white/[0.03]"
-      >
-        <td className="py-2.5 pe-3"><ScoreBadge score={score} /></td>
-        <td className="py-2.5 pe-3 text-xs text-fg">{fmtTime(v.startedAt)}</td>
-        <td className="py-2.5 pe-3 font-mono text-[11px] text-ink" dir="ltr">{v.ip ?? "—"}</td>
-        <td className="py-2.5 pe-3 text-xs text-ink">
-          {[v.geo?.city, v.geo?.country].filter(Boolean).join("، ") || "—"}
-          {v.rdns && <div className="font-mono text-[10px] text-accent" dir="ltr">{v.rdns}</div>}
-        </td>
-        <td className="py-2.5 pe-3 text-xs text-fg">{v.deviceType} · {v.browser}</td>
-        <td className="py-2.5 pe-3 font-mono text-xs text-ink" dir="ltr">{fmtDuration(v.activeMs)}</td>
-        <td className="py-2.5 pe-3 font-mono text-xs text-fg" dir="ltr">{v.maxScrollPct ?? 0}%</td>
-        <td className="py-2.5 pe-3 text-xs text-fg">{v.referrerHost || "direct"}</td>
-        <td className="py-2.5 font-mono text-xs text-accent" dir="ltr">
-          {events.length ? events.map(([k, c]) => `${k}×${c}`).join(" ") : "—"}
-        </td>
-      </tr>
-      {open && (
-        <tr className="border-t border-white/[0.06] bg-white/[0.02]">
-          <td colSpan={9} className="p-4">
-            <dl className="grid gap-x-6 gap-y-2 text-xs sm:grid-cols-2 lg:grid-cols-3">
-              {(
-                [
-                  ["أسباب التقييم", v.scoreReasons?.join("، ")],
-                  ["IP", v.ip],
-                  ["اسم الشبكة (rDNS)", v.rdns],
-                  ["المزوّد", v.geo?.asOrganization],
-                  ["المنطقة", v.geo?.countryRegion],
-                  ["الإحداثيّات (تقديريّة)", v.geo?.latitude && v.geo?.longitude ? `${v.geo.latitude}, ${v.geo.longitude}` : undefined],
-                  ["توقيت الزائر", v.browserTimezone],
-                  ["لغات المتصفح", v.browserLanguages],
-                  ["لغة الموقع", v.siteLang],
-                  ["الشاشة / النافذة", [v.screen, v.viewport].filter(Boolean).join(" / ")],
-                  ["الاتصال", v.connection],
-                  ["المدّة الكلّية", fmtDuration(v.durationMs)],
-                  ["قسم المغادرة", v.exitSection],
-                  ["LCP / INP / CLS", [v.lcpMs && `${v.lcpMs}ms`, v.inpMs && `${v.inpMs}ms`, v.cls].filter(Boolean).join(" / ")],
-                  ["TTFB / Load", [v.ttfbMs, v.loadMs].filter(Boolean).map((x) => `${x}ms`).join(" / ")],
-                  ["زائر عائد", v.returning ? "نعم" : "لا"],
-                  ["معرّف الزائر", v.visitorId],
-                  ["البيئة", v.env],
-                  ["المُحيل الكامل", v.referrer],
-                  ["حملة UTM", [v.utm?.source, v.utm?.medium, v.utm?.campaign].filter(Boolean).join(" / ")],
-                  ["الأقسام المقروءة", v.sectionsSeen?.join("، ")],
-                  [
-                    "زمن كل قسم",
-                    Object.entries(v.sectionTimeMs ?? {})
-                      .sort((a, b) => b[1] - a[1])
-                      .map(([k, ms]) => `${k}: ${fmtDuration(ms)}`)
-                      .join("، "),
-                  ],
-                ] as [string, string | undefined][]
-              )
-                .filter(([, val]) => val)
-                .map(([k, val]) => (
-                  <div key={k}>
-                    <dt className="text-fg-muted">{k}</dt>
-                    <dd className="mt-0.5 break-words text-ink">{val}</dd>
-                  </div>
-                ))}
-            </dl>
-            {v.visitorId && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onIgnore(v.visitorId!);
-                }}
-                className="mt-4 rounded-lg border border-white/10 px-3 py-1.5 text-xs text-fg hover:text-ink"
-              >
-                تجاهل هذا الزائر (زياراتي)
-              </button>
-            )}
-          </td>
-        </tr>
-      )}
-    </>
-  );
+  if (untaggedShare >= 0.4) {
+    out.push(
+      `${Math.round(untaggedShare * 100)}٪ من الزيارات بلا مصدرٍ معروف.`
+      + ` انسخ روابط القنوات أدناه واستبدل بها رابطك في لينكدإن والسيرة وجيت هَب.`,
+    );
+  }
+
+  if (!out.length) out.push("لا إجراء عاجل — راجع بعد أيّام.");
+  return out;
 }
 
 /* ─── الصفحة ───────────────────────────────────────────────────────────────── */
 
-type RangeKey = "today" | "yesterday" | "d2" | "d7" | "d30" | "all" | "custom";
-
-const RANGES: { key: RangeKey; label: string }[] = [
-  { key: "today", label: "اليوم" },
-  { key: "yesterday", label: "أمس" },
-  { key: "d2", label: "أول أمس" },
-  { key: "d7", label: "٧ أيام" },
-  { key: "d30", label: "٣٠ يوماً" },
-  { key: "all", label: "كل الوقت" },
-  { key: "custom", label: "مخصّص" },
-];
-
-/** بداية اليوم بتوقيت الرياض (+٣) معبَّراً عنها كلحظة مطلقة. */
-const RIYADH_OFFSET_MS = 3 * 3600_000;
-const riyadhDayStart = (daysAgo: number) => {
-  const now = Date.now() + RIYADH_OFFSET_MS;
-  const midnight = Math.floor(now / 86_400_000) * 86_400_000;
-  return midnight - daysAgo * 86_400_000 - RIYADH_OFFSET_MS;
-};
-
-/** يحوّل الاختيار إلى حدّين زمنيّين. الحدّ الأعلى مفتوح حين يشمل الآن. */
-function resolveRange(key: RangeKey, from: string, to: string): { from: number; to: number } {
-  const DAY = 86_400_000;
-  switch (key) {
-    case "today":
-      return { from: riyadhDayStart(0), to: Infinity };
-    case "yesterday":
-      return { from: riyadhDayStart(1), to: riyadhDayStart(0) };
-    case "d2":
-      return { from: riyadhDayStart(2), to: riyadhDayStart(1) };
-    case "d7":
-      return { from: riyadhDayStart(6), to: Infinity };
-    case "d30":
-      return { from: riyadhDayStart(29), to: Infinity };
-    case "all":
-      return { from: 0, to: Infinity };
-    case "custom": {
-      const a = from ? new Date(`${from}T00:00:00+03:00`).getTime() : 0;
-      const b = to ? new Date(`${to}T00:00:00+03:00`).getTime() + DAY : Infinity;
-      return { from: a, to: b };
-    }
-  }
-}
-
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);
   const [ready, setReady] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [daily, setDaily] = useState<Daily[]>([]);
   const [visits, setVisits] = useState<Visit[]>([]);
-  const [visitors, setVisitors] = useState<Visitor[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [rangeKey, setRangeKey] = useState<RangeKey>("30");
+  const [showTech, setShowTech] = useState(false);
+  const [ips, setIps] = useState<string[]>([]);
+  const [myIp, setMyIp] = useState<string>("");
 
-  const [rangeKey, setRangeKey] = useState<RangeKey>("today");
-  const [customFrom, setCustomFrom] = useState("");
-  const [customTo, setCustomTo] = useState("");
-  const [hideBots, setHideBots] = useState(true);
-  const [sortByScore, setSortByScore] = useState(false);
-  const [ignored, setIgnored] = useState<string[]>([]);
-
-  useEffect(() => {
-    setIgnored(readIgnored());
-    return onAuthStateChanged(getClientAuth(), (u) => {
-      setUser(u);
-      setReady(true);
-    });
-  }, []);
-
+  useEffect(() => onAuthStateChanged(getClientAuth(), (u) => { setUser(u); setReady(true); }), []);
   const allowed = user?.email === OWNER_EMAIL;
 
   const load = useCallback(async () => {
@@ -449,15 +132,12 @@ export default function Dashboard() {
     setError(null);
     try {
       const db = getClientDb();
-      // ثلاثة استعلامات محدودة — قراءات معدودة تُبقي اللوحة داخل الباقة المجانيّة.
-      const [statsSnap, visitsSnap, visitorsSnap] = await Promise.all([
-        getDocs(query(collection(db, "stats"), orderBy("date", "desc"), limit(31))),
-        getDocs(query(collection(db, "visits"), orderBy("startedAt", "desc"), limit(100))),
-        getDocs(query(collection(db, "visitors"), orderBy("lastSeenAt", "desc"), limit(50))),
+      const [snap, cfg] = await Promise.all([
+        getDocs(query(collection(db, "visits"), orderBy("startedAt", "desc"), limit(300))),
+        getDoc(doc(db, "config", "owner")).catch(() => null),
       ]);
-      setDaily(statsSnap.docs.map((d) => ({ id: d.id, ...d.data() }) as Daily));
-      setVisits(visitsSnap.docs.map((d) => ({ id: d.id, ...d.data() }) as Visit));
-      setVisitors(visitorsSnap.docs.map((d) => ({ id: d.id, ...d.data() }) as Visitor));
+      setVisits(snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Visit));
+      setIps((cfg?.data()?.ips as string[] | undefined) ?? []);
     } catch (e) {
       setError(e instanceof Error ? e.message : "تعذّرت القراءة");
     } finally {
@@ -465,351 +145,192 @@ export default function Dashboard() {
     }
   }, []);
 
+  useEffect(() => { if (allowed) void load(); }, [allowed, load]);
   useEffect(() => {
-    if (allowed) void load();
-  }, [allowed, load]);
-
-  const ignore = useCallback((id: string) => {
-    setIgnored((prev) => {
-      const next = prev.includes(id) ? prev : [...prev, id];
-      try {
-        localStorage.setItem(IGNORE_KEY, JSON.stringify(next));
-      } catch {}
-      return next;
-    });
+    fetch("/api/track", { method: "GET" }).then((r) => r.json())
+      .then((d) => setMyIp(String(d?.ip ?? ""))).catch(() => {});
   }, []);
 
-  const bounds = useMemo(
-    () => resolveRange(rangeKey, customFrom, customTo),
-    [rangeKey, customFrom, customTo]
-  );
+  const days = RANGES.find((r) => r.key === rangeKey)!.days;
 
-  // المدى المختار بترتيب زمني، مع تصفير الأيام الغائبة حتى لا ينكمش المحور.
-  const range = useMemo(() => {
-    const byDate = new Map(daily.map((d) => [d.date ?? d.id.replace("daily_", ""), d]));
-    const first = bounds.from === 0
-      ? Math.min(...[...byDate.keys()].map((k) => new Date(`${k}T00:00:00Z`).getTime()), Date.now())
-      : bounds.from;
-    const last = bounds.to === Infinity ? Date.now() : bounds.to - 1;
-    const n = Math.min(Math.max(1, Math.round((last - first) / 86_400_000) + 1), 90);
-    return Array.from({ length: n }, (_, i) => {
-      const k = dayKey(new Date(first + i * 86_400_000));
-      return byDate.get(k) ?? ({ id: k, date: k, visits: 0 } as Daily);
+  const people = useMemo(() => {
+    const from = Date.now() - days * 86_400_000;
+    const inRange = visits.filter((v) => {
+      if (v.isBot) return false;                       // الزحف ليس زائراً
+      const t = v.startedAt?.toDate?.().getTime();
+      return t === undefined || t >= from;
     });
-  }, [daily, bounds]);
+    return buildPeople(inRange);
+  }, [visits, days]);
 
-  // المدى السابق بالطول نفسه — أساس المقارنة. «كل الوقت» لا سابق له.
-  const prevRange = useMemo(() => {
-    if (rangeKey === "all") return null;
-    const to = bounds.to === Infinity ? Date.now() : bounds.to;
-    const span = to - bounds.from;
-    if (!isFinite(span) || span <= 0) return null;
-    const byDate = new Map(daily.map((d) => [d.date ?? d.id.replace("daily_", ""), d]));
-    const n = Math.min(Math.max(1, Math.round(span / 86_400_000)), 90);
-    return Array.from({ length: n }, (_, i) => {
-      const k = dayKey(new Date(bounds.from - span + i * 86_400_000));
-      return byDate.get(k) ?? ({ id: k, date: k, visits: 0 } as Daily);
-    });
-  }, [daily, bounds, rangeKey]);
-
-  const shown = useMemo(() => {
-    const rows = visits
-      .filter((v) => (hideBots ? !v.isBot : true))
-      .filter((v) => !(v.visitorId && ignored.includes(v.visitorId)))
-      .filter((v) => {
-        const t = v.startedAt?.toDate().getTime();
-        return t === undefined ? true : t >= bounds.from && t < bounds.to;
-      })
-      .map((v) => ({ v, score: v.score ?? scoreSession(v).total }));
-    return sortByScore ? [...rows].sort((a, b) => b.score - a.score) : rows;
-  }, [visits, hideBots, ignored, bounds, sortByScore]);
-
-  // ⚠️ **الوحدة شخصٌ لا جلسة.** عند أحد عشر زائراً تكون النسب المئوية ضجيجاً،
-  // والقيمة كلّها في النظر إلى كل شخصٍ على حدة — من أين اكتشفك، وكم عاد،
-  // وهل فتح سيرتك. لذلك يتصدّر هذا القسم اللوحة والمخطّطات تتبعه.
-  const people = useMemo(() => buildPeople(shown.map(({ v }) => v)), [shown]);
-
-  const perSource = useMemo(() => {
+  const perChannel = useMemo(() => {
     const m: Record<string, number> = {};
-    for (const { v } of shown) {
-      const k = v.utm?.source ?? v.referrerHost ?? "direct";
-      m[k] = (m[k] ?? 0) + 1;
+    for (const p of people) {
+      for (const s of p.sessions) {
+        const k = (s as Visit & { channel?: string }).channel
+          ?? (s.referrerHost && s.referrerHost !== "direct" ? s.referrerHost : "—");
+        m[k] = (m[k] ?? 0) + 1;
+      }
     }
     return m;
-  }, [shown]);
+  }, [people]);
 
-  const sum = (rows: Daily[], f: keyof Daily) => rows.reduce((a, r) => a + ((r[f] as number) ?? 0), 0);
-  const before = (f: keyof Daily) => (prevRange ? sum(prevRange, f) : null);
-  const totalVisits = sum(range, "visits");
-  const totalActive = sum(range, "totalActiveMs");
-  const completed = sum(range, "completedSessions");
-  const hot = sum(range, "hotSessions");
+  const untagged = useMemo(() => {
+    const total = people.reduce((a, p) => a + p.sessions.length, 0);
+    if (!total) return 0;
+    const known = Object.entries(perChannel).filter(([k]) => k !== "—")
+      .reduce((a, [, v]) => a + v, 0);
+    return (total - known) / total;
+  }, [people, perChannel]);
 
-  const vitals = useMemo(
-    () => ({
-      lcp: median(shown.map(({ v }) => v.lcpMs ?? 0).filter(Boolean)),
-      inp: median(shown.map(({ v }) => v.inpMs ?? 0).filter(Boolean)),
-      cls: median(shown.map(({ v }) => v.cls ?? 0).filter((x) => x > 0)),
-    }),
-    [shown]
-  );
+  const v = verdict(people, days);
+  const todo = actions(people, untagged);
 
-  // "الآن": جلسة نُبض قلبها خلال آخر خمس دقائق.
-  const liveNow = useMemo(
-    () => visits.filter((v) => (v.lastSeenAt?.toDate().getTime() ?? 0) > Date.now() - 300_000).length,
-    [visits]
-  );
-
-  const topVisitors = useMemo(
-    () =>
-      visitors
-        .filter((x) => !x.isBot && !ignored.includes(x.id))
-        .sort((a, b) => (b.sessions ?? 0) - (a.sessions ?? 0))
-        .slice(0, 6),
-    [visitors, ignored]
-  );
-
-  const exportCsv = () => {
-    const blob = new Blob([`﻿${toCsv(shown.map((s) => s.v))}`], { type: "text/csv;charset=utf-8" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `ardev-visits-${dayKey(new Date())}.csv`;
-    a.click();
-    URL.revokeObjectURL(a.href);
+  const saveIp = async (next: string[]) => {
+    setIps(next);
+    await setDoc(doc(getClientDb(), "config", "owner"), { ips: next }, { merge: true });
   };
 
-  if (!ready) return <main className="grid min-h-screen place-items-center text-sm text-fg">…</main>;
-
+  /* ── الحواجز ── */
+  if (!ready) return <Shell><p className="text-fg">جارٍ التحقّق…</p></Shell>;
+  if (!user) {
+    return (
+      <Shell>
+        <button
+          onClick={() => signInWithPopup(getClientAuth(), new GoogleAuthProvider())}
+          className="rounded-xl border border-white/15 px-4 py-2 text-sm text-ink hover:bg-white/5"
+        >
+          دخول بجوجل
+        </button>
+      </Shell>
+    );
+  }
   if (!allowed) {
     return (
-      <main className="grid min-h-screen place-items-center px-5" dir="rtl">
-        <div className="card w-full max-w-sm rounded-2xl p-8 text-center">
-          <h1 className="font-display text-2xl font-bold text-ink">لوحة التحكّم</h1>
-          <p className="mt-2 text-sm text-fg">{user ? `${user.email} غير مصرّح له.` : "الدخول لمالك الموقع فقط."}</p>
-          <button
-            onClick={async () => {
-              setError(null);
-              try {
-                const provider = new GoogleAuthProvider();
-                provider.setCustomParameters({ prompt: "select_account" });
-                await signInWithPopup(getClientAuth(), provider);
-              } catch (e) {
-                setError(e instanceof Error ? e.message : "فشل الدخول");
-              }
-            }}
-            className="btn-primary mt-6 w-full rounded-xl px-4 py-2.5 text-sm font-semibold text-white"
-          >
-            الدخول عبر Google
-          </button>
-          {user && (
-            <button
-              onClick={() => signOut(getClientAuth())}
-              className="mt-3 w-full rounded-xl border border-white/10 px-4 py-2.5 text-sm text-fg"
-            >
-              تسجيل الخروج
-            </button>
-          )}
-          {error && <p className="mt-4 text-xs text-rose-400">{error}</p>}
-        </div>
-      </main>
+      <Shell>
+        <p className="text-fg">هذا الحساب لا يملك الوصول.</p>
+        <button onClick={() => signOut(getClientAuth())} className="mt-3 text-sm text-fg/70 underline">خروج</button>
+      </Shell>
     );
   }
 
+  const toneCls = v.tone === "good" ? "border-emerald-500/30 bg-emerald-500/[0.06]"
+    : v.tone === "warn" ? "border-amber-500/30 bg-amber-500/[0.06]"
+      : "border-white/10 bg-white/[0.03]";
+
   return (
-    <main className="mx-auto max-w-6xl px-5 py-12" dir="rtl">
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="font-display text-3xl font-bold text-ink">لوحة الزيارات</h1>
-          <p className="mt-1 font-mono text-xs text-fg-muted">{user?.email}</p>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <button onClick={exportCsv} className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-ink">
-            CSV
-          </button>
-          <button
-            onClick={load}
-            disabled={loading}
-            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-ink disabled:opacity-50"
-          >
+    <main className="mx-auto max-w-5xl px-4 py-8" dir="rtl">
+      <header className="flex flex-wrap items-center gap-3">
+        <h1 className="text-lg font-semibold text-ink">من زار موقعك</h1>
+        <div className="ms-auto flex items-center gap-1">
+          {RANGES.map((r) => (
+            <button
+              key={r.key}
+              onClick={() => setRangeKey(r.key)}
+              className={`rounded-lg border px-2.5 py-1 text-xs ${
+                rangeKey === r.key ? "border-accent/40 bg-accent-soft text-accent" : "border-white/10 text-fg"
+              }`}
+            >
+              {r.label}
+            </button>
+          ))}
+          <button onClick={() => void load()} className="ms-2 text-xs text-fg/70 underline">
             {loading ? "…" : "تحديث"}
-          </button>
-          <button onClick={() => signOut(getClientAuth())} className="rounded-xl border border-white/10 px-4 py-2 text-sm text-fg">
-            خروج
           </button>
         </div>
       </header>
 
-      {/* المرشّحات في صفّ واحد فوق كل شيء */}
-      <div className="mt-6 flex flex-wrap items-center gap-2">
-        {RANGES.map((r) => (
-          <button
-            key={r.key}
-            onClick={() => setRangeKey(r.key)}
-            className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${
-              rangeKey === r.key ? "border-accent/40 bg-accent-soft text-accent" : "border-white/10 text-fg hover:text-ink"
-            }`}
-          >
-            {r.label}
-          </button>
-        ))}
-        {rangeKey === "custom" && (
-          <span className="flex items-center gap-1.5" dir="ltr">
-            <input
-              type="date"
-              value={customFrom}
-              onChange={(e) => setCustomFrom(e.target.value)}
-              className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 font-mono text-xs text-ink"
-            />
-            <span className="text-fg-muted">→</span>
-            <input
-              type="date"
-              value={customTo}
-              onChange={(e) => setCustomTo(e.target.value)}
-              className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 font-mono text-xs text-ink"
-            />
-          </span>
-        )}
-        <span className="mx-1 h-4 w-px bg-white/10" />
-        <button
-          onClick={() => setHideBots((b) => !b)}
-          className={`rounded-lg border px-3 py-1.5 text-xs ${hideBots ? "border-accent/40 bg-accent-soft text-accent" : "border-white/10 text-fg"}`}
-        >
-          إخفاء البوتات
-        </button>
-        <button
-          onClick={() => setSortByScore((b) => !b)}
-          className={`rounded-lg border px-3 py-1.5 text-xs ${sortByScore ? "border-accent/40 bg-accent-soft text-accent" : "border-white/10 text-fg"}`}
-        >
-          ترتيب بالتقييم
-        </button>
-        {ignored.length > 0 && (
-          <button
-            onClick={() => {
-              localStorage.removeItem(IGNORE_KEY);
-              setIgnored([]);
-            }}
-            className="rounded-lg border border-white/10 px-3 py-1.5 text-xs text-fg-muted"
-          >
-            إلغاء التجاهل ({ignored.length})
-          </button>
-        )}
-      </div>
+      {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
 
-      {error && <p className="mt-6 text-sm text-rose-400">{error}</p>}
-
-      <section className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Stat
-          label="الزيارات"
-          value={String(totalVisits)}
-          sub={`${sum(range, "newVisitors")} زائر جديد · ${liveNow} الآن`}
-          now={totalVisits}
-          before={before("visits")}
-        />
-        <Stat label="فرص تستحقّ المتابعة" value={String(hot)} sub="تقييم ٥٥+" now={hot} before={before("hotSessions")} />
-        <Stat
-          label="متوسّط الزمن النشط"
-          value={fmtDuration(completed ? totalActive / completed : 0)}
-          sub="لكل جلسة مكتملة"
-          now={completed ? totalActive / completed : 0}
-          before={
-            prevRange
-              ? sum(prevRange, "completedSessions")
-                ? sum(prevRange, "totalActiveMs") / sum(prevRange, "completedSessions")
-                : 0
-              : null
-          }
-        />
-        <Stat
-          label="LCP / INP الوسيط"
-          value={vitals.lcp ? `${(vitals.lcp / 1000).toFixed(1)}s` : "—"}
-          sub={vitals.inp ? `INP ${vitals.inp}ms · CLS ${vitals.cls}` : "قياس ميداني"}
-        />
+      {/* ① الحكم */}
+      <section className={`mt-5 rounded-2xl border p-4 ${toneCls}`}>
+        <p className="text-[15px] leading-relaxed text-ink">{v.line}</p>
       </section>
 
-      <p className="mt-3 text-[11px] text-fg-muted">
-        الموقع مُستنتَج من عنوان IP، أي أنه يشير إلى مخرج مزوّد الخدمة لا إلى مكان الزائر —
-        اشتراك جوّال في بريدة قد يظهر «الرياض». الدقّة الحقيقيّة تتطلّب إذن الموقع من المتصفّح،
-        ولم أطلبه لأنه يُنفّر الزائر.
-      </p>
-
-      <section className="mt-4 grid gap-4 lg:grid-cols-[1.6fr_1fr]">
-        <DailyBars rows={range} />
-        <HourlyBars visits={shown.map(({ v }) => v)} />
-      </section>
-
-      <section className="mt-8">
-        <h2 className="text-sm font-semibold text-ink">
-          الأشخاص ({people.length}) — مرتّبون بالنيّة لا بالزمن
-        </h2>
-        <p className="mt-1 text-[12px] text-fg/70">
-          من فتح سيرتك أو نقر وسيلة تواصل يتصدّر، ثم الأكثر انتباهاً. اضغط
-          «انسخ للمتابعة» لتأخذ ملخّصاً جاهزاً تبدأ به رسالة.
-        </p>
-        <div className="mt-3">
-          <PeopleSection people={people} />
-        </div>
-      </section>
-
-      <section className="mt-8">
-        <h2 className="text-sm font-semibold text-ink">قنوات موسومة — علاج «مباشر»</h2>
-        <div className="mt-3">
-          <ChannelsSection perSource={perSource} />
-        </div>
-      </section>
-
-      <section className="mt-4">
-        <Funnel visits={shown.map(({ v }) => v)} />
-      </section>
-
-      <section className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Breakdown title="الدول" rows={mergeMaps(range, "byCountry")} />
-        <Breakdown title="المدن" rows={mergeMaps(range, "byCity")} />
-        <Breakdown title="مصادر الزيارة" rows={mergeMaps(range, "byReferrer")} />
-        <Breakdown title="الأجهزة" rows={mergeMaps(range, "byDevice")} />
-        <Breakdown title="المتصفحات" rows={mergeMaps(range, "byBrowser")} />
-        <Breakdown title="أنظمة التشغيل" rows={mergeMaps(range, "byOs")} />
-      </section>
-
-      <section className="card mt-4 rounded-2xl p-5">
-        <h2 className="text-sm font-semibold text-ink">الزوّار العائدون — التكرار أصدق من الزيارة الواحدة</h2>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {topVisitors.map((x) => (
-            <div key={x.id} className="rounded-xl border border-white/[0.06] p-3">
-              <div className="flex items-baseline justify-between gap-2">
-                <span className="text-sm text-ink">{[x.lastCity, x.lastCountry].filter(Boolean).join("، ") || "—"}</span>
-                <span className="font-mono text-xs text-accent" dir="ltr">{x.sessions ?? 1}×</span>
-              </div>
-              <div className="mt-1.5 space-y-0.5 text-[11px] text-fg-muted">
-                <div>أول لمسة: {x.firstTouch?.referrerHost ?? "—"}</div>
-                <div>آخر لمسة: {x.lastTouch?.referrerHost ?? "—"}</div>
-                <div dir="ltr" className="font-mono">
-                  {fmtDuration(x.totalActiveMs)} · {fmtTime(x.lastSeenAt)}
-                </div>
-              </div>
-            </div>
+      {/* ② ماذا أفعل */}
+      <section className="mt-5">
+        <h2 className="text-sm font-semibold text-ink">ماذا أفعل الآن</h2>
+        <ul className="mt-2 space-y-1.5">
+          {todo.map((t, i) => (
+            <li key={i} className="flex gap-2 text-[13px] text-fg">
+              <span className="text-accent">←</span>{t}
+            </li>
           ))}
-          {topVisitors.length === 0 && <p className="text-xs text-fg-muted">لا زوّار بعد.</p>}
-        </div>
+        </ul>
       </section>
 
-      <section className="card mt-4 overflow-x-auto rounded-2xl p-5">
-        <h2 className="text-sm font-semibold text-ink">الجلسات ({shown.length}) — اضغط أي صفّ للتفاصيل</h2>
-        <table className="mt-4 w-full min-w-[920px] text-start">
-          <thead>
-            <tr className="font-mono text-[10px] uppercase tracking-wider text-fg-muted">
-              {["التقييم", "الوقت", "IP", "المكان", "الجهاز", "نشط", "تمرير", "المصدر", "الأحداث"].map((h) => (
-                <th key={h} className="pb-2 pe-3 text-start font-normal">{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {shown.map(({ v, score }) => (
-              <SessionRow key={v.id} v={v} score={score} onIgnore={ignore} />
-            ))}
-          </tbody>
-        </table>
-        {shown.length === 0 && !loading && <p className="mt-4 text-xs text-fg-muted">لا جلسات في هذا المدى.</p>}
+      {/* ③ الأشخاص */}
+      <section className="mt-7">
+        <h2 className="text-sm font-semibold text-ink">الأشخاص ({people.length})</h2>
+        <p className="mt-1 text-[12px] text-fg/70">
+          مرتّبون بالنيّة لا بالزمن: من فتح سيرتك أو نقر تواصلاً يتصدّر.
+        </p>
+        <div className="mt-3"><PeopleSection people={people} /></div>
       </section>
+
+      {/* ④ القنوات */}
+      <section className="mt-7">
+        <h2 className="text-sm font-semibold text-ink">روابط القنوات</h2>
+        <div className="mt-2"><ChannelsSection perSource={perChannel} /></div>
+      </section>
+
+      {/* ⑤ الإعدادات والتفاصيل — مطويّة */}
+      <section className="mt-7">
+        <button onClick={() => setShowTech((s) => !s)} className="text-xs text-fg/70 underline">
+          {showTech ? "إخفاء الإعدادات" : "الإعدادات واستثناء زياراتك"}
+        </button>
+        {showTech && (
+          <div className="mt-3 space-y-4 rounded-2xl border border-white/10 p-4">
+            <div>
+              <h3 className="text-[13px] font-semibold text-ink">استثناء زياراتك</h3>
+              <p className="mt-1 text-[12px] text-fg/70">
+                طريقتان تسدّان ثغرتَي بعضهما: زيارة <span className="font-mono">ardev.dev/me</span>{" "}
+                تستثني هذا المتصفّح، وتسجيل عنوانك يستثني شبكتك كلّها.
+              </p>
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                <span className="font-mono text-[12px] text-fg" dir="ltr">{myIp || "…"}</span>
+                {myIp && !ips.includes(myIp) && (
+                  <button onClick={() => void saveIp([...ips, myIp])}
+                          className="rounded-lg border border-white/15 px-2 py-1 text-[11px] text-ink">
+                    استثنِ عنواني الحالي
+                  </button>
+                )}
+              </div>
+              {ips.length > 0 && (
+                <ul className="mt-2 space-y-1">
+                  {ips.map((x) => (
+                    <li key={x} className="flex items-center gap-2 text-[12px] text-fg" dir="ltr">
+                      <span className="font-mono">{x}</span>
+                      <button onClick={() => void saveIp(ips.filter((y) => y !== x))}
+                              className="text-[11px] text-red-400">إزالة</button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div>
+              <h3 className="text-[13px] font-semibold text-ink">الجلسات الخام</h3>
+              <p className="mt-1 text-[12px] text-fg/70">
+                {visits.length} جلسة محمّلة · {visits.filter((x) => x.isBot).length} منها زحفٌ آليّ مُستبعَد.
+              </p>
+            </div>
+          </div>
+        )}
+      </section>
+
+      <footer className="mt-10 flex items-center gap-3 text-[11px] text-fg/50">
+        <span>{user.email}</span>
+        <button onClick={() => signOut(getClientAuth())} className="underline">خروج</button>
+      </footer>
+    </main>
+  );
+}
+
+function Shell({ children }: { children: React.ReactNode }) {
+  return (
+    <main className="mx-auto flex min-h-[60vh] max-w-5xl items-center justify-center px-4" dir="rtl">
+      <div className="text-center">{children}</div>
     </main>
   );
 }
