@@ -3,8 +3,9 @@ import type { MetadataRoute } from "next";
 const SITE = "https://ardev.dev";
 
 /**
- * صفحة واحدة بنسختين لغويّتين. alternates تُخرِج وسوم hreflang داخل
+ * الرئيسية بنسختين لغويّتين. alternates تُخرِج وسوم hreflang داخل
  * الـ sitemap، وهي الطريقة التي يوصي بها Google لربط النسختين.
+ * وسياسة الخصوصية بنسخة إنجليزية واحدة، وتاريخها ثابت لأنّها لا تتغيّر مع كل نشر.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -20,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
           "x-default": SITE,
         },
       },
+    },
+    {
+      url: `${SITE}/privacy`,
+      lastModified: new Date("2026-11-01"),
+      changeFrequency: "yearly",
+      priority: 0.2,
     },
   ];
 }
