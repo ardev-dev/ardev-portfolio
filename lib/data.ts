@@ -35,6 +35,10 @@ export const profile = {
       ar: "أقود اليوم الهندسة في سُمو، وأنا المسؤول عن عبر ووصال وعزبة — من المعمارية والخلفية إلى المدفوعات والإصدارات وما يتعطّل في الإنتاج.",
     },
     {
+      en: "I also prepare and submit Somow's bids for government tenders on Etimad, from reading the RFP booklet to the technical and financial proposals.",
+      ar: "وأُعدّ عروض سُمو في المنافسات الحكومية على منصة اعتماد وأقدّمها، من قراءة كراسة الشروط إلى العرضين الفني والمالي.",
+    },
+    {
       en: "The part I care about is what happens after launch: architecture the team can work in, review that catches things early, and monitoring that tells you before a user does. On my team that took QA-reported defects down by half.",
       ar: "وما يعنيني حقّاً هو ما بعد الإطلاق: معمارية يعمل الفريق داخلها، ومراجعة تلتقط الخلل مبكّراً، ومراقبة تُخبرك قبل أن يُخبرك المستخدم. هذا خفّض العيوب المُبلَّغة من الجودة إلى النصف في فريقي.",
     },
@@ -43,7 +47,7 @@ export const profile = {
     { label: { en: "Role", ar: "الدور" } as L, value: { en: "Senior Software Engineer & Technical Lead", ar: "مهندس برمجيات خبير وقائد تقني" } as L },
     { label: { en: "Company", ar: "الجهة" } as L, value: { en: "Somow", ar: "سُمو" } as L },
     { label: { en: "Based in", ar: "مقيم في" } as L, value: { en: "Buraydah, Saudi Arabia", ar: "بريدة، السعودية" } as L },
-    { label: { en: "Works on", ar: "يعمل على" } as L, value: { en: "Mobile · Backend · Web · Payments", ar: "جوّال · خلفية · ويب · مدفوعات" } as L },
+    { label: { en: "Works on", ar: "يعمل على" } as L, value: { en: "Mobile · Backend · Web · Payments · Etimad tenders", ar: "جوّال · خلفية · ويب · مدفوعات · منافسات اعتماد" } as L },
     { label: { en: "Languages", ar: "اللغات" } as L, value: { en: "Arabic (native) · English (working)", ar: "العربية (أمّ) · الإنجليزية (عمل)" } as L },
   ],
   location: { en: "Buraydah, Saudi Arabia", ar: "بريدة، السعودية" } as L,
@@ -158,6 +162,18 @@ export const skillGroups: SkillGroup[] = [
       { en: "LLM Tooling", ar: "أدوات النماذج اللغوية" },
       { en: "Multi-Agent Systems", ar: "أنظمة الوكلاء المتعددة" },
       { en: "Automation", ar: "الأتمتة" },
+    ],
+  },
+  {
+    title: { en: "Government Tenders", ar: "المنافسات الحكومية" },
+    items: [
+      { en: "Etimad Platform", ar: "منصة اعتماد" },
+      { en: "RFP Booklet Analysis", ar: "دراسة كراسات الشروط" },
+      { en: "Compliance Matrices", ar: "مصفوفات الامتثال" },
+      { en: "Technical Proposals", ar: "العروض الفنية" },
+      { en: "Financial Proposals & Pricing", ar: "العروض المالية والتسعير" },
+      { en: "Cost Models", ar: "نماذج التكلفة" },
+      { en: "Bid Qualification", ar: "تقييم مناسبة المنافسة" },
     ],
   },
 ];
@@ -392,6 +408,14 @@ export const roles: Role[] = [
       {
         en: "Technical point of contact for external providers — Tamara, Meta, Huawei and payment gateways.",
         ar: "نقطة الاتصال التقنية مع المزوّدين الخارجيين — تمارا وMeta وهواوي وبوّابات الدفع.",
+      },
+      {
+        en: "Prepare and submit Somow's bids for government tenders on Etimad: qualifying the tender against the company's licensed activities, studying the RFP booklet, building the compliance matrix, and writing the technical and financial proposals with their pricing.",
+        ar: "أُعدّ عروض سُمو في المنافسات الحكومية على منصة اعتماد وأقدّمها: تقييم مناسبة المنافسة لأنشطة الشركة المرخّصة، ودراسة كراسة الشروط، وبناء مصفوفة الامتثال، وكتابة العرضين الفني والمالي بتسعيرهما.",
+      },
+      {
+        en: "Built an AI multi-agent pipeline that tracks new IT tenders on Etimad, pulls their booklets and drafts the technical proposal, financial proposal, cost model and compliance matrix for final review.",
+        ar: "بنيتُ خطّاً من وكلاء الذكاء الاصطناعي يرصد منافسات تقنية المعلومات الجديدة على اعتماد، ويسحب كراساتها، ويُعدّ مسودة العرض الفني والمالي ونموذج التكلفة ومصفوفة الامتثال للمراجعة النهائية.",
       },
     ],
   },
