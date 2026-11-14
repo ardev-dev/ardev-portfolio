@@ -96,8 +96,11 @@ export function SystemsPage() {
     const box = rail.current;
     const chip = box?.querySelector<HTMLElement>(`[data-chip="${i}"]`);
     if (!box || !chip) return;
-    const target = chip.offsetLeft - (box.clientWidth - chip.offsetWidth) / 2;
-    box.scrollTo({ left: target, behavior: reduce ? "auto" : "smooth" });
+    // بالفرق بين مركزَي الزرّ والشريط على الشاشة — يصحّ في الاتجاهين. (scrollLeft
+    // سالب في RTL، فحساب الموضع من offsetLeft كان يُبقي الشريط عند أوّله بالعربية.)
+    const c = chip.getBoundingClientRect();
+    const b = box.getBoundingClientRect();
+    box.scrollBy({ left: c.left + c.width / 2 - (b.left + b.width / 2), behavior: reduce ? "auto" : "smooth" });
   }, [i, reduce]);
 
   const running = active && playing && !hover && !reduce;
