@@ -101,7 +101,8 @@ export function SystemsPage() {
     const c = chip.getBoundingClientRect();
     const b = box.getBoundingClientRect();
     box.scrollBy({ left: c.left + c.width / 2 - (b.left + b.width / 2), behavior: reduce ? "auto" : "smooth" });
-  }, [i, reduce]);
+    // rtl ضمن المُعتمَدات: تبديل اللغة يقلب اتجاه الشريط فيعود إلى أوّله، فيُعاد توسيط الزرّ.
+  }, [i, reduce, rtl]);
 
   const running = active && playing && !hover && !reduce;
   const name = (w: Work) => (rtl && w.nameAr ? w.nameAr : w.name);
