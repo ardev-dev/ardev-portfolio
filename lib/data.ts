@@ -254,6 +254,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "Flutter", "Django", "Docker"],
     links: [{ label: website, href: "https://maskani.homes" }],
     cover: "/apps/maskani-web.webp",
+    icon: "/apps/maskani-icon.webp",
     featured: true,
   },
   {
