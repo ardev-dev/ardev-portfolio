@@ -93,15 +93,19 @@ export function SystemsPage() {
   // يُبقي زرّ المشروع النشط ظاهراً في الشريط دون تمرير الصفحة نفسها.
   const rail = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const box = rail.current;
-    const chip = box?.querySelector<HTMLElement>(`[data-chip="${i}"]`);
-    if (!box || !chip) return;
-    // بالفرق بين مركزَي الزرّ والشريط على الشاشة — يصحّ في الاتجاهين. (scrollLeft
-    // سالب في RTL، فحساب الموضع من offsetLeft كان يُبقي الشريط عند أوّله بالعربية.)
-    const c = chip.getBoundingClientRect();
-    const b = box.getBoundingClientRect();
-    box.scrollBy({ left: c.left + c.width / 2 - (b.left + b.width / 2), behavior: reduce ? "auto" : "smooth" });
-    // rtl ضمن المُعتمَدات: تبديل اللغة يقلب اتجاه الشريط فيعود إلى أوّله، فيُعاد توسيط الزرّ.
+    // ⚠️ **مؤجَّل إلى الإطار التالي.** اتجاه الصفحة (dir على <html>) يضبطه مزوّد اللغة
+    // في أثرٍ يعمل **بعد** آثار أبنائه. فلو حسبنا الموضع هنا مباشرةً عند تبديل اللغة
+    // لحسبناه والتخطيط ما زال بالاتجاه القديم، ثم ينقلب الاتجاه فيعود الشريط إلى أوّله.
+    const id = requestAnimationFrame(() => {
+      const box = rail.current;
+      const chip = box?.querySelector<HTMLElement>(`[data-chip="${i}"]`);
+      if (!box || !chip) return;
+      // بالفرق بين مركزَي الزرّ والشريط على الشاشة — يصحّ في الاتجاهين (scrollLeft سالب في RTL).
+      const c = chip.getBoundingClientRect();
+      const b = box.getBoundingClientRect();
+      box.scrollBy({ left: c.left + c.width / 2 - (b.left + b.width / 2), behavior: reduce ? "auto" : "smooth" });
+    });
+    return () => cancelAnimationFrame(id);
   }, [i, reduce, rtl]);
 
   const running = active && playing && !hover && !reduce;
@@ -216,7 +220,7 @@ export function SystemsPage() {
             className="relative order-1 h-[clamp(250px,42dvh,380px)] min-w-0 px-5 pt-6 sm:px-8 lg:order-2 lg:h-[clamp(300px,calc(100dvh-29rem),600px)] lg:py-7"
             style={reduce ? undefined : { animation: "blur-in 0.65s ease both" }}
           >
-            <Stage work={cur.work} brand={cur.brand} title={name(cur.work)} />
+            <Stage work={cur.work} brand={cur.brand} title={name(cur.work)} ar={rtl} />
             {!real(cur.work) && (
               <span className="glass pointer-events-none absolute end-4 top-4 rounded-full px-2.5 py-1 text-[10.5px] text-fg-muted">
                 {t({ en: "Concept mockup", ar: "تصوّر تصميمي" })}
@@ -298,10 +302,10 @@ function CtrlButton({ label, onClick, children }: { label: string; onClick: () =
 const real = (w: Work) => Boolean(w.shots?.length || w.cover);
 
 /** منصّة العرض: لقطات التطبيق، أو لقطة الموقع، أو نموذج مصمَّم لمن لا لقطات له. */
-function Stage({ work, brand, title }: { work: Work; brand: Brand; title: string }) {
+function Stage({ work, brand, title, ar }: { work: Work; brand: Brand; title: string; ar: boolean }) {
   if (work.shots?.length) return <Shots shots={work.shots} title={title} />;
   if (work.cover) return <Cover src={work.cover} title={title} host={work.href?.replace(/^https?:\/\//, "")} />;
-  return <Mockup work={work} brand={brand} name={title} />;
+  return <Mockup work={work} brand={brand} name={title} ar={ar} />;
 }
 
 function Shots({ shots, title }: { shots: string[]; title: string }) {
