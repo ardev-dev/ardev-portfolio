@@ -19,6 +19,28 @@ const EASE = "cubic-bezier(0.22,1,0.36,1)";
 type Slide = { work: Work; group: WorkGroup; brand: Brand; n: number };
 
 /**
+ * ترتيب العرض بالأفضلية لا بالمجال.
+ *
+ * الأوائل قائمة صريحة: المنتجات التي في الإنتاج ثم أقوى الأعمال. وما بعدها يُرتَّب
+ * آلياً بما يُرى منه: اللقطات الحقيقية أوّلاً، فلقطة الموقع، فالشعار الحقيقي،
+ * فالمخطّط، فالبانر — والأحدث قبل الأقدم. فإضافة لقطات لمشروعٍ ترفعه تلقائياً.
+ */
+const PRIORITY = [
+  "Abber", "Wisal", "Azbah", "Maskani", "Manam", "MikroTik Manager Pro", "Sweetra", "Linkati", "Somow", "Faheem",
+  "FactForge", "Etimad Tenders", "solar_community_icons", "flutter_websocket_manager", "video_compressor_plus",
+  "shared_utils", "Wasselak", "TruckGo", "Kushak", "Lumi", "AppProof", "Moqawlat", "Oxfile", "ardev.dev",
+];
+
+function rank(work: Work, brand: Brand, order: number) {
+  const listed = PRIORITY.indexOf(work.name);
+  if (listed >= 0) return listed;
+  const tier = work.shots?.length ? 0 : work.cover ? 1 : work.icon ? 2 : brand.scene !== "banner" ? 3 : 4;
+  const year = Number(work.year.match(/\d{4}/g)?.pop() ?? 0);
+  // الطبقة أوّلاً، ثم الأحدث، ثم ترتيب الفهرس حسماً للتعادل.
+  return 100 + tier * 10000 + (3000 - year) * 100 + order / 100;
+}
+
+/**
  * عرض الأعمال: كل المشاريع في نافذة واحدة.
  *
  * كانت الصفحة فهرساً نصّياً طويلاً يُمرَّر؛ صارت نافذة تعرض مشروعاً واحداً في
@@ -38,7 +60,9 @@ export function SystemsPage() {
     () =>
       catalog
         .flatMap((group) => group.items.map((work) => ({ work, group, brand: brandOf(work, group.id) })))
-        .map((s, n) => ({ ...s, n })),
+        .map((s, order) => ({ ...s, r: rank(s.work, s.brand, order) }))
+        .sort((a, b) => a.r - b.r)
+        .map(({ r: _r, ...s }, n) => ({ ...s, n })),
     []
   );
   const total = slides.length;
@@ -240,40 +264,33 @@ export function SystemsPage() {
         </div>
       </div>
 
-      {/* الشريط: كل المشاريع، مجموعةً بحسب مجالها */}
+      {/* الشريط: كل المشاريع بترتيب العرض، بلا فواصل — المجال يظهر في شريط النافذة. */}
       <nav
         className="anim relative"
         style={{ "--d": "0.16s" } as React.CSSProperties}
         aria-label={t({ en: "Projects", ar: "المشاريع" })}
       >
         <div ref={rail} className="mask-fade-x flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {catalog.map((group) => (
-            <div key={group.id} className="flex shrink-0 items-center gap-1.5">
-              <span className="shrink-0 px-2 text-[10.5px] uppercase tracking-wider text-fg-faint">{t(group.title)}</span>
-              {slides
-                .filter((s) => s.group.id === group.id)
-                .map((s) => {
-                  const on = s.n === i;
-                  return (
-                    <button
-                      key={s.work.name}
-                      data-chip={s.n}
-                      onClick={() => go(s.n)}
-                      aria-current={on ? "true" : undefined}
-                      className={cn(
-                        "flex shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-[12.5px] transition-colors",
-                        on
-                          ? "border-white/35 bg-white/[0.14] text-ink"
-                          : "border-white/[0.09] bg-white/[0.03] text-fg-muted hover:border-white/20 hover:text-ink"
-                      )}
-                    >
-                      <Logo work={s.work} brand={s.brand} size={18} />
-                      <span className="whitespace-nowrap">{name(s.work)}</span>
-                    </button>
-                  );
-                })}
-            </div>
-          ))}
+          {slides.map((s) => {
+            const on = s.n === i;
+            return (
+              <button
+                key={s.work.name}
+                data-chip={s.n}
+                onClick={() => go(s.n)}
+                aria-current={on ? "true" : undefined}
+                className={cn(
+                  "flex shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-[12.5px] transition-colors",
+                  on
+                    ? "border-white/35 bg-white/[0.14] text-ink"
+                    : "border-white/[0.09] bg-white/[0.03] text-fg-muted hover:border-white/20 hover:text-ink"
+                )}
+              >
+                <Logo work={s.work} brand={s.brand} size={18} />
+                <span className="whitespace-nowrap">{name(s.work)}</span>
+              </button>
+            );
+          })}
         </div>
       </nav>
     </Shell>
