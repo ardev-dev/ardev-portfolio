@@ -1,0 +1,10 @@
+@font-face{font-family:Readex;src:url('../../repos/kushak/assets/fonts/ReadexPro-Regular.ttf');font-weight:400}
+@font-face{font-family:Readex;src:url('../../repos/kushak/assets/fonts/ReadexPro-Medium.ttf');font-weight:500}
+@font-face{font-family:Readex;src:url('../../repos/kushak/assets/fonts/ReadexPro-SemiBold.ttf');font-weight:600}
+@font-face{font-family:Readex;src:url('../../repos/kushak/assets/fonts/ReadexPro-Bold.ttf');font-weight:700}
+:root{--bg:#FFFFFF;--fg:#121217;--primary:#1A237E;--secondary:#FAFAFA;--muted:#EEEEEE;--mfg:#6C6C89;--border:#E3E5E5;--success:#34C759;--error:#FC3E6B}
+body{background:var(--bg);color:var(--fg);font-family:Readex,sans-serif;font-size:14px}
+.appbar .title{font-size:16px;font-weight:500}
+.card{background:var(--secondary);border:1px solid var(--border);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.btn{height:48px;border-radius:48px;background:var(--primary);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:500}
+.fab{background:var(--primary);color:#fff}

@@ -518,7 +518,7 @@ export const catalog: WorkGroup[] = [
     title: { en: "Accounting & payments", ar: "المحاسبة والمدفوعات" },
     desc: { en: "Ledgers, wallets and gateways — where a rounding error is a real loss.", ar: "دفاتر ومحافظ وبوّابات — حيث خطأ التقريب خسارة حقيقية." },
     items: [
-      { name: "Kushak", nameAr: "كشك", kind: { en: "Accounting for kiosks and shops — branches, settlements, invoices, staff, stock", ar: "محاسبة الأكشاك والمحلات — فروع وتسويات وفواتير وموظّفون ومخزون" }, stack: ["Flutter", "Firebase"], year: "2026", icon: "/work/kushak-icon.webp" },
+      { name: "Kushak", nameAr: "كشك", kind: { en: "Accounting for kiosks and shops — branches, settlements, invoices, staff, stock", ar: "محاسبة الأكشاك والمحلات — فروع وتسويات وفواتير وموظّفون ومخزون" }, stack: ["Flutter", "Firebase"], year: "2026", icon: "/work/kushak-icon.webp", shots: ["/work/kushak-1.webp", "/work/kushak-2.webp", "/work/kushak-3.webp"] },
       { name: "Alminshar", nameAr: "المنشار", kind: { en: "Accounting system for a sawmill business", ar: "نظام محاسبي لمنشرة" }, stack: ["Flutter"], year: "2024" },
       { name: "Azbah", nameAr: "عزبة", kind: { en: "Expense splitting and settle-up on a double-entry ledger", ar: "تقسيم المصاريف والتسوية على قيد مزدوج" }, stack: ["Flutter", "Django"], year: "2024 — Now", href: "https://azbah.somow.sa", shots: ["/apps/azbah-1.webp", "/apps/azbah-2.webp", "/apps/azbah-3.webp"], icon: "/apps/azbah-icon.webp" },
       { name: "Azbah Admin", nameAr: "إدارة عزبة", kind: { en: "The operations panel behind the ledger", ar: "لوحة التشغيل خلف الدفتر" }, stack: ["Flutter"], year: "2026", icon: "/work/azbah-admin-icon.webp" },
