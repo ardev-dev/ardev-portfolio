@@ -1,0 +1,8 @@
+/* المنشار — ألوان من lib/core/utiles/color_manager.dart ، بلا خطّ مخصّص (خطّ النظام) */
+@font-face{font-family:SFAr;src:url('file:///System/Library/Fonts/SFArabic.ttf');font-weight:100 900}
+:root{--primary:#354276;--secondary:#E56510;--surface:#F7F9FD;--fg:#191C20;--fgv:#43474E;--container:#FFFFFF;--card:#E8EAF0;--divider:#C3C7CF}
+body{background:var(--surface);color:var(--fg);font-family:-apple-system,SFAr,'Geeza Pro',sans-serif;font-size:14px;line-height:20px}
+.top{background:var(--primary);color:#fff}
+.appbar .title{font-size:22px;font-weight:400}
+.cc{background:var(--container);border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,.16);margin:4px}
+.home-ind{color:#000}

@@ -1,0 +1,16 @@
+/* TicTacTonz — lib/src/constant/app_color.dart ; ThemeData() (Material 2, system font) */
+:root{--app:#50206C;--disabled:#D9C6E9;--pt-on:#FFBF00;--pt-off:#FCE7AA;--scaffold:#FAFAFA}
+body{direction:ltr;background:var(--scaffold);color:rgba(0,0,0,.87);font-family:-apple-system,'SF Pro Text','Geeza Pro',sans-serif;font-size:14px}
+.status{color:#fff;background:var(--app)}
+.appbar{background:var(--app);color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2),0 4px 5px rgba(0,0,0,.14),0 1px 10px rgba(0,0,0,.12);justify-content:flex-end;z-index:2}
+.appbar .title{font-size:14px;font-weight:500;line-height:56px}
+.body{padding:10px}
+.players{display:flex;gap:23.4px}
+.pl{flex:1;border:.8px solid var(--disabled);border-radius:5px;overflow:hidden}
+.pl .hd{background:var(--disabled);border-radius:4px 4px 0 0;padding:2px 5px;display:flex;justify-content:space-between;align-items:center;color:#fff;height:28px;white-space:nowrap}
+.pl .pt{padding:3px 5px;text-align:right;font-size:25px;font-weight:700;line-height:30px;color:var(--pt-off)}
+.pl.on{border-color:var(--app)}.pl.on .hd{background:var(--app)}.pl.on .pt{color:var(--pt-on)}
+.x{transform:rotate(45deg)}
+.board{padding-top:15px;display:grid;grid-template-columns:repeat(3,1fr)}
+.board div{aspect-ratio:1;margin:.8px;background:var(--app);border-radius:1px;display:grid;place-items:center;color:#fff;overflow:hidden}
+.home-ind{color:#000}

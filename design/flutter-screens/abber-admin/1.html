@@ -1,0 +1,54 @@
+<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><link rel="stylesheet" href="../kit.css"><link rel="stylesheet" href="base.css"><style>
+.happ{height:64px;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.prof{display:flex;align-items:center;gap:10px;opacity:.8;width:200px}
+.prof img{width:46px;height:46px;border-radius:50%;object-fit:contain}
+.prof div{display:flex;flex-direction:column;gap:4px;font-size:12px;line-height:1.5;font-weight:600;color:var(--primary)}
+.bell{width:44px;height:44px;border-radius:48px;background:var(--secondary);display:grid;place-items:center;position:relative;color:var(--primary)}
+.bell b{position:absolute;left:2px;top:3px;width:8px;height:8px;border-radius:50%;background:var(--error)}
+.trayh{padding:16px 20px 0;display:flex;align-items:center;justify-content:space-between}
+.trayh b{font-size:14px;line-height:1.71;font-weight:600}.trayh span{font-size:10px;line-height:1.6;font-weight:300;color:var(--stroke)}
+.tray{height:94px;padding:10px 20px 0;display:flex;gap:14px;overflow:hidden}
+.ring{width:64px;flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10px;line-height:1.6;font-weight:300}
+.ring .r{width:60px;height:60px;border-radius:50%;border:2.5px solid var(--border);padding:2.5px;position:relative}
+.ring .r.live{border-color:var(--error)}.ring .r.un{border-color:var(--success)}
+.ring .r.me{border:0;padding:2.5px}
+.ring .r.me svg{position:absolute;inset:0}
+.ring .a{width:100%;height:100%;border-radius:50%;background:linear-gradient(225deg,var(--gold),var(--goldDeep));display:grid;place-items:center;font-size:16px;font-weight:600;color:var(--navy)}
+.ring .r.me .a{width:55px;height:55px}
+.plus{position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;border-radius:50%;background:var(--primary);border:2px solid var(--bg);display:grid;place-items:center;color:#fff}
+.lv{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);background:var(--error);border:2px solid var(--bg);border-radius:999px;padding:1px 8px;color:#fff;font-size:10px;line-height:1.6;font-weight:600;white-space:nowrap}
+.search{margin:8px 20px;height:48px;border-radius:48px;background:var(--secondary);display:flex;align-items:center;padding-right:16px;gap:8px;color:var(--stroke);font-size:13px;font-weight:300}
+.svc{padding:20px}
+.svc h3{font-size:15px;line-height:1.6;font-weight:600;margin-bottom:12px}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.c{height:90px;border-radius:12px;background:var(--secondary);padding:10px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:relative;font-size:12px;line-height:1.5;text-align:center}
+.c .si{font-size:24px;color:#5856D6}
+.c em{position:absolute;top:6px;left:6px;font-style:normal;background:var(--primary);color:#fff;border-radius:10px;padding:2px 6px;font-size:10px;line-height:1.6;font-weight:600}
+.nav{position:absolute;left:0;right:0;bottom:0;padding-bottom:16px;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.nav>div{height:64px;padding:4px 40px;display:flex;align-items:center;justify-content:space-between}
+.nav .i{width:44px;height:44px;display:grid;place-items:center}
+.nav .m{width:72px;height:56px;position:relative}
+.nav .m span{position:absolute;left:7.5px;top:0;width:56px;height:56px;border-radius:48px;background:var(--primary);color:#fff;display:grid;place-items:center;box-shadow:0 2px 4px rgba(0,0,0,.25)}
+</style><body><div class="status"><span>9:41</span><span class="r"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1-1.1C13.100 1.700 10.700.7 8 .7S2.900 1.700 1 3.500l1 1.100c1.600-1.500 3.700-2.400 6-2.400zm0 3.300c1.400 0 2.700.500 3.700 1.400l1-1.100C11.400 4.600 9.800 4 8 4s-3.400.6-4.700 1.800l1 1.100c1-.9 2.300-1.400 3.700-1.400zm0 3.200c-.8 0-1.500.300-2 .8l2 2.300 2-2.300c-.5-.5-1.200-.8-2-.8z" fill="currentColor"/></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.500" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"/><rect x="25" y="4.500" width="2" height="4" rx="1" fill="currentColor" opacity=".45"/></svg></span></div>
+<div class="happ"><div class="prof"><img src="file:///Users/ar/Development/projects/abber-project/abber_admin/assets/pngs/logo_abber.png"><div><span>مرحبا بك</span><span>عبدالعزيز</span></div></div>
+<div class="bell"><b></b><i class="si" style="font-size:24px">&#xf163;</i></div></div>
+<div class="trayh"><b>جديد المفسّرين</b><span>حالتك تظهر لعملائك ٢٤ ساعة</span></div>
+<div class="tray">
+<div class="ring"><div class="r me"><svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="28.75" fill="none" stroke="#1A2530" stroke-width="2.5" stroke-dasharray="5 4"/></svg><div class="a">ع</div><span class="plus"><i class="si" style="font-size:12px">&#xf103;</i></span></div><span>حالتي</span></div>
+<div class="ring"><div class="r live"><div class="a">س</div><span class="lv">مباشر</span></div><span>سلطان</span></div>
+<div class="ring"><div class="r un"><div class="a">ن</div></div><span>نورة</span></div>
+<div class="ring"><div class="r un"><div class="a">خ</div></div><span>خالد</span></div>
+<div class="ring"><div class="r"><div class="a">م</div></div><span>منصور</span></div>
+<div class="ring"><div class="r"><div class="a">ه</div></div><span>هيفاء</span></div>
+</div>
+<div class="search"><i class="si" style="font-size:20px">&#xf36e;</i><span>تتبع الطلب</span></div>
+<div class="svc">
+<h3>الطلبات والمذكرات</h3>
+<div class="g"><div class="c"><em>14</em><i class="si">&#xf1d6;</i><span>الطلبات</span></div><div class="c"><em>3</em><i class="si">&#xf3cb;</i><span>المذكرات</span></div><div class="c"><i class="si">&#xf3b0;</i><span>رؤى تحقّقت</span></div></div>
+<h3>الدعم والتواصل</h3>
+<div class="g"><div class="c"><em>5</em><i class="si">&#xf1a3;</i><span>الدعم الفني</span></div><div class="c"><em>27</em><i class="si">&#xf1df;</i><span>واتساب</span></div><div class="c"><i class="si">&#xf46d;</i><span>تدفق محادثات البوت</span></div><div class="c"><i class="si">&#xf5bd;</i><span>الإعلانات والتنبيهات</span></div></div>
+<h3>المالية</h3>
+<div class="g"><div class="c"><i class="si">&#xf5c2;</i><span>السحوبات</span></div><div class="c"><i class="si">&#xf481;</i><span>التسويات</span></div><div class="c"><i class="si">&#xf2d4;</i><span>الإحالات</span></div><div class="c"><i class="si">&#xf53d;</i><span>الكوبونات</span></div><div class="c"><i class="si">&#xf341;</i><span>روابط الدفع</span></div></div>
+</div>
+<div class="nav"><div><span class="i"><i class="si" style="font-size:24px;color:var(--primary)">&#xf30c;</i></span><span class="m"><span><i class="si" style="font-size:24px">&#xf1d6;</i></span></span><span class="i"><i class="si" style="font-size:24px;color:var(--stroke)">&#xf5d6;</i></span></div></div>
+<i class="home-ind" style="color:#000"></i></body></html>

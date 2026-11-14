@@ -1,0 +1,37 @@
+/* مقاولات (Moqawlat v2) — نظام «حَجَر»: lib/v2/ui/theme/hajar_tokens.dart + hajar_text.dart + hajar_tone.dart + hajar_glass.dart */
+@font-face{font-family:Readex;src:url('file:///Users/ar/MyDocuments/projects/moqawlat/assets/fonts/readex/ReadexPro-Light.ttf');font-weight:300}
+@font-face{font-family:Readex;src:url('file:///Users/ar/MyDocuments/projects/moqawlat/assets/fonts/readex/ReadexPro-Regular.ttf');font-weight:400}
+@font-face{font-family:Readex;src:url('file:///Users/ar/MyDocuments/projects/moqawlat/assets/fonts/readex/ReadexPro-Medium.ttf');font-weight:500}
+@font-face{font-family:Readex;src:url('file:///Users/ar/MyDocuments/projects/moqawlat/assets/fonts/readex/ReadexPro-SemiBold.ttf');font-weight:600}
+@font-face{font-family:SolarL;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_linear_icons.ttf')}
+@font-face{font-family:SolarB;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_bold_icons.ttf')}
+:root{--primary:#1A237E;--accent:#3D5AFE;--accentS:#E8EBFF;--bg:#F4F3F0;--surface:#FFFFFF;--muted:#ECEAE5;--border:#DDD9D1;--text:#1C1F2A;--text2:#5A5F6E;--text3:#696D76;--ctl:#8F897E;
+--credit:#176A4C;--creditS:#E4F3EC;--debit:#962F2F;--debitS:#F7E5E5;--info:#255A89;--neutral:#52606D;--neutralS:#EEF0F2}
+body{background:var(--bg);color:var(--text);font-family:Readex,sans-serif;font-size:13px;line-height:24px}
+.so{font-family:SolarL;font-style:normal;font-weight:400;line-height:1;display:inline-block;direction:ltr}.so.b{font-family:SolarB}
+.bar{height:64px;position:relative;display:flex;align-items:center;justify-content:space-between}
+.bar .t{position:absolute;left:0;right:0;text-align:center;font-size:16px;line-height:24px;font-weight:600}
+.circ{width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--ctl);display:grid;place-items:center;margin-right:20px;position:relative}
+.body{padding:8px 20px 12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.ts{font-size:14px;line-height:22px;font-weight:600}.cap{font-size:11px;line-height:16px;color:var(--text2)}.lab{font-size:12px;line-height:18px;font-weight:500;color:var(--text2)}
+.bs{font-size:13px;line-height:24px;font-weight:600}
+.row{display:flex;align-items:center}
+.amt{display:inline-flex;align-items:baseline;gap:4px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.amt i{font-style:normal;font-size:12px;line-height:18px}.amt b{font-weight:600;font-size:14px;line-height:22px;direction:ltr}
+.amt.lg i{font-size:14px;line-height:22px}.amt.lg b{font-size:18px;line-height:28px}
+.debit{color:var(--debit)}.credit{color:var(--credit)}
+.chip{font-size:11px;line-height:16px;font-weight:600;padding:2px 8px;border-radius:999px;display:inline-block}
+.chip.debit{background:var(--debitS)}.chip.credit{background:var(--creditS)}
+.ob{height:44px;border-radius:999px;border:1px solid var(--ctl);background:var(--surface);color:var(--primary);display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;line-height:20px;font-weight:500;flex:1}
+.div{height:1px;background:var(--border);margin:7.500px 0}
+.stat{flex:1;background:var(--muted);border-radius:12px;padding:8px 12px}.stat>span:first-child{display:block;font-size:12px;line-height:18px;font-weight:600;margin-bottom:4px}
+.pbar{height:6px;border-radius:999px;background:var(--muted);overflow:hidden;margin-top:4px}.pbar i{display:block;height:100%;background:var(--credit);margin-right:0}
+.tx{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:8px}
+.tx .in{border-right:4px solid var(--border);padding:14px 16px}
+.tx.d .in{border-right-color:var(--debit)}.tx.c .in{border-right-color:var(--credit)}
+.tx .ib{width:38px;height:38px;border-radius:10px;background:var(--neutralS);color:var(--neutral);display:grid;place-items:center;flex:none;margin-left:10px}
+.tx.d .ib{background:var(--debitS);color:var(--debit)}.tx.c .ib{background:var(--creditS);color:var(--credit)}
+.tx .tt{flex:1;min-width:0}.tx .tt div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx .am{display:flex;flex-direction:column;align-items:flex-end;gap:4px;margin-right:12px}
+.home-ind{color:#000;z-index:9}

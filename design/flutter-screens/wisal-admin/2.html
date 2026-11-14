@@ -1,0 +1,52 @@
+<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><link rel="stylesheet" href="../kit.css"><link rel="stylesheet" href="base.css"><style>
+.sab{height:64px;position:relative;display:flex;align-items:center}
+.sab .lead{width:84px;display:grid;place-items:center}
+.sab .ttl{position:absolute;left:0;right:0;text-align:center;font-size:16px;line-height:28px;font-weight:600}
+.search{margin:2px 20px 0;height:48px;border-radius:48px;background:var(--secondary);display:flex;align-items:center}
+.search .pre{padding:0 16px 0 12px;display:grid;place-items:center}
+.search .hint{flex:1;font-size:13px;line-height:24px;font-weight:300;color:var(--stroke)}
+.search .suf{width:48px;height:48px;display:grid;place-items:center}
+.chips{margin-top:20px;padding-right:20px;display:flex;white-space:nowrap;overflow:hidden}
+.chip{height:36px;margin-left:12px;padding:0 20px;border-radius:50px;background:var(--secondary);color:var(--stroke);font-size:12px;font-weight:500;display:flex;align-items:center;flex:none}
+.chip.on{background:var(--primary);color:#fff}
+.list{padding:0 20px;margin-top:6px}
+.sep{padding:32px 0 4px;font-size:15px;line-height:28px;color:var(--stroke)}
+.ord{margin-top:16px;border:1px solid var(--muted);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;background:var(--bg)}
+.ord .edge{position:absolute;right:0;top:0;bottom:0;width:3px}
+.r1{display:flex;gap:12px;align-items:flex-start}
+.oav{width:48px;height:48px;border-radius:14px;position:relative;flex:none;color:#fff;display:grid;place-items:center;font-size:17px;font-weight:600}
+.oav b{position:absolute;left:-4px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:var(--primary);border:2px solid var(--bg);display:grid;place-items:center}
+.r1 .c{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.nm{display:flex;gap:8px;align-items:center}
+.r2{display:flex;gap:10px;align-items:center}
+.dash{height:1px;background:repeating-linear-gradient(to left,var(--muted) 0 3px,transparent 3px 5px)}
+.r3{display:flex;gap:8px;align-items:center}
+.pill{height:26px;padding:0 10px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:18px;font-weight:500}
+.pill i{width:6px;height:6px;border-radius:50%}
+.go{width:30px;height:30px;border-radius:50%;background:var(--secondary);display:grid;place-items:center}
+</style><body><div class="status"><span>9:41</span><span class="r"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1-1.1C13.100 1.700 10.700.7 8 .7S2.900 1.700 1 3.500l1 1.100c1.600-1.500 3.700-2.400 6-2.400zm0 3.300c1.400 0 2.700.500 3.700 1.400l1-1.100C11.400 4.600 9.800 4 8 4s-3.400.6-4.700 1.800l1 1.100c1-.9 2.300-1.400 3.700-1.400zm0 3.200c-.8 0-1.500.300-2 .8l2 2.300 2-2.300c-.5-.5-1.200-.8-2-.8z" fill="currentColor"/></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.500" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"/><rect x="25" y="4.500" width="2" height="4" rx="1" fill="currentColor" opacity=".45"/></svg></span></div>
+<div class="sab"><div class="lead"><i class="sl" style="font-size:26px">&#xf135;</i></div><div class="ttl">الطلبات</div></div>
+<div class="search"><span class="pre"><i class="sb" style="font-size:20px;color:var(--stroke);transform:rotate(90deg)">&#xf369;</i></span><span class="hint">أبحث عن طلب</span><span class="suf"><i class="sb" style="font-size:20px;color:var(--stroke)">&#xf299;</i></span></div>
+<div class="chips"><span class="chip on">الكل</span><span class="chip">مفتوح</span><span class="chip">مسلم</span><span class="chip">مكتمل</span><span class="chip">ملغي</span><span class="chip">محذوف</span><span class="chip">في إنتظار الدفع</span></div>
+<div class="list"><div class="sep">اليوم</div>
+<div class="ord"><i class="edge" style="background:var(--green)"></i>
+<div class="r1"><div class="oav" style="background:linear-gradient(225deg,#3D3BA8,#6A68C9)">ن<b><i class="sb" style="font-size:12px;color:#fff">&#xf5db;</i></b></div><div class="c"><div class="nm"><span class="t-menu w6 ell" style="flex:1">نورة القحطاني</span><span class="t-xs c-stroke">12 د</span></div><div class="t-sm c-primary ell">الاستشارات الأسرية</div></div></div>
+<div class="r2"><span class="t-sm c-stroke ell" style="flex:1">د. سارة المطيري</span><span class="t-xs c-stroke">#18426</span></div>
+<div class="dash"></div>
+<div class="r3"><span class="pill" style="color:var(--green);background:color-mix(in srgb,var(--green) 12%,transparent)"><i style="background:var(--green)"></i>مفتوح</span><span style="flex:1"></span><span class="go"><i class="sl" style="font-size:16px;color:var(--primary)">&#xf123;</i></span></div></div>
+<div class="ord"><i class="edge" style="background:var(--amber)"></i>
+<div class="r1"><div class="oav" style="background:linear-gradient(225deg,#0B7A66,#3FB79C)">خ<b><i class="sb" style="font-size:12px;color:#fff">&#xf5db;</i></b></div><div class="c"><div class="nm"><span class="t-menu w6 ell" style="flex:1">خالد الشهري</span><span class="t-xs c-stroke">1 س و 40 د</span></div><div class="t-sm c-primary ell">الاستشارات النفسية</div></div></div>
+<div class="r2"><span class="t-sm c-stroke ell" style="flex:1">أ. ماجد الغامدي</span><i class="sb" style="font-size:16px;color:var(--stroke)">&#xf18f;</i><span class="t-xs c-stroke">#18419</span></div>
+<div class="dash"></div>
+<div class="r3"><span class="pill" style="color:var(--amber);background:color-mix(in srgb,var(--amber) 12%,transparent)"><i style="background:var(--amber)"></i>مسلم</span><span style="flex:1"></span><span class="go"><i class="sl" style="font-size:16px;color:var(--primary)">&#xf123;</i></span></div></div>
+<div class="ord"><i class="edge" style="background:var(--primary)"></i>
+<div class="r1"><div class="oav" style="background:linear-gradient(225deg,#9A5B13,#D9A65C)">ر<b><i class="sb" style="font-size:12px;color:#fff">&#xf5db;</i></b></div><div class="c"><div class="nm"><span class="t-menu w6 ell" style="flex:1">ريم العنزي</span><span class="t-xs c-stroke">3 س و 5 د</span></div><div class="t-sm c-primary ell">الاستشارات التربوية</div></div></div>
+<div class="r2"><span class="t-sm c-stroke ell" style="flex:1">د. هند الزهراني</span><span class="t-xs c-stroke">#18407</span></div>
+<div class="dash"></div>
+<div class="r3"><span class="pill" style="color:var(--primary);background:color-mix(in srgb,var(--primary) 12%,transparent)"><i style="background:var(--primary)"></i>مكتمل</span><span class="pill" style="color:var(--primary);background:color-mix(in srgb,var(--primary) 12%,transparent)"><i style="background:var(--primary)"></i>مضبوط الجودة</span><span style="flex:1"></span><span class="go"><i class="sl" style="font-size:16px;color:var(--primary)">&#xf123;</i></span></div></div>
+<div class="ord"><i class="edge" style="background:var(--amber)"></i>
+<div class="r1"><div class="oav" style="background:linear-gradient(225deg,#3D3BA8,#6A68C9)">ع<b><i class="sb" style="font-size:12px;color:#fff">&#xf5db;</i></b></div><div class="c"><div class="nm"><span class="t-menu w6 ell" style="flex:1">عبدالعزيز السبيعي</span><span class="t-xs c-stroke">5 س و 22 د</span></div><div class="t-sm c-primary ell">الاستشارات الدراسية</div></div></div>
+<div class="r2"><span class="t-sm c-stroke ell" style="flex:1">بانتظار اختيار المستشار</span><span class="t-xs c-stroke">#18398</span></div>
+<div class="dash"></div>
+<div class="r3"><span class="pill" style="color:var(--amber);background:color-mix(in srgb,var(--amber) 12%,transparent)"><i style="background:var(--amber)"></i>قيد الانتظار</span><span style="flex:1"></span><span class="go"><i class="sl" style="font-size:16px;color:var(--primary)">&#xf123;</i></span></div></div>
+</div><i class="home-ind"></i></body></html>

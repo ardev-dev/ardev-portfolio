@@ -1,0 +1,10 @@
+/* WA Saver: lib/core/constants.dart (AppColors) + lib/core/theme.dart (GoogleFonts.cairo, M3 light) */
+@font-face{font-family:Cairo;src:url('../../repos/wasselak/assets/fonts/Cairo-Regular.ttf');font-weight:400}
+@font-face{font-family:Cairo;src:url('../../repos/wasselak/assets/fonts/Cairo-Medium.ttf');font-weight:500}
+@font-face{font-family:Cairo;src:url('../../repos/wasselak/assets/fonts/Cairo-SemiBold.ttf');font-weight:600}
+@font-face{font-family:Cairo;src:url('../../repos/wasselak/assets/fonts/Cairo-Bold.ttf');font-weight:700}
+:root{--primary:#075E54;--secondary:#25D366;--accent:#128C7E;--business:#54C7C3;--chatbg:#ECE5DD;--surface:#F0F2F5;--grey:#9E9E9E}
+body{background:#fff;color:rgba(0,0,0,.87);font-family:Cairo,'Apple Color Emoji',sans-serif;font-size:14px;line-height:1.874}
+.top{background:var(--primary);color:#fff}
+.appbar .title{font-size:20px;font-weight:600}
+.av{border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;flex:none}

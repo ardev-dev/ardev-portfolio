@@ -1,0 +1,19 @@
+@font-face{font-family:AppAr;src:url('file:///System/Library/Fonts/SFArabic.ttf');font-weight:100 900}
+@font-face{font-family:CI;src:url('CupertinoIcons.ttf')}
+:root{--primary:#4CAF50;--card:#C2E3C3}
+body{background:#fff;color:#000;font-family:AppAr,'SF Arabic','Geeza Pro',-apple-system,sans-serif;font-size:14px;line-height:1.4}
+.ci{font-family:CI;font-style:normal;line-height:1;display:inline-block}
+.appbar{padding:0 4px}.appbar .title{font-size:22px;font-weight:400}
+.eb{height:40px;border-radius:20px;background:#F6FBF6;box-shadow:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15);color:var(--primary);font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px;padding:0 24px}
+.eb.ic{padding:0 16px 0 24px}
+.mc{background:var(--card);border-radius:12px;margin:4px;box-shadow:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15);display:flex;align-items:center;flex:none}
+.mc .ix{padding:8px}
+.mc .lt{flex:1;min-width:0;display:flex;align-items:center;padding:8px 16px 8px 24px;gap:16px;min-height:72px}
+.mc .mid{flex:1;min-width:0}.mc .tt{font-size:16px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc .sub{display:flex;align-items:center;justify-content:space-between}.mc .sub .tm{flex:1}
+.seal{background:#E0E0E0;border-radius:18px;padding:5px;display:grid;place-items:center;margin-left:10px}
+.ty{background:#E0E0E0;border-radius:18px;padding:5px 10px;font-size:10px;line-height:1.4}
+.mc .tr{font-size:11px;font-weight:500;text-align:center;line-height:1.45;letter-spacing:.3px}
+.ad{background:#F5F5F5;border:1px solid #E6E6E6;display:grid;place-items:center;color:#9E9E9E;font-size:13px;position:relative;margin:0 auto}
+.ad:before{content:"Ad";position:absolute;top:0;left:0;background:#E0A93B;color:#fff;font:600 10px -apple-system,sans-serif;padding:1px 5px;border-radius:0 0 4px 0;direction:ltr}
+.fabc{position:absolute;left:16px;bottom:50px;width:56px;height:56px;border-radius:30px;background:var(--primary);color:#fff;display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.3),0 4px 8px 3px rgba(0,0,0,.15)}

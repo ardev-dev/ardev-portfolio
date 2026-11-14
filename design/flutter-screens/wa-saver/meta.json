@@ -1,0 +1,12 @@
+{
+  "slug": "wa-saver",
+  "catalog_name": "WhatsApp Notification Saver",
+  "format": "phone",
+  "center": 1,
+  "screens": [
+    {"file": "1.png", "screen": "conversations list (home) with filter chips", "source": ["lib/screens/conversations_screen.dart", "lib/widgets/conversation_tile.dart", "lib/widgets/filter_chips.dart", "lib/models/conversation.dart", "lib/core/theme.dart", "lib/core/constants.dart"]},
+    {"file": "2.png", "screen": "chat screen (group) with a recovered deleted message and a repeated-message badge", "source": ["lib/screens/chat_screen.dart", "lib/models/message.dart"]},
+    {"file": "3.png", "screen": "settings", "source": ["lib/screens/settings_screen.dart"]}
+  ],
+  "notes": "App name in the UI is 'WA Saver' (AppStrings.appName). Colours are the app's own AppColors (WhatsApp-like greens); no third-party logo is used anywhere. All conversations/messages are neutral sample data (work chat, delivery update, appointment reminder, service centre). Filter chips are drawn exactly as coded: the selected chip has the same colour as the app bar and unselected labels use bodyMedium black54 on the green bar, so they look low-contrast - that is the code, not a drawing error. Chat bubbles are all left-aligned (received notifications only) with the time at the bottom-right inside a 60px right padding, as coded. The app is Android-only (notification listener) but the shared kit's iOS-style status bar was used per the brief. Font: GoogleFonts Cairo, loaded from a local Cairo copy."
+}

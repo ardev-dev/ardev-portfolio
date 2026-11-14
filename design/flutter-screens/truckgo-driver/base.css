@@ -1,0 +1,21 @@
+@font-face{font-family:JF;src:url('../../repos/truckgo_app_driver/assets/fonts/jf_flat.ttf')}
+@font-face{font-family:IB;src:url('../../repos/truckgo_app_driver/assets/fonts/icons_broken.ttf')}
+:root{--primary:#25be6f;--bg:#f8f8f8;--card:#fff;--amber:#FFA000;--grey:#9E9E9E;--red:#F44336;--disabled:rgba(0,0,0,.38);--divider:rgba(0,0,0,.12);--icon:rgba(0,0,0,.87);--light:#F3F3F3}
+body{background:var(--bg);color:#000;font-family:JF,'SF Arabic','Geeza Pro',-apple-system,sans-serif;font-size:14px;line-height:20px}
+.ib{font-family:IB;font-style:normal;font-weight:400;line-height:1;display:inline-block;direction:ltr;color:var(--icon)}
+.appbar{color:var(--primary)}
+.appbar .title{font-size:18px}
+.appbar .ib{color:var(--primary)}
+.ebtn{height:40px;border-radius:12px;padding:0 24px;display:inline-grid;place-items:center;font-size:16px;line-height:24px;color:#000;background:#f4fbf7;box-shadow:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15)}
+.notif{position:relative;margin:0 15px;width:24px;height:24px}
+.badge{position:absolute;left:18px;top:6px;width:18px;height:18px;border-radius:50%;background:#F44336;color:#000;font-size:14px;line-height:18px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.3);font-style:normal}
+.bnav{background:#fff;box-shadow:0 -1px 6px rgba(0,0,0,.18);z-index:5}
+.bnav div{color:rgba(0,0,0,.54);font-size:12px;gap:0}
+.bnav div.on{color:var(--primary);font-size:14px}
+.bnav .ic{display:block;background:var(--grey)}
+.bnav .on .ic{background:var(--primary)}
+.ic.home{width:25px;height:25px;-webkit-mask:url('bar_home.svg') center/contain no-repeat}
+.ic.ord{width:20px;height:20px;margin-bottom:2px;-webkit-mask:url('../../repos/truckgo_app_driver/assets/images/bar_orders.svg') center/contain no-repeat}
+.ordw{position:relative;display:block}
+.ordw b{position:absolute;top:0;right:0;width:6.7px;height:6.7px;border-radius:50%;background:#FF5252}
+bdi{unicode-bidi:isolate}

@@ -1,0 +1,12 @@
+{
+  "slug": "wisal-admin",
+  "catalog_name": "Wisal Admin",
+  "format": "phone",
+  "center": 1,
+  "screens": [
+    {"file": "1.png", "screen": "home — admin services grid (scrolled to Referrals / User management / Accounting groups)", "source": ["lib/features/home/presentation/pages/home_screen.dart", "lib/features/home/presentation/widgets/home_appbar.dart", "lib/features/home/presentation/widgets/services_section_widget.dart", "lib/features/home/presentation/widgets/bottom_navigation.dart"]},
+    {"file": "2.png", "screen": "orders list with search, status chips and order cards", "source": ["lib/features/order/presentation/pages/orders_screen.dart", "lib/features/order/presentation/views/orders_list_view.dart", "lib/features/order/presentation/widgets/order_widget.dart", "lib/core/widgets/layout/category_widget.dart", "lib/core/widgets/forms/custom_text_form_field.dart"]},
+    {"file": "3.png", "screen": "trial balance (accounting report)", "source": ["lib/features/accounting/presentation/pages/trial_balance_screen.dart", "lib/features/accounting/presentation/widgets/report_widgets.dart", "lib/core/widgets/forms/custom_date_time_field.dart", "lib/core/widgets/forms/custom_switch_field.dart"]}
+  ],
+  "notes": "Read from the local checkout /Users/ar/Development/projects/wisal-project/wisaladmin (v1.0.36+49), not cloned. The app is phone-first (no rail/drawer/data tables), so phone format. Theme: light, ReadexPro from the repo, primary #087443; icons are the real Solar glyphs rendered from the local solar_community_icons font. Home is drawn scrolled down one screen (the first four groups hold only 1-2 tiles each); the fixed greeting header and bottom bar are as in code. Sample data: admin/customer/consultant names, order ids, counters and amounts are invented; account codes and names on the trial balance are the real ones from the backend chart_of_accounts.py. Avatars are initials on a gradient (the app loads network photos). The date text in the two date pills is assumed to be yyyy-MM-dd (formatter lives in shared_utils, not checked in detail)."
+}

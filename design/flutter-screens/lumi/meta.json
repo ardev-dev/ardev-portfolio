@@ -1,0 +1,12 @@
+{
+  "slug": "lumi",
+  "catalog_name": "Lumi",
+  "format": "phone",
+  "center": 1,
+  "screens": [
+    {"file": "1.png", "screen": "home (Lumi voice assistant + game shortcuts + mic)", "source": ["lib/screens/home/home_screen.dart", "lib/widgets/animated_background.dart", "lib/widgets/speech_bubble.dart", "lib/widgets/lumi_avatar.dart", "lib/widgets/game_nav_button.dart", "lib/widgets/mic_button.dart", "lib/config/app_theme.dart"]},
+    {"file": "2.png", "screen": "letters game (after a correct answer)", "source": ["lib/screens/games/letters_game_screen.dart", "lib/config/app_constants.dart", "lib/widgets/speech_bubble.dart", "lib/widgets/lumi_avatar.dart"]},
+    {"file": "3.png", "screen": "parent report", "source": ["lib/screens/parent/parent_report_screen.dart", "lib/config/app_constants.dart"]}
+  ],
+  "notes": "Layout is drawn LTR on purpose: lib/app.dart uses MaterialApp.router with no locale/Directionality, so the real app lays out left-to-right with Arabic strings (lock button on the left, child chip on the right, '6 سنوات' with the number on the left, emoji after titles on the right). If the owner prefers an RTL presentation this would be a deviation from the code. The avatar is a plain purple circle with a glow because the bundled Lottie files (assets/animations/idle.json, talking.json) are placeholder circles. Font: theme declares fontFamily 'Cairo' but pubspec bundles no font files, so a real device would fall back to the system font; Cairo (from another local repo) was used as the declared intent. Lumi's speech-bubble sentences are sample Gemini replies; child names, scores and report numbers are sample data. Background star emoji positions are random in code, placed arbitrarily here."
+}

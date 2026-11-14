@@ -1,0 +1,14 @@
+/* عهدة (Aleuhda) — lib/assets/styles/colors.dart + style.dart (Material 2) ، خطوط المستودع نفسها */
+@font-face{font-family:JF;src:url('file:///private/tmp/claude-501/-Users-ar-MyDocuments-Resume/0bfd9c67-435e-4232-bd64-7ad28abe5767/scratchpad/repos/aleuhda/lib/assets/fonts/jf_flat.ttf')}
+@font-face{font-family:Mont;src:url('file:///private/tmp/claude-501/-Users-ar-MyDocuments-Resume/0bfd9c67-435e-4232-bd64-7ad28abe5767/scratchpad/repos/aleuhda/lib/assets/fonts/montserrat-light.ttf')}
+@font-face{font-family:Iconly;src:url('file:///private/tmp/claude-501/-Users-ar-MyDocuments-Resume/0bfd9c67-435e-4232-bd64-7ad28abe5767/scratchpad/repos/aleuhda/lib/assets/fonts/icons_broken.ttf')}
+:root{--blue:#2E547C;--green:#2D7B6F;--lg:#F3F3F3;--bg:#FAFAFA;--grey:#9E9E9E;--red:#F44336}
+body{background:var(--bg);color:rgba(0,0,0,.87);font-family:JF,sans-serif;font-size:14px}
+.ic{font-family:Iconly;font-style:normal;line-height:1;display:inline-block}
+.mont{font-family:Mont,JF,sans-serif}
+.status{background:#fff;color:#000}
+.home-ind{color:#000}
+.bnav{background:#fff;box-shadow:0 -1px 6px rgba(0,0,0,.18)}
+.bnav div{gap:3px;color:rgba(0,0,0,.54);font-size:12px}.bnav div.on{color:var(--blue);font-size:14px}
+.bnav svg{width:20px;height:20px;fill:var(--grey)}.bnav .on svg{fill:var(--blue)}
+.tabs{display:flex;height:48px;background:#fff}.tabs span{flex:1;display:grid;place-items:center;color:var(--grey);font-size:14px;border-bottom:2px solid transparent}.tabs .on{color:var(--blue);border-bottom-color:rgba(46,84,124,.5)}

@@ -1,0 +1,12 @@
+{
+  "slug": "mateam-app",
+  "catalog_name": "Mateam",
+  "format": "phone",
+  "center": 1,
+  "screens": [
+    {"file": "1.png", "screen": "home (product list)", "source": ["lib/screens/HomePage.dart", "lib/widgets/home/home_body.dart", "lib/widgets/home/product_cart.dart", "lib/static/constants.dart", "lib/main.dart"]},
+    {"file": "2.png", "screen": "product details (kabsa)", "source": ["lib/screens/DetailPage.dart", "lib/widgets/details/details_body.dart", "lib/widgets/details/product_image.dart", "lib/widgets/details/color_dot.dart"]},
+    {"file": "3.png", "screen": "product details (second product)", "source": ["lib/screens/DetailPage.dart", "lib/widgets/details/details_body.dart"]}
+  ],
+  "notes": "The app has only two screens in code (HomePage list + DetailPage), so screens 2 and 3 are the same DetailPage with two different products rather than an invented third screen. The app bar title 'مرحبا بكم بمتجر الالكترونيات' (electronics store) and the three colour dots are hard-coded leftovers in the code and were kept as-is even though the API (mateamm.herokuapp.com/api/v2/products, now dead) served restaurant dishes; dish names (كبسة، مظبي، عصيدة، عصير) are taken from the owner's Mateam Django backend sample DB, prices/descriptions are sample data. The card really prints the product name twice (bodyText1 + caption) and the price as 'السعر: $<price>'. Product photos were network images: replaced by gradient tiles with a dish glyph (the app repo bundles no images). Font: code uses GoogleFonts Almarai, which is not on this machine; Tajawal (closest local Arabic geometric sans) was used. Detail app bar: status-bar icons drawn dark for legibility (old Flutter would likely draw them light on that light bar)."
+}

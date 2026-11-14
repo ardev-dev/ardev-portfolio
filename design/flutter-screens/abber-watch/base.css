@@ -1,0 +1,20 @@
+/* Abber Watch (SwiftUI, watchOS 9, dark only, Arabic) — 198x242pt = Apple Watch 45mm.
+   ألوان النظام الداكنة لـ SwiftUI + AccentColor من Assets.xcassets (dark: 0,0.8,0). خط النظام: SF Compact / SF Arabic. */
+@font-face{font-family:SFC;src:url('file:///System/Library/Fonts/SFCompact.ttf');font-weight:100 900}
+@font-face{font-family:SFA;src:url('file:///System/Library/Fonts/SFArabic.ttf');font-weight:100 900}
+:root{--green:#30D158;--red:#FF453A;--blue:#0A84FF;--orange:#FF9F0A;--purple:#BF5AF2;--gray:#8E8E93;--accent:#00CC00;--sec:rgba(235,235,245,.6);--platter:#1F1F21}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:198px;height:242px;overflow:hidden}
+body{position:relative;background:#000;color:#fff;font-family:SFC,SFA,-apple-system,sans-serif;direction:rtl;-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.22}
+.cap{font-size:16px}.cap2{font-size:15px}.sec{color:var(--sec)}.b{font-weight:700}.m{font-weight:500}
+/* شريط العنوان: navigationTitle (بلون التمييز) + الساعة */
+.top{height:32px;padding:7px 14px 0;display:flex;justify-content:space-between;align-items:flex-start;font-size:16px;font-weight:600}
+.top .t{color:var(--accent)}.top .c{color:#fff;font-weight:500;direction:ltr}
+/* مؤشر صفحات TabView (4 صفحات) */
+.dots{position:absolute;left:0;right:0;bottom:4px;display:flex;justify-content:center;gap:5px}
+.dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3)}.dots i.on{background:#fff}
+svg{display:block;flex:none}
+.chips{padding:6px 8px;display:flex;gap:8px;white-space:nowrap;overflow:hidden}
+.chips span{flex:none;font-size:15px;padding:4px 8px;border-radius:12px;background:rgba(142,142,147,.2)}
+.tag{display:inline-block;font-size:15px;padding:2px 6px;border-radius:8px}
+.platter{margin:0 2px;background:var(--platter);border-radius:10px;padding:4px 8px}

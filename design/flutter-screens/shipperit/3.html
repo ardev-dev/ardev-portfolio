@@ -1,0 +1,45 @@
+<!doctype html><html lang="en" dir="ltr"><meta charset="utf-8"><link rel="stylesheet" href="../kit.css"><link rel="stylesheet" href="base.css"><style>
+body{background:var(--g200)}
+.top{position:absolute;top:0;left:0;right:0;height:143px;background:var(--blue)}
+.status{position:relative;z-index:2;color:#000}
+.appbar{position:relative;z-index:2;padding:0}
+.appbar .iconbtn{width:56px}
+.appbar .t{flex:1;display:flex;align-items:center;margin:0 16px}
+.pd{position:absolute;top:108px;left:0;right:0;height:35px;background:var(--g200);border-radius:45px 45px 0 0;display:flex;align-items:flex-end;justify-content:center;color:#000}
+.form{position:absolute;top:143px;left:0;right:0;padding:15px 20px}
+.f{flex:1;height:60px;border:1px solid rgba(0,0,0,.38);border-radius:8px;position:relative;display:flex;align-items:center;padding:0 12px;font-size:16px;line-height:19px;min-width:0}
+.f label{position:absolute;top:-7px;left:9px;padding:0 4px;background:var(--g200);font-size:12px;line-height:14px;color:rgba(0,0,0,.6)}
+.f span{flex:1;white-space:nowrap;overflow:hidden}
+.f .mi,.f .fa{color:rgba(0,0,0,.45);margin-left:12px}
+.qty{border:1px solid rgba(0,0,0,.26);border-radius:24px;display:flex;align-items:center;height:50px}
+.qty b{width:72px;display:grid;place-items:center;font-weight:400}
+.qty b i{width:40px;height:40px;border-radius:14px;background:var(--blue);display:grid;place-items:center;font-style:normal}
+.dd{flex:1;margin:5px;height:50px;border-radius:5px;background:#F5F5F5;box-shadow:9px 9px 16px rgba(168,177,198,.5),-9px -9px 16px rgba(255,255,255,.5);padding:8px 10px;display:flex;align-items:center}
+.dd span{display:flex;align-items:center;font-size:20px;line-height:24px;color:#000;border-bottom:1px solid #BDBDBD;height:34px}
+.cam{width:80px;height:80px;border:1px solid var(--blue);border-radius:5px;display:grid;place-items:center}
+.sw{width:33px;height:14px;border-radius:7px;background:var(--red);position:relative;display:block;margin:17px 13px}
+.sw i{position:absolute;right:-4px;top:-3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+</style><body><div class="top"></div><div class="status"><span>9:41</span><span class="r"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1-1.1C13.100 1.700 10.700.7 8 .7S2.900 1.700 1 3.500l1 1.100c1.600-1.500 3.700-2.400 6-2.400zm0 3.300c1.400 0 2.700.500 3.700 1.400l1-1.100C11.400 4.600 9.800 4 8 4s-3.400.6-4.700 1.800l1 1.100c1-.9 2.300-1.400 3.700-1.400zm0 3.200c-.8 0-1.500.300-2 .8l2 2.300 2-2.300c-.5-.5-1.200-.8-2-.8z" fill="currentColor"/></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.500" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"/><rect x="25" y="4.500" width="2" height="4" rx="1" fill="currentColor" opacity=".45"/></svg></span></div>
+<div class="appbar"><div class="iconbtn"><i class="mi" style="font-size:24px;color:#000;">&#xe15e;</i></div><div class="t"><span class="code" style="color:var(--indigo)">NYC</span><span class="dot" style="background:var(--indigo50);margin-left:16px"><i style="background:var(--indigo400)"></i></span><span class="dash"><i class="mi" style="font-size:24px;">&#xe38a;</i></span><span class="dot" style="background:var(--pink50);margin-right:16px"><i style="background:var(--pink400)"></i></span><span class="code" style="color:var(--pink)">BAS</span></div></div>
+<div class="pd">Product details</div>
+<div class="form">
+<div style="height:12px"></div>
+<div class="row"><i class="mi" style="font-size:24px;color:rgba(0,0,0,.45);margin-right:16px">&#xe192;</i><div class="f"><label>product link</label><span>https://example.com/item/48213</span><i class="mi" style="font-size:24px;">&#xe380;</i></div></div>
+<div style="height:12px"></div>
+<div class="row"><div class="f"><label>product name</label><span>Medjool dates, 1 kg gift box</span></div></div>
+<div style="height:12px"></div>
+<div class="row sb"><span style="font-size:12px;line-height:15px;font-weight:700">Product quantity</span><div class="qty"><b><i>—</i></b><span>1</span><b><i>+</i></b></div></div>
+<div style="margin-left:30px">single item price</div>
+<div class="row"><div class="f"><span>10.0</span><i class="fa" style="font-size:24px;">&#xf155;</i></div><span style="margin-left:5px">Total (5)</span></div>
+<div style="margin:10px 0 0 30px">single item weight</div>
+<div class="row"><div class="f"><span>1.0</span><i class="fa" style="font-size:24px;">&#xf496;</i></div><span style="margin-left:5px">Total (5)</span></div>
+<div style="height:12px"></div>
+<div class="row"><span style="font-size:20px;line-height:24px;color:#000;margin-right:10px">Category: </span><div class="dd"><span>food<i style="display:inline-block;width:38px"></i><i class="mi" style="font-size:18px;color:rgba(0,0,0,.54);">&#xee88;</i></span></div></div>
+<div style="height:12px"></div><div>Shipment Pictures</div><div style="height:12px"></div>
+<div class="cam"><i class="mi" style="font-size:24px;color:var(--blue);">&#xe130;</i></div>
+<div style="height:12px"></div>
+<div class="row sb" style="height:48px"><span style="color:#000">Save to Wishlist</span><span class="sw"><i></i></span></div>
+<div style="height:12px"></div>
+<div class="btn">DONE</div>
+</div>
+<i class="home-ind" style="color:#000"></i></body></html>

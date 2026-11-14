@@ -454,6 +454,8 @@ export type Work = {
   /** لقطة الموقع الحيّ، للمشاريع التي واجهتها ويب. */
   cover?: string;
   icon?: string;
+  /** لقطات بمقاس ساعة لا هاتف: شاشتها أعرض من ارتفاعها تقريباً، فتُعرض أصغر كي لا تخرج عن النافذة. */
+  device?: "watch";
 };
 
 export type WorkGroup = {
@@ -476,11 +478,11 @@ export const catalog: WorkGroup[] = [
       { name: "Wisal", nameAr: "وصال", kind: { en: "Consultations with VoIP, wallet and double-entry ledger", ar: "استشارات بمكالمات ومحفظة وقيد مزدوج" }, stack: ["Flutter", "Django", "Agora"], year: "2023 — Now", href: "https://wisalapp.com", shots: ["/apps/wisal-1.webp", "/apps/wisal-2.webp", "/apps/wisal-3.webp"], icon: "/apps/wisal-icon.webp" },
       { name: "Manam", nameAr: "منام", kind: { en: "A vertical of Abber on the same backend", ar: "امتداد رأسي لعبر على الخلفية نفسها" }, stack: ["Swift", "Objective-C"], year: "2026", shots: ["/work/manam-1.webp", "/work/manam-2.webp", "/work/manam-3.webp"], icon: "/work/manam-icon.webp" },
       { name: "Abber Web", nameAr: "موقع عبر", kind: { en: "The marketplace's public website", ar: "الموقع العام للمنصّة" }, stack: ["Web"], year: "2022 — Now", href: "https://abber.co", cover: "/apps/abber-web.webp", icon: "/apps/abber-icon.webp" },
-      { name: "Abber Admin", nameAr: "إدارة عبر", kind: { en: "Admin app for the Abber team", ar: "تطبيق الإدارة لفريق عبر" }, stack: ["Flutter"], year: "2025", icon: "/work/abber-admin-icon.webp" },
-      { name: "Abber Blog", nameAr: "مدوّنة عبر", kind: { en: "Standalone app for reading the Abber blog", ar: "تطبيق مستقل لقراءة مقالات مدوّنة عبر" }, stack: ["Flutter"], year: "2026", icon: "/work/abber-blog-icon.webp" },
-      { name: "Abber Watch", nameAr: "عبر للساعة", kind: { en: "Apple Watch companion for interpreters: requests, availability and wallet", ar: "رفيق المعبّر على Apple Watch: الطلبات والتوفّر والمحفظة" }, stack: ["Swift", "watchOS"], year: "2025", icon: "/apps/abber-icon.webp" },
+      { name: "Abber Admin", nameAr: "إدارة عبر", kind: { en: "Admin app for the Abber team", ar: "تطبيق الإدارة لفريق عبر" }, stack: ["Flutter"], year: "2025", icon: "/work/abber-admin-icon.webp", shots: ["/work/abber-admin-2.webp", "/work/abber-admin-1.webp", "/work/abber-admin-3.webp"] },
+      { name: "Abber Blog", nameAr: "مدوّنة عبر", kind: { en: "Standalone app for reading the Abber blog", ar: "تطبيق مستقل لقراءة مقالات مدوّنة عبر" }, stack: ["Flutter"], year: "2026", icon: "/work/abber-blog-icon.webp", shots: ["/work/abber-blog-2.webp", "/work/abber-blog-1.webp", "/work/abber-blog-3.webp"] },
+      { name: "Abber Watch", nameAr: "عبر للساعة", kind: { en: "Apple Watch companion for interpreters: requests, availability and wallet", ar: "رفيق المعبّر على Apple Watch: الطلبات والتوفّر والمحفظة" }, stack: ["Swift", "watchOS"], year: "2025", icon: "/apps/abber-icon.webp", shots: ["/work/abber-watch-2.webp", "/work/abber-watch-1.webp", "/work/abber-watch-3.webp"], device: "watch" },
       { name: "Wisal Web", nameAr: "موقع وصال", kind: { en: "The product's public website", ar: "الموقع العام للمنتج" }, stack: ["Web"], year: "2025 — Now", href: "https://wisalapp.com", cover: "/apps/wisal-web.webp", icon: "/apps/wisal-icon.webp" },
-      { name: "Wisal Admin", nameAr: "إدارة وصال", kind: { en: "Admin app for the Wisal team", ar: "تطبيق الإدارة لفريق وصال" }, stack: ["Flutter"], year: "2026", icon: "/work/wisal-admin-icon.webp" },
+      { name: "Wisal Admin", nameAr: "إدارة وصال", kind: { en: "Admin app for the Wisal team", ar: "تطبيق الإدارة لفريق وصال" }, stack: ["Flutter"], year: "2026", icon: "/work/wisal-admin-icon.webp", shots: ["/work/wisal-admin-2.webp", "/work/wisal-admin-1.webp", "/work/wisal-admin-3.webp"] },
     ],
   },
   {
@@ -489,7 +491,7 @@ export const catalog: WorkGroup[] = [
     desc: { en: "Listings, ownership and the people around a property.", ar: "العروض والملكية ومن يدور حول العقار." },
     items: [
       { name: "Maskani", nameAr: "مسكني", kind: { en: "Social real estate · app, admin, web, backend", ar: "عقارات اجتماعية · تطبيق ولوحة وويب وخلفية" }, stack: ["Flutter", "Django", "Next.js"], year: "2025 — Now", href: "https://maskani.homes", cover: "/apps/maskani-web.webp", icon: "/apps/maskani-icon.webp" },
-      { name: "Maskani Admin", nameAr: "إدارة مسكني", kind: { en: "Internal operations app for the platform", ar: "تطبيق التشغيل الداخلي للمنصّة" }, stack: ["Flutter"], year: "2026", icon: "/apps/maskani-icon.webp" },
+      { name: "Maskani Admin", nameAr: "إدارة مسكني", kind: { en: "Internal operations app for the platform", ar: "تطبيق التشغيل الداخلي للمنصّة" }, stack: ["Flutter"], year: "2026", icon: "/apps/maskani-icon.webp", shots: ["/work/maskani-admin-2.webp", "/work/maskani-admin-1.webp", "/work/maskani-admin-3.webp"] },
       { name: "Dalal", nameAr: "دلال", kind: { en: "Property market for Yemen — app and Django backend", ar: "سوق العقارات في اليمن — تطبيق وخلفية Django" }, stack: ["Flutter", "Django"], year: "2023" },
     ],
   },
@@ -498,19 +500,19 @@ export const catalog: WorkGroup[] = [
     title: { en: "Delivery & logistics", ar: "التوصيل واللوجستيات" },
     desc: { en: "Fleets, drivers and live position — where a late update is a lost order.", ar: "أساطيل وسائقون وموقع لحظي — حيث التأخّر في التحديث طلبٌ ضائع." },
     items: [
-      { name: "Wasselak", nameAr: "وصّلك", kind: { en: "Five apps on one core — customer, captain, business, staff, admin", ar: "خمسة تطبيقات بنواة واحدة — عميل ومندوب ومنشأة وموظّف وإدارة" }, stack: ["Flutter", "Django", "WebSocket"], year: "2023", icon: "/work/wasselak-icon.webp" },
-      { name: "Wasselak Captain", nameAr: "وصّلك — المندوب", kind: { en: "The delivery captain's app", ar: "تطبيق مندوب التوصيل" }, stack: ["Flutter"], year: "2023", icon: "/work/wasselak-icon.webp" },
-      { name: "Wasselak Business", nameAr: "وصّلك — المنشآت", kind: { en: "App for the businesses that send orders", ar: "تطبيق المنشآت التي ترسل الطلبات" }, stack: ["Flutter"], year: "2023", icon: "/work/wasselak-icon.webp" },
-      { name: "Wasselak Employee", nameAr: "وصّلك — الموظفون", kind: { en: "Staff app", ar: "تطبيق الموظفين" }, stack: ["Flutter"], year: "2024", icon: "/work/wasselak-icon.webp" },
-      { name: "Wasselak Admin", nameAr: "وصّلك — الإدارة", kind: { en: "Administration app", ar: "تطبيق الإدارة" }, stack: ["Flutter"], year: "2024", icon: "/work/wasselak-icon.webp" },
-      { name: "Wasselak Core", nameAr: "وصّلك — النواة", kind: { en: "Django core: orders, drivers, coupons, chat, reviews and notifications", ar: "نواة Django: طلبات وسائقون وكوبونات ومحادثة وتقييمات وإشعارات" }, stack: ["Django"], year: "2023", icon: "/work/wasselak-icon.webp" },
-      { name: "TruckGo", nameAr: "ترك جو", kind: { en: "Freight · shipper app, driver app, web, ML service", ar: "شحن · تطبيق عميل وسائق وويب وخدمة تعلّم آلي" }, stack: ["Flutter", "Python"], year: "2023", icon: "/work/truckgo-icon.webp" },
-      { name: "TruckGo Driver", nameAr: "ترك جو — السائق", kind: { en: "The driver's app", ar: "تطبيق السائق" }, stack: ["Flutter"], year: "2022", icon: "/work/truckgo-icon.webp" },
-      { name: "TruckGo Web", nameAr: "ترك جو — الويب", kind: { en: "Django platform: dashboard, drivers, services, wallet, chat and notifications", ar: "منصّة Django: لوحة تحكّم وسائقون وخدمات ومحفظة ومحادثة وإشعارات" }, stack: ["Django"], year: "2022", icon: "/work/truckgo-icon.webp" },
-      { name: "Mapbox App", kind: { en: "Live map and route tracking", ar: "خريطة حيّة وتتبّع مسارات" }, stack: ["Flutter", "Mapbox"], year: "2023", href: "https://github.com/ardev-dev/mapbox_app" },
-      { name: "Mawsil", nameAr: "موصل", kind: { en: "Food delivery: a Flutter app on a Django backend", ar: "توصيل طعام: تطبيق Flutter على خلفية Django" }, stack: ["Flutter", "Django"], year: "2022", href: "https://github.com/ardev-dev/mawsil" },
-      { name: "DBCargo", nameAr: "دي بي كارجو", kind: { en: "Cargo shipping app", ar: "تطبيق شحن بضائع" }, stack: ["Flutter"], year: "2022", href: "https://github.com/ardev-dev/DBCargo" },
-      { name: "Shipperit", nameAr: "شيبرت", kind: { en: "Shipping app, with a Flutter web build", ar: "تطبيق شحن، مع نسخة ويب بـ Flutter" }, stack: ["Flutter"], year: "2022", href: "https://github.com/ardev-dev/shipperit-flutter" },
+      { name: "Wasselak", nameAr: "وصّلك", kind: { en: "Five apps on one core — customer, captain, business, staff, admin", ar: "خمسة تطبيقات بنواة واحدة — عميل ومندوب ومنشأة وموظّف وإدارة" }, stack: ["Flutter", "Django", "WebSocket"], year: "2023", icon: "/work/wasselak-icon.webp", shots: ["/work/wasselak-2.webp", "/work/wasselak-1.webp", "/work/wasselak-3.webp"] },
+      { name: "Wasselak Captain", nameAr: "وصّلك — المندوب", kind: { en: "The delivery captain's app", ar: "تطبيق مندوب التوصيل" }, stack: ["Flutter"], year: "2023", icon: "/work/wasselak-icon.webp", shots: ["/work/wasselak-captain-2.webp", "/work/wasselak-captain-1.webp", "/work/wasselak-captain-3.webp"] },
+      { name: "Wasselak Business", nameAr: "وصّلك — المنشآت", kind: { en: "App for the businesses that send orders", ar: "تطبيق المنشآت التي ترسل الطلبات" }, stack: ["Flutter"], year: "2023", icon: "/work/wasselak-icon.webp", shots: ["/work/wasselak-business-2.webp", "/work/wasselak-business-1.webp", "/work/wasselak-business-3.webp"] },
+      { name: "Wasselak Employee", nameAr: "وصّلك — الموظفون", kind: { en: "Staff app", ar: "تطبيق الموظفين" }, stack: ["Flutter"], year: "2024", icon: "/work/wasselak-icon.webp", shots: ["/work/wasselak-employee-2.webp", "/work/wasselak-employee-1.webp", "/work/wasselak-employee-3.webp"] },
+      { name: "Wasselak Admin", nameAr: "وصّلك — الإدارة", kind: { en: "Administration app", ar: "تطبيق الإدارة" }, stack: ["Flutter"], year: "2024", icon: "/work/wasselak-icon.webp", shots: ["/work/wasselak-admin-2.webp", "/work/wasselak-admin-1.webp", "/work/wasselak-admin-3.webp"] },
+      { name: "Wasselak Core", nameAr: "وصّلك — النواة", kind: { en: "Django core: orders, drivers, coupons, chat, reviews and notifications", ar: "نواة Django: طلبات وسائقون وكوبونات ومحادثة وتقييمات وإشعارات" }, stack: ["Django"], year: "2023", icon: "/work/wasselak-icon.webp", cover: "/work/wasselak-core-web.webp" },
+      { name: "TruckGo", nameAr: "ترك جو", kind: { en: "Freight · shipper app, driver app, web, ML service", ar: "شحن · تطبيق عميل وسائق وويب وخدمة تعلّم آلي" }, stack: ["Flutter", "Python"], year: "2023", icon: "/work/truckgo-icon.webp", shots: ["/work/truckgo-1.webp", "/work/truckgo-2.webp", "/work/truckgo-3.webp"] },
+      { name: "TruckGo Driver", nameAr: "ترك جو — السائق", kind: { en: "The driver's app", ar: "تطبيق السائق" }, stack: ["Flutter"], year: "2022", icon: "/work/truckgo-icon.webp", shots: ["/work/truckgo-driver-2.webp", "/work/truckgo-driver-1.webp", "/work/truckgo-driver-3.webp"] },
+      { name: "TruckGo Web", nameAr: "ترك جو — الويب", kind: { en: "Django platform: dashboard, drivers, services, wallet, chat and notifications", ar: "منصّة Django: لوحة تحكّم وسائقون وخدمات ومحفظة ومحادثة وإشعارات" }, stack: ["Django"], year: "2022", icon: "/work/truckgo-icon.webp", cover: "/work/truckgo-web-web.webp" },
+      { name: "Mapbox App", kind: { en: "Ride-booking demo: place search, route and fare review", ar: "تجربة حجز رحلات: بحث أماكن ومسار ومراجعة الأجرة" }, stack: ["Flutter", "Mapbox"], year: "2023", href: "https://github.com/ardev-dev/mapbox_app", shots: ["/work/mapbox-2.webp", "/work/mapbox-1.webp", "/work/mapbox-3.webp"] },
+      { name: "Mawsil", nameAr: "موصل", kind: { en: "Food delivery: a Flutter app on a Django backend", ar: "توصيل طعام: تطبيق Flutter على خلفية Django" }, stack: ["Flutter", "Django"], year: "2022", href: "https://github.com/ardev-dev/mawsil", shots: ["/work/mawsil-2.webp", "/work/mawsil-1.webp", "/work/mawsil-3.webp"] },
+      { name: "DBCargo", nameAr: "دي بي كارجو", kind: { en: "Cargo shipping app", ar: "تطبيق شحن بضائع" }, stack: ["Flutter"], year: "2022", href: "https://github.com/ardev-dev/DBCargo", shots: ["/work/dbcargo-2.webp", "/work/dbcargo-1.webp", "/work/dbcargo-3.webp"] },
+      { name: "Shipperit", nameAr: "شيبرت", kind: { en: "Shipping app, with a Flutter web build", ar: "تطبيق شحن، مع نسخة ويب بـ Flutter" }, stack: ["Flutter"], year: "2022", href: "https://github.com/ardev-dev/shipperit-flutter", shots: ["/work/shipperit-2.webp", "/work/shipperit-1.webp", "/work/shipperit-3.webp"] },
     ],
   },
   {
@@ -519,14 +521,14 @@ export const catalog: WorkGroup[] = [
     desc: { en: "Ledgers, wallets and gateways — where a rounding error is a real loss.", ar: "دفاتر ومحافظ وبوّابات — حيث خطأ التقريب خسارة حقيقية." },
     items: [
       { name: "Kushak", nameAr: "كشك", kind: { en: "Accounting for kiosks and shops — branches, settlements, invoices, staff, stock", ar: "محاسبة الأكشاك والمحلات — فروع وتسويات وفواتير وموظّفون ومخزون" }, stack: ["Flutter", "Firebase"], year: "2026", icon: "/work/kushak-icon.webp", shots: ["/work/kushak-1.webp", "/work/kushak-2.webp", "/work/kushak-3.webp"] },
-      { name: "Alminshar", nameAr: "المنشار", kind: { en: "Accounting system for a sawmill business", ar: "نظام محاسبي لمنشرة" }, stack: ["Flutter"], year: "2024" },
+      { name: "Alminshar", nameAr: "المنشار", kind: { en: "Accounting system for a sawmill business", ar: "نظام محاسبي لمنشرة" }, stack: ["Flutter"], year: "2024", shots: ["/work/alminshar-1.webp", "/work/alminshar-2.webp", "/work/alminshar-3.webp"] },
       { name: "Azbah", nameAr: "عزبة", kind: { en: "Expense splitting and settle-up on a double-entry ledger", ar: "تقسيم المصاريف والتسوية على قيد مزدوج" }, stack: ["Flutter", "Django"], year: "2024 — Now", href: "https://azbah.somow.sa", shots: ["/apps/azbah-1.webp", "/apps/azbah-2.webp", "/apps/azbah-3.webp"], icon: "/apps/azbah-icon.webp" },
-      { name: "Azbah Admin", nameAr: "إدارة عزبة", kind: { en: "The operations panel behind the ledger", ar: "لوحة التشغيل خلف الدفتر" }, stack: ["Flutter"], year: "2026", icon: "/work/azbah-admin-icon.webp" },
+      { name: "Azbah Admin", nameAr: "إدارة عزبة", kind: { en: "The operations panel behind the ledger", ar: "لوحة التشغيل خلف الدفتر" }, stack: ["Flutter"], year: "2026", icon: "/work/azbah-admin-icon.webp", shots: ["/work/azbah-admin-2.webp", "/work/azbah-admin-1.webp", "/work/azbah-admin-3.webp"] },
       { name: "Azbah Web", nameAr: "موقع عزبة", kind: { en: "The product's public website", ar: "الموقع العام للمنتج" }, stack: ["Web"], year: "2025 — Now", href: "https://azbah.somow.sa", cover: "/apps/azbah-web.webp", icon: "/apps/azbah-icon.webp" },
-      { name: "Ezbh", nameAr: "عزبة (الأولى)", kind: { en: "Group management with its own financial system", ar: "إدارة مجموعات بنظام مالي خاص" }, stack: ["Flutter"], year: "2025" },
-      { name: "Aleuhda", nameAr: "عهدة", kind: { en: "Payments — payment requests, wallet and verification, on its own organisation", ar: "مدفوعات — طلبات دفع ومحفظة وتحقّق، بمؤسّسة مستقلّة" }, stack: ["Flutter"], year: "2022" },
+      { name: "Ezbh", nameAr: "عزبة (الأولى)", kind: { en: "Group management with its own financial system", ar: "إدارة مجموعات بنظام مالي خاص" }, stack: ["Flutter"], year: "2025", shots: ["/work/ezbh-1.webp", "/work/ezbh-2.webp", "/work/ezbh-3.webp"] },
+      { name: "Aleuhda", nameAr: "عهدة", kind: { en: "Payments — payment requests, wallet and verification, on its own organisation", ar: "مدفوعات — طلبات دفع ومحفظة وتحقّق، بمؤسّسة مستقلّة" }, stack: ["Flutter"], year: "2022", shots: ["/work/aleuhda-1.webp", "/work/aleuhda-2.webp", "/work/aleuhda-3.webp"] },
       { name: "Payment gateways", nameAr: "بوّابات الدفع", kind: { en: "HyperPay, Apple Pay, STC Pay and Tamara in production apps", ar: "تمارا · HyperPay · Apple Pay · STC Pay — في تطبيقات إنتاج" }, stack: ["3D Secure", "Dart", "Kotlin"], year: "2023 — Now" },
-      { name: "HyperPay Flutter", kind: { en: "Flutter app wired to the native HyperPay SDK", ar: "تطبيق Flutter مربوط بحزمة HyperPay الأصلية" }, stack: ["Flutter", "Kotlin"], year: "2023", href: "https://github.com/ardev-dev/hyperpay-flutter" },
+      { name: "HyperPay Flutter", kind: { en: "Flutter app wired to the native HyperPay SDK", ar: "تطبيق Flutter مربوط بحزمة HyperPay الأصلية" }, stack: ["Flutter", "Kotlin"], year: "2023", href: "https://github.com/ardev-dev/hyperpay-flutter", shots: ["/work/hyperpay-2.webp", "/work/hyperpay-3.webp"] },
     ],
   },
   {
@@ -536,12 +538,12 @@ export const catalog: WorkGroup[] = [
     items: [
       { name: "Wasla", nameAr: "وصلة", kind: { en: "Group and channel directory with chat, questions and challenges", ar: "دليل مجموعات وقنوات بدردشة وتساؤلات وتحدّيات" }, stack: ["Flutter", "Firebase", "BLoC"], year: "2026" },
       { name: "Social Network", kind: { en: "Feed, profiles and following", ar: "خلاصة وملفّات ومتابعة" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/social-network" },
-      { name: "KingLink", nameAr: "كينج لينك", kind: { en: "WhatsApp group-link directory", ar: "دليل روابط مجموعات واتساب" }, stack: ["Flutter"], year: "2022" },
+      { name: "KingLink", nameAr: "كينج لينك", kind: { en: "WhatsApp group-link directory", ar: "دليل روابط مجموعات واتساب" }, stack: ["Flutter"], year: "2022", shots: ["/work/kinglink-1.webp", "/work/kinglink-3.webp"] },
       { name: "Linkati", nameAr: "لينكاتي", kind: { en: "Link directory and sharing", ar: "دليل روابط ومشاركتها" }, stack: ["Flutter", "Firebase"], year: "2023", shots: ["/work/linkati-1.webp", "/work/linkati-2.webp", "/work/linkati-3.webp"], icon: "/work/linkati-icon.webp" },
-      { name: "Story", nameAr: "ستوري", kind: { en: "Stories and short-form publishing", ar: "قصص ونشر قصير" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/story-flutter" },
-      { name: "Blogstory", nameAr: "بلوق ستوري", kind: { en: "Content app for study opportunities", ar: "تطبيق محتوى للفرص الدراسية" }, stack: ["Flutter", "Firebase"], year: "2024", icon: "/work/blogstory-icon.webp" },
-      { name: "Mogamo3aty", nameAr: "مجموعاتي", kind: { en: "Groups app", ar: "تطبيق مجموعات" }, stack: ["Flutter"], year: "2023", icon: "/work/mogamo3aty-icon.webp" },
-      { name: "WhatsApp Stickers", nameAr: "ملصقات واتساب", kind: { en: "Sticker-pack app for WhatsApp", ar: "تطبيق حِزم ملصقات لواتساب" }, stack: ["Flutter"], year: "2021", href: "https://github.com/ardev-dev/whatsApp_stickers-flutter_app", icon: "/work/stickers-icon.webp" },
+      { name: "Story", nameAr: "ستوري", kind: { en: "Photo-sharing app: feed, profiles and comments", ar: "تطبيق مشاركة صور: خلاصة وملفّات وتعليقات" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/story-flutter", shots: ["/work/story-2.webp", "/work/story-1.webp", "/work/story-3.webp"] },
+      { name: "Blogstory", nameAr: "بلوق ستوري", kind: { en: "Content app for study opportunities", ar: "تطبيق محتوى للفرص الدراسية" }, stack: ["Flutter", "Firebase"], year: "2024", icon: "/work/blogstory-icon.webp", shots: ["/work/blogstory-2.webp", "/work/blogstory-1.webp", "/work/blogstory-3.webp"] },
+      { name: "Mogamo3aty", nameAr: "مجموعاتي", kind: { en: "Group-link directory: newest, most viewed and adding links", ar: "دليل روابط مجموعات: الأحدث والأكثر مشاهدة وإضافة روابط" }, stack: ["Flutter"], year: "2023", icon: "/work/mogamo3aty-icon.webp", shots: ["/work/mogamo3aty-2.webp", "/work/mogamo3aty-1.webp", "/work/mogamo3aty-3.webp"] },
+      { name: "WhatsApp Stickers", nameAr: "ملصقات واتساب", kind: { en: "Sticker-pack app for WhatsApp", ar: "تطبيق حِزم ملصقات لواتساب" }, stack: ["Flutter"], year: "2021", href: "https://github.com/ardev-dev/whatsApp_stickers-flutter_app", icon: "/work/stickers-icon.webp", shots: ["/work/stickers-3.webp"] },
     ],
   },
   {
@@ -550,10 +552,10 @@ export const catalog: WorkGroup[] = [
     desc: { en: "Catalogue, cart, checkout — and the back office behind them.", ar: "كتالوج وسلّة ودفع — وما خلفها من إدارة." },
     items: [
       { name: "Khashkhash", nameAr: "خشخاش", kind: { en: "Django storefront backend — Docker, CI, production settings split", ar: "خلفية متجر بـ Django — Docker وتكامل مستمرّ وفصل إعدادات الإنتاج" }, stack: ["Django", "Docker"], year: "2025" },
-      { name: "Danya", nameAr: "دانيا", kind: { en: "Django store with accounts and product catalogue", ar: "متجر Django بحسابات وكتالوج منتجات" }, stack: ["Django"], year: "2023" },
-      { name: "E-commerce", kind: { en: "Django storefront with blog and dashboard", ar: "متجر Django بمدوّنة ولوحة تحكّم" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/E-commerce" },
-      { name: "E-commerce Pro", kind: { en: "Full storefront and admin", ar: "متجر كامل بلوحة إدارة" }, stack: ["JavaScript", "CSS"], year: "2021", href: "https://github.com/ardev-dev/E-commerce-Pro" },
-      { name: "Mateam", nameAr: "مطعمي", kind: { en: "Restaurant management site and app", ar: "موقع وتطبيق لإدارة المطاعم" }, stack: ["JavaScript", "Flutter"], year: "2021", href: "https://github.com/ardev-dev/Mateam" },
+      { name: "Danya", nameAr: "دانيا", kind: { en: "Django store with accounts and product catalogue", ar: "متجر Django بحسابات وكتالوج منتجات" }, stack: ["Django"], year: "2023", cover: "/work/danya-web.webp" },
+      { name: "E-commerce", kind: { en: "Django storefront with blog and dashboard", ar: "متجر Django بمدوّنة ولوحة تحكّم" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/E-commerce", cover: "/work/ecommerce-web.webp" },
+      { name: "E-commerce Pro", kind: { en: "Full storefront and admin", ar: "متجر كامل بلوحة إدارة" }, stack: ["JavaScript", "CSS"], year: "2021", href: "https://github.com/ardev-dev/E-commerce-Pro", cover: "/work/ecommerce-pro-web.webp" },
+      { name: "Mateam", nameAr: "مطعمي", kind: { en: "Restaurant management site and app", ar: "موقع وتطبيق لإدارة المطاعم" }, stack: ["JavaScript", "Flutter"], year: "2021", href: "https://github.com/ardev-dev/Mateam", shots: ["/work/mateam-app-1.webp", "/work/mateam-app-2.webp"] },
       { name: "WiseBuy", nameAr: "وايز باي", kind: { en: "Price-comparison research: product and review scrapers", ar: "بحث لمقارنة الأسعار: جامعات بيانات للمنتجات والتقييمات" }, stack: ["Python"], year: "2023" },
     ],
   },
@@ -563,9 +565,9 @@ export const catalog: WorkGroup[] = [
     desc: { en: "The systems a company runs on rather than sells.", ar: "أنظمة تُدار بها الشركة لا تُباع." },
     items: [
       { name: "Somow", nameAr: "سُمو", kind: { en: "Company platform and internal operations", ar: "منصّة الشركة وتشغيلها الداخلي" }, stack: ["JavaScript", "Node"], year: "2024 — Now", href: "https://somow.sa", cover: "/apps/somow-web.webp" },
-      { name: "Moqawlat", nameAr: "مقاولات", kind: { en: "Contracting platform", ar: "منصّة مقاولات" }, stack: ["Flutter"], year: "2026", icon: "/work/moqawlat-icon.webp" },
+      { name: "Moqawlat", nameAr: "مقاولات", kind: { en: "Contracting platform", ar: "منصّة مقاولات" }, stack: ["Flutter"], year: "2026", icon: "/work/moqawlat-icon.webp", shots: ["/work/moqawlat-1.webp", "/work/moqawlat-2.webp", "/work/moqawlat-3.webp"] },
       { name: "Purete", nameAr: "بيوريتي", kind: { en: "Multi-service Django behind NGINX, a database per service", ar: "عدّة خدمات Django خلف NGINX، قاعدة بيانات لكل خدمة" }, stack: ["Django", "Docker", "NGINX"], year: "2024" },
-      { name: "AppProof", kind: { en: "Beta-testing platform — app, web, backend", ar: "منصّة اختبار إصدارات — تطبيق وويب وخلفية" }, stack: ["Flutter", "Django", "Next.js"], year: "2026" },
+      { name: "AppProof", kind: { en: "Beta-testing platform — app, web, backend", ar: "منصّة اختبار إصدارات — تطبيق وويب وخلفية" }, stack: ["Flutter", "Django", "Next.js"], year: "2026", shots: ["/work/appproof-app-2.webp", "/work/appproof-app-1.webp", "/work/appproof-app-3.webp"] },
       { name: "AppProof Web", kind: { en: "The platform's website: verified beta testers, usage data and QA reports", ar: "موقع المنصّة: مختبِرون موثَّقون وبيانات استخدام وتقارير جودة" }, stack: ["Next.js", "TypeScript"], year: "2026", cover: "/work/appproof-web.webp" },
     ],
   },
@@ -586,10 +588,10 @@ export const catalog: WorkGroup[] = [
     title: { en: "Education & children", ar: "التعليم والأطفال" },
     desc: { en: "Arabic-first learning, where the language is the hard part.", ar: "تعلّم عربي أوّلاً، واللغة نفسها هي الجزء الصعب." },
     items: [
-      { name: "Lumi", nameAr: "لومي", kind: { en: "Arabic learning assistant for children", ar: "مساعد تعليمي ذكي للأطفال العرب" }, stack: ["Flutter"], year: "2026" },
+      { name: "Lumi", nameAr: "لومي", kind: { en: "Arabic learning assistant for children", ar: "مساعد تعليمي ذكي للأطفال العرب" }, stack: ["Flutter"], year: "2026", shots: ["/work/lumi-2.webp", "/work/lumi-1.webp", "/work/lumi-3.webp"] },
       { name: "Faheem", nameAr: "فهيم", kind: { en: "Smart learning platform for organisations: its marketing site", ar: "منصّة تعليم ذكي للجهات: موقعها التسويقي" }, stack: ["HTML", "Node"], year: "2026", href: "https://faheem.wisalapp.com", cover: "/work/faheem-web.webp" },
-      { name: "Minasa", nameAr: "منصة", kind: { en: "Teaching platform — teacher and student accounts", ar: "منصّة تعليمية — حسابات معلّمين وطلاب" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/minasa" },
-      { name: "Library System", nameAr: "نظام مكتبة", kind: { en: "Cataloguing and lending", ar: "فهرسة وإعارة" }, stack: ["Python"], year: "2021", href: "https://github.com/ardev-dev/system-Library" },
+      { name: "Minasa", nameAr: "منصة", kind: { en: "Exam platform — teachers build exam rooms, students answer", ar: "منصّة اختبارات — المعلّم ينشئ غرف الاختبار والطالب يجيب" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/minasa", cover: "/work/minasa-web.webp" },
+      { name: "Library System", nameAr: "نظام مكتبة", kind: { en: "Desktop app for cataloguing and lending", ar: "برنامج سطح مكتب للفهرسة والإعارة" }, stack: ["Python"], year: "2021", href: "https://github.com/ardev-dev/system-Library", cover: "/work/library-web.webp" },
     ],
   },
   {
@@ -598,10 +600,10 @@ export const catalog: WorkGroup[] = [
     desc: { en: "Built for the parts engineering rarely asks for — timing, feel and state.", ar: "بُنيت لأجزاء نادراً ما تطلبها الهندسة — التوقيت والإحساس والحالة." },
     items: [
       { name: "Sweetra", nameAr: "سويترا", kind: { en: "Match-three candy game — Flame engine, economy, in-app purchases, ads", ar: "لعبة مطابقة حلوى — بمحرّك Flame واقتصاد داخلي ومشتريات وإعلانات" }, stack: ["Flutter", "Flame", "Firebase"], year: "2026", shots: ["/work/sweetra-1.webp", "/work/sweetra-2.webp", "/work/sweetra-3.webp"], icon: "/work/sweetra-icon.webp" },
-      { name: "Jumal", nameAr: "جُمل", kind: { en: "Arabic word-search with a saved progression system", ar: "بحث عن الكلمات العربية بنظام تقدّم محفوظ" }, stack: ["Flutter", "Hive"], year: "2026", href: "https://github.com/ardev-dev/jumal" },
-      { name: "TicTacTonz", nameAr: "اتحداك", kind: { en: "Two-player match game", ar: "لعبة تحدٍّ بين لاعبين" }, stack: ["Flutter"], year: "2022", href: "https://github.com/ardev-dev/tictactonz", icon: "/work/tictactonz-icon.webp" },
+      { name: "Jumal", nameAr: "جُمل", kind: { en: "Arabic word-search with a saved progression system", ar: "بحث عن الكلمات العربية بنظام تقدّم محفوظ" }, stack: ["Flutter", "Hive"], year: "2026", href: "https://github.com/ardev-dev/jumal", shots: ["/work/jumal-1.webp", "/work/jumal-2.webp", "/work/jumal-3.webp"] },
+      { name: "TicTacTonz", nameAr: "اتحداك", kind: { en: "Two-player match game", ar: "لعبة تحدٍّ بين لاعبين" }, stack: ["Flutter"], year: "2022", href: "https://github.com/ardev-dev/tictactonz", icon: "/work/tictactonz-icon.webp", shots: ["/work/tictactonz-1.webp", "/work/tictactonz-2.webp", "/work/tictactonz-3.webp"] },
       { name: "Crush Game", kind: { en: "Match-three puzzle", ar: "لعبة مطابقة ثلاثية" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/crush-game" },
-      { name: "Hue Mixer", kind: { en: "Colour-mixing puzzle with a native engine", ar: "لغز خلط ألوان بمحرّك أصلي" }, stack: ["C++", "Flutter"], year: "2025", href: "https://github.com/ardev-dev/hue_mixer" },
+      { name: "Hue Mixer", kind: { en: "RGB colour mixer with HEX, HSL, Flutter and CSS codes", ar: "خالط ألوان RGB يُخرج أكواد HEX و HSL و Flutter و CSS" }, stack: ["Flutter"], year: "2025", href: "https://github.com/ardev-dev/hue_mixer", shots: ["/work/hue-mixer-1.webp", "/work/hue-mixer-2.webp", "/work/hue-mixer-3.webp"] },
     ],
   },
   {
@@ -636,7 +638,7 @@ export const catalog: WorkGroup[] = [
     desc: { en: "Small, single-purpose things built to be used, not demoed.", ar: "أشياء صغيرة أحاديّة الغرض بُنيت لتُستخدم لا لتُعرض." },
     items: [
       { name: "CopyPaste", kind: { en: "macOS menu-bar clipboard manager", ar: "مدير حافظة في شريط قوائم macOS" }, stack: ["SwiftUI"], year: "2026" },
-      { name: "WhatsApp Notification Saver", kind: { en: "Recovers deleted messages from the notification log", ar: "يستعيد الرسائل المحذوفة من سجلّ الإشعارات" }, stack: ["Flutter", "Android"], year: "2026" },
+      { name: "WhatsApp Notification Saver", kind: { en: "Recovers deleted messages from the notification log", ar: "يستعيد الرسائل المحذوفة من سجلّ الإشعارات" }, stack: ["Flutter", "Android"], year: "2026", shots: ["/work/wa-saver-2.webp", "/work/wa-saver-1.webp", "/work/wa-saver-3.webp"] },
       { name: "ardev.dev", kind: { en: "This portfolio — deck UI, bilingual, own analytics stack", ar: "هذا الملف — واجهة شرائح، ثنائي اللغة، بمنظومة تحليلات خاصة" }, stack: ["Next.js", "Firebase"], year: "2026", href: "https://ardev.dev", cover: "/work/ardev-web.webp" },
       { name: "Oxfile", kind: { en: "29+ free file tools for PDFs, images and documents, in nine languages, all in the browser", ar: "أكثر من ٢٩ أداة ملفات مجانية لـPDF والصور والمستندات، بتسع لغات، كلّها في المتصفّح" }, stack: ["Next.js", "TypeScript", "MDX"], year: "2026", cover: "/work/oxfile-web.webp" },
       { name: "QR Generator", kind: { en: "QR codes for links, WhatsApp, Wi-Fi, email, phone, SMS and vCard, exported as PNG or SVG", ar: "أكواد QR للروابط وواتساب والواي فاي والبريد والهاتف والرسائل وبطاقات الاتصال، تُصدَّر PNG أو SVG" }, stack: ["Next.js", "TypeScript"], year: "2026", cover: "/work/qr-web.webp" },
@@ -659,10 +661,10 @@ export const catalog: WorkGroup[] = [
     title: { en: "Early work", ar: "البدايات" },
     desc: { en: "Where it started: Django and front-end projects from the first years.", ar: "من حيث بدأتُ: مشاريع Django وواجهات من السنوات الأولى." },
     items: [
-      { name: "Discussion Boards", nameAr: "لوحات النقاش", kind: { en: "Django discussion boards with accounts", ar: "لوحات نقاش بـ Django مع حسابات" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/frist_project-boards" },
-      { name: "Django Blog", nameAr: "مدوّنة Django", kind: { en: "A blog built with Django", ar: "مدوّنة مبنيّة بـ Django" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/second_project" },
+      { name: "Discussion Boards", nameAr: "لوحات النقاش", kind: { en: "Django discussion boards with accounts", ar: "لوحات نقاش بـ Django مع حسابات" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/frist_project-boards", cover: "/work/boards-web.webp" },
+      { name: "Django Blog", nameAr: "مدوّنة Django", kind: { en: "Bookstore dashboard: customers, books and order tracking", ar: "لوحة مكتبة كتب: عملاء وكتب ومتابعة الطلبات" }, stack: ["Django"], year: "2021", href: "https://github.com/ardev-dev/second_project", cover: "/work/django-blog-web.webp" },
       { name: "HTML Templates", nameAr: "قوالب HTML", kind: { en: "Hand-written HTML and CSS: a courses landing page", ar: "HTML وCSS مكتوبة يدوياً: صفحة هبوط لدورات" }, stack: ["HTML", "CSS"], year: "2021", href: "https://github.com/ardev-dev/html-templates", cover: "/work/html-templates-web.webp" },
-      { name: "Services Platform", nameAr: "منصّة خدمات", kind: { en: "Django project with accounts, services, chat and a dashboard", ar: "مشروع Django بحسابات وخدمات ومحادثة ولوحة تحكّم" }, stack: ["Django"], year: "2022", href: "https://github.com/ardev-dev/resarsh_project" },
+      { name: "Services Platform", nameAr: "منصّة خدمات", kind: { en: "First TruckGo backend: cargo services, driver offers, orders and chat", ar: "أول خلفية لـ TruckGo: خدمات شحن وعروض سائقين وطلبات ومحادثة" }, stack: ["Django"], year: "2022", href: "https://github.com/ardev-dev/resarsh_project", cover: "/work/services-platform-web.webp" },
       { name: "To-do API", nameAr: "واجهة مهام", kind: { en: "Django REST API with accounts and to-dos", ar: "واجهة REST بـ Django للحسابات والمهام" }, stack: ["Django"], year: "2023", href: "https://github.com/ardev-dev/API-progict" },
       { name: "Portfolio 2023", nameAr: "ملفّي في 2023", kind: { en: "My first portfolio: static pages for skills, experience and projects", ar: "ملفّي الأول: صفحات ثابتة للمهارات والخبرة والمشاريع" }, stack: ["HTML", "CSS"], year: "2023", href: "https://github.com/ardev-dev/abdulrahman" },
       { name: "Al-Mashriqi Furniture", nameAr: "مؤسسة المشرقي للأثاث", kind: { en: "Multi-page website for a furniture and furnishings company", ar: "موقع متعدّد الصفحات لمؤسسة أثاث ومفروشات" }, stack: ["HTML", "CSS"], year: "2026", href: "https://github.com/ardev-dev/home-work", cover: "/work/almashriqi-web.webp" },

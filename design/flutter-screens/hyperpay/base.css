@@ -1,0 +1,14 @@
+/* HyperPay Flutter demo — default Material 2 ThemeData (primary blue #2196F3), English LTR, system font */
+:root{--blue:#2196F3}
+body{direction:ltr;background:#FAFAFA;color:rgba(0,0,0,.87);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:16px}
+.top{background:var(--blue);color:#fff;box-shadow:0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px rgba(0,0,0,.14),0 1px 10px rgba(0,0,0,.12);position:relative;z-index:2}
+.appbar .title{font-size:20px;font-weight:500}
+.form{padding:8px;padding-top:18px}
+.f{height:60px;border:1px solid rgba(0,0,0,.38);border-radius:5px;display:flex;align-items:center;position:relative;margin-bottom:10px}
+.f .p{width:48px;display:grid;place-items:center;color:rgba(0,0,0,.45);flex:none}
+.f .l{color:rgba(0,0,0,.6)}
+.f.on .l{position:absolute;top:-8px;left:8px;font-size:12px;line-height:16px;padding:0 4px;background:#FAFAFA}
+.f .v{letter-spacing:0}
+.pay{margin-top:30px;height:36px;border-radius:4px;background:var(--blue);color:#fff;font-size:14px;font-weight:500;letter-spacing:1.25px;display:grid;place-items:center;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px rgba(0,0,0,.14),0 1px 5px rgba(0,0,0,.12)}
+.snack{position:absolute;left:0;right:0;bottom:0;background:#4CAF50;color:#fff;font-size:14px;padding:14px 16px 48px;box-shadow:0 -3px 6px rgba(0,0,0,.2)}
+.home-ind{color:#000}

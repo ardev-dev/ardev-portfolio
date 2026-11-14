@@ -1,0 +1,22 @@
+/* مدونة عبر — من lib/core/themes (app_colors / app_typography / app_themes: Material 3, seed = primary) */
+@font-face{font-family:Readex;src:url('file:///private/tmp/claude-501/-Users-ar-MyDocuments-Resume/0bfd9c67-435e-4232-bd64-7ad28abe5767/scratchpad/repos/abberblog/assets/fonts/readex/ReadexPro-Light.ttf');font-weight:300}
+@font-face{font-family:Readex;src:url('file:///private/tmp/claude-501/-Users-ar-MyDocuments-Resume/0bfd9c67-435e-4232-bd64-7ad28abe5767/scratchpad/repos/abberblog/assets/fonts/readex/ReadexPro-Regular.ttf');font-weight:400}
+@font-face{font-family:Readex;src:url('file:///private/tmp/claude-501/-Users-ar-MyDocuments-Resume/0bfd9c67-435e-4232-bd64-7ad28abe5767/scratchpad/repos/abberblog/assets/fonts/readex/ReadexPro-Medium.ttf');font-weight:500}
+@font-face{font-family:Readex;src:url('file:///private/tmp/claude-501/-Users-ar-MyDocuments-Resume/0bfd9c67-435e-4232-bd64-7ad28abe5767/scratchpad/repos/abberblog/assets/fonts/readex/ReadexPro-SemiBold.ttf');font-weight:600}
+@font-face{font-family:SolarL;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_linear_icons.ttf')}
+:root{--bg:#FFFFFF;--fg:#1A2530;--primary:#010076;--secondary:#F8F9FA;--muted:#EEEEEE;--border:#E3E5E5;--stroke:#707B81;--field:#FFFFFF;
+--m3-primary:#5B5891;--m3-on-surface-variant:#47464F;--m3-outline-variant:#C8C5D0}
+body{background:var(--bg);color:var(--fg);font-family:Readex,sans-serif;font-size:13px}
+.si{font-family:SolarL;font-style:normal;font-weight:400;line-height:1;display:inline-block;direction:ltr}
+/* AppBar (M3): 56، centerTitle، عنوان 16/600 */
+.abar{height:56px;position:relative;display:flex;align-items:center;padding:0 4px}
+.abar .ttl{position:absolute;left:0;right:0;text-align:center;font-size:16px;font-weight:600;pointer-events:none}
+.abar .sp{flex:1}
+.ib{width:48px;height:48px;display:grid;place-items:center;flex:none}
+/* غلاف المقال 188 بزوايا 16 (PostWidget) — محتوى الغلاف صورة شبكة؛ هنا غلاف عيّنة */
+.cover{height:188px;width:358px;border-radius:16px;position:relative;overflow:hidden;background:var(--muted)}
+.cover svg{position:absolute;inset:0}
+.cover .ct{position:absolute;right:24px;top:0;bottom:0;width:215px;white-space:nowrap;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.cover .ct small{font-size:11px;font-weight:500;opacity:.9}
+.cover .ct b{font-size:19px;line-height:1.6;font-weight:600}
+.cover img{position:absolute;left:14px;bottom:10px;width:30px;height:30px;opacity:.9}

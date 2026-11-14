@@ -1,0 +1,16 @@
+/* جُمَل — lib/core/constants/app_colors.dart + lib/core/theme/app_theme.dart
+   الكود يطلب 'Cairo' لكن pubspec لا يضمّن أي خط، فالتطبيق يُعرض فعليًّا بخط النظام (SF Arabic على iOS). */
+@font-face{font-family:SFAr;src:url('file:///System/Library/Fonts/SFArabic.ttf');font-weight:100 900}
+:root{--primary:#6C5CE7;--primaryLight:#9D8DF7;--primaryDark:#4834D4;--secondary:#00CEC9;--accent:#FF7675;
+--text:#2D3436;--text2:#636E72;--text3:#B2BEC3;--success:#00B894;--successLight:#55EFC4;--error:#D63031;--info:#74B9FF;
+--hint:#FDAA5D;--hintGlow:#FECE7C;--star:#FFD700;--starEmpty:#DFE6E9;--border:#E8E8E8;--path:#DFE6E9;--cell:#F8F9FA}
+body{font-family:SFAr,'SF Arabic','Geeza Pro',-apple-system,sans-serif;color:#fff;font-size:14px;
+background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,0) 50%,rgba(0,0,0,.2)),linear-gradient(to bottom right,#667EEA,#764BA2)}
+.status{color:#fff}.home-ind{color:#fff}
+.safe{position:absolute;top:47px;bottom:34px;left:0;right:0;display:flex;flex-direction:column;overflow:hidden}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:24px;font-size:18px;font-weight:700;letter-spacing:.5px;line-height:1.25}
+.g-primary{background:linear-gradient(to right,#6C5CE7,#4834D4)}
+.g-hint{background:linear-gradient(to right,#FECE7C,#FDAA5D)}
+.g-score{background:linear-gradient(to right,#55EFC4,#00B894)}
+.sh-md{box-shadow:0 4px 8px rgba(0,0,0,.2)}.sh-sm{box-shadow:0 2px 4px rgba(0,0,0,.1)}
+.circbtn{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;flex:none}

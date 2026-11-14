@@ -1,0 +1,7 @@
+@font-face{font-family:AppAr;src:url('file:///System/Library/Fonts/SFArabic.ttf');font-weight:100 900}
+:root{--bg:#F1EFF1;--primary:#219ebc;--secondary:#fcca46;--light:#747474}
+body{background:var(--primary);color:rgba(0,0,0,.87);font-family:AppAr,'SF Arabic','Geeza Pro',-apple-system,sans-serif;font-size:14px}
+.status{color:#fff}
+.appbar{color:#fff;padding:0 4px}
+.appbar .title{font-size:20px;font-weight:500;padding:0 12px}
+.raised{display:inline-flex;align-items:center;justify-content:center;min-height:36px;min-width:88px;padding:0 16px;background:#E0E0E0;border-radius:2px;box-shadow:0 1px 5px rgba(0,0,0,.2),0 2px 2px rgba(0,0,0,.14);font-size:14px;font-weight:500;color:rgba(0,0,0,.87)}

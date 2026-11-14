@@ -1,0 +1,20 @@
+/* AppProof tester app: lib/core/themes/app_colors.dart, app_typography.dart (GoogleFonts Inter), app_decoration.dart. Dark-only theme. */
+@font-face{font-family:Inter;src:url('file:///Users/ar/Library/Fonts/Inter-Regular.ttf');font-weight:400}
+@font-face{font-family:Inter;src:url('file:///Users/ar/Library/Fonts/Inter-Medium.ttf');font-weight:500}
+@font-face{font-family:Inter;src:url('file:///Users/ar/Library/Fonts/Inter-SemiBold.ttf');font-weight:600}
+@font-face{font-family:Inter;src:url('file:///Users/ar/Library/Fonts/Inter-Bold.ttf');font-weight:700}
+@font-face{font-family:Inter;src:url('file:///Users/ar/Library/Fonts/Inter-ExtraBold.ttf');font-weight:800}
+@font-face{font-family:SolarB;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_bold_icons.ttf')}
+@font-face{font-family:SolarL;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_linear_icons.ttf')}
+:root{--primary:#7C3AED;--bg:#0A0A12;--bg2:#11111B;--elev:#252536;--t1:#F4F4F5;--t2:#A1A1AA;--t3:#71717A;--tm:#52525B;--border:#27272A;--success:#10B981;--warning:#F59E0B;--error:#EF4444;--info:#3B82F6;
+--brand:linear-gradient(to bottom right,#7C3AED,#A855F7);--blue:linear-gradient(to bottom right,#3B82F6,#06B6D4);--green:linear-gradient(to bottom right,#10B981,#34D399);--amber:linear-gradient(to bottom right,#F59E0B,#FBBF24)}
+body{background:var(--bg);color:var(--t1);font-family:Inter,'SF Arabic','Geeza Pro',-apple-system,sans-serif;font-size:13px;font-weight:500;line-height:1.25}
+.status,.home-ind{color:#fff}
+.sb,.sl{font-style:normal;font-weight:400;line-height:1;display:inline-block;direction:ltr;flex:none}.sb{font-family:SolarB}.sl{font-family:SolarL}
+.glass{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px}
+.ibox{display:grid;place-items:center;color:#fff;flex:none}
+.xl{font-size:24px;font-weight:800;letter-spacing:-.5px;line-height:1.2}
+.lg{font-size:20px;font-weight:700;letter-spacing:-.3px}
+.md{font-size:17px;font-weight:700}
+.appbar{padding:0 4px}
+.appbar .back{width:48px;height:48px;display:grid;place-items:center;color:var(--t2);flex:none}

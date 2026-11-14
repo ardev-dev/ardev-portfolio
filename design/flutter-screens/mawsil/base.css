@@ -1,0 +1,21 @@
+/* Mawsil (موصول) — colours from lib/src/utilities/app_colors.dart; no custom font in pubspec → platform font (SF on iOS). */
+:root{--main:#89dad0;--text:#ccc7c5;--icon1:#ffd28d;--icon2:#fcab99;--para:#8f837f;--btnbg:#f7f6f4;--sign:#a9a29f;--title:#5c524f;--black:#332d2d;--scaffold:#fafafa}
+body{background:var(--scaffold);color:var(--black);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;direction:ltr}
+.big{font-size:20px;line-height:24px;color:var(--black);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.small{font-size:12px;line-height:1.2;color:var(--text)}
+.it{display:flex;align-items:center;gap:5px}
+.it .mi{font-size:24px}
+.row{display:flex;align-items:center}
+.sb{justify-content:space-between}
+.appicon{width:40px;height:40px;border-radius:20px;background:#fcf4e4;color:#756d54;display:grid;place-items:center;position:relative;flex:none}
+.appicon .mi{font-size:16px}
+.badge{position:absolute;top:0;right:0;width:20px;height:20px;border-radius:10px;background:var(--main);color:#fff;font-size:13px;line-height:20px;text-align:center}
+.photo{position:relative;overflow:hidden;display:grid;place-items:center}
+.photo svg{width:78%;height:78%;filter:drop-shadow(0 6px 8px rgba(60,30,0,.22))}
+.p0{background:linear-gradient(135deg,#ffc56b,#ff9800 70%,#f57c00)}
+.p1{background:linear-gradient(135deg,#b3b5e6,#9294cc 65%,#7376b5)}
+.bbar{position:absolute;left:0;right:0;bottom:0;height:120px;padding:0 20px;background:var(--btnbg);border-radius:32px 32px 0 0;display:flex;align-items:center;justify-content:space-between}
+.box{padding:20px;border-radius:20px;background:#fff;display:flex;align-items:center}
+.box.main{background:var(--main)}
+.box.main .big{color:#fff}
+.home-ind{color:#000}

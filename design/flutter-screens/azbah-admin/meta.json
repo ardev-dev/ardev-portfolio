@@ -1,0 +1,12 @@
+{
+  "slug": "azbah-admin",
+  "catalog_name": "Azbah Admin",
+  "format": "phone",
+  "center": 1,
+  "screens": [
+    {"file": "1.png", "screen": "home — dashboard tab (stats cards, pending claims, statistics tiles, 4-tab bottom bar)", "source": ["lib/features/home/presentation/pages/home_screen.dart", "lib/features/home/presentation/widgets/home_appbar.dart", "lib/features/home/presentation/widgets/dashboard_section_widget.dart", "lib/features/home/presentation/views/statistics_view.dart", "lib/features/home/presentation/widgets/bottom_navigation.dart", "lib/core/widgets/layout/quick_tile.dart", "lib/features/notification/presentation/widgets/notification_badge_widget.dart"]},
+    {"file": "2.png", "screen": "groups list with search", "source": ["lib/features/groups/presentation/pages/groups_screen.dart", "lib/core/widgets/layout/custom_appbar.dart", "lib/core/widgets/forms/custom_text_form_field.dart"]},
+    {"file": "3.png", "screen": "payments list with status filter chips", "source": ["lib/features/payments/presentation/pages/payments_screen.dart", "lib/features/payments/presentation/widgets/payment_transaction_card.dart", "lib/features/payments/domain/entities/payment_transaction_entity.dart", "lib/core/widgets/layout/category_widget.dart"]}
+  ],
+  "notes": "Read from the local checkout /Users/ar/Development/projects/azbah-project/azbahadmin (v1.0.6+16), not cloned. Phone-first app (bottom navigation, no rail/data tables), so phone format. Light theme, ReadexPro from the repo, primary #087443, foreground #101828; icons are the real Solar glyphs from the local solar_community_icons font. The three 'الإحصائيات' tiles are grey because the code marks them isActive:false (screens not finished). All numbers, group names, payer names, amounts and dates are sample data; labels, payment-method and status strings are from code. The admin avatar is an initial on a gradient (network photo in the app). User/group totals are printed without thousands separators because the code interpolates the raw int."
+}

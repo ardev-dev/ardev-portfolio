@@ -1,0 +1,19 @@
+/* Lumi: lib/config/app_theme.dart (fontFamily 'Cairo', M3, seed 6C63FF). No Directionality/locale in app.dart -> layout is LTR with Arabic text. */
+@font-face{font-family:Cairo;src:url('../../repos/wasselak/assets/fonts/Cairo-Regular.ttf');font-weight:400}
+@font-face{font-family:Cairo;src:url('../../repos/wasselak/assets/fonts/Cairo-Medium.ttf');font-weight:500}
+@font-face{font-family:Cairo;src:url('../../repos/wasselak/assets/fonts/Cairo-SemiBold.ttf');font-weight:600}
+@font-face{font-family:Cairo;src:url('../../repos/wasselak/assets/fonts/Cairo-Bold.ttf');font-weight:700}
+:root{--primary:#6C63FF;--secondary:#FF6584;--accent:#FFD93D;--bg:#F8F7FF;--dark:#2D2D2D;--light:#8A8A8A;--on:#1C1B20}
+body{direction:ltr;background:var(--bg);color:var(--on);font-family:Cairo,'Apple Color Emoji',sans-serif;font-size:14px;line-height:1.43;letter-spacing:.25px}
+.abg{position:absolute;inset:0;background:linear-gradient(to bottom right,#F0EEFF,#F8F7FF 50%,#FFEDF2);overflow:hidden}
+.abg span{position:absolute;line-height:1}
+.col{position:relative;display:flex;flex-direction:column;align-items:center;height:797px}
+.bubble{position:relative;margin:0 24px 14px;max-width:320px;padding:14px 20px;background:#fff;border-radius:20px;box-shadow:0 3px 8px rgba(0,0,0,.08);font-size:18px;line-height:1.5;font-weight:500;color:var(--dark);text-align:center;direction:rtl}
+.bubble:after{content:"";position:absolute;left:50%;bottom:-14px;margin-left:-10px;border:10px solid transparent;border-top:15px solid #fff;border-bottom:0}
+.avatar{position:relative;width:180px;height:180px;flex:none}
+.avatar:before{content:"";position:absolute;inset:-2px;border-radius:50%;background:rgba(108,99,255,.2);filter:blur(10px)}
+.avatar.talk:before{inset:-6px;background:rgba(108,99,255,.45);filter:blur(18px)}
+.avatar i{position:absolute;left:50%;top:50%;width:94px;height:94px;margin:-47px;border-radius:50%;background:#6C63FF}
+.avatar.talk{transform:scale(1.04)}.avatar.talk i{width:100px;height:100px;margin:-50px}
+.ib{width:48px;height:48px;display:grid;place-items:center;flex:none}
+.status{position:relative;z-index:1}

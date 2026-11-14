@@ -1,0 +1,40 @@
+{
+ "slug": "truckgo",
+ "catalog_name": "TruckGo",
+ "format": "phone",
+ "center": 1,
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "home (greeting, shipment-tracking card, direct booking / price bargaining options)",
+   "source": [
+    "lib/features/wrapper/presentation/home/home_screen.dart",
+    "lib/features/wrapper/presentation/home/components/option_button_view.dart",
+    "lib/features/order/presentation/components/tracing_number_card_view.dart",
+    "lib/core/widgets/custom_text_form_field_widget.dart"
+   ]
+  },
+  {
+   "file": "2.png",
+   "screen": "service card with origin mini-map and received driver offers",
+   "source": [
+    "lib/features/services/presentation/service/service_screen.dart",
+    "lib/features/services/presentation/offer/components/all_offers_view.dart",
+    "lib/features/services/presentation/offer/components/offer_card_view.dart",
+    "lib/core/widgets/custom_button_widget.dart"
+   ]
+  },
+  {
+   "file": "3.png",
+   "screen": "order tracking (status stepper, live map with driver markers, contact card)",
+   "source": [
+    "lib/features/order/presentation/order_tracking/order_tracking_screen.dart",
+    "lib/features/order/presentation/components/order_tracking_view.dart",
+    "lib/features/order/presentation/widget/icon_order_state_widget.dart",
+    "lib/features/order/presentation/widget/divider_line_widget.dart",
+    "lib/features/map/presentation/widgets/g_map_widget.dart"
+   ]
+  }
+ ],
+ "notes": "Flutter (Material 3, Arabic RTL). Theme from lib/config/themes/app_themes.dart + color_manager.dart (primary #25be6f, bg #f8f8f8); fonts are the repo's own JF Flat and Iconly-Broken icon font. The app is visibly work-in-progress and was drawn as the code is, not polished: (1) the home avatar and the two option thumbnails are template error illustrations (errors/18_RouterOffline.png, 19_Error.png) used as placeholders in code; (2) the first option's description is a hard-coded English placeholder ('Give us a call in order to schedule your appointment.'); (3) the tracking screen title 'Delivery Details' and the 'Rejected' button are hard-coded English; (4) budget uses a hard-coded '$'. MainWrapper (bottom nav) has its body commented out, so HomeScreen is the real landing screen and no bottom nav is drawn. Google Maps widgets are replaced by a neutral stylised map; driver markers use the repo's assets/images/marker.png. Names, phone, prices, offer messages and times are sample data (Khartoum context inferred from the driver app's default camera position). Phone/amount LTR runs are bidi-isolated per the brief. If the owner prefers a cleaner look, 2 and 3 are the stronger screens."
+}

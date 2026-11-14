@@ -312,12 +312,12 @@ function CtrlButton({ label, onClick, children }: { label: string; onClick: () =
 
 /** منصّة العرض: لقطات التطبيق، أو لقطة الموقع، أو بانر المنتج لمن لا لقطات له. */
 function Stage({ work, brand, title, ar, group }: { work: Work; brand: Brand; title: string; ar: boolean; group: string }) {
-  if (work.shots?.length) return <Shots shots={work.shots} title={title} />;
+  if (work.shots?.length) return <Shots shots={work.shots} title={title} watch={work.device === "watch"} />;
   if (work.cover) return <Cover src={work.cover} title={title} host={work.href?.replace(/^https?:\/\//, "")} />;
   return <Mockup work={work} brand={brand} name={title} ar={ar} group={group} />;
 }
 
-function Shots({ shots, title }: { shots: string[]; title: string }) {
+function Shots({ shots, title, watch }: { shots: string[]; title: string; watch?: boolean }) {
   const three = shots.slice(0, 3);
   const fan = three.length === 3;
   return (
@@ -333,10 +333,11 @@ function Shots({ shots, title }: { shots: string[]; title: string }) {
             alt={`${title} — ${k + 1}`}
             className={cn(
               "w-auto rounded-[18px] border border-white/15 bg-black/40 object-contain shadow-lift sm:rounded-[22px]",
-              mid ? "z-10 h-full" : "h-[82%]",
+              // شاشة الساعة شبه مربّعة: بارتفاع الهاتف تتجاوز عرض النافذة، فتُصغَّر.
+              watch ? (mid ? "z-10 h-[58%]" : "h-[46%]") : mid ? "z-10 h-full" : "h-[82%]",
               !fan && k > 0 && "ms-4",
-              fan && k === 0 && "-me-12 -rotate-[5deg] sm:-me-8",
-              fan && k === 2 && "-ms-12 rotate-[5deg] sm:-ms-8"
+              fan && k === 0 && (watch ? "-me-10 -rotate-[5deg]" : "-me-12 -rotate-[5deg] sm:-me-8"),
+              fan && k === 2 && (watch ? "-ms-10 rotate-[5deg]" : "-ms-12 rotate-[5deg] sm:-ms-8")
             )}
           />
         );

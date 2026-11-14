@@ -1,0 +1,8 @@
+/* Mateam-App-flutter: lib/static/constants.dart + main.dart (GoogleFonts Almarai -> closest local: Tajawal) */
+@font-face{font-family:Taj;src:url('file:///Users/ar/Library/Fonts/Tajawal-Regular.ttf');font-weight:400}
+@font-face{font-family:Taj;src:url('file:///Users/ar/Library/Fonts/Tajawal-Medium.ttf');font-weight:500}
+@font-face{font-family:Taj;src:url('file:///Users/ar/Library/Fonts/Tajawal-Bold.ttf');font-weight:600 800}
+:root{--bg:#F1EFF1;--primary:#219ebc;--secondary:#fcca46;--text:#023047;--light:#747474}
+body{background:var(--primary);color:rgba(0,0,0,.87);font-family:Taj,'SF Arabic','Geeza Pro',-apple-system,sans-serif;font-size:14px}
+.tile{display:block;position:relative;overflow:hidden}
+.tile svg{position:absolute;inset:0;width:100%;height:100%}

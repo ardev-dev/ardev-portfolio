@@ -1,0 +1,37 @@
+{
+ "slug": "mapbox",
+ "catalog_name": "Mapbox App",
+ "format": "phone",
+ "center": 1,
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "home: map with current location and 'Hi there!' card",
+   "source": [
+    "lib/screen/home_screen.dart",
+    "lib/main.dart"
+   ]
+  },
+  {
+   "file": "2.png",
+   "screen": "prepare ride: from/to fields, place search results, Review Ride FAB",
+   "source": [
+    "lib/screen/prepare_ride_screen.dart",
+    "lib/widgets/endpoints_card.dart",
+    "lib/widgets/location_field.dart",
+    "lib/widgets/search_listview.dart",
+    "lib/widgets/review_ride_fa_button.dart"
+   ]
+  },
+  {
+   "file": "3.png",
+   "screen": "review ride: route on map with trip summary sheet",
+   "source": [
+    "lib/screen/review_ride_screen.dart",
+    "lib/widgets/review_ride_bottom_sheet.dart",
+    "lib/helpers/commons.dart"
+   ]
+  }
+ ],
+ "notes": "Flutter ride-booking demo titled 'Mapbox Cabs' in code (English, LTR, default Material 2 blue theme, system font - no custom fonts in the repo). Mapbox map is replaced by a neutral stylised map (no provider tiles/logo); route line is Colors.indigo width 3 as in code. The images the code references (assets/image/sport-car.png, assets/icon/circle.png, square.png) are not in the repo, so a simple car glyph and circle/square end markers were drawn. The fare '$384.22' and 'Premier' are hard-coded in the code. Place search is restricted to country=sd in code, so sample addresses are Khartoum streets; distance and drop-off time are sample values."
+}

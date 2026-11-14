@@ -1,0 +1,24 @@
+/* Abber Admin — من lib/core/themes (app_colors / app_typography / app_decoration_styles) */
+@font-face{font-family:Readex;src:url('file:///Users/ar/Development/projects/abber-project/abber_admin/assets/fonts/readex/ReadexPro-Light.ttf');font-weight:300}
+@font-face{font-family:Readex;src:url('file:///Users/ar/Development/projects/abber-project/abber_admin/assets/fonts/readex/ReadexPro-Regular.ttf');font-weight:400}
+@font-face{font-family:Readex;src:url('file:///Users/ar/Development/projects/abber-project/abber_admin/assets/fonts/readex/ReadexPro-Medium.ttf');font-weight:500}
+@font-face{font-family:Readex;src:url('file:///Users/ar/Development/projects/abber-project/abber_admin/assets/fonts/readex/ReadexPro-SemiBold.ttf');font-weight:600}
+@font-face{font-family:SolarL;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_linear_icons.ttf')}
+@font-face{font-family:SolarB;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_bold_icons.ttf')}
+:root{--bg:#FFFFFF;--fg:#1A2530;--primary:#1A2530;--secondary:#F8F9FA;--muted:#EEEEEE;--stroke:#707B81;--error:#FF3B30;--warning:#FFC107;--border:#E3E5E5;--success:#34C759;--navy:#010076;--gold:#FFEABF;--goldDeep:#D9B979}
+body{background:var(--bg);color:var(--fg);font-family:Readex,sans-serif;font-size:13px}
+.si{font-family:SolarL;font-style:normal;font-weight:400;line-height:1;display:inline-block;direction:ltr}
+.sb{font-family:SolarB;font-style:normal;font-weight:400;line-height:1;display:inline-block;direction:ltr}
+/* سلّم النصوص */
+.t-xl{font-size:20px;line-height:1.5}.t-lg{font-size:16px;line-height:1.65}.t-base{font-size:15px;line-height:1.6}.t-menu{font-size:14px;line-height:1.71}
+.t-sm{font-size:13px;line-height:1.85}.t-xs{font-size:12px;line-height:1.5}.t-xxs{font-size:10px;line-height:1.6}
+.w3{font-weight:300}.w4{font-weight:400}.w5{font-weight:500}.w6{font-weight:600}
+.c-stroke{color:var(--stroke)}
+/* AppBar: toolbarHeight 64, centerTitle, leadingWidth 84 */
+.abar{height:64px;position:relative;display:flex;align-items:center}
+.abar .ttl{position:absolute;left:0;right:0;text-align:center;font-size:16px;line-height:1.65;font-weight:600;color:var(--primary)}
+.back{width:44px;height:44px;border-radius:50%;background:var(--secondary);display:grid;place-items:center;margin-right:20px;color:var(--primary);position:relative;z-index:1}
+/* CustomFilterTabBar */
+.ftabs{display:flex;gap:8px;padding:10px 16px;white-space:nowrap;overflow:hidden}
+.ftabs span{flex:none;padding:7px 14px;border-radius:20px;border:1px solid var(--muted);background:var(--secondary);font-size:12px;line-height:1.5;font-weight:500}
+.ftabs span.on{background:var(--primary);border-color:var(--primary);color:var(--bg)}

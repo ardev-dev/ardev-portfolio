@@ -1,0 +1,37 @@
+{
+ "slug": "truckgo-driver",
+ "catalog_name": "TruckGo Driver",
+ "format": "phone",
+ "center": 1,
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "home tab: map of open freight requests (green pins) with bottom navigation",
+   "source": [
+    "lib/features/wrapper/presentation/main_wrapper/main_wrapper.dart",
+    "lib/features/services/presentation/home_screen.dart",
+    "lib/features/services/presentation/components/home_body_view.dart"
+   ]
+  },
+  {
+   "file": "2.png",
+   "screen": "orders tab: tracking-number card and order cards",
+   "source": [
+    "lib/features/wrapper/presentation/main_wrapper/main_wrapper.dart",
+    "lib/features/order/presentation/orders/order_screen.dart",
+    "lib/features/order/presentation/components/tracing_number_card_view.dart",
+    "lib/features/order/presentation/components/order_card_view.dart"
+   ]
+  },
+  {
+   "file": "3.png",
+   "screen": "my offers (customer, offer and shipment details)",
+   "source": [
+    "lib/features/offer/presentation/my_offer/my_offers_screen.dart",
+    "lib/features/offer/presentation/components/offer_card_view.dart",
+    "lib/features/services/presentation/components/service_card_view.dart"
+   ]
+  }
+ ],
+ "notes": "Flutter (Material 3, Arabic RTL), same visual system as the shipper app (primary #25be6f, JF Flat, Iconly-Broken, bottom-nav SVGs from assets/images). bar_home.svg is not valid XML as shipped (duplicate attribute on off-canvas glyphs, no viewBox), so a cleaned local copy (same paths) is used for the nav icon. Drawn as the code is: order status prints the raw API value (in_progress / accepted / complete); in 'my offers' the code prints service.originAddress in both the 'from' and 'to' rows, so the same street appears twice (and the real getAddress() may fall back to an error string - a sample street is shown instead); the white ServiceCardView sits on a white card as in code. Currency comes from the wallet API - 'SDG' is a sample; names, prices, ids and times are sample data. Google Maps is replaced by a neutral stylised map with generic green pins (code: default marker, hueGreen; camera on Khartoum). Home is intentionally just map + pins + nav, as in code."
+}

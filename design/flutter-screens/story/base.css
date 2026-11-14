@@ -1,0 +1,10 @@
+:root{--blue:#2196F3;--bg:#EDF0F6}
+body{direction:ltr;background:var(--bg);color:rgba(0,0,0,.87);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px}
+.appbar{background:var(--blue);color:#fff;box-shadow:0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px rgba(0,0,0,.14),0 1px 10px rgba(0,0,0,.12);position:relative;z-index:2}
+.navy{position:absolute;left:0;right:0;bottom:0;background:#fff;box-shadow:0 0 2px rgba(0,0,0,.12);padding-bottom:34px;z-index:3}
+.navy .row{height:56px;padding:6px 8px;display:flex;justify-content:space-between;align-items:center}
+.navy .it{width:50px;height:44px;border-radius:50px;display:flex;align-items:center;padding:0 8px;justify-content:center;color:#2196F3}
+.navy .it.on{width:130px;background:rgba(33,150,243,.2);justify-content:flex-start}
+.navy .it.on span{flex:1;padding:0 4px;font-weight:700;font-size:14px}
+.lt{display:flex;align-items:center;gap:16px;padding:0 16px;min-height:72px}
+.lt .t{font-size:16px;line-height:1.3}.lt .s{font-size:14px;color:rgba(0,0,0,.54);line-height:1.35}

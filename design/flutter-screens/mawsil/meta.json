@@ -1,0 +1,12 @@
+{
+  "slug": "mawsil",
+  "catalog_name": "Mawsil",
+  "format": "phone",
+  "center": 1,
+  "screens": [
+    {"file": "1.png", "screen": "home (main food view: popular slider + recommended list + bottom nav)", "source": ["lib/src/views/home/home_view.dart", "lib/src/views/home/main_food_view/main_food_view.dart", "lib/src/views/home/main_food_view/components/app_bar.dart", "lib/src/views/home/main_food_view/components/slide_show.dart", "lib/src/views/home/main_food_view/components/recommende.dart", "lib/src/views/home/main_food_view/components/list_food.dart", "lib/src/widgets/column.dart"]},
+    {"file": "2.png", "screen": "popular food detail", "source": ["lib/src/views/food/popular_food_detail_view.dart", "lib/src/views/food/components/app_bar_food.dart", "lib/src/views/food/components/add_to_cart_button.dart", "lib/src/widgets/text/exandable_text_widget.dart"]},
+    {"file": "3.png", "screen": "cart", "source": ["lib/src/views/home/cart/cart_view.dart"]}
+  ],
+  "notes": "Repo used: ardev-dev/mawsil (the Flutter app, GetX). ardev-dev/food-delivery-mawsil is its Django/DRF backend only (no Flutter code). UI is English/LTR, no custom font in pubspec, so the platform font is used. Colours from lib/src/utilities/app_colors.dart. Products come from a dead Heroku API, so names/prices are sample data and the product photos are drawn as neutral plate illustrations on the code's own placeholder colours (orange / #9294cc); the unused stock photo assets/image/food.jpg was not used. Doubts: (1) the home header in code shows the literal placeholders \"contry\" / \"city\"; drawn as a sample location (Saudi Arabia / Riyadh). (2) Hard-coded labels are kept exactly as in code, including their typos: \"Indroduce\", \"With chinese charactristics\", \"Spicy\", \"4.5 1287 comments\", \"Normal / 1.7km / 32\". (3) Bottom-nav badges 0-3 are what the code renders (badgeCount = tab index); badge size/position of the custom_navigation_bar package is approximated. The 4th tab is an empty \"page 4\" placeholder in code and is not drawn."
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "maskani-admin",
+  "catalog_name": "Maskani Admin",
+  "format": "phone",
+  "center": 1,
+  "screens": [
+    {"file": "1.png", "screen": "home — dashboard (8 stat cards + section tiles)", "source": ["lib/features/home/home_screen.dart", "lib/features/dashboard/dashboard_screen.dart", "lib/shared/widgets/quick_tile.dart", "lib/core/widgets/layout/admin_app_bar.dart"]},
+    {"file": "2.png", "screen": "properties list", "source": ["lib/features/properties/properties_screen.dart", "lib/features/home/home_screen.dart (SectionPage)", "lib/core/routes/nav_items.dart", "lib/core/themes/app_themes.dart"]},
+    {"file": "3.png", "screen": "users list", "source": ["lib/features/users/users_screen.dart", "lib/core/widgets/layout/user_avatar_widget.dart", "lib/core/widgets/forms/custom_text_form_field.dart", "lib/core/themes/app_decoration_styles.dart"]}
+  ],
+  "notes": "Read from the local read-only checkout /Users/ar/MyDocuments/projects/maskani/maskani_admin (v1.0.44+45). The code itself says the home has no side menu or drawer (sections open as full pages), and it is a phone app, so phone format. Light theme only, IBM Plex Sans Arabic from the repo, primary #171539; icons are the real Solar glyphs from the local solar_community_icons font. Logo: no screen in lib/ loads an image asset (assets/icons/app_icon*.png are launcher icons only); the home header is drawn by code as a navy rounded box with a Solar 'home' glyph next to 'لوحة إدارة مسكني', so that is what is shown and the brand logo file is not used. Sample data: counters, listing titles, prices, cities, user names, phone numbers (patterned, fictional) and ids. Prices are printed as the code prints them: raw API decimal string + currency code (e.g. '180000.00 YER'), no thousands separator. Property photos are network images in the app; here they are soft gradient thumbnails, and one row uses the code's own no-image fallback (grey box + building icon). User avatars use the code's no-photo fallback. In the users list the search hint and magnifier are very faint because the code colours them with the 'stroke' token, which maps to the divider colour (#E7E7F0) in this app; drawn as coded. The analytics screen (fl_chart) was not chosen: inside SectionPage its KPI cards are sized from the full screen width and would wrap two per row, so it would not look tidy."
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "dbcargo",
+  "catalog_name": "DBCargo",
+  "format": "phone",
+  "center": 1,
+  "screens": [
+    {"file": "1.png", "screen": "home (package tracking banner + feature grid)", "source": ["lib/src/views/home/home_view.dart"]},
+    {"file": "2.png", "screen": "flight search results (tickets list)", "source": ["lib/src/views/trips/tickets/flight_tickets_view.dart", "lib/src/controllers/trip_controller.dart", "lib/src/views/widgets/month_name.dart"]},
+    {"file": "3.png", "screen": "cargo shipment, step 1 of 3 (route, date, shopping items)", "source": ["lib/src/views/cargo/home_cargo/home_cargo_view.dart", "lib/src/views/trips/home_trips/components/flight_airport.dart", "lib/src/views/widgets/text_widget.dart", "lib/src/views/onboarding/onboarding_view.dart"]}
+  ],
+  "notes": "Repo used: ardev-dev/DBCargo (36 Dart files, has the cargo flow: shipment steps, add item, wishlist). ardev-dev/dpcargo-flutter is an earlier, thinner copy (25 files, no cargo screens). UI is English/LTR; ThemeData() sets no font family (the Helvetica files in pubspec are never applied), so the platform font is used. Images are the repo's own assets (homePage/banners.png, homePage/avatar.jpg, world_maps.png). The DBCargo code base is nearly identical to ardev-dev/shipperit-flutter (same screens, only branding strings differ), so the two slugs were given complementary screens. Doubts: (1) the app is a UI prototype with hard-coded content: every ticket in code is the same constant card (NYC to SFO, 08:00 AM, Flight No 23, Jet Airways, $ 240, list repeated 10 times); card 1 is exactly that, cards 2-3 vary only times / flight no / price as sample data. (2) Shopping items in code are literally \"test item 0..4\"; drawn with sample item names. (3) Home has no SafeArea and a 30px top padding; shifted down 17px so the header clears the iOS status bar. (4) Code typos kept as written: \"18 Search Resulte\", \"SunFransisco\" / \"SanFransisco\"."
+}

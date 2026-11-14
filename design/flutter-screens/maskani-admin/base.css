@@ -1,0 +1,25 @@
+/* Maskani Admin — lib/core/themes/{app_colors,app_typography,app_themes,app_decoration_styles}.dart */
+@font-face{font-family:Plex;src:url('file:///Users/ar/MyDocuments/projects/maskani/maskani_admin/assets/fonts/plex/IBMPlexSansArabic-Light.ttf');font-weight:300}
+@font-face{font-family:Plex;src:url('file:///Users/ar/MyDocuments/projects/maskani/maskani_admin/assets/fonts/plex/IBMPlexSansArabic-Regular.ttf');font-weight:400}
+@font-face{font-family:Plex;src:url('file:///Users/ar/MyDocuments/projects/maskani/maskani_admin/assets/fonts/plex/IBMPlexSansArabic-Medium.ttf');font-weight:500}
+@font-face{font-family:Plex;src:url('file:///Users/ar/MyDocuments/projects/maskani/maskani_admin/assets/fonts/plex/IBMPlexSansArabic-SemiBold.ttf');font-weight:600}
+@font-face{font-family:Plex;src:url('file:///Users/ar/MyDocuments/projects/maskani/maskani_admin/assets/fonts/plex/IBMPlexSansArabic-Bold.ttf');font-weight:700}
+@font-face{font-family:SolL;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_linear_icons.ttf')}
+@font-face{font-family:SolB;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_bold_icons.ttf')}
+:root{--primary:#171539;--gold:#FFC107;--bg:#F6F6FB;--surface:#FFFFFF;--tp:#050536;--ts:#5A5F72;--hint:#6B7080;--divider:#E7E7F0;--error:#EF4444;--success:#10B981;--warning:#F59E0B;--info:#2563EB}
+body{background:var(--bg);color:var(--tp);font-family:Plex,sans-serif;font-size:14px}
+.sl,.sb{font-style:normal;font-weight:400;line-height:1;display:inline-block;direction:ltr;flex:none}
+.sl{font-family:SolL}.sb{font-family:SolB}
+.t-lg{font-size:16px;line-height:1.5}.t-base{font-size:15px;line-height:1.6}.t-sm{font-size:13px;line-height:1.6}.t-xs{font-size:12px;line-height:1.5}.t-xxs{font-size:11px;line-height:1.5}
+.w3{font-weight:300}.w4{font-weight:400}.w6{font-weight:600}.w7{font-weight:700}
+.c-ts{color:var(--ts)}
+.ell{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* AdminAppBar: white box under status bar, height 64, margin h 16 */
+.top{background:var(--surface)}
+.aab{height:64px;margin:0 16px;display:flex;align-items:center;justify-content:space-between}
+.aab .ttl{flex:1;text-align:center;font-size:16px;line-height:1.5;font-weight:600}
+.aab .acts{min-width:26px;display:flex;align-items:center;gap:10px}
+/* SectionPage body */
+.page{padding:16px}
+.lst{display:flex;flex-direction:column;gap:12px}
+.dot{width:7px;height:7px;border-radius:50%;flex:none}

@@ -1,0 +1,20 @@
+/* Hue Mixer — lib/main.dart : ThemeData(primarySwatch: deepPurple, fontFamily: 'Arial'), Material 3 */
+:root{--deep:#673AB7;--accent:#E040FB;--bg:#F5F5F5;--red:#F44336;--green:#4CAF50;--blue:#2196F3;--g50:#FAFAFA;--g300:#E0E0E0;--g700:#616161}
+body{direction:ltr;background:var(--bg);color:#000;font-family:Arial,sans-serif;font-size:14px;line-height:1.15}
+.top{background:linear-gradient(to bottom right,var(--deep),var(--accent));color:#fff}
+.status{color:#fff}
+.appbar{color:#000}.appbar .title{font-size:22px;font-weight:700}
+.body{position:absolute;top:103px;left:0;right:0;bottom:0;padding:20px;display:flex;flex-direction:column}
+.card{background:#fff;border-radius:20px;box-shadow:0 10px 20px rgba(0,0,0,.1);padding:20px;display:flex;flex-direction:column;align-items:center}
+.card h1{font-size:24px;font-weight:700;color:var(--deep);margin-bottom:30px}
+.cones{display:flex;justify-content:space-evenly;width:100%}
+.cone{width:100px;display:flex;flex-direction:column;align-items:center;color:var(--c)}
+.pill{padding:8px 12px;border-radius:20px;border:2px solid rgb(from var(--c) r g b/.4);background:rgb(from var(--c) r g b/.15);font-size:18px;font-weight:700;margin-bottom:20px}
+.slider{width:100px;height:280px;position:relative;margin-bottom:15px}
+.track{position:absolute;left:10px;top:20px;width:80px;height:240px;border-radius:40px;border:3px solid rgb(from var(--c) r g b/.6);background:linear-gradient(to top,var(--c),rgb(from var(--c) r g b/.7),rgb(from var(--c) r g b/.4),rgb(from var(--c) r g b/.1));box-shadow:0 8px 20px rgb(from var(--c) r g b/.3)}
+.thumb{position:absolute;left:5px;width:90px;height:40px;border-radius:20px;background:#fff;border:4px solid var(--c);box-shadow:0 4px 10px rgba(0,0,0,.2),0 2px 15px rgb(from var(--c) r g b/.3);display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:700}
+.thumb i{width:20px;height:20px;border-radius:50%;background:var(--c)}
+.cone .lbl{font-size:16px;font-weight:700}
+.result{margin-top:auto;border-radius:20px;padding:25px;display:flex;flex-direction:column;align-items:center;background:var(--rc);color:var(--fg);box-shadow:0 10px 20px rgb(from var(--rc) r g b/.4)}
+.result b{font-size:24px;font-weight:700;margin-top:15px}
+.result span{font-size:18px;margin-top:10px;opacity:.8}
