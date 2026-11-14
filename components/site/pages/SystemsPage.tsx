@@ -24,10 +24,9 @@ type Slide = { work: Work; group: WorkGroup; brand: Brand; n: number };
  * كانت الصفحة فهرساً نصّياً طويلاً يُمرَّر؛ صارت نافذة تعرض مشروعاً واحداً في
  * كل مرّة بتصميمه، وتحتها شريط يضمّ كل المشاريع للقفز إلى أيٍّ منها.
  *
- * ⚠️ **الحقيقي والمصمَّم لا يختلطان.** المشروع الذي له شعار ولقطات حقيقية
- * يعرضها كما هي. والذي ليس له (خلفيات، حِزم، أدوات، مشاريع قديمة بلا أصول) يأخذ
- * شعاراً ونموذج تصميم مصنوعين هنا — بطلب المالك — وتظهر عليه شارة «تصوّر
- * تصميمي»، فلا يُقرأ النموذج على أنّه لقطة من المنتج.
+ * ⚠️ **لا واجهة مُتخيَّلة.** المشروع الذي له لقطات حقيقية يعرضها كما هي. والذي ليس
+ * له يعرض بانر منتج بهويته (شعاره واسمه ووصفه وتقنياته) — لا شاشةً نموذجية قد
+ * توحي للزائر بأنّ التطبيق نفسه وهميّ. التفصيل في components/site/work/Mockup.tsx.
  */
 export function SystemsPage() {
   const { t, lang } = useLang();
@@ -155,12 +154,6 @@ export function SystemsPage() {
             <span className="font-mono text-[11px]" dir="ltr">
               {String(i + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
             </span>
-            {/* في شريط النافذة لا فوق التصميم: كانت الشارة تغطّي ركن النموذج نفسه. */}
-            {!real(cur.work) && (
-              <span className="ms-3 rounded-full border border-white/15 px-2 py-0.5 text-[10.5px] text-fg-muted">
-                {t({ en: "Concept mockup", ar: "تصوّر تصميمي" })}
-              </span>
-            )}
           </p>
           <div className="flex items-center gap-1.5">
             <CtrlButton label={t({ en: "Previous project", ar: "المشروع السابق" })} onClick={() => step(-1)}>
@@ -226,7 +219,7 @@ export function SystemsPage() {
             className="relative order-1 h-[clamp(250px,42dvh,380px)] min-w-0 px-5 pt-6 sm:px-8 lg:order-2 lg:h-[clamp(300px,calc(100dvh-29rem),600px)] lg:py-7"
             style={reduce ? undefined : { animation: "blur-in 0.65s ease both" }}
           >
-            <Stage work={cur.work} brand={cur.brand} title={name(cur.work)} ar={rtl} />
+            <Stage work={cur.work} brand={cur.brand} title={name(cur.work)} ar={rtl} group={t(cur.group.title)} />
 
           </div>
         </div>
@@ -300,14 +293,11 @@ function CtrlButton({ label, onClick, children }: { label: string; onClick: () =
   );
 }
 
-/** هل للمشروع تصميم حقيقي (لقطات أو لقطة موقع)؟ */
-const real = (w: Work) => Boolean(w.shots?.length || w.cover);
-
-/** منصّة العرض: لقطات التطبيق، أو لقطة الموقع، أو نموذج مصمَّم لمن لا لقطات له. */
-function Stage({ work, brand, title, ar }: { work: Work; brand: Brand; title: string; ar: boolean }) {
+/** منصّة العرض: لقطات التطبيق، أو لقطة الموقع، أو بانر المنتج لمن لا لقطات له. */
+function Stage({ work, brand, title, ar, group }: { work: Work; brand: Brand; title: string; ar: boolean; group: string }) {
   if (work.shots?.length) return <Shots shots={work.shots} title={title} />;
   if (work.cover) return <Cover src={work.cover} title={title} host={work.href?.replace(/^https?:\/\//, "")} />;
-  return <Mockup work={work} brand={brand} name={title} ar={ar} />;
+  return <Mockup work={work} brand={brand} name={title} ar={ar} group={group} />;
 }
 
 function Shots({ shots, title }: { shots: string[]; title: string }) {

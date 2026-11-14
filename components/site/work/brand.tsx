@@ -8,39 +8,44 @@ import {
   Utensils, Wallet, Watch, Workflow, Wrench,
   type LucideIcon,
 } from "lucide-react";
-import type { Work } from "@/lib/data";
+import type { L, Work } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 /**
- * هوية المشروع في عرض الأعمال: لونه، وأيقونته، ونوع نموذجه.
+ * هوية المشروع في عرض الأعمال: لونه، وأيقونته، وما يُعرض له حين لا لقطات حقيقية.
  *
- * للمشاريع التي لها شعار ولقطات حقيقية لا يُستعمل من هذا إلا اللون. والبقية
- * (خلفيات، حِزم، أدوات، مشاريع قديمة بلا أصول) تأخذ من هنا شعاراً مصمَّماً
- * ونموذج تصميم — وكلاهما موسوم في الواجهة بأنّه «تصوّر» لا لقطة من المنتج.
+ * ⚠️ **لا شاشات مُتخيَّلة.** جُرِّب رسم واجهة نموذجية لكل مشروع بلا لقطات، فقرّر
+ * المالك إزالتها: شاشةٌ لا تشبه التطبيق توحي للزائر بأنّ التطبيق نفسه وهميّ.
+ * فالمشروع بلا لقطات يأخذ **بانر منتج** — شعاره واسمه ووصفه وتقنياته — وهو
+ * لا يدّعي شيئاً عن شكل الواجهة.
+ *
+ * والاستثناء ما بُني على معلومة حقيقية لا على تخيّل: أمر تثبيت الحزمة، ومراحل
+ * خطّ الإنتاج كما في وصفه، وبنية الخدمات كما في مستودعها.
  */
-export type Scene =
-  | "listings" | "map" | "ledger" | "admin" | "checkout" | "feed" | "articles" | "links" | "stickers" | "lessons"
-  | "match3" | "ttt" | "words" | "colors" | "messages" | "watch"
-  | "shop" | "site" | "dashboard" | "table" | "filetools" | "tool"
-  | "code" | "pipeline" | "services" | "timeline" | "menubar";
-export type Device = "phone" | "watch" | "web" | "code";
-export type Brand = { hue: number; Icon: LucideIcon; scene: Scene; device: Device };
+export type Scene = "banner" | "code" | "pipeline" | "services";
+export type Brand = {
+  hue: number;
+  Icon: LucideIcon;
+  scene: Scene;
+  /** مكوّنات حقيقية تُعرض في البانر — من المشروع نفسه لا من التخمين. */
+  points?: L[];
+};
 
 const GROUPS: Record<string, Brand> = {
-  marketplaces: { hue: 262, Icon: MessagesSquare, scene: "feed", device: "phone" },
-  realestate: { hue: 38, Icon: Building2, scene: "listings", device: "phone" },
-  logistics: { hue: 168, Icon: Truck, scene: "map", device: "phone" },
-  finance: { hue: 150, Icon: Wallet, scene: "ledger", device: "phone" },
-  social: { hue: 286, Icon: Users, scene: "feed", device: "phone" },
-  commerce: { hue: 342, Icon: ShoppingBag, scene: "shop", device: "web" },
-  business: { hue: 214, Icon: Briefcase, scene: "dashboard", device: "web" },
-  network: { hue: 192, Icon: Router, scene: "code", device: "code" },
-  education: { hue: 24, Icon: GraduationCap, scene: "lessons", device: "phone" },
-  games: { hue: 318, Icon: Gamepad2, scene: "match3", device: "phone" },
-  ai: { hue: 246, Icon: Workflow, scene: "pipeline", device: "code" },
-  oss: { hue: 204, Icon: Package, scene: "code", device: "code" },
-  tools: { hue: 48, Icon: Wrench, scene: "tool", device: "web" },
-  early: { hue: 28, Icon: FolderOpen, scene: "site", device: "web" },
+  marketplaces: { hue: 262, Icon: MessagesSquare, scene: "banner" },
+  realestate: { hue: 38, Icon: Building2, scene: "banner" },
+  logistics: { hue: 168, Icon: Truck, scene: "banner" },
+  finance: { hue: 150, Icon: Wallet, scene: "banner" },
+  social: { hue: 286, Icon: Users, scene: "banner" },
+  commerce: { hue: 342, Icon: ShoppingBag, scene: "banner" },
+  business: { hue: 214, Icon: Briefcase, scene: "banner" },
+  network: { hue: 192, Icon: Router, scene: "code" },
+  education: { hue: 24, Icon: GraduationCap, scene: "banner" },
+  games: { hue: 318, Icon: Gamepad2, scene: "banner" },
+  ai: { hue: 246, Icon: Workflow, scene: "banner" },
+  oss: { hue: 204, Icon: Package, scene: "code" },
+  tools: { hue: 48, Icon: Wrench, scene: "banner" },
+  early: { hue: 28, Icon: FolderOpen, scene: "banner" },
 };
 
 /**
@@ -51,54 +56,55 @@ const GROUPS: Record<string, Brand> = {
  * مشروعٍ جديد تغيّر شكل مشروعٍ قديم بصمت.
  */
 const OVERRIDES: Record<string, Partial<Brand>> = {
-  // لوحات الإدارة: شاشة أرقام وطلبات
-  "Abber Admin": { Icon: ShieldCheck, scene: "admin" },
-  "Wisal Admin": { Icon: ShieldCheck, scene: "admin" },
-  "Maskani Admin": { Icon: ShieldCheck, scene: "admin" },
-  "Azbah Admin": { Icon: ShieldCheck, scene: "admin" },
-  "Wasselak Admin": { Icon: ShieldCheck, scene: "admin" },
-  "Wasselak Employee": { Icon: Users, scene: "admin" },
-  "Wasselak Business": { Icon: Store, scene: "admin" },
-  "Abber Blog": { Icon: Newspaper, scene: "articles" },
-  "Abber Watch": { Icon: Watch, scene: "watch", device: "watch" },
+  // لوحات الإدارة والتطبيقات الفرعية
+  "Abber Admin": { Icon: ShieldCheck },
+  "Wisal Admin": { Icon: ShieldCheck },
+  "Maskani Admin": { Icon: ShieldCheck },
+  "Azbah Admin": { Icon: ShieldCheck },
+  "Wasselak Admin": { Icon: ShieldCheck },
+  "Wasselak Employee": { Icon: Users },
+  "Wasselak Business": { Icon: Store },
+  "Abber Blog": { Icon: Newspaper },
+  "Abber Watch": { Icon: Watch },
   // التوصيل
-  "Wasselak Core": { Icon: Server, scene: "dashboard", device: "web" },
-  "TruckGo Web": { Icon: LayoutDashboard, scene: "dashboard", device: "web" },
+  "Wasselak Core": { Icon: Server },
+  "TruckGo Web": { Icon: LayoutDashboard },
   "Mapbox App": { Icon: MapPin },
   // المال
   Kushak: { Icon: Store },
   Alminshar: { Icon: Receipt },
-  Aleuhda: { Icon: CreditCard, scene: "checkout" },
-  "Payment gateways": { Icon: CreditCard, scene: "checkout" },
-  "HyperPay Flutter": { Icon: CreditCard, scene: "checkout" },
-  Moqawlat: { Icon: HardHat, scene: "ledger", device: "phone" },
+  Aleuhda: { Icon: CreditCard },
+  "Payment gateways": { Icon: CreditCard },
+  "HyperPay Flutter": { Icon: CreditCard },
+  Moqawlat: { Icon: HardHat },
   // الاجتماعية والمحتوى
-  KingLink: { Icon: Link2, scene: "links" },
-  Wasla: { Icon: Share2, scene: "links" },
+  KingLink: { Icon: Link2 },
+  Wasla: { Icon: Share2 },
   Story: { Icon: Newspaper },
-  Blogstory: { Icon: Newspaper, scene: "articles" },
-  Mogamo3aty: { Icon: Users, scene: "links" },
-  "WhatsApp Stickers": { Icon: Smile, scene: "stickers" },
+  Blogstory: { Icon: Newspaper },
+  Mogamo3aty: { Icon: Users },
+  "WhatsApp Stickers": { Icon: Smile },
   // التجارة والأعمال
   Mateam: { Icon: Utensils },
   Danya: { Icon: Store },
-  WiseBuy: { Icon: ListChecks, scene: "table" },
-  Purete: { Icon: Server, scene: "services", device: "code" },
+  WiseBuy: { Icon: ListChecks },
+  // بنية الخدمات كما في مستودعها: NGINX أمام عدّة خدمات Django، قاعدة بيانات لكل خدمة.
+  Purete: { Icon: Server, scene: "services" },
   AppProof: { Icon: ClipboardList },
   "AppProof Web": { Icon: ClipboardList },
   Somow: { Icon: LayoutDashboard },
   // التعليم
   Lumi: { Icon: Baby },
-  Minasa: { Icon: BookOpen, device: "web", scene: "table" },
-  "Library System": { Icon: Library, device: "web", scene: "table" },
+  Minasa: { Icon: BookOpen },
+  "Library System": { Icon: Library },
   // الألعاب
-  Jumal: { Icon: Puzzle, scene: "words" },
-  TicTacTonz: { Icon: Gamepad2, scene: "ttt" },
-  "Hue Mixer": { Icon: Palette, scene: "colors" },
-  // الذكاء والأتمتة
-  FactForge: { Icon: Bot },
-  CutReact: { Icon: Film, scene: "timeline" },
-  "Etimad Tenders": { Icon: FileText },
+  Jumal: { Icon: Puzzle },
+  TicTacTonz: { Icon: Gamepad2 },
+  "Hue Mixer": { Icon: Palette },
+  // الذكاء والأتمتة — المراحل كما وردت في وصف كل خطّ
+  FactForge: { Icon: Bot, scene: "pipeline" },
+  "Etimad Tenders": { Icon: FileText, scene: "pipeline" },
+  CutReact: { Icon: Film },
   // الشبكات والحِزم
   "MikroTik Manager Pro": { Icon: Router },
   shared_utils: { Icon: Boxes },
@@ -106,9 +112,20 @@ const OVERRIDES: Record<string, Partial<Brand>> = {
   hyperpay_flutter_plugin: { Icon: CreditCard },
   voice_call_core: { Icon: MessageSquareText },
   // الأدوات
-  CopyPaste: { Icon: ClipboardList, scene: "menubar", device: "code" },
-  "WhatsApp Notification Saver": { Icon: MessageSquareText, scene: "messages", device: "phone" },
-  Oxfile: { Icon: FileText, scene: "filetools" },
+  CopyPaste: { Icon: ClipboardList },
+  "WhatsApp Notification Saver": { Icon: MessageSquareText },
+  // أسماء الأدوات من ملفّات ترجمة Oxfile نفسها.
+  Oxfile: {
+    Icon: FileText,
+    points: [
+      { en: "Merge PDF", ar: "دمج PDF" },
+      { en: "Split PDF", ar: "تقسيم PDF" },
+      { en: "Compress PDF", ar: "ضغط PDF" },
+      { en: "PDF to Word", ar: "PDF إلى Word" },
+      { en: "Rotate PDF", ar: "تدوير PDF" },
+      { en: "Protect PDF", ar: "حماية PDF" },
+    ],
+  },
   qr: { Icon: QrCode, hue: 48 },
   colorcraft: { Icon: Palette, hue: 300 },
   typeblaze: { Icon: Keyboard, hue: 18 },
@@ -123,11 +140,11 @@ const OVERRIDES: Record<string, Partial<Brand>> = {
   units: { Icon: Ruler, hue: 96 },
   age: { Icon: CalendarDays, hue: 230 },
   // البدايات
-  "Discussion Boards": { Icon: MessagesSquare, scene: "table" },
+  "Discussion Boards": { Icon: MessagesSquare },
   "Django Blog": { Icon: Newspaper },
   "HTML Templates": { Icon: Braces },
-  "Services Platform": { Icon: LayoutDashboard, scene: "dashboard" },
-  "To-do API": { Icon: ListChecks, scene: "code", device: "code" },
+  "Services Platform": { Icon: LayoutDashboard },
+  "To-do API": { Icon: ListChecks, scene: "code" },
   "Portfolio 2023": { Icon: Briefcase },
   "Company Site": { Icon: Building2 },
 };
