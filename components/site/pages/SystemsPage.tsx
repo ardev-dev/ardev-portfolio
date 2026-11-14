@@ -155,6 +155,12 @@ export function SystemsPage() {
             <span className="font-mono text-[11px]" dir="ltr">
               {String(i + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
             </span>
+            {/* في شريط النافذة لا فوق التصميم: كانت الشارة تغطّي ركن النموذج نفسه. */}
+            {!real(cur.work) && (
+              <span className="ms-3 rounded-full border border-white/15 px-2 py-0.5 text-[10.5px] text-fg-muted">
+                {t({ en: "Concept mockup", ar: "تصوّر تصميمي" })}
+              </span>
+            )}
           </p>
           <div className="flex items-center gap-1.5">
             <CtrlButton label={t({ en: "Previous project", ar: "المشروع السابق" })} onClick={() => step(-1)}>
@@ -221,11 +227,7 @@ export function SystemsPage() {
             style={reduce ? undefined : { animation: "blur-in 0.65s ease both" }}
           >
             <Stage work={cur.work} brand={cur.brand} title={name(cur.work)} ar={rtl} />
-            {!real(cur.work) && (
-              <span className="glass pointer-events-none absolute end-4 top-4 rounded-full px-2.5 py-1 text-[10.5px] text-fg-muted">
-                {t({ en: "Concept mockup", ar: "تصوّر تصميمي" })}
-              </span>
-            )}
+
           </div>
         </div>
 
