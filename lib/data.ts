@@ -492,7 +492,7 @@ export const catalog: WorkGroup[] = [
     items: [
       { name: "Maskani", nameAr: "مسكني", kind: { en: "Social real estate · app, admin, web, backend", ar: "عقارات اجتماعية · تطبيق ولوحة وويب وخلفية" }, stack: ["Flutter", "Django", "Next.js"], year: "2025 — Now", href: "https://maskani.homes", cover: "/apps/maskani-web.webp", icon: "/apps/maskani-icon.webp" },
       { name: "Maskani Admin", nameAr: "إدارة مسكني", kind: { en: "Internal operations app for the platform", ar: "تطبيق التشغيل الداخلي للمنصّة" }, stack: ["Flutter"], year: "2026", icon: "/apps/maskani-icon.webp", shots: ["/work/maskani-admin-2.webp", "/work/maskani-admin-1.webp", "/work/maskani-admin-3.webp"] },
-      { name: "Dalal", nameAr: "دلال", kind: { en: "Property market for Yemen — app and Django backend", ar: "سوق العقارات في اليمن — تطبيق وخلفية Django" }, stack: ["Flutter", "Django"], year: "2023" },
+      { name: "Dalal", nameAr: "دلال", kind: { en: "Early prototype: a Flutter sign-in screen on a token-auth Django API", ar: "نموذج أوّلي: شاشة دخول بـ Flutter على واجهة Django بمصادقة الرموز" }, stack: ["Flutter", "Django"], year: "2023" },
     ],
   },
   {
@@ -537,7 +537,7 @@ export const catalog: WorkGroup[] = [
     desc: { en: "Feeds, chat and communities — products whose value is other people.", ar: "خلاصات ودردشة ومجتمعات — منتجات قيمتها في الناس أنفسهم." },
     items: [
       { name: "Wasla", nameAr: "وصلة", kind: { en: "Group and channel directory with chat, questions and challenges", ar: "دليل مجموعات وقنوات بدردشة وتساؤلات وتحدّيات" }, stack: ["Flutter", "Firebase", "BLoC"], year: "2026" },
-      { name: "Social Network", kind: { en: "Feed, profiles and following", ar: "خلاصة وملفّات ومتابعة" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/social-network" },
+      { name: "Social Network", kind: { en: "Starter scaffold for a Firebase social app: Google sign-in and page skeletons", ar: "هيكل أوّلي لتطبيق اجتماعي على Firebase: دخول عبر Google وهياكل الصفحات" }, stack: ["Flutter", "Firebase"], year: "2023", href: "https://github.com/ardev-dev/social-network" },
       { name: "KingLink", nameAr: "كينج لينك", kind: { en: "WhatsApp group-link directory", ar: "دليل روابط مجموعات واتساب" }, stack: ["Flutter"], year: "2022", shots: ["/work/kinglink-1.webp", "/work/kinglink-3.webp"] },
       { name: "Linkati", nameAr: "لينكاتي", kind: { en: "Link directory and sharing", ar: "دليل روابط ومشاركتها" }, stack: ["Flutter", "Firebase"], year: "2023", shots: ["/work/linkati-1.webp", "/work/linkati-2.webp", "/work/linkati-3.webp"], icon: "/work/linkati-icon.webp" },
       { name: "Story", nameAr: "ستوري", kind: { en: "Photo-sharing app: feed, profiles and comments", ar: "تطبيق مشاركة صور: خلاصة وملفّات وتعليقات" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/story-flutter", shots: ["/work/story-2.webp", "/work/story-1.webp", "/work/story-3.webp"] },
@@ -602,7 +602,7 @@ export const catalog: WorkGroup[] = [
       { name: "Sweetra", nameAr: "سويترا", kind: { en: "Match-three candy game — Flame engine, economy, in-app purchases, ads", ar: "لعبة مطابقة حلوى — بمحرّك Flame واقتصاد داخلي ومشتريات وإعلانات" }, stack: ["Flutter", "Flame", "Firebase"], year: "2026", shots: ["/work/sweetra-1.webp", "/work/sweetra-2.webp", "/work/sweetra-3.webp"], icon: "/work/sweetra-icon.webp" },
       { name: "Jumal", nameAr: "جُمل", kind: { en: "Arabic word-search with a saved progression system", ar: "بحث عن الكلمات العربية بنظام تقدّم محفوظ" }, stack: ["Flutter", "Hive"], year: "2026", href: "https://github.com/ardev-dev/jumal", shots: ["/work/jumal-1.webp", "/work/jumal-2.webp", "/work/jumal-3.webp"] },
       { name: "TicTacTonz", nameAr: "اتحداك", kind: { en: "Two-player match game", ar: "لعبة تحدٍّ بين لاعبين" }, stack: ["Flutter"], year: "2022", href: "https://github.com/ardev-dev/tictactonz", icon: "/work/tictactonz-icon.webp", shots: ["/work/tictactonz-1.webp", "/work/tictactonz-2.webp", "/work/tictactonz-3.webp"] },
-      { name: "Crush Game", kind: { en: "Match-three puzzle", ar: "لعبة مطابقة ثلاثية" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/crush-game" },
+      { name: "Crush Game", kind: { en: "Project scaffold only: a sign-in screen stub, no game code yet", ar: "هيكل مشروع فقط: شاشة دخول مبدئية، بلا كود لعبة بعد" }, stack: ["Flutter"], year: "2023", href: "https://github.com/ardev-dev/crush-game" },
       { name: "Hue Mixer", kind: { en: "RGB colour mixer with HEX, HSL, Flutter and CSS codes", ar: "خالط ألوان RGB يُخرج أكواد HEX و HSL و Flutter و CSS" }, stack: ["Flutter"], year: "2025", href: "https://github.com/ardev-dev/hue_mixer", shots: ["/work/hue-mixer-1.webp", "/work/hue-mixer-2.webp", "/work/hue-mixer-3.webp"] },
     ],
   },
