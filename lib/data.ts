@@ -361,10 +361,10 @@ export const packages: Pkg[] = [
   {
     name: "flutter_websocket_manager",
     blurb: {
-      en: "Production WebSocket lifecycle — reconnection, backoff, typed events.",
-      ar: "إدارة دورة حياة WebSocket للإنتاج — إعادة اتصال وتراجع تدريجي وأحداث مُصنّفة.",
+      en: "WebSocket connection manager: headers and query params, text or JSON sending, connection state and event callbacks.",
+      ar: "مدير اتصال WebSocket: ترويسات ومعاملات استعلام، وإرسال نص أو JSON، وحالة الاتصال واستدعاءات للأحداث.",
     },
-    points: "155 / 160",
+    points: "160 / 160",
     href: "https://pub.dev/packages/flutter_websocket_manager",
   },
   {
