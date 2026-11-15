@@ -1,0 +1,16 @@
+{
+ "slug": "websocket-manager",
+ "catalog_name": "flutter_websocket_manager",
+ "format": "wide",
+ "center": 1,
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "Editor window: the package's own usage example (example/main.dart, lines 2-33)",
+   "source": [
+    "example/main.dart"
+   ]
+  }
+ ],
+ "notes": "Addendum 2 option 3. The package has no UI: example/main.dart is a console snippet, so no phone screens were drawn. The image is an editor window whose code is example/main.dart lines 2-33 verbatim (generated from the file and diff-checked; only syntax colouring added; line 1, a commented-out duplicate import, and lines 34-50, the state switch and disconnect(), are outside the viewport). The sidebar lists real files of the repo; the status bar shows name and version from pubspec.yaml (1.0.5); window chrome is generic. 'token': '12345' and 'Bearer your_access_token' are the README's own placeholders, not credentials. The tests were NOT run: they open a socket to wss://example.com and use an unstubbed mock, so they need the network and would not pass as written. Doubt for the owner: the catalog/GitHub description promises auto-reconnect, lifecycle-aware state and exponential backoff, but lib/flutter_websocket_manager.dart at main (a1cad40, v1.0.5) has none of these (connect / send / callbacks / 3-value state enum only); the picture shows only what the code really has. The README still says ^0.0.1 in its install snippet."
+}

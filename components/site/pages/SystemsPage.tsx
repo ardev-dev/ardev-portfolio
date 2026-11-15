@@ -199,7 +199,7 @@ export function SystemsPage() {
         <div className="grid grid-cols-[minmax(0,1fr)] items-stretch lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)]">
           <div
             key={`info-${i}`}
-            className="order-2 flex min-w-0 flex-col justify-center px-6 py-6 sm:px-9 lg:order-1 lg:py-8"
+            className="order-2 flex min-w-0 flex-col justify-center px-6 py-6 [container-type:inline-size] sm:px-9 lg:order-1 lg:py-8"
             style={reduce ? undefined : { animation: `rise-in 0.6s ${EASE} both` }}
           >
             <div className="flex items-center gap-3.5">
@@ -212,9 +212,23 @@ export function SystemsPage() {
               </div>
             </div>
 
-            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-fg">{t(cur.work.kind)}</p>
+            {/* سطر التعريف: دائماً سطر واحد. */}
+            <p className="mt-4 max-w-md truncate text-[13px] text-fg-muted">{t(cur.work.kind)}</p>
 
-            <div className="mt-5 flex flex-wrap gap-1.5">
+            {/*
+              الوصف: أربعة أسطر بالضبط على الشاشات العريضة (النصّ مكتوب بطول يملؤها)، وستّة على الهاتف
+              حيث العمود أضيق. الارتفاع الأدنى مع القصّ يثبّتان الصندوق فلا تتفاوت الشرائح.
+
+              ⚠️ العرض بوحدة em (29.87em = 448px عند 15px) والخطّ يتبع عرض العمود (cqw): فإذا ضاق
+              العمود صغر الخطّ والعرض معاً وبقيت مواضع انكسار الأسطر كما هي. لو ثُبّت الخطّ على 15px
+              لصار النصّ خمسة أسطر على شاشة 1024 وقُصّ آخره.
+            */}
+            <p className="mt-3 line-clamp-6 min-h-[9.75em] max-w-[29.87em] text-[15px] leading-relaxed text-fg lg:line-clamp-4 lg:min-h-[6.5em] lg:text-[clamp(12px,3.348cqw,15px)]">
+              {t(cur.work.about ?? cur.work.kind)}
+            </p>
+
+            {/* صفّ واحد من التقنيات بارتفاع ثابت. */}
+            <div className="mt-5 flex h-[26px] flex-wrap gap-1.5 overflow-hidden">
               {cur.work.stack.map((s) => (
                 <span key={s} className="glass rounded-lg px-2.5 py-1 font-mono text-[11px] text-fg-muted" dir="ltr">
                   {s}
@@ -222,12 +236,14 @@ export function SystemsPage() {
               ))}
             </div>
 
+            {/* مكان الرابط محجوز حتى لو لم يوجد، كي لا يتغيّر ارتفاع اللوحة بين شريحة وأخرى. */}
+            <div className="mt-6 h-6">
             {cur.work.href && (
               <a
                 href={cur.work.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group mt-7 inline-flex w-fit items-center gap-1 border-b border-white/15 pb-0.5 text-sm text-ink transition-colors hover:border-white/60"
+                className="group inline-flex w-fit items-center gap-1 border-b border-white/15 pb-0.5 text-sm text-ink transition-colors hover:border-white/60"
               >
                 {t({ en: "Open", ar: "افتحه" })}
                 <ArrowUpRight
@@ -236,6 +252,7 @@ export function SystemsPage() {
                 />
               </a>
             )}
+            </div>
           </div>
 
           <div

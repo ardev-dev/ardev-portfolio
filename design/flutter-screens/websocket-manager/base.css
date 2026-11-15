@@ -1,0 +1,44 @@
+/* Editor window for code-only packages (Addendum 2, option 3): 1120x700, dark, Menlo. All code text comes verbatim from the repo. */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1120px;height:700px;overflow:hidden}
+body{background:#1b1c21;color:#d4d7dd;font:12px -apple-system,'SF Pro Text','Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased;direction:ltr}
+i{font-style:normal}
+.win{width:1120px;height:700px;display:flex;flex-direction:column;background:#1e1f25}
+.tbar{height:38px;flex:none;background:#2a2b32;border-bottom:1px solid #16171b;display:flex;align-items:center;position:relative}
+.dots{display:flex;gap:8px;padding-left:14px}.dots i{width:12px;height:12px;border-radius:50%;display:block}
+.ttl{position:absolute;left:0;right:0;text-align:center;color:#a9adb8;font-size:12.5px;font-weight:500}
+.main{flex:1;display:flex;min-height:0}
+.side{width:216px;flex:none;background:#23242a;border-right:1px solid #16171b;padding-top:10px;overflow:hidden}
+.sh{font-size:10.5px;letter-spacing:.9px;color:#8b8f9b;padding:0 16px 10px}
+.proj{font-size:10.5px;font-weight:700;letter-spacing:0;color:#c9ccd4;height:24px;display:flex;align-items:center;padding-left:6px;white-space:nowrap;overflow:hidden}
+.row{height:23px;display:flex;align-items:center;color:#b9bcc6;font-size:12.5px;white-space:nowrap;padding-right:8px}
+.row span{overflow:hidden;text-overflow:ellipsis}
+.row.act{background:#34363f;color:#fff}
+.chev{width:14px;flex:none;text-align:center;color:#8b8f9b;font-size:14px;line-height:1;display:inline-block}
+.chev.open{transform:rotate(90deg)}
+.fo{width:14px;height:11px;flex:none;margin-right:7px;border-radius:2px;background:#7f8696;position:relative;display:inline-block}
+.fo:before{content:'';position:absolute;left:0;top:-2px;width:6px;height:3px;border-radius:1.500px 1.500px 0 0;background:#7f8696}
+.fi{width:10px;height:10px;flex:none;margin:0 9px 0 2px;display:inline-block;border-radius:2px;background:#6f7584}
+.fi.dart{background:#40c4ff;transform:rotate(45deg);border-radius:1.500px;width:9px;height:9px}
+.fi.md{background:#7aa2f7;border-radius:50%}
+.fi.yaml{background:#d9a05b}
+.ed{flex:1;min-width:0;display:flex;flex-direction:column}
+.tabs{height:35px;flex:none;background:#23242a;display:flex;border-bottom:1px solid #16171b}
+.tab{height:35px;display:flex;align-items:center;padding:0 12px 0 12px;font-size:12.5px;color:#fff;background:#1e1f25;border-right:1px solid #16171b;border-top:1.500px solid #40c4ff}
+.tab b{font-weight:400;color:#8b8f9b;margin-left:12px;font-size:14px}
+.crumbs{height:24px;flex:none;display:flex;align-items:center;gap:0;padding-left:16px;color:#8b8f9b;font-size:12px;white-space:pre}
+.crumbs i{margin:0 2px;font-size:13px}
+.code{flex:1;min-height:0;overflow:hidden;padding-top:4px;font-family:Menlo,'SF Mono',Monaco,monospace}
+.ln{display:flex;white-space:pre}
+.no{width:46px;flex:none;text-align:right;padding-right:16px;color:#5b5f6b;-webkit-user-select:none}
+.tx{color:#d4d7dd}
+.k-com{color:#737a87}
+.k-str{color:#c9a27a}
+.k-int{color:#9cc4e4}
+.k-kw{color:#c08fd6}
+.k-ty{color:#5fc9b4}
+.k-fn{color:#dcd7a0}
+.k-num{color:#b5cea8}
+.k-ann{color:#9cc4e4}
+.sbar{height:24px;flex:none;background:#2a2b32;border-top:1px solid #16171b;display:flex;align-items:center;gap:18px;padding:0 14px;color:#a9adb8;font-size:11.5px}
+.sbar .sp{flex:1}

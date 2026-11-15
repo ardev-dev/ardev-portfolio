@@ -1,0 +1,16 @@
+{
+ "slug": "hyperpay-plugin",
+ "catalog_name": "hyperpay_flutter_plugin",
+ "format": "wide",
+ "center": 1,
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "Editor window: Ready UI method-channel implementation (lib/src/ready_ui/ready_ui_method_channel.dart, lines 8-39)",
+   "source": [
+    "lib/src/ready_ui/ready_ui_method_channel.dart"
+   ]
+  }
+ ],
+ "notes": "Addendum 2 option 3. The example/ app is the untouched Flutter plugin template (AppBar 'Plugin example app' + 'Running on: <platform version>'), i.e. trivial, so it was not drawn as phone screens. The image is an editor window showing lib/src/ready_ui/ready_ui_method_channel.dart lines 8-39 verbatim (generated from the file and diff-checked; imports on lines 1-7 are above the viewport). Sidebar = real repo files; status bar = name/version from pubspec.yaml. No credentials, entity IDs or checkout IDs appear (the file only has parameter names). The real package/repo name is 'hyperpay_flutte_plugin' (missing 'r'), shown as-is; the catalog spells it hyperpay_flutter_plugin. Doubts for the owner: this is an unfinished 0.0.1 plugin - README and pubspec description are the template text, MethodChannelReadyUI is never registered as the platform instance, HyperpayFluttePlugin.readyUICards passes 'brands: []', the Android handler has a non-compiling 'else if (\"gethyperpayresponse\")' with openCheckoutUI commented out, and iOS only implements getPlatformVersion. Tests were not run (the method-channel test mocks a different channel name than the plugin uses). Consider whether it belongs in the portfolio next to the working 'hyperpay' demo."
+}

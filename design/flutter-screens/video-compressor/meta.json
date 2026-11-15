@@ -1,0 +1,32 @@
+{
+ "slug": "video-compressor",
+ "catalog_name": "video_compressor_plus",
+ "format": "phone",
+ "center": 2,
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "CompressPage while compressing: LinearProgressIndicator, percentage, Cancel",
+   "source": [
+    "example/lib/main.dart"
+   ]
+  },
+  {
+   "file": "2.png",
+   "screen": "CompressPage after compression: 'Pick and compress a video' + Size / Dimensions / Duration / output path",
+   "source": [
+    "example/lib/main.dart",
+    "lib/src/media/media_info.dart",
+    "ios/video_compressor_plus/Sources/video_compressor_plus/VideoCompressorPlusPlugin.swift"
+   ]
+  },
+  {
+   "file": "3.png",
+   "screen": "ThumbnailPage with an extracted thumbnail",
+   "source": [
+    "example/lib/video_thumbnail.dart"
+   ]
+  }
+ ],
+ "notes": "Addendum 2 option 1: redrawn from the package's example app (repo ardev-dev/video_compressor_plus, branch stable, v4.1.0; it is a public fork continuing video_compress, as its README states). The example has exactly two pages; the three images are real distinct states: compressing, result, thumbnail page. English/LTR, Material 3 with colorSchemeSeed: Colors.indigo, system font. Sample data only: 47%, 3.9 MB, 568 x 320, 42367 ms and the output path (shape taken from the Swift code: NSTemporaryDirectory()/video_compress/<name><UUID>.mp4; UUIDs are made up). Fidelity doubts: (1) the M3 colours were computed by hand from the seed (tonal-spot: primary ~#505B92, surface ~#FBF8FF, secondaryContainer ~#DEE1F9) because material_color_utilities is not in the local pub cache - expect +-2 per channel; (2) the thumbnail picture is a drawn stand-in for the user's video frame (Image.memory of whatever video is picked), a 16:9 dusk landscape; (3) the progress bar uses Flutter's default 'year2023' flat style. The idle state (only the button, centred) was not drawn separately because the result state contains it."
+}

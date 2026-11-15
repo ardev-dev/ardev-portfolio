@@ -1,0 +1,34 @@
+/* Abber (تطبيق العميل) — lib/core/themes: app_colors / app_text_scale / app_decoration_styles */
+@font-face{font-family:Readex;src:url('file:///Users/ar/Development/projects/abber-project/Abber-App/assets/fonts/readex/ReadexPro-Light.ttf');font-weight:300}
+@font-face{font-family:Readex;src:url('file:///Users/ar/Development/projects/abber-project/Abber-App/assets/fonts/readex/ReadexPro-Regular.ttf');font-weight:400}
+@font-face{font-family:Readex;src:url('file:///Users/ar/Development/projects/abber-project/Abber-App/assets/fonts/readex/ReadexPro-Medium.ttf');font-weight:500}
+@font-face{font-family:Readex;src:url('file:///Users/ar/Development/projects/abber-project/Abber-App/assets/fonts/readex/ReadexPro-SemiBold.ttf');font-weight:600}
+@font-face{font-family:SolarL;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_linear_icons.ttf')}
+@font-face{font-family:SolarB;src:url('file:///Users/ar/MyDocuments/projects/solar_community_icons/assets/fonts/solar_bold_icons.ttf')}
+:root{--bg:#FFFFFF;--fg:#1A2530;--primary:#010076;--secondary:#F8F9FA;--muted:#EEEEEE;--border:#E3E5E5;--stroke:#707B81;--success:#34C759;--successTint:#E9F9EE;--cardBorder:#E9EAEB}
+body{background:var(--bg);color:var(--fg);font-family:Readex,sans-serif;font-size:13px}
+.si{font-family:SolarL;font-style:normal;font-weight:400;line-height:1;display:inline-block;direction:ltr;flex:none}
+.sb{font-family:SolarB;font-style:normal;font-weight:400;line-height:1;display:inline-block;direction:ltr;flex:none}
+/* AppTextScale */
+.titleLg{font-size:18px;line-height:1.67;font-weight:600}.titleMd{font-size:16px;line-height:1.65;font-weight:600}.code{font-size:16px;line-height:1.65;font-weight:500}
+.buttonLg{font-size:15px;line-height:1.6;font-weight:600}.menu{font-size:14px;line-height:1.71;font-weight:500}
+.bodyStrong{font-size:13px;line-height:1.85;font-weight:600}.bodyMedium{font-size:13px;line-height:1.85;font-weight:500}.bodyRegular{font-size:13px;line-height:1.85;font-weight:400}.bodyMuted{font-size:13px;line-height:1.85;font-weight:300}
+.labelMuted{font-size:12px;line-height:1.5;font-weight:300}.caption{font-size:10px;line-height:1.6;font-weight:300}
+.c-stroke{color:var(--stroke)}
+/* AppBar: toolbarHeight 64, centerTitle, leadingWidth 84, actionsPadding left 20 */
+.abar{height:64px;position:relative;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.abar .ttl{position:absolute;left:0;right:0;text-align:center}
+.circ{width:44px;height:44px;border-radius:50%;background:var(--secondary);display:grid;place-items:center;position:relative;z-index:1}
+/* PaymentMethodRow */
+.mrow{display:flex;align-items:center;gap:12px;padding:13px 16px;border:1px solid var(--border);border-radius:16px;background:var(--secondary)}
+.mrow.on{border:2px solid var(--primary);background:#fff;box-shadow:0 4px 14px rgba(1,0,118,.08)}
+.mrow .logo{width:32px;display:grid;place-items:center;flex:none}
+.mrow .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.mrow .sub{color:var(--stroke)}
+.ind{width:20px;height:20px;border-radius:999px;border:1.5px solid var(--border);flex:none;display:block}
+.ind.cb{border-radius:6px;background:#fff}
+.ind.on{border:0;background:var(--primary)}
+.badge{height:24px;padding:0 6px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--cardBorder);border-radius:5px;max-width:32px}
+.badge img{max-width:100%;object-fit:contain;display:block}
+.paybtn{border-radius:16px;padding:15px 0;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;background:var(--primary)}
+.safe{display:flex;align-items:center;justify-content:center;gap:6px;color:var(--stroke)}

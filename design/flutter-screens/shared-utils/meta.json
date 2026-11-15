@@ -1,0 +1,18 @@
+{
+ "slug": "shared-utils",
+ "catalog_name": "shared_utils",
+ "format": "wide",
+ "center": 1,
+ "method": "option 3: editor window with a verbatim excerpt of the repo's own README usage (no UI to redraw, tests could not be run)",
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "editor, two viewports of README.md: BaseEntity pagination model (left) and PaginatedListView usage with BLoC (right)",
+   "source": [
+    "README.md:84-114",
+    "README.md:654-684"
+   ]
+  }
+ ],
+ "notes": "Source: local read-only checkout /Users/ar/Development/projects/shared_utils (branch stable, version 4.6.0, commit ffee942). The package has no example/showcase app. Its UI pieces (rich toast pill, OptionalUpdateBanner, PageIndicator, CustomTimer, LoadMoreWidget, PaginatedListView, SkeletonizerWidget, ResponsiveGridView) are deliberately theme-agnostic: nearly all colours are passed in by the host app, and there is no screen that composes them, so a 'widget showcase' would have been a layout and palette I invented. I chose option 3 instead. A terminal with real `flutter test` output was not possible: the dependencies (flutter_lints, skeletonizer, flutter_stripe, material_ui ...) are not in the local pub cache and installing packages is not allowed; a scratch copy made for that attempt was deleted, nothing outside the scratchpad was touched. Image content: README.md lines 84-114 ('BaseEntity - Pagination') and 654-684 (the PaginatedListView example), with their real line numbers. The Arabic prose/comments and the placeholder identifiers (BaseOrderModel, MyBloc, MyModel, AppColors) are the README's own. Only display change: comment/prose text direction is automatic so the Arabic reads right-to-left. Built by fl/<slug>/build.py + fl/_p2/codewin.py, which read the source by line number and only add colours; a check confirmed every code line in the HTML equals the source line. Window chrome is mine, not repo text: title bar, tab labels (real file paths), the small line-range label at the right of each tab."
+}

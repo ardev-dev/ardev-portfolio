@@ -1,0 +1,18 @@
+{
+ "slug": "socket-push",
+ "catalog_name": "Custom Socket Push",
+ "format": "wide",
+ "center": 1,
+ "method": "option 3: editor window, two viewports of the one file that actually runs",
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "editor: HomePage send button + getToken (left); push payload and logging in sendPushMessage (right)",
+   "source": [
+    "lib/myCode/app.dart:26-56",
+    "lib/myCode/app.dart:65-95"
+   ]
+  }
+ ],
+ "notes": "USE ONLY AFTER FIXING THE CATALOG TEXT: the code is Firebase Cloud Messaging, not a raw socket (see meta.json). Built by fl/<slug>/build.py + fl/_p2/codewin.py, which read the source by line number and only add colours; a check confirmed every code line in the HTML equals the source line. Window chrome is mine, not repo text: title bar, tab labels (real file paths), the small line-range label at the right of each tab."
+}

@@ -1,0 +1,18 @@
+{
+ "slug": "voice-call-core",
+ "catalog_name": "voice_call_core",
+ "format": "wide",
+ "center": 1,
+ "method": "option 3: editor window with verbatim excerpts of the plugin's public entry point and WebRTC configuration",
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "editor: VoiceCallCore SDK class (left) and CoreSDKConfig ICE-server / audio-constraint builders (right)",
+   "source": [
+    "lib/voice_call_core.dart:31-63",
+    "lib/src/core/config/sdk_config.dart:26-58"
+   ]
+  }
+ ],
+ "notes": "Source: AbberApp/voice_call_core @ f75072b (main). The plugin ships NO call UI: no incoming/in-call screens, no widgets at all (its own doc comment says 'without UI components'); lib/ holds the SDK class, recording and cloud-storage managers, call models and config. HEAD has no example app either. History does contain a one-screen Material demo (example/lib/main.dart, commit 36e629a: SDK status card, Start/Stop Recording buttons, status box, feature list) but it was deleted 3 minutes later by the HEAD commit 'Remove example directory' and it only demonstrates recording, not calls, so I did not present it as the plugin's screen. If the owner would rather have that demo as a phone screen it can be redrawn from that commit. Nothing sensitive is in the excerpt: STUN/TURN servers come from the host app's SensitiveConfig, no URLs or keys appear. Built by fl/<slug>/build.py + fl/_p2/codewin.py, which read the source by line number and only add colours; a check confirmed every code line in the HTML equals the source line. Window chrome is mine, not repo text: title bar, tab labels (real file paths), the small line-range label at the right of each tab."
+}

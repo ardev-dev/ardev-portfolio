@@ -1,0 +1,64 @@
+<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><link rel="stylesheet" href="../kit.css"><link rel="stylesheet" href="base.css"><style>
+body{background:var(--dbg);color:#fff;line-height:1.25;font-weight:600;display:flex;flex-direction:column;padding-bottom:34px}
+.blob{position:absolute;border-radius:50%}
+.hd{position:relative;padding:8px 16px}
+.hd .r{display:flex;align-items:center;gap:12px}
+.bk{width:40px;height:40px;border-radius:12px;background:var(--dsurface);border:1px solid rgba(245,158,11,.3);display:grid;place-items:center;font-size:16px;flex:none}
+.cnt{flex:1;padding:8px 14px;border-radius:20px;background:var(--dsurface);border:1px solid rgba(245,158,11,.2);text-align:center;font-size:14px}
+.stk{display:flex;align-items:center;gap:4px;padding:8px 12px;border-radius:20px;background:linear-gradient(90deg,#FF6B35,#FF4E50);font-size:14px;flex:none}
+.pg{margin-top:12px;height:7px;border-radius:4px;background:var(--dsurface);border:1px solid rgba(245,158,11,.15);display:flex}
+.pg i{width:60%;border-radius:4px;background:linear-gradient(90deg,#F59E0B,#9B59B6)}
+.pl{position:relative;display:flex;align-items:center;padding:0 16px}
+.pc{flex:1;display:flex;align-items:center;padding:10px 12px;border-radius:16px;background:var(--dsurface);border:1px solid rgba(245,158,11,.18)}
+.pc.on{background:linear-gradient(135deg,#F59E0B,#9B59B6);border-color:transparent}
+.pc .c{width:36px;height:36px;border-radius:50%;background:rgba(245,158,11,.12);display:grid;place-items:center;font-size:18px;color:rgba(255,255,255,.6);flex:none}
+.pc.on .c{background:rgba(255,255,255,.2);color:#fff}
+.pc .tx{flex:1;margin-right:8px}
+.pc .tx b{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,.7)}.pc.on .tx b{color:#fff}
+.pc .tx span{display:block;font-size:14px;color:rgba(245,158,11,.9)}.pc.on .tx span{color:#fff}
+.pc .py{padding:4px;border-radius:50%;background:rgba(255,255,255,.2);font-size:14px;display:grid}
+.vs{margin:0 8px;padding:8px 10px;border-radius:12px;background:var(--dsurface);border:1px solid rgba(245,158,11,.3);color:var(--primary);font-size:12px;flex:none}
+.panel{position:relative;flex:1;margin-top:10px;background:rgba(10,10,11,.95);border-radius:30px 30px 0 0;border-top:1.500px solid rgba(245,158,11,.25);padding:18px 18px 20px;display:flex;flex-direction:column;align-items:center}
+.pw{display:flex;gap:10px}
+.pb{display:flex;align-items:center;gap:6px;padding:10px 14px;border-radius:14px;border:1px solid;font-size:12px}
+.pb i{font-size:16px}
+.pb.used{background:var(--dsurface);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.25)}
+.tm{margin-top:16px;display:flex;align-items:center;padding:14px;border-radius:20px;background:var(--dsurface);border:1px solid rgba(245,158,11,.35)}
+.tm .ring{width:54px;height:54px;position:relative;display:grid;place-items:center;font-size:18px}
+.tm .ring svg{position:absolute;inset:0}
+.tm .tx{margin-right:16px}
+.tm .tx b{display:flex;align-items:center;gap:6px;font-size:15px;color:var(--primary);font-weight:600}
+.tm .tx b i{font-size:18px}
+.tm .tx span{display:block;margin-top:4px;font-size:12px;font-weight:400;color:rgba(255,255,255,.55)}
+.qc{align-self:stretch;margin-top:18px;padding:22px;border-radius:22px;background:var(--dsurface);border:1.500px solid rgba(245,158,11,.3);display:flex;flex-direction:column;align-items:center}
+.qc .ic{padding:12px;border-radius:50%;background:linear-gradient(90deg,#F59E0B,#9B59B6);font-size:24px;display:grid}
+.qc p{margin-top:16px;font-size:18px;line-height:1.6;text-align:center}
+.op{align-self:stretch;display:flex;align-items:center;padding:16px;border-radius:18px;background:var(--dsurface);border:2px solid rgba(255,255,255,.08);margin-bottom:12px;font-size:15px;color:rgba(255,255,255,.85)}
+.op .l{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:17px;color:rgba(255,255,255,.55);margin-left:14px;flex:none}
+.op span{flex:1}
+.op.ok{background:rgba(16,185,129,.12);border-color:#10B981;color:#fff}
+.op.ok .l{background:linear-gradient(90deg,#10B981,#34D399);color:#fff}
+</style><body>
+<i class="blob" style="top:-80px;right:-80px;width:260px;height:260px;background:radial-gradient(circle,rgba(245,158,11,.35),transparent 70%)"></i>
+<i class="blob" style="top:120px;left:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(155,89,182,.22),transparent 70%)"></i>
+<div style="position:relative;color:#fff"><div class="status"><span>9:41</span><span class="r"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="currentColor"/><rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1-1.1C13.100 1.700 10.700.7 8 .7S2.900 1.700 1 3.500l1 1.100c1.600-1.500 3.700-2.400 6-2.400zm0 3.300c1.400 0 2.700.500 3.700 1.400l1-1.100C11.400 4.600 9.800 4 8 4s-3.400.6-4.700 1.800l1 1.100c1-.9 2.300-1.400 3.700-1.400zm0 3.200c-.8 0-1.500.300-2 .8l2 2.300 2-2.300c-.5-.5-1.200-.8-2-.8z" fill="currentColor"/></svg><svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.500" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"/><rect x="25" y="4.500" width="2" height="4" rx="1" fill="currentColor" opacity=".45"/></svg></span></div></div>
+<div class="hd"><div class="r"><span class="bk"><i class="sb">&#xf125;</i></span><span class="cnt">السؤال 6 من 10</span><span class="stk"><span style="font-weight:400">🔥</span><bdi>3</bdi></span></div><div class="pg"><i></i></div></div>
+<div class="pl">
+<div class="pc on"><span class="c"><i class="sb">&#xf5aa;</i></span><div class="tx"><b>أنت</b><span>3 نقطة</span></div><span class="py"><i class="sb">&#xf40c;</i></span></div>
+<span class="vs">VS</span>
+<div class="pc"><span class="c"><i class="sb">&#xf5aa;</i></span><div class="tx"><b>الخصم</b><span>2 نقطة</span></div></div>
+</div>
+<div class="panel">
+<div class="pw">
+<span class="pb used"><i class="sb">&#xf4c3;</i>50:50<i class="sb" style="font-size:13px;margin-right:-2px">&#xf1e3;</i></span>
+<span class="pb" style="background:linear-gradient(90deg,#10B981,#34D399);border-color:rgba(16,185,129,.4)"><i class="sb">&#xf4bb;</i>تخطي</span>
+<span class="pb" style="background:linear-gradient(90deg,#F59E0B,#FBBF24);border-color:rgba(245,158,11,.4)"><i class="sb">&#xf1ff;</i>+10 ث</span>
+</div>
+<div class="tm"><span class="ring"><svg viewBox="0 0 54 54"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#F59E0B"/><stop offset="1" stop-color="#9B59B6"/></linearGradient></defs><circle cx="27" cy="27" r="24" fill="#0A0A0B" stroke="rgba(255,255,255,.08)" stroke-width="6"/><circle cx="27" cy="27" r="24" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round" stroke-dasharray="105.6 150.8" transform="rotate(-90 27 27)"/></svg><b style="position:relative">14</b></span>
+<div class="tx"><b><i class="sb">&#xf40a;</i>دورك الآن!</b><span>اختر الإجابة الصحيحة</span></div></div>
+<div class="qc"><span class="ic"><i class="sb">&#xf425;</i></span><p>ما اسم أطول نهر في العالم، الذي يمرّ بإحدى عشرة دولة أفريقية؟</p></div>
+<div style="height:18px;flex:none"></div>
+<div class="op"><b class="l">أ</b><span>الأمازون</span></div>
+<div class="op ok"><b class="l">ج</b><span>النيل</span><i class="sb" style="font-size:28px;color:#10B981">&#xf1e3;</i></div>
+</div>
+<i class="home-ind" style="color:#fff"></i></body></html>

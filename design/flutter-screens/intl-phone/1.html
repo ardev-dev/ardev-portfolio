@@ -1,0 +1,56 @@
+<!doctype html><html lang="en" dir="ltr"><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>.code{font-size:13px;line-height:20px}</style><body>
+<div class="win">
+<div class="tbar"><span class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></span><span class="ttl">intl_phone_utils.dart &mdash; intl_phone_utils</span></div>
+<div class="main">
+<div class="side"><div class="sh">EXPLORER</div><div class="proj"><i class="chev open">&#x203A;</i>INTL_PHONE_UTILS</div>
+<div class="row" style="padding-left:10px"><i class="chev">&#x203A;</i><i class="fo"></i><span>android</span></div>
+<div class="row" style="padding-left:10px"><i class="chev">&#x203A;</i><i class="fo"></i><span>ios</span></div>
+<div class="row" style="padding-left:10px"><i class="chev open">&#x203A;</i><i class="fo"></i><span>lib</span></div>
+<div class="row act" style="padding-left:24px"><i class="chev"></i><i class="fi dart"></i><span>intl_phone_utils.dart</span></div>
+<div class="row" style="padding-left:10px"><i class="chev">&#x203A;</i><i class="fo"></i><span>linux</span></div>
+<div class="row" style="padding-left:10px"><i class="chev">&#x203A;</i><i class="fo"></i><span>macos</span></div>
+<div class="row" style="padding-left:10px"><i class="chev open">&#x203A;</i><i class="fo"></i><span>test</span></div>
+<div class="row" style="padding-left:24px"><i class="chev"></i><i class="fi dart"></i><span>intl_phone_utils_test.dart</span></div>
+<div class="row" style="padding-left:10px"><i class="chev">&#x203A;</i><i class="fo"></i><span>windows</span></div>
+<div class="row" style="padding-left:10px"><i class="chev"></i><i class="fi md"></i><span>CHANGELOG.md</span></div>
+<div class="row" style="padding-left:10px"><i class="chev"></i><i class="fi txt"></i><span>LICENSE</span></div>
+<div class="row" style="padding-left:10px"><i class="chev"></i><i class="fi md"></i><span>README.md</span></div>
+<div class="row" style="padding-left:10px"><i class="chev"></i><i class="fi yaml"></i><span>analysis_options.yaml</span></div>
+<div class="row" style="padding-left:10px"><i class="chev"></i><i class="fi yaml"></i><span>pubspec.yaml</span></div>
+</div>
+<div class="ed"><div class="tabs"><div class="tab on"><i class="fi dart"></i>intl_phone_utils.dart<b>&times;</b></div></div>
+<div class="crumbs">lib <i>&#x203A;</i> intl_phone_utils.dart</div>
+<div class="code">
+<div class="ln"><span class="no">1</span><span class="tx"><span class="k-kw">import</span> <span class="k-str">'package:flutter/material.dart'</span>;</span></div>
+<div class="ln"><span class="no">2</span><span class="tx"><span class="k-kw">import</span> <span class="k-str">'package:intl_phone_field/countries.dart'</span>;</span></div>
+<div class="ln"><span class="no">3</span><span class="tx"></span></div>
+<div class="ln"><span class="no">4</span><span class="tx"><span class="k-com">/// Returns the country code based on the provided complete phone number.</span></span></div>
+<div class="ln"><span class="no">5</span><span class="tx"><span class="k-ty">String</span> <span class="k-fn">getCountryCodeByPhoneNumber</span>(<span class="k-ty">String</span> completePhoneNumber) {</span></div>
+<div class="ln"><span class="no">6</span><span class="tx">  <span class="k-kw">for</span> (<span class="k-kw">var</span> country <span class="k-kw">in</span> countries) {</span></div>
+<div class="ln"><span class="no">7</span><span class="tx">    <span class="k-kw">final</span> <span class="k-ty">String</span> dialCode = <span class="k-str">"+<span class="k-int">${country.dialCode}</span>"</span>;</span></div>
+<div class="ln"><span class="no">8</span><span class="tx">    <span class="k-kw">if</span> (completePhoneNumber.<span class="k-fn">startsWith</span>(dialCode) &amp;&amp;</span></div>
+<div class="ln"><span class="no">9</span><span class="tx">        (completePhoneNumber.length - dialCode.length) &lt;= country.maxLength) {</span></div>
+<div class="ln"><span class="no">10</span><span class="tx">      <span class="k-kw">return</span> country.code;</span></div>
+<div class="ln"><span class="no">11</span><span class="tx">    }</span></div>
+<div class="ln"><span class="no">12</span><span class="tx">  }</span></div>
+<div class="ln"><span class="no">13</span><span class="tx">  <span class="k-kw">return</span> <span class="k-str">''</span>;</span></div>
+<div class="ln"><span class="no">14</span><span class="tx">}</span></div>
+<div class="ln"><span class="no">15</span><span class="tx"></span></div>
+<div class="ln"><span class="no">16</span><span class="tx"><span class="k-com">/// Returns the country flag based on the provided complete phone number.</span></span></div>
+<div class="ln"><span class="no">17</span><span class="tx"><span class="k-ty">String</span> <span class="k-fn">getCountryFlagWidgetByPhoneNumber</span>(<span class="k-ty">String</span> completePhoneNumber) {</span></div>
+<div class="ln"><span class="no">18</span><span class="tx">  <span class="k-ty">String</span> flag = <span class="k-str">''</span>;</span></div>
+<div class="ln"><span class="no">19</span><span class="tx">  <span class="k-kw">for</span> (<span class="k-kw">var</span> country <span class="k-kw">in</span> countries) {</span></div>
+<div class="ln"><span class="no">20</span><span class="tx">    <span class="k-kw">final</span> <span class="k-ty">String</span> dialCode = <span class="k-str">"+<span class="k-int">${country.dialCode}</span>"</span>;</span></div>
+<div class="ln"><span class="no">21</span><span class="tx">    <span class="k-kw">if</span> (completePhoneNumber.<span class="k-fn">startsWith</span>(dialCode) &amp;&amp;</span></div>
+<div class="ln"><span class="no">22</span><span class="tx">        (completePhoneNumber.length - dialCode.length) &lt;= country.maxLength) {</span></div>
+<div class="ln"><span class="no">23</span><span class="tx">      flag = country.flag;</span></div>
+<div class="ln"><span class="no">24</span><span class="tx">      <span class="k-kw">break</span>;</span></div>
+<div class="ln"><span class="no">25</span><span class="tx">    }</span></div>
+<div class="ln"><span class="no">26</span><span class="tx">  }</span></div>
+<div class="ln"><span class="no">27</span><span class="tx">  <span class="k-kw">return</span> flag;</span></div>
+<div class="ln"><span class="no">28</span><span class="tx">}</span></div>
+</div></div>
+</div>
+<div class="sbar"><span>intl_phone_utils 0.0.1</span><span class="sp"></span><span>Ln 1, Col 1</span><span>Spaces: 2</span><span>UTF-8</span><span>LF</span><span>Dart</span></div>
+</div></body></html>

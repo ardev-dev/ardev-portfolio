@@ -1,0 +1,20 @@
+{
+ "slug": "cutreact",
+ "catalog_name": "CutReact",
+ "format": "wide",
+ "center": 1,
+ "method": "option 3: editor + terminal window with real source excerpts and real captured output (no UI/dashboard in the repo)",
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "editor panes (pipeline steps docstring; FFmpeg loudness normalisation) + terminal with the production audit of episode CR002",
+   "source": [
+    "scripts/produce_pipeline.py",
+    "scripts/generate_audio.py",
+    "scripts/production_audit.py",
+    "output/CR002/script.json"
+   ]
+  }
+ ],
+ "notes": "CutReact (/Users/ar/MyDocuments/projects/CutReact, read-only) has no dashboard: Python scripts + a Remotion composition, so this is one 1120x700 editor/terminal image, all verbatim. Top-left editor pane: scripts/produce_pipeline.py lines 1-16 (the docstring listing the real pipeline steps 0-7: pre-flight, find_clip, generate_audio with Kokoro TTS + word timestamps, pre-render audit, Remotion render + ffmpeg merge, post-render audit, YouTube upload, clean). Bottom-left editor pane: scripts/generate_audio.py lines 201-213 (normalize_audio: ffmpeg loudnorm to -14 LUFS, libmp3lame 192k). Line numbers are the real ones. Right pane: real output of `python3 scripts/production_audit.py CR002`, captured on 2026-11-15 from a copy under run/cutreact (scripts + output/CR00x JSON only; config/.env and the YouTube credential/token files were NOT copied or read), PYTHONDONTWRITEBYTECODE=1; raw capture in fl/cutreact/session.out; only the trailing blank line is trimmed. It is the pre-render gate for CR002 (script validated, video not yet rendered, hence the single warning; the warning label 'video.mp4 exists' is the script's own wording). The 'Disk space (40.9GB free)' figure is this machine's at capture time. Syntax/prompt colours are display styling only. Nothing was rendered, downloaded, uploaded or posted, no API called. Not used: output/CR001/video.mp4 (voice-over on a third-party creator's clip, so no still frame), and the CR001 audit (fails the later-tightened word-count gate). Doubt: the image shows the audit gate rather than a full pipeline run, because a real run needs the Kokoro model/venv, network clip download and the YouTube API. Builder: fl/_p4_ffcr_build.py."
+}

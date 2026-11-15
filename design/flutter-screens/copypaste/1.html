@@ -1,0 +1,44 @@
+<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1120px;height:700px;overflow:hidden}
+:root{--accent:#007AFF}
+body{position:relative;font-family:-apple-system,'SF Pro Text','SF Arabic',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:rgba(0,0,0,.85);
+ background:radial-gradient(900px 620px at 18% 108%,#f3c9b8 0%,rgba(243,201,184,0) 62%),radial-gradient(820px 600px at 92% -8%,#b9c7ee 0%,rgba(185,199,238,0) 60%),linear-gradient(160deg,#dfe6f3 0%,#cfd6ea 42%,#d9cfe4 100%)}
+.sf{display:inline-block;flex:none;-webkit-mask-size:100% 100%;-webkit-mask-repeat:no-repeat}
+/* شريط القوائم (واجهة عربية: عناصر الحالة يساراً) */
+.menubar{position:absolute;top:0;left:0;right:0;height:26px;background:rgba(255,255,255,.52);backdrop-filter:blur(30px);border-bottom:.5px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:flex-end;padding:0 10px;gap:6px;font-size:13px;font-weight:500;color:rgba(0,0,0,.86)}
+.menubar .clock{padding:0 6px}
+.menubar .st{width:32px;height:22px;border-radius:5px;background:rgba(0,0,0,.12);display:grid;place-items:center}
+/* NSPopover 360x480 */
+.pop{position:absolute;top:39px;left:10px;width:360px;height:480px;border-radius:11px;background:rgba(246,246,246,.86);backdrop-filter:blur(40px) saturate(1.6);box-shadow:0 0 0 .5px rgba(0,0,0,.22),0 18px 50px rgba(0,0,0,.28),0 2px 6px rgba(0,0,0,.10);display:flex;flex-direction:column}
+.arrow{position:absolute;top:27px;left:164px;width:28px;height:13px;overflow:hidden}
+.arrow i{position:absolute;left:4px;top:5px;width:20px;height:20px;transform:rotate(45deg);border-radius:3px;background:rgba(246,246,246,.95);box-shadow:0 0 0 .5px rgba(0,0,0,.22)}
+.div{height:1px;background:rgba(0,0,0,.1);flex:none}
+.head{display:flex;align-items:center;gap:8px;padding:10px 12px;flex:none}
+.head span{font-size:13px;line-height:16px;color:rgba(60,60,67,.3)}
+.list{flex:1;padding:4px 6px;display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.row{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:6px}
+.row.sel{background:rgba(0,122,255,.14)}
+.ic{width:28px;height:28px;border-radius:6px;background:rgba(60,60,67,.08);display:grid;place-items:center;flex:none;overflow:hidden}
+.thumb{width:28px;height:28px;background:linear-gradient(180deg,#8fc3ee 0%,#cfe6f6 52%,#7fb27a 52%,#4f8f5a 100%);position:relative;display:block}
+.thumb:after{content:"";position:absolute;right:5px;top:5px;width:7px;height:7px;border-radius:50%;background:#ffe9a8}
+.tx{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.t{max-width:100%;font-size:13px;line-height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.src{display:flex;align-items:center;gap:3px;font-size:10px;line-height:12px;color:rgba(60,60,67,.6)}
+.src.acc{color:var(--accent)}
+.tr{display:flex;align-items:center;gap:6px;flex:none;margin-inline-start:4px}
+.kb{font:500 9px/11px 'SF Mono',ui-monospace,Menlo,monospace;color:rgba(60,60,67,.6);background:rgba(60,60,67,.15);border-radius:3px;padding:1px 4px;direction:ltr}
+.foot{display:flex;align-items:center;gap:12px;padding:8px 12px;flex:none;color:rgba(0,0,0,.62)}
+.foot .lbl{display:flex;align-items:center;gap:5px;font-size:11px;line-height:16px}
+.foot .sp{flex:1}
+</style><body>
+<div class="menubar"><span class="st"><i class="sf" style="width:16.88px;height:19.20px;background:rgba(0,0,0,.86);-webkit-mask-image:url('sf/doc.on.clipboard.png');"></i></span><span class="clock">الأحد 15 نوفمبر&nbsp;&nbsp;9:41 ص</span></div>
+<div class="arrow"><i></i></div>
+<div class="pop">
+ <div class="head"><i class="sf" style="width:14.25px;height:13.88px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/magnifyingglass.png');"></i><span>ابحث في التاريخ</span></div>
+ <div class="div"></div>
+ <div class="list"><div class="row sel"><span class="ic"><i class="sf" style="width:15.09px;height:17.28px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/doc.text.png');"></i></span><div class="tx"><div class="t" dir="ltr">#1A237E</div><div class="src"><i class="sf" style="width:10.41px;height:9.84px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/app.png');"></i><span>مقياس الألوان الرقمي</span></div></div><div class="tr"><i class="sf" style="width:11.41px;height:13.28px;background:#FF9500;-webkit-mask-image:url('sf/pin.fill.png');"></i><span class="kb">⌘1</span></div></div><div class="row"><span class="ic"><i class="sf" style="width:15.09px;height:17.28px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/doc.text.png');"></i></span><div class="tx"><div class="t" dir="ltr">git log --oneline --graph -n 20</div><div class="src"><i class="sf" style="width:10.41px;height:9.84px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/app.png');"></i><span>الطرفية</span></div></div><div class="tr"><i class="sf" style="width:11.41px;height:13.28px;background:#FF9500;-webkit-mask-image:url('sf/pin.fill.png');"></i><span class="kb">⌘2</span></div></div><div class="row"><span class="ic"><i class="sf" style="width:15.09px;height:17.28px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/doc.text.png');"></i></span><div class="tx"><div class="t" dir="ltr">https://example.com/docs/getting-started</div><div class="src"><i class="sf" style="width:10.41px;height:9.84px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/app.png');"></i><span>Safari</span></div></div><div class="tr"><span class="kb">⌘3</span></div></div><div class="row"><span class="ic"><i class="sf" style="width:15.09px;height:17.28px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/doc.text.png');"></i></span><div class="tx"><div class="t" dir="rtl">موعد اجتماع الفريق يوم الثلاثاء الساعة العاشرة صباحاً</div><div class="src"><i class="sf" style="width:10.41px;height:9.84px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/app.png');"></i><span>الملاحظات</span></div></div><div class="tr"><span class="kb">⌘4</span></div></div><div class="row"><span class="ic"><span class="thumb"></span></span><div class="tx"><div class="t" dir="rtl">صورة</div><div class="src"><i class="sf" style="width:10.41px;height:9.84px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/app.png');"></i><span>المعاينة</span></div></div><div class="tr"><span class="kb">⌘5</span></div></div><div class="row"><span class="ic"><i class="sf" style="width:15.09px;height:17.28px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/doc.text.png');"></i></span><div class="tx"><div class="t" dir="ltr">flutter build macos --release</div><div class="src"><i class="sf" style="width:10.41px;height:9.84px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/app.png');"></i><span>الطرفية</span></div></div><div class="tr"><span class="kb">⌘6</span></div></div><div class="row"><span class="ic"><i class="sf" style="width:15.09px;height:17.28px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/doc.text.png');"></i></span><div class="tx"><div class="t" dir="rtl">شكراً لتواصلكم، سنرد عليكم خلال يوم عمل واحد.</div><div class="src acc"><i class="sf" style="width:10.16px;height:12.34px;background:var(--accent);-webkit-mask-image:url('sf/iphone.png');"></i><span>من جهاز آخر</span></div></div><div class="tr"><span class="kb">⌘7</span></div></div><div class="row"><span class="ic"><i class="sf" style="width:15.09px;height:17.28px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/doc.text.png');"></i></span><div class="tx"><div class="t" dir="ltr">SELECT id, title FROM notes ORDER BY created_at DESC;</div><div class="src"><i class="sf" style="width:10.41px;height:9.84px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/app.png');"></i><span>تحرير النصوص</span></div></div><div class="tr"><span class="kb">⌘8</span></div></div><div class="row"><span class="ic"><i class="sf" style="width:15.09px;height:17.28px;background:rgba(60,60,67,.6);-webkit-mask-image:url('sf/doc.text.png');"></i></span><div class="tx"><div class="t" dir="ltr">support@example.com</div></div><div class="tr"><span class="kb">⌘9</span></div></div></div>
+ <div class="div"></div>
+ <div class="foot"><span class="lbl"><i class="sf" style="width:12.20px;height:14.09px;background:currentColor;-webkit-mask-image:url('sf/trash.png');"></i>مسح الكل</span><span class="sp"></span><i class="sf" style="width:14.81px;height:14.81px;background:currentColor;-webkit-mask-image:url('sf/gearshape.png');"></i><i class="sf" style="width:14.25px;height:14.62px;background:currentColor;-webkit-mask-image:url('sf/power.png');"></i></div>
+</div>
+</body></html>

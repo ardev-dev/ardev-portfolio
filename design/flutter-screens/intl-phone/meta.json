@@ -1,0 +1,16 @@
+{
+ "slug": "intl-phone",
+ "catalog_name": "intl_phone_utils",
+ "format": "wide",
+ "center": 1,
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "Editor window: the library source (lib/intl_phone_utils.dart, lines 1-28)",
+   "source": [
+    "lib/intl_phone_utils.dart"
+   ]
+  }
+ ],
+ "notes": "Addendum 2 option 3. No example app, the README is the unedited 'TODO' package template and test/intl_phone_utils_test.dart is an empty placeholder, so there is no usage excerpt or meaningful test output to show; the only real material is the library itself. The image is an editor window with lib/intl_phone_utils.dart lines 1-28 verbatim (imports + getCountryCodeByPhoneNumber + getCountryFlagWidgetByPhoneNumber; generated from the file and diff-checked). Not shown (below the viewport): getNumberByCountryDialCode, the IntlPhoneUtils static wrapper class and the ImageFlag widget. Sidebar = real repo paths; status bar = name/version from pubspec.yaml (0.0.1). Doubts for the owner: the package is 0.0.1 and not on pub.dev (catalog links to GitHub); IntlPhoneUtils.getNumberByCountryDialCode calls itself (infinite recursion) instead of the top-level function, which is why that part was left out of frame; ImageFlag is the only widget and needs intl_phone_field's flag assets, so it could not be drawn as a screen without inventing one."
+}

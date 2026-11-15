@@ -1,0 +1,21 @@
+{
+ "slug": "factforge",
+ "catalog_name": "FactForge",
+ "format": "wide",
+ "center": 1,
+ "method": "option 3: terminal window with real captured output (no UI/dashboard in the repo)",
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "terminal, two panes: pipeline stage list + render steps + audio QC (left), production audit report of a real produced Short (right)",
+   "source": [
+    "main.py",
+    "scripts/produce_pipeline.py",
+    "scripts/audio_qc.py",
+    "scripts/production_audit.py",
+    "output/S02906/"
+   ]
+  }
+ ],
+ "notes": "FactForge (/Users/ar/MyDocuments/projects/FactForge, read-only) has no dashboard or web UI: it is Python agents/scripts plus a Remotion render project, so this is one 1120x700 terminal image. Every line is real output captured on 2026-11-15 from a partial copy under run/factforge (main.py, config/settings.py, utils/, scripts/production_audit.py, audio_qc.py, produce_pipeline.py, output/S02906; no .env, no credential files copied), with PYTHONDONTWRITEBYTECODE=1; raw capture in fl/factforge/session.out. Left pane: (1) `grep -n '\\[[1-7]/7\\]' main.py` = the seven stage banners printed by main.py _run_pipeline (Fact Research, Script Writing, Voice Generation, Thumbnail, Video Rendering, Titles/Description/Translations, Publishing to YouTube); (2) `sed -n '6,14p' scripts/produce_pipeline.py` = the nine automated render steps from that script's docstring; (3) `python3 scripts/audio_qc.py S02906` = the project's audio QC gate run on the locally stored, pipeline-produced video output/S02906/video.mp4 (ffprobe/ffmpeg only, offline). Right pane: `python3 scripts/production_audit.py S02906` = the project's quality-gate report for the same video (PASSED). Nothing was added; the only trim is ONE line of the audit metrics, `hook: ...`, removed because it quotes the episode hook that names a real company in an accusatory sentence; trailing blank lines dropped. Colours (prompt, line numbers, keys) are display styling only; the long segment_types line wraps as a terminal would. No API was called, nothing was rendered, uploaded or posted. Doubts: the catalog says 'six agent stages' while main.py prints 7 stages ([1/7]..[7/7]) and agents/ holds 9 agent modules - the image shows the code's own numbers. `python main.py` (status screen) could not be used: it crashes against the current database/ideas_short.json format. A video still frame was not used because the produced videos are built on stock background footage. The run-copy kept under run/factforge is ~330 MB (three copied output folders) and can be deleted. Builder: fl/_p4_ffcr_build.py. The shared generator for this image and cutreact's is fl/factforge/_build_ffcr.py."
+}

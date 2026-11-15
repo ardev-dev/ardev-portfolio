@@ -1,0 +1,19 @@
+{
+ "slug": "clean-architecture",
+ "catalog_name": "clean-architecture",
+ "format": "wide",
+ "center": 1,
+ "method": "option 3: terminal with real captured `ls` output of the feature's layers + editor panes with two complete domain-layer files",
+ "screens": [
+  {
+   "file": "1.png",
+   "screen": "terminal: ls lib/features/services/*/* (left); services_repo.dart and services_usecase.dart in full (right)",
+   "source": [
+    "lib/features/services/ (directory listing)",
+    "lib/features/services/domain/repositories/services_repo.dart:1-10",
+    "lib/features/services/domain/usecases/services_usecase.dart:1-15"
+   ]
+  }
+ ],
+ "notes": "Source: ardev-dev/clean-architecture @ ebc99aa (single commit, 2023-02-07). Terminal text is the unedited output of `ls lib/features/services/*/*` run in the clone (saved as fl/clean-architecture/session.out); colours on the directory headers are added, no text is. The two editor panes show the complete files. Doubts the owner should know: (1) the repo is an early, unfinished skeleton, not a full reference: one `services` feature split into data / domain / presentation, with the data sources and the bloc still TODO stubs, lib/injection.dart empty and the README the default Flutter-module text. (2) services_repositorie_impl.dart does not compile as committed (it instantiates the abstract Failure and calls Right()/Left() without values), so it is not shown. (3) lib/main.dart is an unrelated finger-drawing board (DrawingBoard with a colour bar) that is not connected to the layered feature; redrawing it would have misrepresented the project, so there is no phone screen. Built by fl/<slug>/build.py + fl/_p2/codewin.py, which read the source by line number and only add colours; a check confirmed every code line in the HTML equals the source line. Window chrome is mine, not repo text: title bar, tab labels (real file paths), the small line-range label at the right of each tab. The title bar text is also mine."
+}

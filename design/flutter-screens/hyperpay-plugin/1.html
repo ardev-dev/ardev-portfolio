@@ -1,0 +1,65 @@
+<!doctype html><html lang="en" dir="ltr"><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>.code{font-size:12.5px;line-height:17.9px}</style><body>
+<div class="win">
+<div class="tbar"><span class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></span><span class="ttl">ready_ui_method_channel.dart &mdash; hyperpay_flutte_plugin</span></div>
+<div class="main">
+<div class="side"><div class="sh">EXPLORER</div><div class="proj"><i class="chev open">&#x203A;</i>HYPERPAY_FLUTTE_PLUGIN</div>
+<div class="row" style="padding-left:10px"><i class="chev">&#x203A;</i><i class="fo"></i><span>android</span></div>
+<div class="row" style="padding-left:10px"><i class="chev">&#x203A;</i><i class="fo"></i><span>example</span></div>
+<div class="row" style="padding-left:10px"><i class="chev">&#x203A;</i><i class="fo"></i><span>ios</span></div>
+<div class="row" style="padding-left:10px"><i class="chev open">&#x203A;</i><i class="fo"></i><span>lib</span></div>
+<div class="row" style="padding-left:24px"><i class="chev open">&#x203A;</i><i class="fo"></i><span>src</span></div>
+<div class="row" style="padding-left:38px"><i class="chev open">&#x203A;</i><i class="fo"></i><span>ready_ui</span></div>
+<div class="row act" style="padding-left:52px"><i class="chev"></i><i class="fi dart"></i><span>ready_ui_method_channel.dart</span></div>
+<div class="row" style="padding-left:24px"><i class="chev"></i><i class="fi dart"></i><span>enum.dart</span></div>
+<div class="row" style="padding-left:24px"><i class="chev"></i><i class="fi dart"></i><span>helper.dart</span></div>
+<div class="row" style="padding-left:24px"><i class="chev"></i><i class="fi dart"></i><span>hyper_pay_const.dart</span></div>
+<div class="row" style="padding-left:24px"><i class="chev"></i><i class="fi dart"></i><span>hyperpay_flutte_plugin.dart</span></div>
+<div class="row" style="padding-left:24px"><i class="chev"></i><i class="fi dart"></i><span>hyperpay_flutte_plugin_method_channel.dart</span></div>
+<div class="row" style="padding-left:24px"><i class="chev"></i><i class="fi dart"></i><span>hyperpay_flutte_plugin_platform_interface.dart</span></div>
+<div class="row" style="padding-left:10px"><i class="chev">&#x203A;</i><i class="fo"></i><span>test</span></div>
+<div class="row" style="padding-left:10px"><i class="chev"></i><i class="fi md"></i><span>CHANGELOG.md</span></div>
+<div class="row" style="padding-left:10px"><i class="chev"></i><i class="fi txt"></i><span>LICENSE</span></div>
+<div class="row" style="padding-left:10px"><i class="chev"></i><i class="fi md"></i><span>README.md</span></div>
+<div class="row" style="padding-left:10px"><i class="chev"></i><i class="fi yaml"></i><span>analysis_options.yaml</span></div>
+<div class="row" style="padding-left:10px"><i class="chev"></i><i class="fi yaml"></i><span>pubspec.yaml</span></div>
+</div>
+<div class="ed"><div class="tabs"><div class="tab on"><i class="fi dart"></i>ready_ui_method_channel.dart<b>&times;</b></div></div>
+<div class="crumbs">lib <i>&#x203A;</i> src <i>&#x203A;</i> ready_ui <i>&#x203A;</i> ready_ui_method_channel.dart</div>
+<div class="code">
+<div class="ln"><span class="no">8</span><span class="tx"><span class="k-com">/// An implementation of [HyperpayFluttePluginPlatform] that uses method channels.</span></span></div>
+<div class="ln"><span class="no">9</span><span class="tx"><span class="k-kw">class</span> <span class="k-ty">MethodChannelReadyUI</span> <span class="k-kw">extends</span> <span class="k-ty">HyperpayFluttePluginPlatform</span> {</span></div>
+<div class="ln"><span class="no">10</span><span class="tx">  <span class="k-com">/// The method channel used to interact with the native platform.</span></span></div>
+<div class="ln"><span class="no">11</span><span class="tx">  <span class="k-ann">@visibleForTesting</span></span></div>
+<div class="ln"><span class="no">12</span><span class="tx">  <span class="k-kw">final</span> methodChannel = <span class="k-kw">const</span> <span class="k-ty">MethodChannel</span>(<span class="k-ty">PaymentConst</span>.channelName);</span></div>
+<div class="ln"><span class="no">13</span><span class="tx"></span></div>
+<div class="ln"><span class="no">14</span><span class="tx">  <span class="k-ann">@override</span></span></div>
+<div class="ln"><span class="no">15</span><span class="tx">  <span class="k-ty">Future</span>&lt;<span class="k-ty">PaymentResultData</span>&gt; <span class="k-fn">readyUICards</span>({<span class="k-kw">required</span> <span class="k-ty">List</span>&lt;<span class="k-ty">String</span>&gt; brands, <span class="k-kw">required</span> <span class="k-ty">String</span> checkoutId,</span></div>
+<div class="ln"><span class="no">16</span><span class="tx">      <span class="k-kw">required</span> <span class="k-ty">PaymentMode</span> paymentMode, <span class="k-kw">required</span> <span class="k-ty">PaymentLang</span> lang, <span class="k-kw">required</span> <span class="k-ty">String</span> shopperResultUrl,}) <span class="k-kw">async</span> {</span></div>
+<div class="ln"><span class="no">17</span><span class="tx">    <span class="k-ty">String</span> transactionStatus;</span></div>
+<div class="ln"><span class="no">18</span><span class="tx"></span></div>
+<div class="ln"><span class="no">19</span><span class="tx">    <span class="k-kw">try</span> {</span></div>
+<div class="ln"><span class="no">20</span><span class="tx">      <span class="k-kw">final</span> <span class="k-ty">String</span>? result = <span class="k-kw">await</span> methodChannel.<span class="k-fn">invokeMethod</span>(</span></div>
+<div class="ln"><span class="no">21</span><span class="tx">        <span class="k-ty">PaymentConst</span>.methodCall,</span></div>
+<div class="ln"><span class="no">22</span><span class="tx">        {</span></div>
+<div class="ln"><span class="no">23</span><span class="tx">          <span class="k-str">"type"</span>: <span class="k-ty">PaymentConst</span>.readyUi,</span></div>
+<div class="ln"><span class="no">24</span><span class="tx">          <span class="k-str">"mode"</span>: paymentMode.value,</span></div>
+<div class="ln"><span class="no">25</span><span class="tx">          <span class="k-str">"checkoutid"</span>: checkoutId,</span></div>
+<div class="ln"><span class="no">26</span><span class="tx">          <span class="k-str">"ShopperResultUrl"</span>: shopperResultUrl,</span></div>
+<div class="ln"><span class="no">27</span><span class="tx">          <span class="k-str">"lang"</span>: lang.<span class="k-fn">getLanguageCode</span>(),</span></div>
+<div class="ln"><span class="no">28</span><span class="tx">          <span class="k-str">"brand"</span>: brands,</span></div>
+<div class="ln"><span class="no">29</span><span class="tx">        },</span></div>
+<div class="ln"><span class="no">30</span><span class="tx">      );</span></div>
+<div class="ln"><span class="no">31</span><span class="tx">      transactionStatus = <span class="k-str">'<span class="k-int">$result</span>'</span>;</span></div>
+<div class="ln"><span class="no">32</span><span class="tx">      <span class="k-kw">return</span> <span class="k-ty">PaymentResultManger</span>.<span class="k-fn">getPaymentResult</span>(transactionStatus);</span></div>
+<div class="ln"><span class="no">33</span><span class="tx">    } <span class="k-kw">on</span> <span class="k-ty">PlatformException</span> <span class="k-kw">catch</span> (e) {</span></div>
+<div class="ln"><span class="no">34</span><span class="tx">      transactionStatus = <span class="k-str">"<span class="k-int">${e.message}</span>"</span>;</span></div>
+<div class="ln"><span class="no">35</span><span class="tx">      <span class="k-kw">return</span> <span class="k-ty">PaymentResultData</span>(</span></div>
+<div class="ln"><span class="no">36</span><span class="tx">          errorString: e.message, paymentResult: <span class="k-ty">PaymentResult</span>.error);</span></div>
+<div class="ln"><span class="no">37</span><span class="tx">    }</span></div>
+<div class="ln"><span class="no">38</span><span class="tx">  }</span></div>
+<div class="ln"><span class="no">39</span><span class="tx">}</span></div>
+</div></div>
+</div>
+<div class="sbar"><span>hyperpay_flutte_plugin 0.0.1</span><span class="sp"></span><span>Ln 8, Col 1</span><span>Spaces: 2</span><span>UTF-8</span><span>LF</span><span>Dart</span></div>
+</div></body></html>
