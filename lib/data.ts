@@ -151,7 +151,8 @@ export const skillGroups: SkillGroup[] = [
     title: { en: "Payments & Fintech", ar: "المدفوعات والدفع الرقمي" },
     items: [
       "HyperPay", "Tap", "Tamara", "Mada", "STC Pay", "Apple Pay",
-      "Google Pay", "PayPal", "Visa", "Mastercard", "Stripe", "3D Secure",
+      "Google Pay", "PayPal", "Visa", "Mastercard", "Stripe", "Network International",
+      "Samsung Pay", "3D Secure",
     ].map(same),
   },
   {
@@ -220,9 +221,9 @@ export const projects: Project[] = [
       ar: "سوق يُرسل فيه المستخدم حلمه فيصله تفسيره من معبّر موثّق. بنيتُه وأُشغّله بكامله: خلفية Django تغطّي نحو ٣٠ مجالاً، وتطبيق Flutter، والمدفوعات والمحفظة والمتجر والجلسات المباشرة — والتشغيل الإنتاجي وراء ذلك كلّه.",
     },
     metrics: [
-      { value: "21K+", label: { en: "users", ar: "مستخدم" } },
-      { value: "40K+", label: { en: "orders", ar: "طلب" } },
-      { value: "600K+", label: { en: "live messages", ar: "رسالة لحظية" } },
+      { value: "23K+", label: { en: "users", ar: "مستخدم" } },
+      { value: "47K+", label: { en: "orders", ar: "طلب" } },
+      { value: "680K+", label: { en: "live messages", ar: "رسالة لحظية" } },
       { value: "4.7★", label: { en: "App Store", ar: "App Store" } },
     ],
     tags: ["Flutter", "Django", "WebRTC", "Payments", "Real-time"],
