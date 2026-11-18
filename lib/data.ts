@@ -283,6 +283,27 @@ export const projects: Project[] = [
     icon: "/apps/wisal-icon.webp",
   },
   {
+    slug: "buildingplanner",
+    name: "Building Planner",
+    nameAr: "مخطط البناء",
+    year: "2026",
+    kind: { en: "Construction Planning App", ar: "تطبيق تخطيط البناء" },
+    blurb: {
+      en: "Enter a plot's dimensions and get a 2D plan for every floor, a 3D model you can walk through with the real sun, electrical, water and safety layouts, a bill of quantities at your own prices, and the cost and a dated build schedule. It exports a PDF report or an AutoCAD DXF file, works in any country in Arabic and English, and needs no server or account.",
+      ar: "يُدخل المستخدم أبعاد أرضه فيحصل على مخطط 2D لكل طابق، ومجسّم 3D يتجوّل فيه تحت الشمس الحقيقية، ومنظومات الكهرباء والماء والسلامة، وجدول كميات بأسعاره هو، والكلفة ومدّة البناء بتواريخ حقيقية. يصدّر تقرير PDF وملف أوتوكاد DXF، ويعمل في أي دولة بالعربية والإنجليزية بلا خادم ولا حساب.",
+    },
+    metrics: [
+      { value: "2D + 3D", label: { en: "plans and walk-through", ar: "مخطط ومجسّم" } },
+      { value: "PDF · DXF", label: { en: "exports", ar: "تصدير" } },
+      { value: "0", label: { en: "servers needed", ar: "خوادم مطلوبة" } },
+    ],
+    tags: ["React", "TypeScript", "three.js", "Capacitor"],
+    links: [{ label: website, href: "https://buildingplanner.pages.dev/en/" }],
+    shots: ["/apps/buildingplanner-1.webp", "/apps/buildingplanner-2.webp", "/apps/buildingplanner-3.webp"],
+    cover: "/apps/buildingplanner-web.webp",
+    icon: "/apps/buildingplanner-icon.webp",
+  },
+  {
     slug: "azbah",
     name: "Azbah",
     nameAr: "عزبة",
@@ -498,6 +519,7 @@ export const catalog: WorkGroup[] = [
     desc: { en: "Listings, ownership and the people around a property.", ar: "العروض والملكية ومن يدور حول العقار." },
     items: [
       { name: "Maskani", nameAr: "مسكني", kind: { en: "Social real estate · app, admin, web, backend", ar: "عقارات اجتماعية · تطبيق ولوحة وويب وخلفية" }, about: { en: "Social real estate platform where owners and clients deal directly, without payments. Users post listings, services, jobs and property requests, follow others and chat live. Django with Channels serves the Flutter app and Next.js site.", ar: "منصّة عقارية اجتماعية يتعامل فيها المالك مع العميل مباشرةً دون مدفوعات. ينشر المستخدمون الإعلانات والخدمات والوظائف وطلبات العقار ويتابع بعضهم بعضاً ويتحادثون لحظياً. خلفية Django واحدة مع Channels تخدم تطبيق Flutter وموقع Next.js." }, stack: ["Flutter", "Django", "Next.js"], year: "2025 — Now", href: "https://maskani.homes", cover: "/apps/maskani-web.webp", icon: "/apps/maskani-icon.webp" },
+      { name: "Building Planner", nameAr: "مخطط البناء", kind: { en: "Construction planning · mobile app and site", ar: "تخطيط البناء · تطبيق جوّال وموقع" }, about: { en: "Turns a plot's dimensions into floor plans, a walkable 3D model, electrical, water and safety layouts, a priced bill of quantities, and the cost and build schedule, with PDF and DXF export. React and three.js in Capacitor, on a tested TypeScript calculation engine, fully offline.", ar: "يحوّل أبعاد الأرض إلى مخطط لكل طابق ومجسّم 3D يُتجوَّل فيه، ومنظومات الكهرباء والماء والسلامة، وجدول كميات مسعّر، والكلفة والجدول الزمني، مع تصدير PDF و DXF. مبنيّ بـ React و three.js داخل Capacitor على محرّك حسابات TypeScript مختبَر، ويعمل كاملاً بلا إنترنت." }, stack: ["React", "three.js", "Capacitor"], year: "2026", href: "https://buildingplanner.pages.dev/en/", shots: ["/apps/buildingplanner-1.webp", "/apps/buildingplanner-2.webp", "/apps/buildingplanner-3.webp"], icon: "/apps/buildingplanner-icon.webp" },
       { name: "Maskani Admin", nameAr: "إدارة مسكني", kind: { en: "Internal operations app for the platform", ar: "تطبيق التشغيل الداخلي للمنصّة" }, about: { en: "Operations app for Maskani moderators, limited to admins signed in with Google. It covers users, listings, services, requests, reports, verification, chats, help desk flows and analytics. Flutter and BLoC on the backend admin routes.", ar: "تطبيق تشغيل لمشرفي مسكني، لا يدخله إلا حساب إداري عبر Google. يغطّي المستخدمين والإعلانات والخدمات والطلبات والبلاغات والتوثيق والمحادثات ومسارات مركز المساعدة ورسوم التحليلات. مبنيّ بـ Flutter و BLoC على مسارات الإدارة في الخلفية." }, stack: ["Flutter"], year: "2026", icon: "/apps/maskani-icon.webp", shots: ["/work/maskani-admin-2.webp", "/work/maskani-admin-1.webp", "/work/maskani-admin-3.webp"] },
       { name: "Dalal", nameAr: "دلال", kind: { en: "Early prototype: a Flutter sign-in screen on a token-auth Django API", ar: "نموذج أوّلي: شاشة دخول بـ Flutter على واجهة Django بمصادقة الرموز" }, about: { en: "Early prototype of a real estate market app for Yemen. Only sign-in exists: a Flutter form posts to a Django REST Framework token endpoint, stores the token and opens a placeholder page. The backend adds a users route and a test view.", ar: "نموذج أوّلي لتطبيق سوق عقارات في اليمن. لم يُنجَز منه سوى الدخول: نموذج Flutter يرسل بيانات الدخول إلى مسار الرموز في Django REST Framework ويحفظ الرمز ثم يفتح صفحة رئيسية مؤقّتة. الخلفية تعرض المستخدمين ومساراً تجريبياً محمياً." }, stack: ["Flutter", "Django"], year: "2023" },
     ],
