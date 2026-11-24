@@ -222,7 +222,7 @@ export const projects: Project[] = [
     },
     metrics: [
       { value: "23K+", label: { en: "users", ar: "مستخدم" } },
-      { value: "47K+", label: { en: "orders", ar: "طلب" } },
+      { value: "65K+", label: { en: "transactions", ar: "معاملة" } },
       { value: "680K+", label: { en: "live messages", ar: "رسالة لحظية" } },
       { value: "4.7★", label: { en: "App Store", ar: "App Store" } },
     ],
