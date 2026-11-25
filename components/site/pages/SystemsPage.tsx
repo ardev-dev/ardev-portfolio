@@ -36,10 +36,10 @@ const PRIORITY = [
   // ثم أقوى الأعمال وأجملها تصميماً.
   "Sweetra", "MikroTik Manager Pro",
   "Faheem", "Linkati", "Moqawlat", "Etimad Tenders", "Payment gateways", "DBCargo",
-  "AppProof", "AppProof Web",
+  "AppProof", "AppProof Web", "Somow", "Kushak",
   "Wasselak", "Wasselak Captain", "Wasselak Business", "Wasselak Employee", "Wasselak Admin", "Wasselak Core",
-  "Wasla", "Jumal", "Lumi", "Kushak",
-  "FactForge", "Somow",
+  "Wasla", "Jumal", "Lumi",
+  "FactForge",
   "TruckGo", "TruckGo Driver", "TruckGo Web", "TruckGo AI",
   "HyperPay Flutter",
   "solar_community_icons", "video_compressor_plus", "flutter_websocket_manager", "shared_utils", "voice_call_core",
