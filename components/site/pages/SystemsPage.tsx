@@ -27,7 +27,7 @@ type Slide = { work: Work; group: WorkGroup; brand: Brand; n: number };
  */
 const PRIORITY = [
   // عائلات المنتجات في الإنتاج: المنتج ثم أدواته الملاصقة له (الإدارة، الساعة، الموقع، المدوّنة).
-  "Abber", "Abber Admin", "Abber Watch", "Abber Web", "Abber Blog",
+  "Abber", "Abber Admin", "Abber Watch", "Abber Web",
   "Wisal", "Wisal Admin", "Wisal Web",
   "Azbah", "Azbah Admin", "Azbah Web",
   "Manam",
@@ -35,18 +35,24 @@ const PRIORITY = [
   "Maskani", "Maskani Admin",
   // ثم أقوى الأعمال وأجملها تصميماً.
   "Sweetra", "MikroTik Manager Pro",
+  "Faheem", "Linkati", "Moqawlat", "Etimad Tenders", "Payment gateways", "DBCargo",
   "Wasselak", "Wasselak Captain", "Wasselak Business", "Wasselak Employee", "Wasselak Admin", "Wasselak Core",
-  "AppProof", "AppProof Web", "Linkati", "Wasla", "Jumal", "Lumi", "Faheem", "Moqawlat", "Kushak",
-  "FactForge", "Etimad Tenders", "Somow",
+  "AppProof", "AppProof Web", "Wasla", "Jumal", "Lumi", "Kushak",
+  "FactForge", "Somow",
   "TruckGo", "TruckGo Driver", "TruckGo Web", "TruckGo AI",
-  "Payment gateways", "HyperPay Flutter",
+  "HyperPay Flutter",
   "solar_community_icons", "video_compressor_plus", "flutter_websocket_manager", "shared_utils", "voice_call_core",
   "Hue Mixer", "Alminshar", "Oxfile", "ardev.dev", "CutReact",
 ];
 
+/** ما يُعرض في آخر الشريط بعد كل شيء، بطلب المالك. */
+const LAST = ["Abber Blog"];
+
 function rank(work: Work, brand: Brand, order: number) {
   const listed = PRIORITY.indexOf(work.name);
   if (listed >= 0) return listed;
+  const last = LAST.indexOf(work.name);
+  if (last >= 0) return 1e9 + last;
   const tier = work.shots?.length ? 0 : work.cover ? 1 : work.icon ? 2 : brand.scene !== "banner" ? 3 : 4;
   const year = Number(work.year.match(/\d{4}/g)?.pop() ?? 0);
   // الطبقة أوّلاً، ثم الأحدث، ثم ترتيب الفهرس حسماً للتعادل.
