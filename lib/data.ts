@@ -116,7 +116,7 @@ export const sections = {
 /** أرقام تظهر كعدّادات متحرّكة. */
 export const stats: { value: number; suffix: string; label: L }[] = [
   { value: 6, suffix: "+", label: { en: "Years engineering", ar: "سنوات في الهندسة" } },
-  { value: 98, suffix: "", label: { en: "Apps & services shipped", ar: "تطبيقات وخدمات مُنجَزة" } },
+  { value: 101, suffix: "", label: { en: "Apps & services shipped", ar: "تطبيقات وخدمات مُنجَزة" } },
   { value: 20, suffix: "", label: { en: "Live on Apple, Google & Huawei", ar: "منشورة الآن على المتاجر" } },
   { value: 7.6, suffix: "M+", label: { en: "Lines of code authored", ar: "أسطر برمجية مؤلَّفة" } },
 ];
