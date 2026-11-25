@@ -135,8 +135,12 @@ export function ProjectPage({ p, index, total }: { p: Project; index: number; to
         </div>
 
         <div className="min-w-0">
-          {p.shots ? <Phones shots={p.shots} name={title} /> : p.cover ? (
-            <BrowserShot src={p.cover} alt={title} host={p.links[0]?.href.replace(/^https?:\/\//, "")} />
+          {p.shots && !(p.heroWeb && p.cover) ? <Phones shots={p.shots} name={title} /> : p.cover ? (
+            <BrowserShot
+              src={p.cover}
+              alt={title}
+              host={(p.links.find((l) => !/apple\.com|google\.com/.test(l.href)) ?? p.links[0])?.href.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+            />
           ) : (
             <div className="card grid aspect-[16/10] place-items-center rounded-xl">
               <span className="font-serif text-5xl italic text-fg-faint">{p.name}</span>

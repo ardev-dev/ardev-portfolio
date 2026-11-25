@@ -199,6 +199,8 @@ export type Project = {
   /** صور حقيقيّة: لقطات المتجر للتطبيقات، ولقطات الموقع الحيّ للويب. */
   shots?: string[];
   cover?: string;
+  /** اعرض لقطة الموقع الحقيقية في صفحة المشروع بدل لقطات الهاتف. */
+  heroWeb?: boolean;
   icon?: string;
   featured?: boolean;
   year: string;
@@ -325,6 +327,7 @@ export const projects: Project[] = [
     ],
     shots: ["/apps/azbah-1.webp", "/apps/azbah-2.webp", "/apps/azbah-3.webp"],
     cover: "/apps/azbah-web.webp",
+    heroWeb: true,
     icon: "/apps/azbah-icon.webp",
   },
   {
