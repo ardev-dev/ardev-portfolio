@@ -26,9 +26,22 @@ type Slide = { work: Work; group: WorkGroup; brand: Brand; n: number };
  * فالمخطّط، فالبانر — والأحدث قبل الأقدم. فإضافة لقطات لمشروعٍ ترفعه تلقائياً.
  */
 const PRIORITY = [
-  "Abber", "Wisal", "Azbah", "Maskani", "Manam", "MikroTik Manager Pro", "Sweetra", "Linkati", "Somow", "Faheem",
-  "FactForge", "Etimad Tenders", "solar_community_icons", "flutter_websocket_manager", "video_compressor_plus",
-  "shared_utils", "Wasselak", "TruckGo", "Kushak", "Lumi", "AppProof", "Moqawlat", "Oxfile", "ardev.dev",
+  // عائلات المنتجات في الإنتاج: المنتج ثم أدواته الملاصقة له (الإدارة، الساعة، الموقع، المدوّنة).
+  "Abber", "Abber Admin", "Abber Watch", "Abber Web", "Abber Blog",
+  "Wisal", "Wisal Admin", "Wisal Web",
+  "Azbah", "Azbah Admin", "Azbah Web",
+  "Manam",
+  "Building Planner",
+  "Maskani", "Maskani Admin",
+  // ثم أقوى الأعمال وأجملها تصميماً.
+  "Sweetra", "MikroTik Manager Pro",
+  "Wasselak", "Wasselak Captain", "Wasselak Business", "Wasselak Employee", "Wasselak Admin", "Wasselak Core",
+  "AppProof", "AppProof Web", "Linkati", "Wasla", "Jumal", "Lumi", "Faheem", "Moqawlat", "Kushak",
+  "FactForge", "Etimad Tenders", "Somow",
+  "TruckGo", "TruckGo Driver", "TruckGo Web", "TruckGo AI",
+  "Payment gateways", "HyperPay Flutter",
+  "solar_community_icons", "video_compressor_plus", "flutter_websocket_manager", "shared_utils", "voice_call_core",
+  "Hue Mixer", "Alminshar", "Oxfile", "ardev.dev", "CutReact",
 ];
 
 function rank(work: Work, brand: Brand, order: number) {
