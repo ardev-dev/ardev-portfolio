@@ -222,8 +222,8 @@ export const projects: Project[] = [
     },
     metrics: [
       { value: "23K+", label: { en: "users", ar: "مستخدم" } },
-      { value: "65K+", label: { en: "transactions", ar: "معاملة" } },
-      { value: "680K+", label: { en: "live messages", ar: "رسالة لحظية" } },
+      { value: "66K+", label: { en: "transactions", ar: "معاملة" } },
+      { value: "700K+", label: { en: "live messages", ar: "رسالة لحظية" } },
       { value: "4.7★", label: { en: "App Store", ar: "App Store" } },
     ],
     tags: ["Flutter", "Django", "WebRTC", "Payments", "Real-time"],
@@ -421,8 +421,8 @@ export const roles: Role[] = [
         ar: "تُرقّيت من مطوّر Flutter إلى مهندس برمجيات خبير وقائد تقني. مسؤول عن عبر ووصال وعزبة من المعمارية إلى الدعم في الإنتاج.",
       },
       {
-        en: "Run Abber in production for 23,000+ users, with 65,000+ transactions, 680K+ real-time messages and 2.8M+ notifications, and over six months of zero downtime.",
-        ar: "أشغّل عبر في الإنتاج لأكثر من ٢٣ ألف مستخدم، بأكثر من ٦٥ ألف معاملة و٦٨٠ ألف رسالة لحظية و٢٫٨ مليون إشعار، وبلا أي توقّف لأكثر من ستة أشهر.",
+        en: "Run Abber in production for 23,000+ users, with 66,000+ transactions, 700K+ real-time messages and 2.9M+ notifications, and over six months of zero downtime.",
+        ar: "أشغّل عبر في الإنتاج لأكثر من ٢٣ ألف مستخدم، بأكثر من ٦٦ ألف معاملة و٧٠٠ ألف رسالة لحظية و٢٫٩ مليون إشعار، وبلا أي توقّف لأكثر من ستة أشهر.",
       },
       {
         en: "Cut QA-reported defects by 50% by introducing engineering standards, code review and production monitoring.",
@@ -708,7 +708,7 @@ export const catalog: WorkGroup[] = [
 /** أرقام الفهرس — محسوبة من GitHub، لا مقدّرة. */
 export const catalogStats = [
   { value: "133", label: { en: "repositories", ar: "مستودعاً" } },
-  { value: "12", label: { en: "organisations", ar: "مؤسّسة" } },
+  { value: "13", label: { en: "organisations", ar: "مؤسّسة" } },
   { value: "7", label: { en: "published packages", ar: "حزمة منشورة" } },
   { value: "2019", label: { en: "shipping since", ar: "أُطلق منذ" } },
 ];
