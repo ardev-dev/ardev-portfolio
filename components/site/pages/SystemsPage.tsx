@@ -37,14 +37,14 @@ const PRIORITY = [
   "Sweetra", "MikroTik Manager Pro",
   "Faheem", "Linkati", "Moqawlat", "Etimad Tenders", "Payment gateways", "DBCargo",
   "AppProof", "AppProof Web", "Somow", "Kushak",
-  "TicTacTonz", "WhatsApp Stickers",
+  "TicTacTonz", "WhatsApp Stickers", "ardev.dev", "Portfolio 2023",
   "Wasselak", "Wasselak Captain", "Wasselak Business", "Wasselak Employee", "Wasselak Admin", "Wasselak Core",
   "Wasla", "Jumal", "Lumi",
   "FactForge",
   "TruckGo", "TruckGo Driver", "TruckGo Web", "TruckGo AI",
   "HyperPay Flutter",
   "solar_community_icons", "video_compressor_plus", "flutter_websocket_manager", "shared_utils", "voice_call_core",
-  "Hue Mixer", "Alminshar", "Oxfile", "ardev.dev", "CutReact",
+  "Hue Mixer", "Alminshar", "Oxfile", "CutReact",
 ];
 
 /** ما يُعرض في آخر الشريط بعد كل شيء، بطلب المالك. */
