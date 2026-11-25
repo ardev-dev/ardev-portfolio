@@ -37,7 +37,7 @@ const PRIORITY = [
   "Sweetra", "MikroTik Manager Pro",
   "Faheem", "Linkati", "Moqawlat", "Etimad Tenders", "Payment gateways", "DBCargo",
   "AppProof", "AppProof Web", "Somow", "Kushak",
-  "TicTacTonz", "WhatsApp Stickers", "ardev.dev", "Portfolio 2023",
+  "TicTacTonz", "WhatsApp Stickers", "ardev.dev", "Portfolio 2023", "Shipperit",
   "Wasselak", "Wasselak Captain", "Wasselak Business", "Wasselak Employee", "Wasselak Admin", "Wasselak Core",
   "Wasla", "Jumal", "Lumi",
   "FactForge",
