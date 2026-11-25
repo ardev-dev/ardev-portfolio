@@ -48,7 +48,7 @@ const PRIORITY = [
 ];
 
 /** ما يُعرض في آخر الشريط بعد كل شيء، بطلب المالك. */
-const LAST = ["Abber Blog"];
+const LAST = ["Abber Blog", "Django Blog"];
 
 function rank(work: Work, brand: Brand, order: number) {
   const listed = PRIORITY.indexOf(work.name);
